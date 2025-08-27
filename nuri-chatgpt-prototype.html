@@ -136,7 +136,7 @@
             <!-- Top Group: New Chat & Search -->
             <div class="p-4 border-b border-gray-200">
                 <div class="space-y-1">
-                    <button onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg bg-gray-200 text-gray-800 text-left nav-button">
                         <i data-lucide="plus" class="w-4 h-4"></i>
                         <span class="text-sm">New Chat</span>
                     </button>
@@ -150,15 +150,15 @@
             <!-- Tools Group -->
             <div class="px-4 pb-4 border-b border-gray-200">
                 <div class="space-y-1">
-                    <button onclick="loadToolPage('wellness')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                    <button id="wellness-tool" onclick="loadToolPage('wellness')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left tool-button">
                         <i data-lucide="heart" class="w-4 h-4"></i>
                         <span class="text-sm">Wellness Tools</span>
                     </button>
-                    <button onclick="loadToolPage('nutrition')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                    <button id="nutrition-tool" onclick="loadToolPage('nutrition')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left tool-button">
                         <i data-lucide="apple" class="w-4 h-4"></i>
                         <span class="text-sm">Nutrition Tools</span>
                     </button>
-                    <button onclick="loadToolPage('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                    <button id="exercise-tool" onclick="loadToolPage('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left tool-button">
                         <i data-lucide="dumbbell" class="w-4 h-4"></i>
                         <span class="text-sm">Exercise Tools</span>
                     </button>
@@ -431,6 +431,39 @@
 
             // Update mobile title
             mobileTitle.textContent = 'Nuri Assistant';
+
+            // Update navigation highlighting
+            updateNavigationHighlight('chat');
+        }
+
+        function updateNavigationHighlight(activeType) {
+            // Clear all tool button highlights
+            const toolButtons = document.querySelectorAll('.tool-button');
+            toolButtons.forEach(btn => {
+                btn.classList.remove('bg-gray-200', 'text-gray-800');
+                btn.classList.add('text-gray-700');
+            });
+
+            // Clear new chat highlight
+            const newChatBtn = document.getElementById('new-chat');
+            if (newChatBtn) {
+                newChatBtn.classList.remove('bg-gray-200', 'text-gray-800');
+                newChatBtn.classList.add('text-gray-700');
+            }
+
+            // Highlight active item
+            if (activeType === 'chat') {
+                if (newChatBtn) {
+                    newChatBtn.classList.add('bg-gray-200', 'text-gray-800');
+                    newChatBtn.classList.remove('text-gray-700');
+                }
+            } else {
+                const activeBtn = document.getElementById(activeType + '-tool');
+                if (activeBtn) {
+                    activeBtn.classList.add('bg-gray-200', 'text-gray-800');
+                    activeBtn.classList.remove('text-gray-700');
+                }
+            }
         }
 
         function loadToolPage(toolType) {
@@ -457,6 +490,9 @@
                     'exercise': 'Exercise Tools'
                 };
                 mobileTitle.textContent = titles[toolType] || 'Nuri Tools';
+
+                // Update navigation highlighting
+                updateNavigationHighlight(toolType);
             }
         }
 
