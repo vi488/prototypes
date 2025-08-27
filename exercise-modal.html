@@ -8,8 +8,8 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         :root {
-            --nuri-primary: #458500;
-            --nuri-primary-hover: #3a7000;
+            --nuri-primary: #00AF9F;
+            --nuri-primary-hover: #009688;
         }
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
@@ -63,7 +63,7 @@
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Workout Type</label>
                         <div class="grid grid-cols-2 gap-2">
-                            <button class="flex items-center space-x-2 p-3 border border-nuri-primary bg-nuri-primary bg-opacity-10 text-nuri-primary rounded-lg workout-type selected">
+                            <button class="flex items-center space-x-2 p-3 border border-gray-400 bg-gray-100 text-gray-700 rounded-lg workout-type selected">
                                 <i data-lucide="dumbbell" class="w-4 h-4"></i>
                                 <span class="text-sm">Strength</span>
                             </button>
@@ -103,11 +103,11 @@
                                     <div class="w-2 h-2 bg-gray-200 rounded-full"></div>
                                 </div>
                             </button>
-                            <button class="w-full flex items-center justify-between p-3 border border-nuri-primary bg-nuri-primary bg-opacity-10 rounded-lg intensity-btn selected">
-                                <span class="text-sm text-nuri-primary">Moderate</span>
+                            <button class="w-full flex items-center justify-between p-3 border border-gray-400 bg-gray-100 rounded-lg intensity-btn selected">
+                                <span class="text-sm text-gray-700">Moderate</span>
                                 <div class="flex space-x-1">
-                                    <div class="w-2 h-2 bg-nuri-primary rounded-full"></div>
-                                    <div class="w-2 h-2 bg-nuri-primary rounded-full"></div>
+                                    <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-gray-600 rounded-full"></div>
                                     <div class="w-2 h-2 bg-gray-200 rounded-full"></div>
                                 </div>
                             </button>
@@ -324,11 +324,11 @@
         workoutTypes.forEach(btn => {
             btn.addEventListener('click', function() {
                 workoutTypes.forEach(b => {
-                    b.classList.remove('border-nuri-primary', 'bg-nuri-primary', 'bg-opacity-10', 'text-nuri-primary', 'selected');
+                    b.classList.remove('border-gray-400', 'bg-gray-100', 'text-gray-700', 'selected');
                     b.classList.add('border-gray-200', 'text-gray-700');
                 });
-                this.classList.add('border-nuri-primary', 'bg-nuri-primary', 'bg-opacity-10', 'text-nuri-primary', 'selected');
-                this.classList.remove('border-gray-200', 'text-gray-700');
+                this.classList.add('border-gray-400', 'bg-gray-100', 'text-gray-700', 'selected');
+                this.classList.remove('border-gray-200');
             });
         });
         
@@ -337,13 +337,15 @@
         intensityBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 intensityBtns.forEach(b => {
-                    b.classList.remove('border-nuri-primary', 'bg-nuri-primary', 'bg-opacity-10', 'selected');
+                    b.classList.remove('border-gray-400', 'bg-gray-100', 'selected');
                     b.classList.add('border-gray-200');
-                    b.querySelector('span').classList.remove('text-nuri-primary');
+                    b.querySelector('span').classList.remove('text-gray-700');
+                    b.querySelector('span').classList.add('text-gray-600');
                 });
-                this.classList.add('border-nuri-primary', 'bg-nuri-primary', 'bg-opacity-10', 'selected');
+                this.classList.add('border-gray-400', 'bg-gray-100', 'selected');
                 this.classList.remove('border-gray-200');
-                this.querySelector('span').classList.add('text-nuri-primary');
+                this.querySelector('span').classList.add('text-gray-700');
+                this.querySelector('span').classList.remove('text-gray-600');
             });
         });
     </script>

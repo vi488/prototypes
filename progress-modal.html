@@ -9,8 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --nuri-primary: #458500;
-            --nuri-primary-hover: #3a7000;
+            --nuri-primary: #00AF9F;
+            --nuri-primary-hover: #009688;
         }
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
@@ -74,7 +74,7 @@
             <div class="p-6 max-h-[calc(90vh-180px)] overflow-y-auto">
                 <!-- Overview Cards -->
                 <div class="grid grid-cols-4 gap-6 mb-8">
-                    <div class="bg-gradient-to-br from-nuri-primary to-green-600 rounded-xl p-6 text-white">
+                    <div class="bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl p-6 text-white">
                         <div class="flex items-center justify-between mb-4">
                             <i data-lucide="target" class="w-8 h-8"></i>
                             <span class="text-2xl font-bold">85%</span>
@@ -119,16 +119,20 @@
                             <h3 class="text-lg font-semibold text-gray-800">Mood Trends</h3>
                             <button class="text-sm text-nuri-primary hover:text-nuri-primary">View Details</button>
                         </div>
-                        <canvas id="moodChart" width="400" height="200"></canvas>
+                        <div class="relative h-48">
+                            <canvas id="moodChart"></canvas>
+                        </div>
                     </div>
-                    
+
                     <!-- Activity Overview -->
                     <div class="bg-white rounded-xl p-6 shadow-sm">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-semibold text-gray-800">Activity Overview</h3>
                             <button class="text-sm text-nuri-primary hover:text-nuri-primary">View Details</button>
                         </div>
-                        <canvas id="activityChart" width="400" height="200"></canvas>
+                        <div class="relative h-48">
+                            <canvas id="activityChart"></canvas>
+                        </div>
                     </div>
                 </div>
                 
@@ -321,58 +325,83 @@
             window.parent.postMessage('closeModal', '*');
         }
         
-        // Initialize charts
-        const moodCtx = document.getElementById('moodChart').getContext('2d');
-        new Chart(moodCtx, {
-            type: 'line',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'Mood Score',
-                    data: [7, 8, 6, 5, 7, 8, 7],
-                    borderColor: '#458500',
-                    backgroundColor: 'rgba(69, 133, 0, 0.1)',
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+        // Initialize charts after DOM is loaded
+        setTimeout(() => {
+            const moodCtx = document.getElementById('moodChart').getContext('2d');
+            new Chart(moodCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Mood Score',
+                        data: [7, 8, 6, 5, 7, 8, 7],
+                        borderColor: '#458500',
+                        backgroundColor: 'rgba(69, 133, 0, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#458500',
+                        pointBorderColor: '#458500'
+                    }]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 10
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 10,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            }
+                        }
                     }
                 }
-            }
-        });
-        
-        const activityCtx = document.getElementById('activityChart').getContext('2d');
-        new Chart(activityCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Exercise', 'Nutrition', 'Mood', 'Fasting'],
-                datasets: [{
-                    data: [25, 35, 20, 20],
-                    backgroundColor: ['#3b82f6', '#458500', '#8b5cf6', '#f59e0b']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
+            });
+
+            const activityCtx = document.getElementById('activityChart').getContext('2d');
+            new Chart(activityCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Exercise', 'Nutrition', 'Mood', 'Fasting'],
+                    datasets: [{
+                        data: [25, 35, 20, 20],
+                        backgroundColor: ['#3b82f6', '#458500', '#8b5cf6', '#f59e0b'],
+                        borderWidth: 0,
+                        cutout: '60%'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
                     }
                 }
-            }
-        });
+            });
+        }, 100);
     </script>
 </body>
 </html>

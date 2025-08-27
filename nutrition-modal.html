@@ -8,8 +8,8 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         :root {
-            --nuri-primary: #458500;
-            --nuri-primary-hover: #3a7000;
+            --nuri-primary: #00AF9F;
+            --nuri-primary-hover: #009688;
         }
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
@@ -130,7 +130,7 @@
                     
                     <!-- Meal Tabs -->
                     <div class="flex space-x-1 mb-6 bg-gray-100 rounded-lg p-1">
-                        <button class="flex-1 py-2 px-4 bg-white text-nuri-primary rounded-md font-medium text-sm shadow-sm">Breakfast</button>
+                        <button class="flex-1 py-2 px-4 bg-white text-gray-800 rounded-md font-medium text-sm shadow-sm">Breakfast</button>
                         <button class="flex-1 py-2 px-4 text-gray-600 rounded-md font-medium text-sm hover:bg-white">Lunch</button>
                         <button class="flex-1 py-2 px-4 text-gray-600 rounded-md font-medium text-sm hover:bg-white">Dinner</button>
                         <button class="flex-1 py-2 px-4 text-gray-600 rounded-md font-medium text-sm hover:bg-white">Snacks</button>
@@ -258,10 +258,10 @@
         tabs.forEach(tab => {
             tab.addEventListener('click', function() {
                 tabs.forEach(t => {
-                    t.classList.remove('bg-white', 'text-nuri-primary', 'shadow-sm');
+                    t.classList.remove('bg-white', 'text-gray-800', 'shadow-sm');
                     t.classList.add('text-gray-600');
                 });
-                this.classList.add('bg-white', 'text-nuri-primary', 'shadow-sm');
+                this.classList.add('bg-white', 'text-gray-800', 'shadow-sm');
                 this.classList.remove('text-gray-600');
             });
         });

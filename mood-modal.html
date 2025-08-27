@@ -8,8 +8,8 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         :root {
-            --nuri-primary: #458500;
-            --nuri-primary-hover: #3a7000;
+            --nuri-primary: #00AF9F;
+            --nuri-primary-hover: #009688;
         }
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
@@ -43,7 +43,8 @@
         
         .mood-emoji.selected {
             transform: scale(1.2);
-            filter: drop-shadow(0 0 10px rgba(69, 133, 0, 0.3));
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+            background-color: #f3f4f6 !important;
         }
     </style>
 </head>
@@ -103,10 +104,10 @@
                     <div>
                         <div class="flex items-center justify-between mb-3">
                             <label class="text-sm font-medium text-gray-700">Energy Level</label>
-                            <span class="text-sm text-nuri-primary font-medium" id="energyValue">7</span>
+                            <span class="text-sm text-gray-700 font-medium" id="energyValue">7</span>
                         </div>
                         <div class="relative">
-                            <input type="range" min="1" max="10" value="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider" id="energySlider">
+                            <input type="range" min="1" max="10" value="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider" id="energySlider" style="accent-color: #6b7280;">
                             <div class="flex justify-between text-xs text-gray-500 mt-1">
                                 <span>Low</span>
                                 <span>High</span>
@@ -118,7 +119,7 @@
                     <div>
                         <div class="flex items-center justify-between mb-3">
                             <label class="text-sm font-medium text-gray-700">Stress Level</label>
-                            <span class="text-sm text-nuri-primary font-medium" id="stressValue">3</span>
+                            <span class="text-sm text-gray-700 font-medium" id="stressValue">3</span>
                         </div>
                         <div class="relative">
                             <input type="range" min="1" max="10" value="3" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider" id="stressSlider">
@@ -133,7 +134,7 @@
                     <div>
                         <div class="flex items-center justify-between mb-3">
                             <label class="text-sm font-medium text-gray-700">Sleep Quality (Last Night)</label>
-                            <span class="text-sm text-nuri-primary font-medium" id="sleepValue">8</span>
+                            <span class="text-sm text-gray-700 font-medium" id="sleepValue">8</span>
                         </div>
                         <div class="relative">
                             <input type="range" min="1" max="10" value="8" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider" id="sleepSlider">
@@ -165,9 +166,9 @@
                             <i data-lucide="dollar-sign" class="w-4 h-4"></i>
                             <span class="text-sm">Finances</span>
                         </button>
-                        <button class="flex items-center space-x-2 p-3 border border-nuri-primary bg-nuri-primary bg-opacity-10 rounded-lg transition-colors trigger-btn selected">
-                            <i data-lucide="dumbbell" class="w-4 h-4 text-nuri-primary"></i>
-                            <span class="text-sm text-nuri-primary">Exercise</span>
+                        <button class="flex items-center space-x-2 p-3 border border-gray-400 bg-gray-100 rounded-lg transition-colors trigger-btn selected">
+                            <i data-lucide="dumbbell" class="w-4 h-4 text-gray-700"></i>
+                            <span class="text-sm text-gray-700">Exercise</span>
                         </button>
                         <button class="flex items-center space-x-2 p-3 border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:bg-opacity-5 transition-colors trigger-btn">
                             <i data-lucide="sun" class="w-4 h-4"></i>
@@ -275,13 +276,15 @@
             btn.addEventListener('click', function() {
                 this.classList.toggle('selected');
                 if (this.classList.contains('selected')) {
-                    this.classList.add('border-nuri-primary', 'bg-nuri-primary', 'bg-opacity-10');
-                    this.querySelector('i').classList.add('text-nuri-primary');
-                    this.querySelector('span').classList.add('text-nuri-primary');
+                    this.classList.add('border-gray-400', 'bg-gray-100');
+                    this.classList.remove('border-gray-200');
+                    this.querySelector('i').classList.add('text-gray-700');
+                    this.querySelector('span').classList.add('text-gray-700');
                 } else {
-                    this.classList.remove('border-nuri-primary', 'bg-nuri-primary', 'bg-opacity-10');
-                    this.querySelector('i').classList.remove('text-nuri-primary');
-                    this.querySelector('span').classList.remove('text-nuri-primary');
+                    this.classList.remove('border-gray-400', 'bg-gray-100');
+                    this.classList.add('border-gray-200');
+                    this.querySelector('i').classList.remove('text-gray-700');
+                    this.querySelector('span').classList.remove('text-gray-700');
                 }
             });
         });

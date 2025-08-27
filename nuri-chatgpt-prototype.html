@@ -9,10 +9,10 @@
     <style>
         /* Custom Nuri Brand Colors */
         :root {
-            --nuri-primary: #458500;
-            --nuri-primary-hover: #3a7000;
-            --nuri-primary-light: #5a9900;
-            --nuri-primary-dark: #2f5c00;
+            --nuri-primary: #00AF9F;
+            --nuri-primary-hover: #009688;
+            --nuri-primary-light: #26C6DA;
+            --nuri-primary-dark: #00695C;
         }
         
         .bg-nuri-primary { background-color: var(--nuri-primary); }
@@ -82,6 +82,35 @@
         .bottom-sheet.open {
             transform: translateY(0);
         }
+
+        /* State transition animations */
+        .state-transition {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Initial state styling */
+        #initialState {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #conversationState {
+            transition: opacity 0.3s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-white font-sans">
@@ -92,8 +121,10 @@
             <!-- Sidebar Header -->
             <div class="flex items-center justify-between p-4 border-b border-gray-200">
                 <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-nuri-primary rounded-full flex items-center justify-center">
-                        <i data-lucide="leaf" class="w-5 h-5 text-white"></i>
+                    <div class="w-8 h-8 flex items-center justify-center">
+                        <svg width="24" height="30" viewBox="0 0 95 121" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
+                        </svg>
                     </div>
                     <span class="text-lg font-semibold text-gray-800">Nuri</span>
                 </div>
@@ -101,20 +132,44 @@
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
-            
-            <!-- New Chat Button -->
-            <div class="p-4">
-                <button class="w-full flex items-center justify-center space-x-2 bg-nuri-primary text-white px-4 py-2 rounded-lg hover:bg-nuri-primary font-medium transition-colors">
-                    <i data-lucide="plus" class="w-4 h-4"></i>
-                    <span>New Chat</span>
-                </button>
-            </div>
-            
-            <!-- Chat History -->
-            <div class="px-4 pb-4">
-                <h3 class="text-sm font-medium text-gray-700 mb-3">Recent Chats</h3>
+
+            <!-- Top Group: New Chat & Search -->
+            <div class="p-4 border-b border-gray-200">
                 <div class="space-y-1">
-                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-nuri-primary bg-opacity-10 text-nuri-primary cursor-pointer">
+                    <button onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span class="text-sm">New Chat</span>
+                    </button>
+                    <button class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                        <span class="text-sm">Search Chat</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tools Group -->
+            <div class="px-4 pb-4 border-b border-gray-200">
+                <div class="space-y-1">
+                    <button onclick="loadToolPage('wellness')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="heart" class="w-4 h-4"></i>
+                        <span class="text-sm">Wellness Tools</span>
+                    </button>
+                    <button onclick="loadToolPage('nutrition')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="apple" class="w-4 h-4"></i>
+                        <span class="text-sm">Nutrition Tools</span>
+                    </button>
+                    <button onclick="loadToolPage('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="dumbbell" class="w-4 h-4"></i>
+                        <span class="text-sm">Exercise Tools</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chats Group -->
+            <div class="px-4 pb-4">
+                <h3 class="text-sm font-medium text-gray-700 mb-3">Chats</h3>
+                <div class="space-y-1">
+                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-gray-200 text-gray-800 cursor-pointer">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
                         <span class="text-sm truncate">Nutrition planning help</span>
                     </div>
@@ -133,37 +188,6 @@
                 </div>
             </div>
             
-            <!-- Wellness Tools -->
-            <div class="px-4 pb-4">
-                <h3 class="text-sm font-medium text-gray-700 mb-3">Wellness Tools</h3>
-                <div class="space-y-1">
-                    <button onclick="openModal('nutrition')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
-                        <i data-lucide="apple" class="w-4 h-4"></i>
-                        <span class="text-sm">Log Meal</span>
-                    </button>
-                    <button onclick="openModal('mood')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
-                        <i data-lucide="smile" class="w-4 h-4"></i>
-                        <span class="text-sm">Track Mood</span>
-                    </button>
-                    <button onclick="openModal('fasting')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
-                        <i data-lucide="clock" class="w-4 h-4"></i>
-                        <span class="text-sm">Fasting Timer</span>
-                    </button>
-                    <button onclick="openModal('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
-                        <i data-lucide="dumbbell" class="w-4 h-4"></i>
-                        <span class="text-sm">Log Exercise</span>
-                    </button>
-                    <button onclick="openModal('progress')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
-                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                        <span class="text-sm">View Progress</span>
-                    </button>
-                    <button class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
-                        <i data-lucide="target" class="w-4 h-4"></i>
-                        <span class="text-sm">Set Goals</span>
-                    </button>
-                </div>
-            </div>
-            
             <!-- Sidebar Footer -->
             <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-gray-50">
                 <div class="space-y-2">
@@ -171,7 +195,7 @@
                         <i data-lucide="coins" class="w-4 h-4"></i>
                         <span>1,250 tokens</span>
                     </div>
-                    <button class="w-full flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                    <button onclick="openModal('settings')" class="w-full flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
                         <i data-lucide="settings" class="w-4 h-4"></i>
                         <span class="text-sm">Settings</span>
                     </button>
@@ -186,156 +210,109 @@
         <!-- Sidebar Overlay for Mobile -->
         <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
 
-        <!-- Main Chat Area -->
+        <!-- Main Content Area -->
         <div class="flex-1 flex flex-col lg:ml-0">
             <!-- Mobile Header -->
             <div class="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 bg-white">
                 <button id="sidebarToggle" class="p-2 rounded-md hover:bg-gray-100">
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
-                <span class="font-semibold text-gray-800">Nuri Assistant</span>
+                <span id="mobileTitle" class="font-semibold text-gray-800">Nuri Assistant</span>
                 <div class="flex items-center space-x-2">
                     <button class="p-2 rounded-md hover:bg-gray-100">
                         <i data-lucide="user" class="w-5 h-5"></i>
                     </button>
-                    <button class="p-2 rounded-md hover:bg-gray-100">
+                    <button onclick="openModal('settings')" class="p-2 rounded-md hover:bg-gray-100">
                         <i data-lucide="settings" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Tool Selector -->
-            <div class="p-4 border-b border-gray-200 bg-white">
-                <div class="flex space-x-2 overflow-x-auto">
-                    <button onclick="openModal('nutrition')" class="flex items-center space-x-2 px-3 py-2 bg-nuri-primary text-white rounded-lg text-sm whitespace-nowrap">
-                        <i data-lucide="apple" class="w-4 h-4"></i>
-                        <span>Nutrition</span>
-                    </button>
-                    <button onclick="openModal('mood')" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm whitespace-nowrap hover:bg-gray-200">
-                        <i data-lucide="smile" class="w-4 h-4"></i>
-                        <span>Mood</span>
-                    </button>
-                    <button onclick="openModal('fasting')" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm whitespace-nowrap hover:bg-gray-200">
-                        <i data-lucide="clock" class="w-4 h-4"></i>
-                        <span>Fasting</span>
-                    </button>
-                    <button onclick="openModal('exercise')" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm whitespace-nowrap hover:bg-gray-200">
-                        <i data-lucide="dumbbell" class="w-4 h-4"></i>
-                        <span>Exercise</span>
-                    </button>
-                    <button onclick="openModal('progress')" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm whitespace-nowrap hover:bg-gray-200">
-                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                        <span>Progress</span>
-                    </button>
-                </div>
-            </div>
 
-            <!-- Messages Area -->
-            <div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-6">
-                <!-- Welcome Message -->
-                <div class="flex justify-center">
-                    <div class="text-center max-w-2xl">
-                        <div class="w-12 h-12 bg-nuri-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i data-lucide="leaf" class="w-6 h-6 text-white"></i>
-                        </div>
-                        <h1 class="text-2xl font-semibold text-gray-800 mb-2">Hello John! I'm Nuri, your personal wellness assistant.</h1>
-                        <p class="text-gray-600">I can help you with nutrition, fitness, wellness tracking, and more. What would you like to work on today?</p>
-                    </div>
-                </div>
 
-                <!-- Sample Conversation -->
-                <div class="max-w-4xl mx-auto space-y-6">
-                    <!-- User Message -->
-                    <div class="flex justify-end">
-                        <div class="flex items-start space-x-3 max-w-2xl">
-                            <div class="bg-nuri-primary text-white px-4 py-3 rounded-2xl rounded-tr-md message-animate">
-                                <p>I want to plan a healthy dinner for tonight. I'm trying to eat low-carb.</p>
+            <!-- Main Content Area -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar">
+                <!-- Chat Page -->
+                <div id="chatPage" class="h-full">
+                    <!-- Initial State - Centered Welcome -->
+                    <div id="initialState" class="h-full flex flex-col items-center justify-center p-8">
+                        <div class="text-center max-w-2xl">
+                            <div class="w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                                <svg width="48" height="60" viewBox="0 0 95 121" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
+                                </svg>
                             </div>
-                            <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="user" class="w-4 h-4 text-white"></i>
-                            </div>
-                        </div>
-                    </div>
+                            <h1 class="text-3xl font-semibold text-gray-800 mb-4">Hello John! I'm Nuri, your personal wellness assistant.</h1>
+                            <p class="text-gray-600 text-lg mb-8">I can help you with nutrition, fitness, wellness tracking, and more. What would you like to work on today?</p>
 
-                    <!-- AI Response -->
-                    <div class="flex justify-start">
-                        <div class="flex items-start space-x-3 max-w-2xl">
-                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="bot" class="w-4 h-4 text-gray-600"></i>
+                            <!-- Centered Quick Suggestions -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8 max-w-lg mx-auto">
+                                <button class="suggestion-btn-initial px-6 py-3 bg-gray-50 text-gray-700 rounded-xl text-sm hover:bg-gray-100 transition-colors border border-gray-200">
+                                    "Plan a healthy breakfast"
+                                </button>
+                                <button class="suggestion-btn-initial px-6 py-3 bg-gray-50 text-gray-700 rounded-xl text-sm hover:bg-gray-100 transition-colors border border-gray-200">
+                                    "Start my fasting timer"
+                                </button>
+                                <button class="suggestion-btn-initial px-6 py-3 bg-gray-50 text-gray-700 rounded-xl text-sm hover:bg-gray-100 transition-colors border border-gray-200">
+                                    "Track my mood today"
+                                </button>
+                                <button class="suggestion-btn-initial px-6 py-3 bg-gray-50 text-gray-700 rounded-xl text-sm hover:bg-gray-100 transition-colors border border-gray-200">
+                                    "Show my progress"
+                                </button>
                             </div>
-                            <div class="bg-gray-100 text-gray-800 px-4 py-3 rounded-2xl rounded-tl-md message-animate">
-                                <p class="mb-3">Great choice! I'd be happy to help you plan a low-carb dinner. Here are some delicious options:</p>
-                                <ul class="space-y-2 mb-3">
-                                    <li class="flex items-center space-x-2">
-                                        <span class="w-2 h-2 bg-nuri-primary rounded-full"></span>
-                                        <span><strong>Grilled Salmon</strong> with roasted asparagus and cauliflower rice</span>
-                                    </li>
-                                    <li class="flex items-center space-x-2">
-                                        <span class="w-2 h-2 bg-nuri-primary rounded-full"></span>
-                                        <span><strong>Chicken Stir-fry</strong> with broccoli, bell peppers, and zucchini noodles</span>
-                                    </li>
-                                    <li class="flex items-center space-x-2">
-                                        <span class="w-2 h-2 bg-nuri-primary rounded-full"></span>
-                                        <span><strong>Beef and Vegetable Skewers</strong> with a side salad</span>
-                                    </li>
-                                </ul>
-                                <p>Would you like me to provide a detailed recipe for any of these options, or help you log this meal once you've prepared it?</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- User Message 2 -->
-                    <div class="flex justify-end">
-                        <div class="flex items-start space-x-3 max-w-2xl">
-                            <div class="bg-nuri-primary text-white px-4 py-3 rounded-2xl rounded-tr-md message-animate">
-                                <p>The salmon option sounds perfect! Can you give me the recipe?</p>
-                            </div>
-                            <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="user" class="w-4 h-4 text-white"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Typing Indicator -->
-                    <div class="flex justify-start">
-                        <div class="flex items-start space-x-3 max-w-2xl">
-                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="bot" class="w-4 h-4 text-gray-600"></i>
-                            </div>
-                            <div class="bg-gray-100 px-4 py-3 rounded-2xl rounded-tl-md">
-                                <div class="flex space-x-1">
-                                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
-                                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
-                                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
+                            <!-- Centered Input -->
+                            <div class="max-w-2xl mx-auto">
+                                <div class="flex items-end space-x-3">
+                                    <div class="flex-1 relative">
+                                        <textarea
+                                            id="initialMessageInput"
+                                            placeholder="Message Nuri..."
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent resize-none bg-white text-gray-800"
+                                            rows="1"
+                                            style="max-height: 120px;"
+                                        ></textarea>
+                                        <div class="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center space-x-1">
+                                            <button class="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                                                <i data-lucide="paperclip" class="w-4 h-4"></i>
+                                            </button>
+                                            <button class="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                                                <i data-lucide="mic" class="w-4 h-4"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <button
+                                        id="initialSendButton"
+                                        class="p-3 bg-gray-800 text-white rounded-xl hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        disabled
+                                    >
+                                        <i data-lucide="send" class="w-5 h-5"></i>
+                                    </button>
+                                </div>
+                                <div class="mt-2 text-xs text-gray-500 text-center">
+                                    Nuri can help with nutrition, fitness, wellness, and more. Ask anything!
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Quick Suggestions (for new chats) -->
-            <div class="p-4 border-t border-gray-200 bg-white" id="quickSuggestions">
-                <div class="max-w-4xl mx-auto">
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <button class="px-4 py-2 bg-gray-50 text-gray-700 rounded-lg text-sm hover:bg-gray-100 transition-colors suggestion-btn">
-                            "Plan a healthy breakfast"
-                        </button>
-                        <button class="px-4 py-2 bg-gray-50 text-gray-700 rounded-lg text-sm hover:bg-gray-100 transition-colors suggestion-btn">
-                            "Start my fasting timer"
-                        </button>
-                        <button class="px-4 py-2 bg-gray-50 text-gray-700 rounded-lg text-sm hover:bg-gray-100 transition-colors suggestion-btn">
-                            "Track my mood today"
-                        </button>
-                        <button class="px-4 py-2 bg-gray-50 text-gray-700 rounded-lg text-sm hover:bg-gray-100 transition-colors suggestion-btn">
-                            "Show my progress"
-                        </button>
+                    <!-- Conversation State - Chat Messages -->
+                    <div id="conversationState" class="hidden p-4 space-y-6">
+                        <!-- Messages will be dynamically added here -->
+                        <div id="messagesContainer" class="max-w-4xl mx-auto space-y-6">
+                            <!-- Messages will be inserted here -->
+                        </div>
                     </div>
                 </div>
+
+                <!-- Tool Pages (will be loaded dynamically) -->
+                <div id="toolPage" class="hidden h-full">
+                    <iframe id="toolFrame" class="w-full h-full border-0"></iframe>
+                </div>
             </div>
 
-            <!-- Input Area -->
-            <div class="p-4 border-t border-gray-200 bg-white">
+            <!-- Conversation Input Area (hidden initially) -->
+            <div id="conversationInput" class="hidden p-4 border-t border-gray-200 bg-white">
                 <div class="max-w-4xl mx-auto">
                     <div class="flex items-end space-x-3">
                         <div class="flex-1 relative">
@@ -357,7 +334,7 @@
                         </div>
                         <button
                             id="sendButton"
-                            class="p-3 bg-nuri-primary text-white rounded-xl hover:bg-nuri-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="p-3 bg-gray-800 text-white rounded-xl hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             disabled
                         >
                             <i data-lucide="send" class="w-5 h-5"></i>
@@ -386,10 +363,25 @@
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebarClose = document.getElementById('sidebarClose');
+        const mobileTitle = document.getElementById('mobileTitle');
+
+        // Page elements
+        const chatPage = document.getElementById('chatPage');
+        const toolPage = document.getElementById('toolPage');
+        const toolFrame = document.getElementById('toolFrame');
+
+        // Initial state elements
+        const initialState = document.getElementById('initialState');
+        const initialMessageInput = document.getElementById('initialMessageInput');
+        const initialSendButton = document.getElementById('initialSendButton');
+        const initialSuggestionBtns = document.querySelectorAll('.suggestion-btn-initial');
+
+        // Conversation state elements
+        const conversationState = document.getElementById('conversationState');
+        const conversationInput = document.getElementById('conversationInput');
         const messageInput = document.getElementById('messageInput');
         const sendButton = document.getElementById('sendButton');
-        const quickSuggestions = document.getElementById('quickSuggestions');
-        const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+        const messagesContainer = document.getElementById('messagesContainer');
 
         // Sidebar functionality
         function openSidebar() {
@@ -408,7 +400,144 @@
         sidebarClose?.addEventListener('click', closeSidebar);
         sidebarOverlay?.addEventListener('click', closeSidebar);
 
-        // Input functionality
+        // Page management
+        let currentPage = 'chat';
+
+        function loadChatPage() {
+            currentPage = 'chat';
+
+            // Show chat page, hide tool page
+            chatPage.classList.remove('hidden');
+            toolPage.classList.add('hidden');
+
+            // Reset to initial state
+            isInitialState = true;
+            initialState.classList.remove('hidden');
+            conversationState.classList.add('hidden');
+            conversationInput.classList.add('hidden');
+
+            // Clear messages
+            messagesContainer.innerHTML = '';
+
+            // Clear inputs
+            if (initialMessageInput) {
+                initialMessageInput.value = '';
+                initialSendButton.disabled = true;
+            }
+            if (messageInput) {
+                messageInput.value = '';
+                sendButton.disabled = true;
+            }
+
+            // Update mobile title
+            mobileTitle.textContent = 'Nuri Assistant';
+        }
+
+        function loadToolPage(toolType) {
+            currentPage = toolType;
+
+            // Hide chat page, show tool page
+            chatPage.classList.add('hidden');
+            toolPage.classList.remove('hidden');
+
+            // Load appropriate tool page
+            const toolUrls = {
+                'wellness': 'wellness-tools.html',
+                'nutrition': 'nutrition-tools.html',
+                'exercise': 'exercise-tools.html'
+            };
+
+            if (toolUrls[toolType]) {
+                toolFrame.src = toolUrls[toolType];
+
+                // Update mobile title
+                const titles = {
+                    'wellness': 'Wellness Tools',
+                    'nutrition': 'Nutrition Tools',
+                    'exercise': 'Exercise Tools'
+                };
+                mobileTitle.textContent = titles[toolType] || 'Nuri Tools';
+            }
+        }
+
+        // State management
+        let isInitialState = true;
+
+        function switchToConversationState() {
+            if (!isInitialState) return;
+
+            isInitialState = false;
+
+            // Fade out initial state
+            initialState.style.opacity = '0';
+
+            setTimeout(() => {
+                // Hide initial state
+                initialState.classList.add('hidden');
+
+                // Show conversation state with fade in
+                conversationState.classList.remove('hidden');
+                conversationInput.classList.remove('hidden');
+
+                // Add fade in animation
+                conversationState.classList.add('fade-in');
+                conversationInput.classList.add('fade-in');
+
+                // Focus on conversation input
+                setTimeout(() => {
+                    messageInput.focus();
+                }, 100);
+            }, 300);
+        }
+
+        function addMessage(content, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = isUser ? 'flex justify-end' : 'flex justify-start';
+
+            if (isUser) {
+                messageDiv.innerHTML = `
+                    <div class="flex items-start space-x-3 max-w-2xl">
+                        <div class="px-4 py-3 rounded-2xl rounded-tr-md message-animate" style="background-color: #e9e9e980; color: #1f2937;">
+                            <p>${content}</p>
+                        </div>
+                        <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="user" class="w-4 h-4 text-white"></i>
+                        </div>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="flex items-start space-x-3 max-w-2xl">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="bot" class="w-4 h-4 text-gray-600"></i>
+                        </div>
+                        <div class="bg-gray-100 text-gray-800 px-4 py-3 rounded-2xl rounded-tl-md message-animate">
+                            <p>${content}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            messagesContainer.appendChild(messageDiv);
+
+            // Re-initialize Lucide icons for new elements
+            lucide.createIcons();
+
+            // Scroll to bottom
+            conversationState.scrollTop = conversationState.scrollHeight;
+        }
+
+        // Initial state input functionality
+        initialMessageInput.addEventListener('input', function() {
+            const hasText = this.value.trim().length > 0;
+            initialSendButton.disabled = !hasText;
+
+            // Auto-resize textarea
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Conversation state input functionality
         messageInput.addEventListener('input', function() {
             const hasText = this.value.trim().length > 0;
             sendButton.disabled = !hasText;
@@ -418,25 +547,58 @@
             this.style.height = Math.min(this.scrollHeight, 120) + 'px';
         });
 
-        // Send message functionality
+        // Send message functionality for initial state
+        function sendInitialMessage() {
+            const message = initialMessageInput.value.trim();
+            if (!message) return;
+
+            // Switch to conversation state
+            switchToConversationState();
+
+            // Add user message
+            addMessage(message, true);
+
+            // Clear initial input
+            initialMessageInput.value = '';
+            initialMessageInput.style.height = 'auto';
+            initialSendButton.disabled = true;
+
+            // Simulate AI response after a delay
+            setTimeout(() => {
+                addMessage("I'd be happy to help you with that! Let me provide you with some personalized recommendations based on your wellness goals.");
+            }, 1000);
+        }
+
+        // Send message functionality for conversation state
         function sendMessage() {
             const message = messageInput.value.trim();
             if (!message) return;
 
-            // Hide quick suggestions after first message
-            quickSuggestions.style.display = 'none';
+            // Add user message
+            addMessage(message, true);
 
             // Clear input
             messageInput.value = '';
             messageInput.style.height = 'auto';
             sendButton.disabled = true;
 
-            // Here you would typically send the message to your backend
-            console.log('Sending message:', message);
+            // Simulate AI response after a delay
+            setTimeout(() => {
+                addMessage("Thank you for your message! I'm here to help you with your wellness journey.");
+            }, 1000);
         }
 
-        sendButton.addEventListener('click', sendMessage);
+        // Event listeners for initial state
+        initialSendButton.addEventListener('click', sendInitialMessage);
+        initialMessageInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendInitialMessage();
+            }
+        });
 
+        // Event listeners for conversation state
+        sendButton.addEventListener('click', sendMessage);
         messageInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -444,35 +606,21 @@
             }
         });
 
-        // Quick suggestion functionality
-        suggestionBtns.forEach(btn => {
+        // Initial state suggestion functionality
+        initialSuggestionBtns.forEach(btn => {
             btn.addEventListener('click', function() {
                 const suggestion = this.textContent.replace(/"/g, '');
-                messageInput.value = suggestion;
-                messageInput.focus();
-                sendButton.disabled = false;
+                initialMessageInput.value = suggestion;
+                initialMessageInput.focus();
+                initialSendButton.disabled = false;
+
+                // Auto-resize textarea
+                initialMessageInput.style.height = 'auto';
+                initialMessageInput.style.height = Math.min(initialMessageInput.scrollHeight, 120) + 'px';
             });
         });
 
-        // Tool selector functionality
-        const toolButtons = document.querySelectorAll('[class*="bg-nuri-primary"], [class*="bg-gray-100"]');
-        toolButtons.forEach(btn => {
-            if (btn.classList.contains('px-3')) { // Tool selector buttons
-                btn.addEventListener('click', function() {
-                    // Remove active state from all tool buttons
-                    toolButtons.forEach(b => {
-                        if (b.classList.contains('px-3')) {
-                            b.classList.remove('bg-nuri-primary', 'text-white');
-                            b.classList.add('bg-gray-100', 'text-gray-700');
-                        }
-                    });
 
-                    // Add active state to clicked button
-                    this.classList.remove('bg-gray-100', 'text-gray-700');
-                    this.classList.add('bg-nuri-primary', 'text-white');
-                });
-            }
-        });
 
         // Responsive behavior
         function handleResize() {
@@ -493,21 +641,13 @@
         window.addEventListener('resize', handleResize);
         handleResize(); // Initial call
 
-        // Modal functionality
+        // Modal functionality (only for settings now)
         const modalContainer = document.getElementById('modalContainer');
         const modalFrame = document.getElementById('modalFrame');
 
         function openModal(type) {
-            const modalUrls = {
-                'nutrition': 'nutrition-modal.html',
-                'mood': 'mood-modal.html',
-                'fasting': 'fasting-modal.html',
-                'exercise': 'exercise-modal.html',
-                'progress': 'progress-modal.html'
-            };
-
-            if (modalUrls[type]) {
-                modalFrame.src = modalUrls[type];
+            if (type === 'settings') {
+                modalFrame.src = 'settings-modal.html';
                 modalContainer.classList.remove('hidden');
                 document.body.classList.add('overflow-hidden');
             }
@@ -536,6 +676,8 @@
         // Make functions globally available
         window.openModal = openModal;
         window.closeModal = closeModal;
+        window.loadChatPage = loadChatPage;
+        window.loadToolPage = loadToolPage;
     </script>
 </body>
 </html>

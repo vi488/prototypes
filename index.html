@@ -8,8 +8,8 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         :root {
-            --nuri-primary: #458500;
-            --nuri-primary-hover: #3a7000;
+            --nuri-primary: #00AF9F;
+            --nuri-primary-hover: #009688;
         }
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
@@ -31,8 +31,10 @@
     <header class="bg-white border-b border-gray-200 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-nuri-primary rounded-full flex items-center justify-center">
-                    <i data-lucide="leaf" class="w-6 h-6 text-white"></i>
+                <div class="w-12 h-12 flex items-center justify-center">
+                    <svg width="36" height="45" viewBox="0 0 95 121" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
+                    </svg>
                 </div>
                 <div>
                     <h1 class="text-2xl font-bold text-gray-900">Nuri ChatGPT-like Design Prototypes</h1>
@@ -76,18 +78,18 @@
         <div class="mb-8">
             <h2 class="text-xl font-semibold text-gray-900 mb-4">Main ChatGPT-like Interface</h2>
             <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
-                <div class="aspect-video bg-gradient-to-br from-nuri-primary to-green-600 relative">
+                <div class="aspect-video bg-gradient-to-br from-nuri-primary to-teal-600 relative">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <div class="text-center text-white">
                             <i data-lucide="message-circle" class="w-16 h-16 mx-auto mb-4 opacity-80"></i>
                             <h3 class="text-2xl font-bold mb-2">Main Chat Interface</h3>
-                            <p class="text-lg opacity-90">ChatGPT-like design with sidebar navigation</p>
+                            <p class="text-lg opacity-90">ChatGPT-like design with integrated tool pages</p>
                         </div>
                     </div>
                 </div>
                 <div class="p-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-2">Complete Chat Interface</h3>
-                    <p class="text-gray-600 mb-4">The main prototype showcasing the full ChatGPT-like interface with collapsible sidebar, chat area, tool selection, and all interactive elements.</p>
+                    <p class="text-gray-600 mb-4">The main prototype with ChatGPT-like interface, sidebar navigation matching ChatGPT structure, and integrated tool pages that load in the main panel.</p>
                     <div class="flex items-center justify-between">
                         <div class="flex items-center space-x-4 text-sm text-gray-500">
                             <span class="flex items-center space-x-1">
@@ -111,10 +113,59 @@
             </div>
         </div>
 
-        <!-- Feature Modals -->
+        <!-- Tool Pages & Modals -->
         <div class="mb-8">
-            <h2 class="text-xl font-semibold text-gray-900 mb-4">Feature Modals</h2>
-            <p class="text-gray-600 mb-6">Individual prototypes for each wellness feature that can be accessed from the main interface.</p>
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Tool Pages & Modals</h2>
+            <p class="text-gray-600 mb-6">Individual prototypes for wellness tools (integrated pages) and feature modals (popup overlays).</p>
+
+            <!-- Tool Pages Section -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">🔧 Integrated Tool Pages</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Wellness Tools -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
+                        <i data-lucide="heart" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Wellness Tools</h3>
+                        <p class="text-sm text-gray-600 mb-4">Mood tracking, sleep quality, stress management, and wellness tips.</p>
+                        <a href="wellness-tools.html" target="_blank" class="text-nuri-primary hover:text-nuri-primary font-medium text-sm">
+                            View Page →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Nutrition Tools -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
+                        <i data-lucide="apple" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Nutrition Tools</h3>
+                        <p class="text-sm text-gray-600 mb-4">Meal logging, calorie tracking, water intake, and nutrition analysis.</p>
+                        <a href="nutrition-tools.html" target="_blank" class="text-nuri-primary hover:text-nuri-primary font-medium text-sm">
+                            View Page →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Exercise Tools -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                        <i data-lucide="dumbbell" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Exercise Tools</h3>
+                        <p class="text-sm text-gray-600 mb-4">Workout logging, exercise tracking, progress monitoring, and fitness goals.</p>
+                        <a href="exercise-tools.html" target="_blank" class="text-nuri-primary hover:text-nuri-primary font-medium text-sm">
+                            View Page →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Modals Section -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">📱 Feature Modals (Legacy)</h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Nutrition Modal -->
@@ -187,15 +238,17 @@
                     </div>
                 </div>
 
-                <!-- Coming Soon -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card opacity-60">
+                <!-- Settings Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
                     <div class="h-32 bg-gradient-to-br from-gray-400 to-gray-500 flex items-center justify-center">
                         <i data-lucide="settings" class="w-12 h-12 text-white"></i>
                     </div>
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-900 mb-2">Settings & More</h3>
-                        <p class="text-sm text-gray-600 mb-4">Additional features and settings modals coming soon.</p>
-                        <span class="text-gray-400 font-medium text-sm">Coming Soon</span>
+                        <h3 class="font-semibold text-gray-900 mb-2">Settings</h3>
+                        <p class="text-sm text-gray-600 mb-4">Profile management, notifications, preferences, privacy, and support.</p>
+                        <a href="settings-modal.html" target="_blank" class="text-nuri-primary hover:text-nuri-primary font-medium text-sm">
+                            View Modal →
+                        </a>
                     </div>
                 </div>
             </div>

@@ -8,8 +8,8 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         :root {
-            --nuri-primary: #458500;
-            --nuri-primary-hover: #3a7000;
+            --nuri-primary: #00AF9F;
+            --nuri-primary-hover: #009688;
         }
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
@@ -84,8 +84,8 @@
                 <div class="flex-1 p-8 flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-white">
                     <!-- Current Fast Status -->
                     <div class="text-center mb-8">
-                        <div class="inline-flex items-center px-4 py-2 bg-nuri-primary bg-opacity-10 text-nuri-primary rounded-full text-sm font-medium mb-4">
-                            <div class="w-2 h-2 bg-nuri-primary rounded-full mr-2 pulse-animation"></div>
+                        <div class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-4">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-2 pulse-animation"></div>
                             Currently Fasting
                         </div>
                         <h3 class="text-2xl font-semibold text-gray-800 mb-2">16:8 Intermittent Fast</h3>
@@ -114,7 +114,7 @@
                             />
                         </svg>
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <div class="timer-display text-nuri-primary">12:34</div>
+                            <div class="timer-display text-gray-800">12:34</div>
                             <p class="text-sm text-gray-600 mt-2">Hours Fasted</p>
                             <p class="text-xs text-gray-500">3:26 remaining</p>
                         </div>
@@ -135,15 +135,15 @@
                     <!-- Quick Stats -->
                     <div class="grid grid-cols-3 gap-4 mt-8 w-full max-w-md">
                         <div class="text-center p-4 bg-white rounded-lg shadow-sm">
-                            <div class="text-2xl font-bold text-nuri-primary">78%</div>
+                            <div class="text-2xl font-bold text-gray-800">78%</div>
                             <div class="text-xs text-gray-600">Complete</div>
                         </div>
                         <div class="text-center p-4 bg-white rounded-lg shadow-sm">
-                            <div class="text-2xl font-bold text-nuri-primary">16</div>
+                            <div class="text-2xl font-bold text-gray-800">16</div>
                             <div class="text-xs text-gray-600">Goal Hours</div>
                         </div>
                         <div class="text-center p-4 bg-white rounded-lg shadow-sm">
-                            <div class="text-2xl font-bold text-nuri-primary">7</div>
+                            <div class="text-2xl font-bold text-gray-800">7</div>
                             <div class="text-xs text-gray-600">Day Streak</div>
                         </div>
                     </div>
@@ -155,13 +155,13 @@
                     <div class="mb-6">
                         <h4 class="text-lg font-semibold text-gray-800 mb-4">Fasting Plans</h4>
                         <div class="space-y-2">
-                            <div class="p-3 bg-nuri-primary bg-opacity-10 border border-nuri-primary rounded-lg">
+                            <div class="p-3 bg-gray-100 border border-gray-400 rounded-lg">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="font-medium text-nuri-primary">16:8 Method</p>
+                                        <p class="font-medium text-gray-800">16:8 Method</p>
                                         <p class="text-xs text-gray-600">16h fast, 8h eating</p>
                                     </div>
-                                    <i data-lucide="check" class="w-4 h-4 text-nuri-primary"></i>
+                                    <i data-lucide="check" class="w-4 h-4 text-gray-700"></i>
                                 </div>
                             </div>
                             <div class="p-3 bg-white border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer">
@@ -349,20 +349,20 @@
             btn.addEventListener('click', function() {
                 // Remove selection from all plans
                 planButtons.forEach(b => {
-                    b.classList.remove('bg-nuri-primary', 'bg-opacity-10', 'border-nuri-primary');
+                    b.classList.remove('bg-gray-100', 'border-gray-400');
                     b.classList.add('bg-white', 'border-gray-200');
                     const check = b.querySelector('[data-lucide="check"]');
                     if (check) check.remove();
                 });
-                
+
                 // Add selection to clicked plan
                 this.classList.remove('bg-white', 'border-gray-200');
-                this.classList.add('bg-nuri-primary', 'bg-opacity-10', 'border-nuri-primary');
-                
+                this.classList.add('bg-gray-100', 'border-gray-400');
+
                 // Add check icon
                 const checkIcon = document.createElement('i');
                 checkIcon.setAttribute('data-lucide', 'check');
-                checkIcon.className = 'w-4 h-4 text-nuri-primary';
+                checkIcon.className = 'w-4 h-4 text-gray-700';
                 this.querySelector('.flex').appendChild(checkIcon);
                 
                 // Re-initialize icons
