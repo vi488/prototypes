@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuri ChatGPT-like Design Prototypes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        :root {
+            --nuri-primary: #458500;
+            --nuri-primary-hover: #3a7000;
+        }
+        .bg-nuri-primary { background-color: var(--nuri-primary); }
+        .text-nuri-primary { color: var(--nuri-primary); }
+        .border-nuri-primary { border-color: var(--nuri-primary); }
+        .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+        
+        .prototype-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .prototype-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-nuri-primary rounded-full flex items-center justify-center">
+                    <i data-lucide="leaf" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Nuri ChatGPT-like Design Prototypes</h1>
+                    <p class="text-gray-600">Interactive prototypes showcasing the new ChatGPT-inspired interface</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Overview -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Prototype Overview</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="smartphone" class="w-8 h-8 text-blue-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Mobile Responsive</h3>
+                    <p class="text-sm text-gray-600">Optimized for desktop, tablet, and mobile devices</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="zap" class="w-8 h-8 text-green-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Interactive</h3>
+                    <p class="text-sm text-gray-600">Fully functional with real interactions and animations</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="palette" class="w-8 h-8 text-purple-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Branded</h3>
+                    <p class="text-sm text-gray-600">Uses authentic Nuri colors, icons, and styling</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Prototype -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Main ChatGPT-like Interface</h2>
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                <div class="aspect-video bg-gradient-to-br from-nuri-primary to-green-600 relative">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <i data-lucide="message-circle" class="w-16 h-16 mx-auto mb-4 opacity-80"></i>
+                            <h3 class="text-2xl font-bold mb-2">Main Chat Interface</h3>
+                            <p class="text-lg opacity-90">ChatGPT-like design with sidebar navigation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Complete Chat Interface</h3>
+                    <p class="text-gray-600 mb-4">The main prototype showcasing the full ChatGPT-like interface with collapsible sidebar, chat area, tool selection, and all interactive elements.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="monitor" class="w-4 h-4"></i>
+                                <span>Desktop</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="tablet" class="w-4 h-4"></i>
+                                <span>Tablet</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="smartphone" class="w-4 h-4"></i>
+                                <span>Mobile</span>
+                            </span>
+                        </div>
+                        <a href="nuri-chatgpt-prototype.html" target="_blank" class="bg-nuri-primary text-white px-6 py-2 rounded-lg hover:bg-nuri-primary transition-colors">
+                            View Prototype
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Modals -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Feature Modals</h2>
+            <p class="text-gray-600 mb-6">Individual prototypes for each wellness feature that can be accessed from the main interface.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Nutrition Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center">
+                        <i data-lucide="apple" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Nutrition Tracker</h3>
+                        <p class="text-sm text-gray-600 mb-4">Meal logging, calorie tracking, and nutrition analysis with daily summaries.</p>
+                        <a href="nutrition-modal.html" target="_blank" class="text-nuri-primary hover:text-nuri-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mood Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center">
+                        <i data-lucide="smile" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Mood Tracker</h3>
+                        <p class="text-sm text-gray-600 mb-4">Mood selection, wellness scales, trigger tracking, and mood history.</p>
+                        <a href="mood-modal.html" target="_blank" class="text-nuri-primary hover:text-nuri-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Fasting Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center">
+                        <i data-lucide="clock" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Fasting Timer</h3>
+                        <p class="text-sm text-gray-600 mb-4">Interactive timer, fasting plans, eating windows, and progress tracking.</p>
+                        <a href="fasting-modal.html" target="_blank" class="text-nuri-primary hover:text-nuri-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Exercise Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center">
+                        <i data-lucide="dumbbell" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibent text-gray-900 mb-2">Exercise Tracker</h3>
+                        <p class="text-sm text-gray-600 mb-4">Workout logging, exercise details, intensity tracking, and fitness summaries.</p>
+                        <a href="exercise-modal.html" target="_blank" class="text-nuri-primary hover:text-nuri-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Progress Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-green-400 to-green-500 flex items-center justify-center">
+                        <i data-lucide="bar-chart-3" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Progress Dashboard</h3>
+                        <p class="text-sm text-gray-600 mb-4">Charts, analytics, achievements, and comprehensive wellness progress tracking.</p>
+                        <a href="progress-modal.html" target="_blank" class="text-nuri-primary hover:text-nuri-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coming Soon -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card opacity-60">
+                    <div class="h-32 bg-gradient-to-br from-gray-400 to-gray-500 flex items-center justify-center">
+                        <i data-lucide="settings" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Settings & More</h3>
+                        <p class="text-sm text-gray-600 mb-4">Additional features and settings modals coming soon.</p>
+                        <span class="text-gray-400 font-medium text-sm">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">How to Use the Prototypes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Main Prototype Features</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-nuri-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Click hamburger menu (mobile) to open/close sidebar</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-nuri-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Click wellness tools in sidebar to open feature modals</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-nuri-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Use tool selector bar to switch between features</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-nuri-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Type in message input and click send button</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-nuri-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Click quick suggestions to populate input field</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Testing Responsive Design</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="monitor" class="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0"></i>
+                            <span><strong>Desktop (1024px+):</strong> Full sidebar always visible</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="tablet" class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0"></i>
+                            <span><strong>Tablet (768-1023px):</strong> Collapsible sidebar</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="smartphone" class="w-4 h-4 text-purple-500 mt-0.5 flex-shrink-0"></i>
+                            <span><strong>Mobile (<768px):</strong> Sidebar as overlay</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="refresh-cw" class="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0"></i>
+                            <span>Resize browser window to test responsive behavior</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="text-center text-sm text-gray-500">
+                <p>Nuri ChatGPT-like Design Prototypes • Created August 27, 2025</p>
+                <p class="mt-1">Interactive prototypes for stakeholder review and development planning</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

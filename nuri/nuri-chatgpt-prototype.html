@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuri - ChatGPT-like Design Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Custom Nuri Brand Colors */
+        :root {
+            --nuri-primary: #458500;
+            --nuri-primary-hover: #3a7000;
+            --nuri-primary-light: #5a9900;
+            --nuri-primary-dark: #2f5c00;
+        }
+        
+        .bg-nuri-primary { background-color: var(--nuri-primary); }
+        .text-nuri-primary { color: var(--nuri-primary); }
+        .border-nuri-primary { border-color: var(--nuri-primary); }
+        .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+        
+        /* Sidebar animations */
+        .sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        /* Message animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message-animate {
+            animation: fadeInUp 0.3s ease-out;
+        }
+        
+        /* Typing indicator */
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        .typing-dot {
+            animation: bounce 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* Mobile bottom sheet */
+        .bottom-sheet {
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .bottom-sheet.open {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-white font-sans">
+    <!-- Main Container -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar-transition fixed inset-y-0 left-0 z-50 w-80 bg-gray-50 border-r border-gray-200 transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0">
+            <!-- Sidebar Header -->
+            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-nuri-primary rounded-full flex items-center justify-center">
+                        <i data-lucide="leaf" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-lg font-semibold text-gray-800">Nuri</span>
+                </div>
+                <button id="sidebarClose" class="lg:hidden p-1 rounded-md hover:bg-gray-200">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <!-- New Chat Button -->
+            <div class="p-4">
+                <button class="w-full flex items-center justify-center space-x-2 bg-nuri-primary text-white px-4 py-2 rounded-lg hover:bg-nuri-primary font-medium transition-colors">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    <span>New Chat</span>
+                </button>
+            </div>
+            
+            <!-- Chat History -->
+            <div class="px-4 pb-4">
+                <h3 class="text-sm font-medium text-gray-700 mb-3">Recent Chats</h3>
+                <div class="space-y-1">
+                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-nuri-primary bg-opacity-10 text-nuri-primary cursor-pointer">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span class="text-sm truncate">Nutrition planning help</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-600 cursor-pointer">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span class="text-sm truncate">Mood tracking insights</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-600 cursor-pointer">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span class="text-sm truncate">Fasting schedule setup</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-600 cursor-pointer">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span class="text-sm truncate">Exercise routine planning</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wellness Tools -->
+            <div class="px-4 pb-4">
+                <h3 class="text-sm font-medium text-gray-700 mb-3">Wellness Tools</h3>
+                <div class="space-y-1">
+                    <button onclick="openModal('nutrition')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="apple" class="w-4 h-4"></i>
+                        <span class="text-sm">Log Meal</span>
+                    </button>
+                    <button onclick="openModal('mood')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="smile" class="w-4 h-4"></i>
+                        <span class="text-sm">Track Mood</span>
+                    </button>
+                    <button onclick="openModal('fasting')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                        <span class="text-sm">Fasting Timer</span>
+                    </button>
+                    <button onclick="openModal('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="dumbbell" class="w-4 h-4"></i>
+                        <span class="text-sm">Log Exercise</span>
+                    </button>
+                    <button onclick="openModal('progress')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                        <span class="text-sm">View Progress</span>
+                    </button>
+                    <button class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="target" class="w-4 h-4"></i>
+                        <span class="text-sm">Set Goals</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Sidebar Footer -->
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-gray-50">
+                <div class="space-y-2">
+                    <div class="flex items-center space-x-2 text-sm text-gray-600">
+                        <i data-lucide="coins" class="w-4 h-4"></i>
+                        <span>1,250 tokens</span>
+                    </div>
+                    <button class="w-full flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="settings" class="w-4 h-4"></i>
+                        <span class="text-sm">Settings</span>
+                    </button>
+                    <div class="flex items-center space-x-2 p-2">
+                        <div class="w-6 h-6 bg-gray-400 rounded-full"></div>
+                        <span class="text-sm text-gray-700">John Doe</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar Overlay for Mobile -->
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
+
+        <!-- Main Chat Area -->
+        <div class="flex-1 flex flex-col lg:ml-0">
+            <!-- Mobile Header -->
+            <div class="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 bg-white">
+                <button id="sidebarToggle" class="p-2 rounded-md hover:bg-gray-100">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+                <span class="font-semibold text-gray-800">Nuri Assistant</span>
+                <div class="flex items-center space-x-2">
+                    <button class="p-2 rounded-md hover:bg-gray-100">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                    </button>
+                    <button class="p-2 rounded-md hover:bg-gray-100">
+                        <i data-lucide="settings" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tool Selector -->
+            <div class="p-4 border-b border-gray-200 bg-white">
+                <div class="flex space-x-2 overflow-x-auto">
+                    <button onclick="openModal('nutrition')" class="flex items-center space-x-2 px-3 py-2 bg-nuri-primary text-white rounded-lg text-sm whitespace-nowrap">
+                        <i data-lucide="apple" class="w-4 h-4"></i>
+                        <span>Nutrition</span>
+                    </button>
+                    <button onclick="openModal('mood')" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm whitespace-nowrap hover:bg-gray-200">
+                        <i data-lucide="smile" class="w-4 h-4"></i>
+                        <span>Mood</span>
+                    </button>
+                    <button onclick="openModal('fasting')" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm whitespace-nowrap hover:bg-gray-200">
+                        <i data-lucide="clock" class="w-4 h-4"></i>
+                        <span>Fasting</span>
+                    </button>
+                    <button onclick="openModal('exercise')" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm whitespace-nowrap hover:bg-gray-200">
+                        <i data-lucide="dumbbell" class="w-4 h-4"></i>
+                        <span>Exercise</span>
+                    </button>
+                    <button onclick="openModal('progress')" class="flex items-center space-x-2 px-3 py-2 bg-gray-100 text-gray-700 rounded-lg text-sm whitespace-nowrap hover:bg-gray-200">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                        <span>Progress</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-6">
+                <!-- Welcome Message -->
+                <div class="flex justify-center">
+                    <div class="text-center max-w-2xl">
+                        <div class="w-12 h-12 bg-nuri-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="leaf" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h1 class="text-2xl font-semibold text-gray-800 mb-2">Hello John! I'm Nuri, your personal wellness assistant.</h1>
+                        <p class="text-gray-600">I can help you with nutrition, fitness, wellness tracking, and more. What would you like to work on today?</p>
+                    </div>
+                </div>
+
+                <!-- Sample Conversation -->
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <!-- User Message -->
+                    <div class="flex justify-end">
+                        <div class="flex items-start space-x-3 max-w-2xl">
+                            <div class="bg-nuri-primary text-white px-4 py-3 rounded-2xl rounded-tr-md message-animate">
+                                <p>I want to plan a healthy dinner for tonight. I'm trying to eat low-carb.</p>
+                            </div>
+                            <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="user" class="w-4 h-4 text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Response -->
+                    <div class="flex justify-start">
+                        <div class="flex items-start space-x-3 max-w-2xl">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="bot" class="w-4 h-4 text-gray-600"></i>
+                            </div>
+                            <div class="bg-gray-100 text-gray-800 px-4 py-3 rounded-2xl rounded-tl-md message-animate">
+                                <p class="mb-3">Great choice! I'd be happy to help you plan a low-carb dinner. Here are some delicious options:</p>
+                                <ul class="space-y-2 mb-3">
+                                    <li class="flex items-center space-x-2">
+                                        <span class="w-2 h-2 bg-nuri-primary rounded-full"></span>
+                                        <span><strong>Grilled Salmon</strong> with roasted asparagus and cauliflower rice</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <span class="w-2 h-2 bg-nuri-primary rounded-full"></span>
+                                        <span><strong>Chicken Stir-fry</strong> with broccoli, bell peppers, and zucchini noodles</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <span class="w-2 h-2 bg-nuri-primary rounded-full"></span>
+                                        <span><strong>Beef and Vegetable Skewers</strong> with a side salad</span>
+                                    </li>
+                                </ul>
+                                <p>Would you like me to provide a detailed recipe for any of these options, or help you log this meal once you've prepared it?</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Message 2 -->
+                    <div class="flex justify-end">
+                        <div class="flex items-start space-x-3 max-w-2xl">
+                            <div class="bg-nuri-primary text-white px-4 py-3 rounded-2xl rounded-tr-md message-animate">
+                                <p>The salmon option sounds perfect! Can you give me the recipe?</p>
+                            </div>
+                            <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="user" class="w-4 h-4 text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Typing Indicator -->
+                    <div class="flex justify-start">
+                        <div class="flex items-start space-x-3 max-w-2xl">
+                            <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="bot" class="w-4 h-4 text-gray-600"></i>
+                            </div>
+                            <div class="bg-gray-100 px-4 py-3 rounded-2xl rounded-tl-md">
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
+                                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
+                                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Suggestions (for new chats) -->
+            <div class="p-4 border-t border-gray-200 bg-white" id="quickSuggestions">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button class="px-4 py-2 bg-gray-50 text-gray-700 rounded-lg text-sm hover:bg-gray-100 transition-colors suggestion-btn">
+                            "Plan a healthy breakfast"
+                        </button>
+                        <button class="px-4 py-2 bg-gray-50 text-gray-700 rounded-lg text-sm hover:bg-gray-100 transition-colors suggestion-btn">
+                            "Start my fasting timer"
+                        </button>
+                        <button class="px-4 py-2 bg-gray-50 text-gray-700 rounded-lg text-sm hover:bg-gray-100 transition-colors suggestion-btn">
+                            "Track my mood today"
+                        </button>
+                        <button class="px-4 py-2 bg-gray-50 text-gray-700 rounded-lg text-sm hover:bg-gray-100 transition-colors suggestion-btn">
+                            "Show my progress"
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-4 border-t border-gray-200 bg-white">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex items-end space-x-3">
+                        <div class="flex-1 relative">
+                            <textarea
+                                id="messageInput"
+                                placeholder="Message Nuri..."
+                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent resize-none bg-white text-gray-800"
+                                rows="1"
+                                style="max-height: 120px;"
+                            ></textarea>
+                            <div class="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center space-x-1">
+                                <button class="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                                    <i data-lucide="paperclip" class="w-4 h-4"></i>
+                                </button>
+                                <button class="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                                    <i data-lucide="mic" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button
+                            id="sendButton"
+                            class="p-3 bg-nuri-primary text-white rounded-xl hover:bg-nuri-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled
+                        >
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="mt-2 text-xs text-gray-500 text-center">
+                        Nuri can help with nutrition, fitness, wellness, and more. Ask anything!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Container for Feature Modals -->
+    <div id="modalContainer" class="hidden fixed inset-0 z-50">
+        <iframe id="modalFrame" class="w-full h-full border-0"></iframe>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // DOM elements
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const quickSuggestions = document.getElementById('quickSuggestions');
+        const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+
+        // Sidebar functionality
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        sidebarToggle?.addEventListener('click', openSidebar);
+        sidebarClose?.addEventListener('click', closeSidebar);
+        sidebarOverlay?.addEventListener('click', closeSidebar);
+
+        // Input functionality
+        messageInput.addEventListener('input', function() {
+            const hasText = this.value.trim().length > 0;
+            sendButton.disabled = !hasText;
+
+            // Auto-resize textarea
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Send message functionality
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Hide quick suggestions after first message
+            quickSuggestions.style.display = 'none';
+
+            // Clear input
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            sendButton.disabled = true;
+
+            // Here you would typically send the message to your backend
+            console.log('Sending message:', message);
+        }
+
+        sendButton.addEventListener('click', sendMessage);
+
+        messageInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Quick suggestion functionality
+        suggestionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const suggestion = this.textContent.replace(/"/g, '');
+                messageInput.value = suggestion;
+                messageInput.focus();
+                sendButton.disabled = false;
+            });
+        });
+
+        // Tool selector functionality
+        const toolButtons = document.querySelectorAll('[class*="bg-nuri-primary"], [class*="bg-gray-100"]');
+        toolButtons.forEach(btn => {
+            if (btn.classList.contains('px-3')) { // Tool selector buttons
+                btn.addEventListener('click', function() {
+                    // Remove active state from all tool buttons
+                    toolButtons.forEach(b => {
+                        if (b.classList.contains('px-3')) {
+                            b.classList.remove('bg-nuri-primary', 'text-white');
+                            b.classList.add('bg-gray-100', 'text-gray-700');
+                        }
+                    });
+
+                    // Add active state to clicked button
+                    this.classList.remove('bg-gray-100', 'text-gray-700');
+                    this.classList.add('bg-nuri-primary', 'text-white');
+                });
+            }
+        });
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth >= 1024) {
+                // Desktop: always show sidebar
+                sidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            } else {
+                // Mobile/Tablet: hide sidebar by default
+                if (!sidebarOverlay.classList.contains('hidden')) {
+                    // Only close if overlay is visible (sidebar is open)
+                    closeSidebar();
+                }
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initial call
+
+        // Modal functionality
+        const modalContainer = document.getElementById('modalContainer');
+        const modalFrame = document.getElementById('modalFrame');
+
+        function openModal(type) {
+            const modalUrls = {
+                'nutrition': 'nutrition-modal.html',
+                'mood': 'mood-modal.html',
+                'fasting': 'fasting-modal.html',
+                'exercise': 'exercise-modal.html',
+                'progress': 'progress-modal.html'
+            };
+
+            if (modalUrls[type]) {
+                modalFrame.src = modalUrls[type];
+                modalContainer.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+        }
+
+        function closeModal() {
+            modalContainer.classList.add('hidden');
+            modalFrame.src = '';
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Listen for close modal messages from iframes
+        window.addEventListener('message', function(event) {
+            if (event.data === 'closeModal') {
+                closeModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Make functions globally available
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+    </script>
+</body>
+</html>
