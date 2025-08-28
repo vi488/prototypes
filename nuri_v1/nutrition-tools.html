@@ -7,14 +7,52 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
+        /* Comprehensive Green Palette - Consistent with main app */
         :root {
-            --nuri-primary: #00AF9F;
-            --nuri-primary-hover: #009688;
+            /* Main Brand Green Palette */
+            --nuri-primary: #00AF9F;           /* Main brand green */
+            --nuri-primary-hover: #009688;     /* Darker green for hover */
+            --nuri-primary-light: #4DB6AC;     /* Light green for accents */
+            --nuri-primary-lighter: #80CBC4;   /* Lighter green for backgrounds */
+            --nuri-primary-lightest: #B2DFDB;  /* Very light green for subtle backgrounds */
+            --nuri-primary-dark: #00695C;      /* Dark green for emphasis */
+            --nuri-primary-darker: #004D40;    /* Darker green for strong emphasis */
+
+            /* Background variations */
+            --nuri-bg-light: #F5FFFE;          /* Subtle light background - consistent with V2 */
+            --nuri-bg-medium: #B2DFDB;         /* Medium light green background */
+            --nuri-bg-dark: #4DB6AC;           /* Medium green background */
+
+            /* Icon Greens - Harmonious variations */
+            --nuri-icon-primary: #00AF9F;      /* Primary icons */
+            --nuri-icon-secondary: #26A69A;    /* Secondary icons */
+            --nuri-icon-tertiary: #4DD0E1;     /* Tertiary icons */
+            --nuri-icon-light: #80CBC4;        /* Light icons */
         }
+
+        /* Utility Classes */
         .bg-nuri-primary { background-color: var(--nuri-primary); }
+        .bg-nuri-primary-light { background-color: var(--nuri-primary-light); }
+        .bg-nuri-primary-lighter { background-color: var(--nuri-primary-lighter); }
+        .bg-nuri-primary-dark { background-color: var(--nuri-primary-dark); }
+        .bg-nuri-bg-light { background-color: var(--nuri-bg-light); }
+        .bg-nuri-bg-medium { background-color: var(--nuri-bg-medium); }
+        .bg-nuri-bg-dark { background-color: var(--nuri-bg-dark); }
+
         .text-nuri-primary { color: var(--nuri-primary); }
+        .text-nuri-primary-light { color: var(--nuri-primary-light); }
+        .text-nuri-primary-dark { color: var(--nuri-primary-dark); }
+        .text-nuri-icon-primary { color: var(--nuri-icon-primary); }
+        .text-nuri-icon-secondary { color: var(--nuri-icon-secondary); }
+        .text-nuri-icon-tertiary { color: var(--nuri-icon-tertiary); }
+        .text-nuri-icon-light { color: var(--nuri-icon-light); }
+
         .border-nuri-primary { border-color: var(--nuri-primary); }
+        .border-nuri-primary-light { border-color: var(--nuri-primary-light); }
+        .border-nuri-bg-medium { border-color: var(--nuri-bg-medium); }
+
         .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+        .hover\:bg-nuri-primary-light:hover { background-color: var(--nuri-primary); }
     </style>
 </head>
 <body class="bg-white font-sans">
@@ -26,16 +64,16 @@
         </div>
 
         <!-- Today's Progress -->
-        <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 mb-8 border border-green-200">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Today's Nutrition</h2>
+        <div class="bg-gradient-to-r from-nuri-bg-light to-nuri-bg-medium rounded-xl p-6 mb-8 border border-nuri-primary-light">
+            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Today's Nutrition</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-nuri-primary">1,247</div>
+                    <div class="text-2xl font-bold text-nuri-icon-primary">1,247</div>
                     <div class="text-sm text-gray-600">Calories Today</div>
                     <div class="text-xs text-gray-500">from logged meals</div>
                 </div>
                 <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-blue-500">14h</div>
+                    <div class="text-2xl font-bold text-nuri-icon-secondary">14h</div>
                     <div class="text-sm text-gray-600">Fasting Time</div>
                     <div class="text-xs text-gray-500">current session</div>
                 </div>
@@ -46,32 +84,32 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <!-- Meal Logger -->
             <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="utensils" class="w-6 h-6 text-orange-600"></i>
+                <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="utensils" class="w-6 h-6 text-nuri-icon-primary"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Meal Logger</h3>
+                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Meal Logger</h3>
                 <p class="text-gray-600 text-sm mb-4">Log meals by type with ingredients and symptoms tracking</p>
-                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary transition-colors">
+                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
                     Log Meal
                 </button>
             </div>
 
             <!-- Fasting Timer -->
             <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="clock" class="w-6 h-6 text-blue-600"></i>
+                <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="clock" class="w-6 h-6 text-nuri-icon-secondary"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Fasting Timer</h3>
+                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Fasting Timer</h3>
                 <p class="text-gray-600 text-sm mb-4">Start and track intermittent fasting sessions</p>
-                <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
                     Start Fasting
                 </button>
             </div>
         </div>
         
         <!-- Recent Meals -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Recent Meals</h2>
+        <div class="bg-white rounded-xl border border-nuri-primary-light p-6 mb-8">
+            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Recent Meals</h2>
 
             <!-- Breakfast -->
             <div class="mb-6">
@@ -82,8 +120,8 @@
                 <div class="space-y-2">
                     <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
                         <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
-                                <i data-lucide="wheat" class="w-4 h-4 text-orange-600"></i>
+                            <div class="w-8 h-8 bg-nuri-primary-bg-medium rounded-lg flex items-center justify-center">
+                                <i data-lucide="wheat" class="w-4 h-4 text-nuri-primary"></i>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-800">Oatmeal with berries</p>
@@ -94,8 +132,8 @@
                     </div>
                     <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
                         <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-                                <i data-lucide="coffee" class="w-4 h-4 text-yellow-600"></i>
+                            <div class="w-8 h-8 bg-nuri-primary-bg-light rounded-lg flex items-center justify-center">
+                                <i data-lucide="coffee" class="w-4 h-4 text-nuri-primary-light"></i>
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-800">Coffee with milk</p>
@@ -109,41 +147,54 @@
         </div>
 
         <!-- Current Fasting Session -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Current Fasting Session</h2>
+        <div class="bg-white rounded-xl border border-nuri-primary-light p-6">
+            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Current Fasting Session</h2>
 
             <!-- Active Fasting Display -->
-            <div class="bg-blue-50 rounded-lg p-4 mb-4">
+            <div class="bg-nuri-bg-light rounded-lg p-4 mb-4 border border-nuri-primary-lighter">
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                            <i data-lucide="clock" class="w-5 h-5 text-blue-600"></i>
+                        <div class="w-10 h-10 bg-nuri-bg-medium rounded-full flex items-center justify-center">
+                            <i data-lucide="clock" class="w-5 h-5 text-nuri-icon-tertiary"></i>
                         </div>
                         <div>
-                            <h3 class="font-medium text-gray-800">16:8 Intermittent Fasting</h3>
+                            <h3 class="font-medium text-nuri-primary-dark">16:8 Intermittent Fasting</h3>
                             <p class="text-sm text-gray-600">Started yesterday at 8:00 PM</p>
                         </div>
                     </div>
-                    <span class="text-lg font-bold text-blue-600">14h 23m</span>
+                    <span class="text-lg font-bold text-nuri-icon-secondary">14h 23m</span>
                 </div>
 
-                <!-- Progress Bar -->
+                <!-- Enhanced Progress Bar -->
                 <div class="mb-3">
-                    <div class="flex items-center justify-between text-sm text-gray-600 mb-1">
-                        <span>Progress</span>
-                        <span>14h 23m / 16h</span>
+                    <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
+                        <span>Fasting Progress</span>
+                        <span class="text-nuri-icon-secondary font-medium">14h 23m / 16h</span>
                     </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-blue-500 h-2 rounded-full" style="width: 89%"></div>
+                    <!-- Multi-layer Progress Bar -->
+                    <div class="relative w-full bg-nuri-primary-lighter rounded-full h-3">
+                        <!-- Completed time (current progress) -->
+                        <div class="absolute top-0 left-0 bg-nuri-icon-secondary h-3 rounded-full transition-all duration-300" style="width: 89%"></div>
+                        <!-- Time markers -->
+                        <div class="absolute top-0 left-0 w-full h-3 flex items-center">
+                            <!-- Current time marker -->
+                            <div class="absolute bg-nuri-primary h-4 w-0.5 rounded-full" style="left: 89%; transform: translateX(-50%)"></div>
+                        </div>
+                    </div>
+                    <!-- Time labels -->
+                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>Start</span>
+                        <span class="text-nuri-icon-primary font-medium">Current: 14h 23m</span>
+                        <span>Goal: 16h</span>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="flex space-x-3">
-                    <button class="flex-1 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors text-sm">
+                    <button class="flex-1 bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors text-sm">
                         End Fast
                     </button>
-                    <button class="flex-1 bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600 transition-colors text-sm">
+                    <button class="flex-1 bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors text-sm">
                         Pause
                     </button>
                 </div>

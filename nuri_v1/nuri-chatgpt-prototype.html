@@ -7,12 +7,31 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        /* Custom Nuri Brand Colors */
+        /* Custom Nuri Brand Colors - Comprehensive Green Palette */
         :root {
-            --nuri-primary: #00AF9F;
-            --nuri-primary-hover: #009688;
-            --nuri-primary-light: #26C6DA;
-            --nuri-primary-dark: #00695C;
+            /* Main Brand Green Palette */
+            --nuri-primary: #00AF9F;           /* Main brand green */
+            --nuri-primary-hover: #009688;     /* Darker green for hover */
+            --nuri-primary-light: #4DD0E1;     /* Light green for accents */
+            --nuri-primary-lighter: #80E5FF;   /* Very light green */
+            --nuri-primary-dark: #00695C;      /* Dark green for emphasis */
+
+            /* Background Greens */
+            --nuri-bg-light: #F5FFFE;          /* Subtle light background - consistent with V2 */
+            --nuri-bg-medium: #B2EBF2;         /* Medium light background */
+            --nuri-bg-dark: #4DB6AC;           /* Medium background */
+
+            /* Icon Greens - Harmonious variations */
+            --nuri-icon-primary: #00AF9F;      /* Primary icons */
+            --nuri-icon-secondary: #26A69A;    /* Secondary icons */
+            --nuri-icon-tertiary: #4DD0E1;     /* Tertiary icons */
+            --nuri-icon-light: #80CBC4;        /* Light icons */
+
+            /* Button Greens - Consistent system */
+            --nuri-btn-primary: #00AF9F;       /* Primary buttons */
+            --nuri-btn-primary-hover: #009688; /* Primary button hover */
+            --nuri-btn-secondary: #26A69A;     /* Secondary buttons */
+            --nuri-btn-secondary-hover: #00695C; /* Secondary button hover */
         }
 
         /* ChatGPT-like font family */
@@ -20,10 +39,54 @@
             font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
         
+        /* Comprehensive Green Palette Utility Classes */
+
+        /* Background Colors */
         .bg-nuri-primary { background-color: var(--nuri-primary); }
+        .bg-nuri-primary-light { background-color: var(--nuri-primary-light); }
+        .bg-nuri-primary-lighter { background-color: var(--nuri-primary-lighter); }
+        .bg-nuri-primary-dark { background-color: var(--nuri-primary-dark); }
+        .bg-nuri-bg-light { background-color: var(--nuri-bg-light); }
+        .bg-nuri-bg-medium { background-color: var(--nuri-bg-medium); }
+        .bg-nuri-bg-dark { background-color: var(--nuri-bg-dark); }
+
+        /* Text Colors */
         .text-nuri-primary { color: var(--nuri-primary); }
+        .text-nuri-primary-light { color: var(--nuri-primary-light); }
+        .text-nuri-primary-dark { color: var(--nuri-primary-dark); }
+        .text-nuri-icon-primary { color: var(--nuri-icon-primary); }
+        .text-nuri-icon-secondary { color: var(--nuri-icon-secondary); }
+        .text-nuri-icon-tertiary { color: var(--nuri-icon-tertiary); }
+        .text-nuri-icon-light { color: var(--nuri-icon-light); }
+
+        /* Border Colors */
         .border-nuri-primary { border-color: var(--nuri-primary); }
+        .border-nuri-primary-light { border-color: var(--nuri-primary-light); }
+        .border-nuri-bg-medium { border-color: var(--nuri-bg-medium); }
+
+        /* Hover States */
         .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+        .hover\:bg-nuri-primary-light:hover { background-color: var(--nuri-primary); }
+        .hover\:text-nuri-primary:hover { color: var(--nuri-primary); }
+        .hover\:text-nuri-primary-dark:hover { color: var(--nuri-primary-dark); }
+
+        /* Button System - Consistent across app */
+        .btn-nuri-primary {
+            background-color: var(--nuri-btn-primary);
+            color: white;
+            transition: background-color 0.2s ease;
+        }
+        .btn-nuri-primary:hover {
+            background-color: var(--nuri-btn-primary-hover);
+        }
+        .btn-nuri-secondary {
+            background-color: var(--nuri-btn-secondary);
+            color: white;
+            transition: background-color 0.2s ease;
+        }
+        .btn-nuri-secondary:hover {
+            background-color: var(--nuri-btn-secondary-hover);
+        }
         
         /* Sidebar animations */
         .sidebar-transition {
@@ -199,7 +262,7 @@
                             <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
                         </svg>
                     </div>
-                    <span class="text-lg font-semibold text-gray-800">Nuri</span>
+                    <span class="text-lg font-semibold text-nuri-primary-dark">Nuri</span>
                 </div>
                 <button id="sidebarClose" class="lg:hidden p-1 rounded-md hover:bg-gray-200">
                     <i data-lucide="x" class="w-5 h-5"></i>
@@ -209,7 +272,7 @@
             <!-- Top Group: New Chat & Search -->
             <div class="p-4 border-b border-gray-200">
                 <div class="space-y-1">
-                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg bg-gray-200 text-gray-800 text-left nav-button">
+                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg bg-nuri-bg-medium text-nuri-primary-dark text-left nav-button">
                         <i data-lucide="plus" class="w-4 h-4"></i>
                         <span class="text-sm">New Chat</span>
                     </button>
@@ -242,7 +305,7 @@
             <div class="px-4 pb-4">
                 <h3 class="text-sm font-medium text-gray-700 mb-3">Chats</h3>
                 <div class="space-y-1">
-                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-gray-200 text-gray-800 cursor-pointer">
+                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-nuri-bg-medium text-nuri-primary-dark cursor-pointer">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
                         <span class="text-sm truncate">Nutrition planning help</span>
                     </div>
@@ -303,7 +366,7 @@
                 <button id="sidebarToggle" class="p-2 rounded-md hover:bg-gray-100">
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
-                <span id="mobileTitle" class="font-semibold text-gray-800">Nuri Assistant</span>
+                <span id="mobileTitle" class="font-semibold text-nuri-primary-dark">Nuri Assistant</span>
                 <div class="flex items-center space-x-2">
                     <!-- Account icon removed -->
                 </div>
@@ -325,7 +388,7 @@
                                         <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
                                     </svg>
                                 </div>
-                                <h1 class="text-3xl font-semibold text-gray-800 mb-8">What can I help with?</h1>
+                                <h1 class="text-3xl font-semibold text-nuri-primary-dark mb-8">What can I help with?</h1>
                             </div>
 
                             <!-- Centered Input - Desktop, Bottom Input - Mobile -->
@@ -645,27 +708,27 @@
             // Clear all tool button highlights
             const toolButtons = document.querySelectorAll('.tool-button');
             toolButtons.forEach(btn => {
-                btn.classList.remove('bg-gray-200', 'text-gray-800');
+                btn.classList.remove('bg-nuri-bg-medium', 'text-nuri-primary-dark');
                 btn.classList.add('text-gray-700');
             });
 
             // Clear new chat highlight
             const newChatBtn = document.getElementById('new-chat');
             if (newChatBtn) {
-                newChatBtn.classList.remove('bg-gray-200', 'text-gray-800');
+                newChatBtn.classList.remove('bg-nuri-bg-medium', 'text-nuri-primary-dark');
                 newChatBtn.classList.add('text-gray-700');
             }
 
             // Highlight active item
             if (activeType === 'chat') {
                 if (newChatBtn) {
-                    newChatBtn.classList.add('bg-gray-200', 'text-gray-800');
+                    newChatBtn.classList.add('bg-nuri-bg-medium', 'text-nuri-primary-dark');
                     newChatBtn.classList.remove('text-gray-700');
                 }
             } else {
                 const activeBtn = document.getElementById(activeType + '-tool');
                 if (activeBtn) {
-                    activeBtn.classList.add('bg-gray-200', 'text-gray-800');
+                    activeBtn.classList.add('bg-nuri-bg-medium', 'text-nuri-primary-dark');
                     activeBtn.classList.remove('text-gray-700');
                 }
             }
@@ -764,7 +827,7 @@
                         <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
                             <i data-lucide="bot" class="w-4 h-4 text-gray-600"></i>
                         </div>
-                        <div class="bg-gray-100 text-gray-800 px-4 py-3 rounded-2xl rounded-tl-md message-animate">
+                        <div class="bg-nuri-bg-light text-nuri-primary-dark px-4 py-3 rounded-2xl rounded-tl-md message-animate">
                             <p>${content}</p>
                         </div>
                     </div>
@@ -793,9 +856,9 @@
                 // Update mobile send button style
                 if (hasText) {
                     mobileInitialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                    mobileInitialSendButton.classList.add('bg-gray-800', 'text-white');
+                    mobileInitialSendButton.classList.add('bg-nuri-primary', 'text-white');
                 } else {
-                    mobileInitialSendButton.classList.remove('bg-gray-800', 'text-white');
+                    mobileInitialSendButton.classList.remove('bg-nuri-primary', 'text-white');
                     mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400');
                 }
             }
@@ -803,9 +866,9 @@
             // Update send button style based on content
             if (hasText) {
                 initialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                initialSendButton.classList.add('bg-gray-800', 'text-white');
+                initialSendButton.classList.add('bg-nuri-primary', 'text-white');
             } else {
-                initialSendButton.classList.remove('bg-gray-800', 'text-white');
+                initialSendButton.classList.remove('bg-nuri-primary', 'text-white');
                 initialSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 
@@ -827,9 +890,9 @@
                 // Update desktop send button style
                 if (hasText) {
                     initialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                    initialSendButton.classList.add('bg-gray-800', 'text-white');
+                    initialSendButton.classList.add('bg-nuri-primary', 'text-white');
                 } else {
-                    initialSendButton.classList.remove('bg-gray-800', 'text-white');
+                    initialSendButton.classList.remove('bg-nuri-primary', 'text-white');
                     initialSendButton.classList.add('bg-gray-200', 'text-gray-400');
                 }
             }
@@ -837,9 +900,9 @@
             // Update send button style based on content
             if (hasText) {
                 mobileInitialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                mobileInitialSendButton.classList.add('bg-gray-800', 'text-white');
+                mobileInitialSendButton.classList.add('bg-nuri-primary', 'text-white');
             } else {
-                mobileInitialSendButton.classList.remove('bg-gray-800', 'text-white');
+                mobileInitialSendButton.classList.remove('bg-nuri-primary', 'text-white');
                 mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 
@@ -861,9 +924,9 @@
                 // Update mobile send button style
                 if (hasText) {
                     mobileSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                    mobileSendButton.classList.add('bg-gray-800', 'text-white');
+                    mobileSendButton.classList.add('bg-nuri-primary', 'text-white');
                 } else {
-                    mobileSendButton.classList.remove('bg-gray-800', 'text-white');
+                    mobileSendButton.classList.remove('bg-nuri-primary', 'text-white');
                     mobileSendButton.classList.add('bg-gray-200', 'text-gray-400');
                 }
             }
@@ -871,9 +934,9 @@
             // Update send button style based on content
             if (hasText) {
                 sendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                sendButton.classList.add('bg-gray-800', 'text-white');
+                sendButton.classList.add('bg-nuri-primary', 'text-white');
             } else {
-                sendButton.classList.remove('bg-gray-800', 'text-white');
+                sendButton.classList.remove('bg-nuri-primary', 'text-white');
                 sendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 
@@ -895,9 +958,9 @@
                 // Update desktop send button style
                 if (hasText) {
                     sendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                    sendButton.classList.add('bg-gray-800', 'text-white');
+                    sendButton.classList.add('bg-nuri-primary', 'text-white');
                 } else {
-                    sendButton.classList.remove('bg-gray-800', 'text-white');
+                    sendButton.classList.remove('bg-nuri-primary', 'text-white');
                     sendButton.classList.add('bg-gray-200', 'text-gray-400');
                 }
             }
@@ -905,9 +968,9 @@
             // Update send button style based on content
             if (hasText) {
                 mobileSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                mobileSendButton.classList.add('bg-gray-800', 'text-white');
+                mobileSendButton.classList.add('bg-nuri-primary', 'text-white');
             } else {
-                mobileSendButton.classList.remove('bg-gray-800', 'text-white');
+                mobileSendButton.classList.remove('bg-nuri-primary', 'text-white');
                 mobileSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 
@@ -936,14 +999,14 @@
                 initialMessageInput.value = '';
                 initialMessageInput.style.height = 'auto';
                 initialSendButton.disabled = true;
-                initialSendButton.classList.remove('bg-gray-800', 'text-white');
+                initialSendButton.classList.remove('bg-nuri-primary', 'text-white');
                 initialSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
             if (mobileInitialMessageInput) {
                 mobileInitialMessageInput.value = '';
                 mobileInitialMessageInput.style.height = 'auto';
                 mobileInitialSendButton.disabled = true;
-                mobileInitialSendButton.classList.remove('bg-gray-800', 'text-white');
+                mobileInitialSendButton.classList.remove('bg-nuri-primary', 'text-white');
                 mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 
@@ -970,14 +1033,14 @@
                 messageInput.value = '';
                 messageInput.style.height = 'auto';
                 sendButton.disabled = true;
-                sendButton.classList.remove('bg-gray-800', 'text-white');
+                sendButton.classList.remove('bg-nuri-primary', 'text-white');
                 sendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
             if (mobileMessageInput) {
                 mobileMessageInput.value = '';
                 mobileMessageInput.style.height = 'auto';
                 mobileSendButton.disabled = true;
-                mobileSendButton.classList.remove('bg-gray-800', 'text-white');
+                mobileSendButton.classList.remove('bg-nuri-primary', 'text-white');
                 mobileSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 

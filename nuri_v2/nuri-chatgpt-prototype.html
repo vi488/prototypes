@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuri - ChatGPT-like Design Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Dual-Color Brand Palette - Green & Orange */
+        :root {
+            /* Primary Brand Colors */
+            --nuri-green: #00AF9F;             /* Main brand green */
+            --nuri-orange: #FF611A;            /* Brand orange - used for borders/text, not fills */
+
+            /* Green Variations */
+            --nuri-green-hover: #009688;       /* Darker green for hover */
+            --nuri-green-light: #4DB6AC;       /* Light green for accents */
+            --nuri-green-lighter: #80CBC4;     /* Lighter green for backgrounds */
+            --nuri-green-lightest: #B2DFDB;    /* Very light green for subtle backgrounds */
+            --nuri-green-dark: #00695C;        /* Dark green for emphasis */
+            --nuri-green-darker: #004D40;      /* Darker green for strong emphasis */
+
+            /* Orange Variations (Outline/Border Style) */
+            --nuri-orange-hover: #E5540F;      /* Darker orange for hover text */
+            --nuri-orange-light: #FF8A65;      /* Light orange for hover backgrounds */
+            --nuri-orange-lighter: #FFAB91;    /* Lighter orange for subtle backgrounds */
+            --nuri-orange-lightest: #FFCCBC;   /* Very light orange for button hover backgrounds */
+            --nuri-orange-dark: #D84315;       /* Dark orange for emphasis */
+            --nuri-orange-darker: #BF360C;     /* Darker orange for strong emphasis */
+
+            /* Background variations */
+            --nuri-bg-green-light: #E0F2F1;    /* Very light green background */
+            --nuri-bg-green-medium: #B2DFDB;   /* Medium light green background */
+            --nuri-bg-orange-light: #FFF3E0;   /* Very light orange background */
+            --nuri-bg-orange-medium: #FFCCBC;  /* Medium light orange background */
+
+            /* Contextual Color Usage */
+            --nuri-success: #00AF9F;           /* Green for success, completion, positive */
+            --nuri-action: #FF611A;            /* Orange for actions, alerts, energy */
+            --nuri-wellness: #00AF9F;          /* Green for wellness, health, calm */
+            --nuri-nutrition: #FF611A;         /* Orange for nutrition, food, energy */
+            --nuri-exercise: #FF611A;          /* Orange for exercise, activity, energy */
+
+            /* Legacy compatibility - map to new system */
+            --nuri-primary: #00AF9F;           /* Maps to green */
+            --nuri-primary-hover: #009688;     /* Maps to green hover */
+        }
+
+        /* ChatGPT-like font family */
+        body {
+            font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        /* Dual-Color Utility Classes */
+
+        /* Green Background Colors */
+        .bg-nuri-green { background-color: var(--nuri-green); }
+        .bg-nuri-green-light { background-color: var(--nuri-green-light); }
+        .bg-nuri-green-lighter { background-color: var(--nuri-green-lighter); }
+        .bg-nuri-green-lightest { background-color: var(--nuri-green-lightest); }
+        .bg-nuri-green-dark { background-color: var(--nuri-green-dark); }
+        .bg-nuri-bg-green-light { background-color: var(--nuri-bg-green-light); }
+        .bg-nuri-bg-green-medium { background-color: var(--nuri-bg-green-medium); }
+
+        /* Orange Background Colors */
+        .bg-nuri-orange { background-color: var(--nuri-orange); }
+        .bg-nuri-orange-light { background-color: var(--nuri-orange-light); }
+        .bg-nuri-orange-lighter { background-color: var(--nuri-orange-lighter); }
+        .bg-nuri-orange-lightest { background-color: var(--nuri-orange-lightest); }
+        .bg-nuri-orange-dark { background-color: var(--nuri-orange-dark); }
+        .bg-nuri-bg-orange-light { background-color: var(--nuri-bg-orange-light); }
+        .bg-nuri-bg-orange-medium { background-color: var(--nuri-bg-orange-medium); }
+
+        /* Green Text Colors */
+        .text-nuri-green { color: var(--nuri-green); }
+        .text-nuri-green-light { color: var(--nuri-green-light); }
+        .text-nuri-green-dark { color: var(--nuri-green-dark); }
+        .text-nuri-green-darker { color: var(--nuri-green-darker); }
+
+        /* Orange Text Colors */
+        .text-nuri-orange { color: var(--nuri-orange); }
+        .text-nuri-orange-light { color: var(--nuri-orange-light); }
+        .text-nuri-orange-dark { color: var(--nuri-orange-dark); }
+        .text-nuri-orange-darker { color: var(--nuri-orange-darker); }
+
+        /* Contextual Text Colors */
+        .text-nuri-wellness { color: var(--nuri-wellness); }
+        .text-nuri-nutrition { color: var(--nuri-nutrition); }
+        .text-nuri-exercise { color: var(--nuri-exercise); }
+        .text-nuri-success { color: var(--nuri-success); }
+        .text-nuri-action { color: var(--nuri-action); }
+
+        /* Border Colors */
+        .border-nuri-green { border-color: var(--nuri-green); }
+        .border-nuri-green-light { border-color: var(--nuri-green-light); }
+        .border-nuri-green-lighter { border-color: var(--nuri-green-lighter); }
+        .border-nuri-orange { border-color: var(--nuri-orange); }
+        .border-nuri-orange-light { border-color: var(--nuri-orange-light); }
+        .border-nuri-orange-lighter { border-color: var(--nuri-orange-lighter); }
+
+        /* Hover States */
+        .hover\:bg-nuri-green:hover { background-color: var(--nuri-green-hover); }
+        .hover\:bg-nuri-orange:hover { background-color: var(--nuri-orange-hover); }
+        .hover\:bg-nuri-green-light:hover { background-color: var(--nuri-green); }
+        .hover\:bg-nuri-orange-light:hover { background-color: var(--nuri-orange); }
+
+        /* Contextual Button Styles - Adapt to container color */
+        .btn-orange-light {
+            background-color: var(--nuri-orange-lightest);
+            border: 1px solid var(--nuri-orange-lighter);
+            color: var(--nuri-orange-dark);
+        }
+
+        .btn-green-light {
+            background-color: var(--nuri-green-lightest);
+            border: 1px solid var(--nuri-green-lighter);
+            color: var(--nuri-green-dark);
+        }
+
+        /* Nested Panel Hierarchy - Custom subtle background colors */
+        .panel-green-light { background-color: #F5FFFE; }
+        .panel-green-medium { background-color: var(--nuri-bg-green-medium); }
+        .panel-orange-light { background-color: #FFF3E7; }
+        .panel-orange-medium { background-color: var(--nuri-orange-lighter); }
+
+        /* No hover effects for simplicity */
+
+        /* Legacy compatibility */
+        .bg-nuri-primary { background-color: var(--nuri-primary); }
+        .text-nuri-primary { color: var(--nuri-primary); }
+        .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+
+        /* Button System - Consistent across app */
+        .btn-nuri-primary {
+            background-color: var(--nuri-btn-primary);
+            color: white;
+            transition: background-color 0.2s ease;
+        }
+        .btn-nuri-primary:hover {
+            background-color: var(--nuri-btn-primary-hover);
+        }
+        .btn-nuri-secondary {
+            background-color: var(--nuri-btn-secondary);
+            color: white;
+            transition: background-color 0.2s ease;
+        }
+        .btn-nuri-secondary:hover {
+            background-color: var(--nuri-btn-secondary-hover);
+        }
+        
+        /* Sidebar animations */
+        .sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        /* Message animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message-animate {
+            animation: fadeInUp 0.3s ease-out;
+        }
+        
+        /* Typing indicator */
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        .typing-dot {
+            animation: bounce 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* Mobile bottom sheet */
+        .bottom-sheet {
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .bottom-sheet.open {
+            transform: translateY(0);
+        }
+
+        /* State transition animations */
+        .state-transition {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Initial state styling */
+        #initialState {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #conversationState {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Mobile input positioning - ChatGPT style */
+        @media (max-width: 767px) {
+            /* Make initial state input stick to bottom on mobile */
+            #initialState {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding-bottom: 120px; /* Account for fixed input */
+                padding-top: 2rem;
+            }
+
+            #initialState .max-w-3xl {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            #initialState .text-center {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-bottom: 0;
+            }
+
+            /* Position mobile input at bottom */
+            .mobile-bottom-input {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 16px;
+                z-index: 30;
+            }
+
+            /* Hide desktop inputs on mobile */
+            #initialState .max-w-3xl.mx-auto.mb-8 {
+                display: none !important;
+            }
+
+            /* Adjust conversation input for mobile */
+            #conversationInput {
+                display: none !important;
+            }
+
+            /* Add padding to conversation state to account for fixed input */
+            #conversationState {
+                padding-bottom: 120px !important;
+            }
+
+            /* Ensure main content area accounts for fixed input */
+            .mobile-content-padding {
+                padding-bottom: 120px;
+            }
+
+            /* Hide desktop input on mobile */
+            #initialState .hidden.md\\:block {
+                display: none !important;
+            }
+
+            /* Adjust mobile header to account for fixed input */
+            .lg\\:hidden {
+                position: relative;
+                z-index: 40;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white font-sans">
+    <!-- Main Container -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar-transition fixed inset-y-0 left-0 z-50 w-80 bg-gray-50 border-r border-gray-200 transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0">
+            <!-- Sidebar Header -->
+            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 flex items-center justify-center">
+                        <svg width="24" height="30" viewBox="0 0 95 121" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
+                        </svg>
+                    </div>
+                    <span class="text-lg font-semibold text-nuri-green-dark">Nuri</span>
+                </div>
+                <button id="sidebarClose" class="lg:hidden p-1 rounded-md hover:bg-gray-200">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Top Group: New Chat & Search -->
+            <div class="p-4 border-b border-gray-200">
+                <div class="space-y-1">
+                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg bg-nuri-bg-medium text-nuri-primary-dark text-left nav-button">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span class="text-sm">New Chat</span>
+                    </button>
+                    <button onclick="openSearchDialog()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                        <span class="text-sm">Search chats</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tools Group -->
+            <div class="px-4 pb-4 border-b border-gray-200">
+                <div class="space-y-1">
+                    <button id="wellness-tool" onclick="loadToolPage('wellness')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-green-light text-gray-700 text-left tool-button">
+                        <i data-lucide="heart" class="w-4 h-4 text-nuri-green"></i>
+                        <span class="text-sm">Wellness Tools</span>
+                    </button>
+                    <button id="nutrition-tool" onclick="loadToolPage('nutrition')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-green-light text-gray-700 text-left tool-button">
+                        <i data-lucide="apple" class="w-4 h-4 text-nuri-green"></i>
+                        <span class="text-sm">Nutrition Tools</span>
+                    </button>
+                    <button id="exercise-tool" onclick="loadToolPage('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-green-light text-gray-700 text-left tool-button">
+                        <i data-lucide="dumbbell" class="w-4 h-4 text-nuri-green"></i>
+                        <span class="text-sm">Exercise Tools</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chats Group -->
+            <div class="px-4 pb-4">
+                <h3 class="text-sm font-medium text-gray-700 mb-3">Chats</h3>
+                <div class="space-y-1">
+                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-nuri-bg-medium text-nuri-primary-dark cursor-pointer">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span class="text-sm truncate">Nutrition planning help</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-600 cursor-pointer">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span class="text-sm truncate">Mood tracking insights</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-600 cursor-pointer">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span class="text-sm truncate">Fasting schedule setup</span>
+                    </div>
+                    <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-600 cursor-pointer">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span class="text-sm truncate">Exercise routine planning</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar Footer -->
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+                <div class="relative">
+                    <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <div id="userAvatar" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background-color: #10a37f;">
+                            JD
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-medium">John Doe</div>
+                            <div class="text-xs text-gray-500">Free</div>
+                        </div>
+                        <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                    </button>
+
+                    <!-- Profile Dropdown Menu -->
+                    <div id="profileDropdown" class="hidden absolute bottom-full left-0 right-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg">
+                        <div class="py-1">
+                            <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 text-gray-700">
+                                <i data-lucide="settings" class="w-4 h-4"></i>
+                                <span class="text-sm">Settings</span>
+                            </button>
+                            <div class="border-t border-gray-100"></div>
+                            <button class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 text-gray-700">
+                                <i data-lucide="log-out" class="w-4 h-4"></i>
+                                <span class="text-sm">Log out</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar Overlay for Mobile -->
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col lg:ml-0">
+            <!-- Mobile Header -->
+            <div class="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 bg-white">
+                <button id="sidebarToggle" class="p-2 rounded-md hover:bg-gray-100">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+                <span id="mobileTitle" class="font-semibold text-nuri-primary-dark">Nuri Assistant</span>
+                <div class="flex items-center space-x-2">
+                    <!-- Account icon removed -->
+                </div>
+            </div>
+
+
+
+            <!-- Main Content Area -->
+            <div class="flex-1 overflow-y-auto custom-scrollbar">
+                <!-- Chat Page -->
+                <div id="chatPage" class="h-full">
+                    <!-- Initial State - Centered Welcome -->
+                    <div id="initialState" class="h-full flex flex-col items-center justify-center p-8 md:p-8">
+                        <div class="w-full max-w-3xl mx-auto">
+                            <!-- Logo and Title -->
+                            <div class="text-center mb-8">
+                                <div class="w-12 h-12 flex items-center justify-center mx-auto mb-4">
+                                    <svg width="36" height="45" viewBox="0 0 95 121" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
+                                    </svg>
+                                </div>
+                                <h1 class="text-3xl font-semibold text-nuri-primary-dark mb-8">What can I help with?</h1>
+                            </div>
+
+                            <!-- Centered Input - Desktop, Bottom Input - Mobile -->
+                            <div class="max-w-3xl mx-auto mb-8 md:mb-8 hidden md:block">
+                                <div class="relative">
+                                    <textarea
+                                        id="initialMessageInput"
+                                        placeholder="Message Nuri"
+                                        class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
+                                        rows="1"
+                                        style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
+                                    ></textarea>
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                                        <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                                            <i data-lucide="paperclip" class="w-4 h-4"></i>
+                                        </button>
+                                        <button
+                                            id="initialSendButton"
+                                            class="p-1.5 bg-gray-200 text-gray-400 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                            disabled
+                                        >
+                                            <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="mt-3 text-xs text-gray-500 text-center">
+                                    Nuri can make mistakes. Check important info.
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!-- Conversation State - Chat Messages -->
+                    <div id="conversationState" class="hidden p-4 space-y-6">
+                        <!-- Messages will be dynamically added here -->
+                        <div id="messagesContainer" class="max-w-4xl mx-auto space-y-6">
+                            <!-- Messages will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool Pages (will be loaded dynamically) -->
+                <div id="toolPage" class="hidden h-full">
+                    <iframe id="toolFrame" class="w-full h-full border-0"></iframe>
+                </div>
+            </div>
+
+            <!-- Conversation Input Area (hidden initially) -->
+            <div id="conversationInput" class="hidden p-4 bg-white md:relative">
+                <div class="max-w-4xl mx-auto">
+                    <div class="relative">
+                        <textarea
+                            id="messageInput"
+                            placeholder="Message Nuri"
+                            class="w-full px-4 py-4 pr-16 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
+                            rows="1"
+                            style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
+                        ></textarea>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                            <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                                <i data-lucide="paperclip" class="w-4 h-4"></i>
+                            </button>
+                            <button
+                                id="sendButton"
+                                class="p-1.5 bg-gray-200 text-gray-400 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                disabled
+                            >
+                                <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-500 text-center hidden md:block">
+                        Nuri can make mistakes. Check important info.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Input Areas (ChatGPT Style) -->
+    <!-- Mobile Initial Input (shown only on mobile when in initial state) -->
+    <div id="mobileInitialInput" class="md:hidden mobile-bottom-input">
+        <div class="max-w-3xl mx-auto">
+            <div class="relative">
+                <textarea
+                    id="mobileInitialMessageInput"
+                    placeholder="Message Nuri"
+                    class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
+                    rows="1"
+                    style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
+                ></textarea>
+                <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                    <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                        <i data-lucide="paperclip" class="w-4 h-4"></i>
+                    </button>
+                    <button
+                        id="mobileInitialSendButton"
+                        class="p-1.5 bg-gray-200 text-gray-400 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled
+                    >
+                        <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-3 text-xs text-gray-500 text-center">
+                Nuri can make mistakes. Check important info.
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Conversation Input (shown only on mobile when in conversation state) -->
+    <div id="mobileConversationInput" class="md:hidden mobile-bottom-input hidden">
+        <div class="max-w-3xl mx-auto">
+            <div class="relative">
+                <textarea
+                    id="mobileMessageInput"
+                    placeholder="Message Nuri"
+                    class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
+                    rows="1"
+                    style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
+                ></textarea>
+                <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                    <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                        <i data-lucide="paperclip" class="w-4 h-4"></i>
+                    </button>
+                    <button
+                        id="mobileSendButton"
+                        class="p-1.5 bg-gray-200 text-gray-400 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled
+                    >
+                        <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-3 text-xs text-gray-500 text-center">
+                Nuri can make mistakes. Check important info.
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Container for Feature Modals -->
+    <div id="modalContainer" class="hidden fixed inset-0 z-50">
+        <iframe id="modalFrame" class="w-full h-full border-0"></iframe>
+    </div>
+
+    <!-- Search Dialog -->
+    <div id="searchDialog" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 pt-20">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 max-h-[80vh] overflow-hidden">
+            <!-- Search Header -->
+            <div class="flex items-center p-4 border-b border-gray-200">
+                <div class="flex-1 relative">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search chats..."
+                        class="w-full px-4 py-3 text-base bg-transparent border-none outline-none text-gray-900 placeholder-gray-500"
+                        autocomplete="off"
+                    >
+                </div>
+                <button onclick="closeSearchDialog()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i data-lucide="x" class="w-5 h-5 text-gray-500"></i>
+                </button>
+            </div>
+
+            <!-- Search Results -->
+            <div class="max-h-96 overflow-y-auto">
+                <div id="searchResults" class="py-2">
+                    <!-- Default results when no search -->
+                    <div class="px-4 py-2">
+                        <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer" onclick="loadChatPage(); closeSearchDialog();">
+                            <i data-lucide="plus" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-sm text-gray-900">New chat</span>
+                        </div>
+                    </div>
+
+                    <!-- Chat History Section -->
+                    <div class="px-4 py-2">
+                        <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 px-3">Today</div>
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-sm text-gray-900">Nutrition planning help</span>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-sm text-gray-900">Mood tracking insights</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-4 py-2">
+                        <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 px-3">Yesterday</div>
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-sm text-gray-900">Fasting schedule setup</span>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-sm text-gray-900">Exercise routine planning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // DOM elements
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const mobileTitle = document.getElementById('mobileTitle');
+
+        // Page elements
+        const chatPage = document.getElementById('chatPage');
+        const toolPage = document.getElementById('toolPage');
+        const toolFrame = document.getElementById('toolFrame');
+
+        // Initial state elements
+        const initialState = document.getElementById('initialState');
+        const initialMessageInput = document.getElementById('initialMessageInput');
+        const initialSendButton = document.getElementById('initialSendButton');
+        const initialSuggestionBtns = document.querySelectorAll('.suggestion-btn-initial');
+
+        // Mobile initial state elements
+        const mobileInitialInput = document.getElementById('mobileInitialInput');
+        const mobileInitialMessageInput = document.getElementById('mobileInitialMessageInput');
+        const mobileInitialSendButton = document.getElementById('mobileInitialSendButton');
+
+        // Mobile conversation state elements
+        const mobileConversationInput = document.getElementById('mobileConversationInput');
+        const mobileMessageInput = document.getElementById('mobileMessageInput');
+        const mobileSendButton = document.getElementById('mobileSendButton');
+
+        // Conversation state elements
+        const conversationState = document.getElementById('conversationState');
+        const conversationInput = document.getElementById('conversationInput');
+        const messageInput = document.getElementById('messageInput');
+        const sendButton = document.getElementById('sendButton');
+        const messagesContainer = document.getElementById('messagesContainer');
+
+        // Sidebar functionality
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        sidebarToggle?.addEventListener('click', openSidebar);
+        sidebarClose?.addEventListener('click', closeSidebar);
+        sidebarOverlay?.addEventListener('click', closeSidebar);
+
+        // Page management
+        let currentPage = 'chat';
+
+        function loadChatPage() {
+            currentPage = 'chat';
+
+            // Show chat page, hide tool page
+            chatPage.classList.remove('hidden');
+            toolPage.classList.add('hidden');
+
+            // Reset to initial state
+            isInitialState = true;
+            initialState.classList.remove('hidden');
+            conversationState.classList.add('hidden');
+            conversationInput.classList.add('hidden');
+
+            // Show mobile initial input, hide mobile conversation input
+            if (mobileInitialInput) {
+                mobileInitialInput.classList.remove('hidden');
+            }
+            if (mobileConversationInput) {
+                mobileConversationInput.classList.add('hidden');
+            }
+
+            // Clear messages
+            messagesContainer.innerHTML = '';
+
+            // Clear inputs (both desktop and mobile)
+            if (initialMessageInput) {
+                initialMessageInput.value = '';
+                initialSendButton.disabled = true;
+            }
+            if (mobileInitialMessageInput) {
+                mobileInitialMessageInput.value = '';
+                mobileInitialSendButton.disabled = true;
+            }
+            if (messageInput) {
+                messageInput.value = '';
+                sendButton.disabled = true;
+            }
+
+            // Update mobile title
+            mobileTitle.textContent = 'Nuri Assistant';
+
+            // Update navigation highlighting
+            updateNavigationHighlight('chat');
+        }
+
+        function updateNavigationHighlight(activeType) {
+            // Clear all tool button highlights
+            const toolButtons = document.querySelectorAll('.tool-button');
+            toolButtons.forEach(btn => {
+                btn.classList.remove('bg-nuri-bg-green-medium', 'bg-nuri-bg-orange-medium', 'text-nuri-green-dark', 'text-nuri-orange-dark');
+                btn.classList.add('text-gray-700');
+            });
+
+            // Clear new chat highlight
+            const newChatBtn = document.getElementById('new-chat');
+            if (newChatBtn) {
+                newChatBtn.classList.remove('bg-nuri-bg-green-medium', 'text-nuri-green-dark');
+                newChatBtn.classList.add('text-gray-700');
+            }
+
+            // Highlight active item - Consistent green for all navigation items
+            if (activeType === 'chat') {
+                if (newChatBtn) {
+                    newChatBtn.classList.add('bg-nuri-bg-green-medium', 'text-nuri-green-dark');
+                    newChatBtn.classList.remove('text-gray-700');
+                }
+            } else {
+                const activeBtn = document.getElementById(activeType + '-tool');
+                if (activeBtn) {
+                    // Use consistent green for all tools in sidebar navigation
+                    activeBtn.classList.add('bg-nuri-bg-green-medium', 'text-nuri-green-dark');
+                    activeBtn.classList.remove('text-gray-700');
+                }
+            }
+        }
+
+        function loadToolPage(toolType) {
+            currentPage = toolType;
+
+            // Hide chat page, show tool page
+            chatPage.classList.add('hidden');
+            toolPage.classList.remove('hidden');
+
+            // Load appropriate tool page
+            const toolUrls = {
+                'wellness': 'wellness-tools.html',
+                'nutrition': 'nutrition-tools.html',
+                'exercise': 'exercise-tools.html'
+            };
+
+            if (toolUrls[toolType]) {
+                toolFrame.src = toolUrls[toolType];
+
+                // Update mobile title
+                const titles = {
+                    'wellness': 'Wellness Tools',
+                    'nutrition': 'Nutrition Tools',
+                    'exercise': 'Exercise Tools'
+                };
+                mobileTitle.textContent = titles[toolType] || 'Nuri Tools';
+
+                // Update navigation highlighting
+                updateNavigationHighlight(toolType);
+            }
+        }
+
+        // State management
+        let isInitialState = true;
+
+        function switchToConversationState() {
+            if (!isInitialState) return;
+
+            isInitialState = false;
+
+            // Fade out initial state
+            initialState.style.opacity = '0';
+
+            setTimeout(() => {
+                // Hide initial state
+                initialState.classList.add('hidden');
+
+                // Hide mobile initial input and show mobile conversation input
+                if (mobileInitialInput) {
+                    mobileInitialInput.classList.add('hidden');
+                }
+                if (mobileConversationInput) {
+                    mobileConversationInput.classList.remove('hidden');
+                }
+
+                // Show conversation state with fade in
+                conversationState.classList.remove('hidden');
+                conversationInput.classList.remove('hidden');
+
+                // Add fade in animation
+                conversationState.classList.add('fade-in');
+                conversationInput.classList.add('fade-in');
+
+                // Focus on appropriate input based on screen size
+                setTimeout(() => {
+                    if (window.innerWidth >= 768) {
+                        messageInput?.focus();
+                    } else {
+                        mobileMessageInput?.focus();
+                    }
+                }, 100);
+            }, 300);
+        }
+
+        function addMessage(content, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = isUser ? 'flex justify-end' : 'flex justify-start';
+
+            if (isUser) {
+                messageDiv.innerHTML = `
+                    <div class="flex items-start space-x-3 max-w-2xl">
+                        <div class="px-4 py-3 rounded-2xl rounded-tr-md message-animate" style="background-color: #e9e9e980; color: #1f2937;">
+                            <p>${content}</p>
+                        </div>
+                        <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="user" class="w-4 h-4 text-white"></i>
+                        </div>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="flex items-start space-x-3 max-w-2xl">
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="bot" class="w-4 h-4 text-gray-600"></i>
+                        </div>
+                        <div class="bg-nuri-bg-green-light text-nuri-green-dark px-4 py-3 rounded-2xl rounded-tl-md message-animate">
+                            <p>${content}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            messagesContainer.appendChild(messageDiv);
+
+            // Re-initialize Lucide icons for new elements
+            lucide.createIcons();
+
+            // Scroll to bottom
+            conversationState.scrollTop = conversationState.scrollHeight;
+        }
+
+        // Initial state input functionality (Desktop)
+        initialMessageInput?.addEventListener('input', function() {
+            const hasText = this.value.trim().length > 0;
+            initialSendButton.disabled = !hasText;
+
+            // Sync with mobile input
+            if (mobileInitialMessageInput) {
+                mobileInitialMessageInput.value = this.value;
+                mobileInitialSendButton.disabled = !hasText;
+
+                // Update mobile send button style - Light orange for clear distinction
+                if (hasText) {
+                    mobileInitialSendButton.classList.remove('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                    mobileInitialSendButton.classList.add('btn-orange-light');
+                } else {
+                    mobileInitialSendButton.classList.remove('btn-orange-light');
+                    mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                }
+            }
+
+            // Update send button style based on content - Light orange for clear distinction
+            if (hasText) {
+                initialSendButton.classList.remove('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                initialSendButton.classList.add('btn-orange-light');
+            } else {
+                initialSendButton.classList.remove('btn-orange-light');
+                initialSendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+            }
+
+            // Auto-resize textarea
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 200) + 'px';
+        });
+
+        // Mobile initial state input functionality
+        mobileInitialMessageInput?.addEventListener('input', function() {
+            const hasText = this.value.trim().length > 0;
+            mobileInitialSendButton.disabled = !hasText;
+
+            // Sync with desktop input
+            if (initialMessageInput) {
+                initialMessageInput.value = this.value;
+                initialSendButton.disabled = !hasText;
+
+                // Update desktop send button style - Light orange for clear distinction
+                if (hasText) {
+                    initialSendButton.classList.remove('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                    initialSendButton.classList.add('btn-orange-light');
+                } else {
+                    initialSendButton.classList.remove('btn-orange-light');
+                    initialSendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                }
+            }
+
+            // Update send button style based on content - Light orange for clear distinction
+            if (hasText) {
+                mobileInitialSendButton.classList.remove('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                mobileInitialSendButton.classList.add('btn-orange-light');
+            } else {
+                mobileInitialSendButton.classList.remove('btn-orange-light');
+                mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+            }
+
+            // Auto-resize textarea
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 200) + 'px';
+        });
+
+        // Conversation state input functionality (Desktop)
+        messageInput?.addEventListener('input', function() {
+            const hasText = this.value.trim().length > 0;
+            sendButton.disabled = !hasText;
+
+            // Sync with mobile input
+            if (mobileMessageInput) {
+                mobileMessageInput.value = this.value;
+                mobileSendButton.disabled = !hasText;
+
+                // Update mobile send button style - Light orange for clear distinction
+                if (hasText) {
+                    mobileSendButton.classList.remove('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                    mobileSendButton.classList.add('btn-orange-light');
+                } else {
+                    mobileSendButton.classList.remove('btn-orange-light');
+                    mobileSendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                }
+            }
+
+            // Update send button style based on content - Light orange for clear distinction
+            if (hasText) {
+                sendButton.classList.remove('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                sendButton.classList.add('btn-orange-light');
+            } else {
+                sendButton.classList.remove('btn-orange-light');
+                sendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+            }
+
+            // Auto-resize textarea
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 200) + 'px';
+        });
+
+        // Mobile conversation state input functionality
+        mobileMessageInput?.addEventListener('input', function() {
+            const hasText = this.value.trim().length > 0;
+            mobileSendButton.disabled = !hasText;
+
+            // Sync with desktop input
+            if (messageInput) {
+                messageInput.value = this.value;
+                sendButton.disabled = !hasText;
+
+                // Update desktop send button style - Light orange for clear distinction
+                if (hasText) {
+                    sendButton.classList.remove('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                    sendButton.classList.add('btn-orange-light');
+                } else {
+                    sendButton.classList.remove('btn-orange-light');
+                    sendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                }
+            }
+
+            // Update send button style based on content - Light orange for clear distinction
+            if (hasText) {
+                mobileSendButton.classList.remove('bg-gray-200', 'text-gray-400', 'border-gray-200');
+                mobileSendButton.classList.add('btn-orange-light');
+            } else {
+                mobileSendButton.classList.remove('btn-orange-light');
+                mobileSendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+            }
+
+            // Auto-resize textarea
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 200) + 'px';
+        });
+
+        // Send message functionality for initial state
+        function sendInitialMessage() {
+            // Get message from either desktop or mobile input
+            const desktopMessage = initialMessageInput?.value.trim() || '';
+            const mobileMessage = mobileInitialMessageInput?.value.trim() || '';
+            const message = desktopMessage || mobileMessage;
+
+            if (!message) return;
+
+            // Switch to conversation state
+            switchToConversationState();
+
+            // Add user message
+            addMessage(message, true);
+
+            // Clear both inputs
+            if (initialMessageInput) {
+                initialMessageInput.value = '';
+                initialMessageInput.style.height = 'auto';
+                initialSendButton.disabled = true;
+                initialSendButton.classList.remove('btn-orange-light');
+                initialSendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+            }
+            if (mobileInitialMessageInput) {
+                mobileInitialMessageInput.value = '';
+                mobileInitialMessageInput.style.height = 'auto';
+                mobileInitialSendButton.disabled = true;
+                mobileInitialSendButton.classList.remove('btn-orange-light');
+                mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+            }
+
+            // Simulate AI response after a delay
+            setTimeout(() => {
+                addMessage("I'd be happy to help you with that! Let me provide you with some personalized recommendations based on your wellness goals.");
+            }, 1000);
+        }
+
+        // Send message functionality for conversation state
+        function sendMessage() {
+            // Get message from either desktop or mobile input
+            const desktopMessage = messageInput?.value.trim() || '';
+            const mobileMessage = mobileMessageInput?.value.trim() || '';
+            const message = desktopMessage || mobileMessage;
+
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, true);
+
+            // Clear both inputs
+            if (messageInput) {
+                messageInput.value = '';
+                messageInput.style.height = 'auto';
+                sendButton.disabled = true;
+                sendButton.classList.remove('btn-orange-light');
+                sendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+            }
+            if (mobileMessageInput) {
+                mobileMessageInput.value = '';
+                mobileMessageInput.style.height = 'auto';
+                mobileSendButton.disabled = true;
+                mobileSendButton.classList.remove('btn-orange-light');
+                mobileSendButton.classList.add('bg-gray-200', 'text-gray-400', 'border-gray-200');
+            }
+
+            // Simulate AI response after a delay
+            setTimeout(() => {
+                addMessage("Thank you for your message! I'm here to help you with your wellness journey.");
+            }, 1000);
+        }
+
+        // Event listeners for initial state (Desktop)
+        initialSendButton?.addEventListener('click', sendInitialMessage);
+        initialMessageInput?.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendInitialMessage();
+            }
+        });
+
+        // Event listeners for mobile initial state
+        mobileInitialSendButton?.addEventListener('click', sendInitialMessage);
+        mobileInitialMessageInput?.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendInitialMessage();
+            }
+        });
+
+        // Event listeners for conversation state (Desktop)
+        sendButton?.addEventListener('click', sendMessage);
+        messageInput?.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Event listeners for mobile conversation state
+        mobileSendButton?.addEventListener('click', sendMessage);
+        mobileMessageInput?.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Initial state suggestion functionality (removed since no suggestion buttons)
+        // initialSuggestionBtns.forEach(btn => {
+        //     btn.addEventListener('click', function() {
+        //         const suggestion = this.textContent.trim();
+        //         initialMessageInput.value = suggestion;
+        //         initialMessageInput.focus();
+        //         initialSendButton.disabled = false;
+        //
+        //         // Update send button style
+        //         initialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+        //         initialSendButton.classList.add('bg-gray-800', 'text-white');
+        //
+        //         // Auto-resize textarea
+        //         initialMessageInput.style.height = 'auto';
+        //         initialMessageInput.style.height = Math.min(initialMessageInput.scrollHeight, 200) + 'px';
+        //     });
+        // });
+
+
+
+        // Responsive behavior
+        function handleResize() {
+            if (window.innerWidth >= 1024) {
+                // Desktop: always show sidebar
+                sidebar.classList.remove('-translate-x-full');
+                sidebarOverlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+
+                // Hide mobile input on desktop
+                if (mobileInitialInput) {
+                    mobileInitialInput.classList.add('hidden');
+                }
+            } else {
+                // Mobile/Tablet: hide sidebar by default
+                if (!sidebarOverlay.classList.contains('hidden')) {
+                    // Only close if overlay is visible (sidebar is open)
+                    closeSidebar();
+                }
+
+                // Show mobile input on mobile if in initial state
+                if (isInitialState && mobileInitialInput) {
+                    mobileInitialInput.classList.remove('hidden');
+                }
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initial call
+
+        // Initialize mobile input visibility on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.innerWidth < 768 && isInitialState && mobileInitialInput) {
+                mobileInitialInput.classList.remove('hidden');
+            }
+        });
+
+        // Modal functionality (only for settings now)
+        const modalContainer = document.getElementById('modalContainer');
+        const modalFrame = document.getElementById('modalFrame');
+
+        function openModal(type) {
+            if (type === 'settings') {
+                modalFrame.src = 'settings-modal.html';
+                modalContainer.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+        }
+
+        function closeModal() {
+            modalContainer.classList.add('hidden');
+            modalFrame.src = '';
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Listen for close modal messages from iframes
+        window.addEventListener('message', function(event) {
+            if (event.data === 'closeModal') {
+                closeModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !modalContainer.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Profile dropdown functionality
+        const profileMenuButton = document.getElementById('profileMenuButton');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        profileMenuButton?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('hidden');
+        });
+
+        // Mobile profile button removed
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!profileMenuButton?.contains(e.target) && !profileDropdown?.contains(e.target)) {
+                profileDropdown?.classList.add('hidden');
+            }
+        });
+
+        // Close dropdown on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                profileDropdown?.classList.add('hidden');
+            }
+        });
+
+        // User avatar color generation
+        function generateAvatarColor(name) {
+            const colors = [
+                '#10a37f', // ChatGPT green
+                '#ff6b6b', // Red
+                '#4ecdc4', // Teal
+                '#45b7d1', // Blue
+                '#96ceb4', // Light green
+                '#feca57', // Yellow
+                '#ff9ff3', // Pink
+                '#54a0ff', // Light blue
+                '#5f27cd', // Purple
+                '#00d2d3'  // Cyan
+            ];
+
+            let hash = 0;
+            for (let i = 0; i < name.length; i++) {
+                hash = name.charCodeAt(i) + ((hash << 5) - hash);
+            }
+
+            return colors[Math.abs(hash) % colors.length];
+        }
+
+        function getUserInitials(name) {
+            return name.split(' ')
+                      .map(word => word.charAt(0).toUpperCase())
+                      .join('')
+                      .substring(0, 2);
+        }
+
+        // Initialize user avatar with protection against overwrites
+        function initializeUserAvatar(userName = 'John Doe', accountType = 'Free') {
+            const userAvatar = document.getElementById('userAvatar');
+
+            if (userAvatar) {
+                const initials = getUserInitials(userName);
+                const color = generateAvatarColor(userName);
+
+                // Function to set avatar content
+                function setAvatarContent() {
+                    userAvatar.textContent = initials;
+                    userAvatar.style.backgroundColor = color;
+                    console.log('Avatar set to:', initials, 'with color:', color);
+                }
+
+                // Set initial content
+                setAvatarContent();
+
+                // Create a MutationObserver to watch for changes to the avatar
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                            if (userAvatar.textContent !== initials) {
+                                console.log('Avatar content changed from', userAvatar.textContent, 'back to', initials);
+                                setAvatarContent();
+                            }
+                        }
+                    });
+                });
+
+                // Start observing
+                observer.observe(userAvatar, {
+                    childList: true,
+                    characterData: true,
+                    subtree: true
+                });
+            }
+
+            // Update name and account type in profile button text areas only
+            const nameElement = document.querySelector('#profileMenuButton .text-sm.font-medium');
+            const accountElement = document.querySelector('#profileMenuButton .text-xs.text-gray-500');
+
+            if (nameElement) {
+                nameElement.textContent = userName;
+                console.log('Name updated to:', userName);
+            }
+            if (accountElement) {
+                accountElement.textContent = accountType;
+                console.log('Account type updated to:', accountType);
+            }
+        }
+
+        // Initialize avatar on page load with delay to ensure all scripts are loaded
+        setTimeout(() => {
+            initializeUserAvatar();
+        }, 500);
+
+        // Also initialize after Lucide icons are created
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                initializeUserAvatar();
+            }, 1000);
+        });
+
+        // Initialize Lucide icons first
+        lucide.createIcons();
+
+        // Search dialog functionality
+        const searchDialog = document.getElementById('searchDialog');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        function openSearchDialog() {
+            searchDialog.classList.remove('hidden');
+            setTimeout(() => {
+                searchInput.focus();
+            }, 100);
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSearchDialog() {
+            searchDialog.classList.add('hidden');
+            searchInput.value = '';
+            document.body.classList.remove('overflow-hidden');
+            // Reset to default results
+            showDefaultSearchResults();
+        }
+
+        function showDefaultSearchResults() {
+            searchResults.innerHTML = `
+                <!-- Default results when no search -->
+                <div class="px-4 py-2">
+                    <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer" onclick="loadChatPage(); closeSearchDialog();">
+                        <i data-lucide="plus" class="w-4 h-4 text-gray-500"></i>
+                        <span class="text-sm text-gray-900">New chat</span>
+                    </div>
+                </div>
+
+                <!-- Chat History Section -->
+                <div class="px-4 py-2">
+                    <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 px-3">Today</div>
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-sm text-gray-900">Nutrition planning help</span>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-sm text-gray-900">Mood tracking insights</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-4 py-2">
+                    <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 px-3">Yesterday</div>
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-sm text-gray-900">Fasting schedule setup</span>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-sm text-gray-900">Exercise routine planning</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        // Search functionality
+        searchInput?.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+
+            if (query === '') {
+                showDefaultSearchResults();
+                return;
+            }
+
+            // Filter chats based on search query
+            const chats = [
+                { title: 'Nutrition planning help', date: 'Today' },
+                { title: 'Mood tracking insights', date: 'Today' },
+                { title: 'Fasting schedule setup', date: 'Yesterday' },
+                { title: 'Exercise routine planning', date: 'Yesterday' },
+                { title: 'Weight loss goals discussion', date: 'Last week' },
+                { title: 'Healthy meal prep ideas', date: 'Last week' }
+            ];
+
+            const filteredChats = chats.filter(chat =>
+                chat.title.toLowerCase().includes(query)
+            );
+
+            if (filteredChats.length === 0) {
+                searchResults.innerHTML = `
+                    <div class="px-4 py-8 text-center">
+                        <i data-lucide="search" class="w-8 h-8 text-gray-400 mx-auto mb-2"></i>
+                        <p class="text-sm text-gray-500">No chats found for "${query}"</p>
+                    </div>
+                `;
+            } else {
+                let resultsHTML = '';
+                const groupedChats = {};
+
+                filteredChats.forEach(chat => {
+                    if (!groupedChats[chat.date]) {
+                        groupedChats[chat.date] = [];
+                    }
+                    groupedChats[chat.date].push(chat);
+                });
+
+                Object.keys(groupedChats).forEach(date => {
+                    resultsHTML += `
+                        <div class="px-4 py-2">
+                            <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 px-3">${date}</div>
+                            <div class="space-y-1">
+                    `;
+
+                    groupedChats[date].forEach(chat => {
+                        resultsHTML += `
+                            <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-sm text-gray-900">${chat.title}</span>
+                            </div>
+                        `;
+                    });
+
+                    resultsHTML += `
+                            </div>
+                        </div>
+                    `;
+                });
+
+                searchResults.innerHTML = resultsHTML;
+            }
+
+            lucide.createIcons();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+K or Cmd+K to open search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                openSearchDialog();
+            }
+
+            // Escape to close search
+            if (e.key === 'Escape' && !searchDialog.classList.contains('hidden')) {
+                closeSearchDialog();
+            }
+        });
+
+        // Close search when clicking outside
+        searchDialog?.addEventListener('click', function(e) {
+            if (e.target === searchDialog) {
+                closeSearchDialog();
+            }
+        });
+
+        // Make functions globally available
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        window.loadChatPage = loadChatPage;
+        window.loadToolPage = loadToolPage;
+        window.initializeUserAvatar = initializeUserAvatar;
+        window.openSearchDialog = openSearchDialog;
+        window.closeSearchDialog = closeSearchDialog;
+    </script>
+</body>
+</html>

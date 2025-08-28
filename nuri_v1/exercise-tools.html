@@ -7,14 +7,52 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
+        /* Comprehensive Green Palette - Consistent with main app */
         :root {
-            --nuri-primary: #00AF9F;
-            --nuri-primary-hover: #009688;
+            /* Main Brand Green Palette */
+            --nuri-primary: #00AF9F;           /* Main brand green */
+            --nuri-primary-hover: #009688;     /* Darker green for hover */
+            --nuri-primary-light: #4DB6AC;     /* Light green for accents */
+            --nuri-primary-lighter: #80CBC4;   /* Lighter green for backgrounds */
+            --nuri-primary-lightest: #B2DFDB;  /* Very light green for subtle backgrounds */
+            --nuri-primary-dark: #00695C;      /* Dark green for emphasis */
+            --nuri-primary-darker: #004D40;    /* Darker green for strong emphasis */
+
+            /* Background variations */
+            --nuri-bg-light: #F5FFFE;          /* Subtle light background - consistent with V2 */
+            --nuri-bg-medium: #B2DFDB;         /* Medium light green background */
+            --nuri-bg-dark: #4DB6AC;           /* Medium green background */
+
+            /* Icon Greens - Harmonious variations */
+            --nuri-icon-primary: #00AF9F;      /* Primary icons */
+            --nuri-icon-secondary: #26A69A;    /* Secondary icons */
+            --nuri-icon-tertiary: #4DD0E1;     /* Tertiary icons */
+            --nuri-icon-light: #80CBC4;        /* Light icons */
         }
+
+        /* Utility Classes */
         .bg-nuri-primary { background-color: var(--nuri-primary); }
+        .bg-nuri-primary-light { background-color: var(--nuri-primary-light); }
+        .bg-nuri-primary-lighter { background-color: var(--nuri-primary-lighter); }
+        .bg-nuri-primary-dark { background-color: var(--nuri-primary-dark); }
+        .bg-nuri-bg-light { background-color: var(--nuri-bg-light); }
+        .bg-nuri-bg-medium { background-color: var(--nuri-bg-medium); }
+        .bg-nuri-bg-dark { background-color: var(--nuri-bg-dark); }
+
         .text-nuri-primary { color: var(--nuri-primary); }
+        .text-nuri-primary-light { color: var(--nuri-primary-light); }
+        .text-nuri-primary-dark { color: var(--nuri-primary-dark); }
+        .text-nuri-icon-primary { color: var(--nuri-icon-primary); }
+        .text-nuri-icon-secondary { color: var(--nuri-icon-secondary); }
+        .text-nuri-icon-tertiary { color: var(--nuri-icon-tertiary); }
+        .text-nuri-icon-light { color: var(--nuri-icon-light); }
+
         .border-nuri-primary { border-color: var(--nuri-primary); }
+        .border-nuri-primary-light { border-color: var(--nuri-primary-light); }
+        .border-nuri-bg-medium { border-color: var(--nuri-bg-medium); }
+
         .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+        .hover\:bg-nuri-primary-light:hover { background-color: var(--nuri-primary); }
     </style>
 </head>
 <body class="bg-white font-sans">
@@ -26,16 +64,31 @@
         </div>
 
         <!-- Today's Summary -->
-        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 mb-8 border border-blue-200">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Weekly Progress</h2>
+        <div class="bg-gradient-to-r from-nuri-bg-light to-nuri-bg-medium rounded-xl p-6 mb-8 border border-nuri-primary-light">
+            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Weekly Progress</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-blue-500">75%</div>
+                    <!-- Circular Progress Chart -->
+                    <div class="relative w-20 h-20 mx-auto mb-3">
+                        <svg class="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
+                            <!-- Background circle -->
+                            <path class="text-nuri-primary-lighter" stroke="currentColor" stroke-width="3" fill="none"
+                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <!-- Progress circle -->
+                            <path class="text-nuri-icon-primary" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"
+                                  stroke-dasharray="75, 100"
+                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        </svg>
+                        <!-- Percentage text in center -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-lg font-bold text-nuri-icon-primary">75%</span>
+                        </div>
+                    </div>
                     <div class="text-sm text-gray-600">Weekly Goal</div>
                     <div class="text-xs text-gray-500">Progress</div>
                 </div>
                 <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-green-500">5</div>
+                    <div class="text-2xl font-bold text-nuri-icon-secondary">5</div>
                     <div class="text-sm text-gray-600">Exercises</div>
                     <div class="text-xs text-gray-500">This week</div>
                 </div>
@@ -46,58 +99,58 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <!-- Goals Tracker -->
             <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="target" class="w-6 h-6 text-green-600"></i>
+                <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="target" class="w-6 h-6 text-nuri-icon-primary"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Goals Tracker</h3>
+                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Goals Tracker</h3>
                 <p class="text-gray-600 text-sm mb-4">Set and track fitness goals with categories and points</p>
-                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary transition-colors">
+                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
                     Manage Goals
                 </button>
             </div>
 
             <!-- Exercise Tracker -->
             <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="activity" class="w-6 h-6 text-blue-600"></i>
+                <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="activity" class="w-6 h-6 text-nuri-icon-secondary"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Exercise Tracker</h3>
+                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Exercise Tracker</h3>
                 <p class="text-gray-600 text-sm mb-4">Log exercises with type, duration, and calories burned</p>
-                <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
                     Log Exercise
                 </button>
             </div>
         </div>
         
         <!-- Current Goals -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Current Goals</h2>
+        <div class="bg-white rounded-xl border border-nuri-primary-light p-6 mb-8">
+            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Current Goals</h2>
 
             <div class="space-y-4">
                 <!-- Goal 1 -->
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                <div class="flex items-center justify-between py-3 border-b border-nuri-primary-lighter">
                     <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="target" class="w-4 h-4 text-green-600"></i>
+                        <div class="w-8 h-8 bg-nuri-bg-medium rounded-lg flex items-center justify-center">
+                            <i data-lucide="target" class="w-4 h-4 text-nuri-icon-primary"></i>
                         </div>
                         <div>
-                            <div class="font-medium text-gray-800">Exercise 3 times this week</div>
+                            <div class="font-medium text-nuri-primary-dark">Exercise 3 times this week</div>
                             <div class="text-sm text-gray-600">Exercise • 25 points</div>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
-                        <span class="text-sm text-gray-600">2/3</span>
-                        <button class="w-6 h-6 border-2 border-gray-300 rounded hover:border-green-500 hover:bg-green-50">
-                            <i data-lucide="check" class="w-3 h-3 text-green-500 hidden"></i>
+                        <span class="text-sm text-nuri-icon-secondary">2/3</span>
+                        <button class="w-6 h-6 border-2 border-nuri-primary-lighter rounded hover:border-nuri-primary hover:bg-nuri-bg-light">
+                            <i data-lucide="check" class="w-3 h-3 text-nuri-icon-primary hidden"></i>
                         </button>
                     </div>
                 </div>
 
                 <!-- Goal 2 -->
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                <div class="flex items-center justify-between py-3 border-b border-nuri-primary-lighter">
                     <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="target" class="w-4 h-4 text-blue-600"></i>
+                        <div class="w-8 h-8 bg-nuri-bg-light rounded-lg flex items-center justify-center">
+                            <i data-lucide="target" class="w-4 h-4 text-nuri-icon-secondary"></i>
                         </div>
                         <div>
                             <div class="font-medium text-gray-800">Walk 10,000 steps daily</div>
@@ -106,7 +159,7 @@
                     </div>
                     <div class="flex items-center space-x-2">
                         <span class="text-sm text-gray-600">8,543/10,000</span>
-                        <button class="w-6 h-6 border-2 border-gray-300 rounded hover:border-green-500 hover:bg-green-50">
+                        <button class="w-6 h-6 border-2 border-gray-300 rounded hover:border-nuri-primary hover:bg-nuri-primary-bg-light">
                             <i data-lucide="check" class="w-3 h-3 text-green-500 hidden"></i>
                         </button>
                     </div>
@@ -134,8 +187,8 @@
         </div>
 
         <!-- Recent Exercises -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Recent Exercises</h2>
+        <div class="bg-white rounded-xl border border-nuri-primary-light p-6">
+            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Recent Exercises</h2>
 
             <div class="space-y-4">
                 <!-- Exercise 1 -->

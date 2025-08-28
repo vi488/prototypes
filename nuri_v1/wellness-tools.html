@@ -7,14 +7,52 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
+        /* Comprehensive Green Palette - Consistent with main app */
         :root {
-            --nuri-primary: #00AF9F;
-            --nuri-primary-hover: #009688;
+            /* Main Brand Green Palette */
+            --nuri-primary: #00AF9F;           /* Main brand green */
+            --nuri-primary-hover: #009688;     /* Darker green for hover */
+            --nuri-primary-light: #4DB6AC;     /* Light green for accents */
+            --nuri-primary-lighter: #80CBC4;   /* Lighter green for backgrounds */
+            --nuri-primary-lightest: #B2DFDB;  /* Very light green for subtle backgrounds */
+            --nuri-primary-dark: #00695C;      /* Dark green for emphasis */
+            --nuri-primary-darker: #004D40;    /* Darker green for strong emphasis */
+
+            /* Background variations */
+            --nuri-bg-light: #F5FFFE;          /* Subtle light background - consistent with V2 */
+            --nuri-bg-medium: #B2DFDB;         /* Medium light green background */
+            --nuri-bg-dark: #4DB6AC;           /* Medium green background */
+
+            /* Icon Greens - Harmonious variations */
+            --nuri-icon-primary: #00AF9F;      /* Primary icons */
+            --nuri-icon-secondary: #26A69A;    /* Secondary icons */
+            --nuri-icon-tertiary: #4DD0E1;     /* Tertiary icons */
+            --nuri-icon-light: #80CBC4;        /* Light icons */
         }
+
+        /* Utility Classes */
         .bg-nuri-primary { background-color: var(--nuri-primary); }
+        .bg-nuri-primary-light { background-color: var(--nuri-primary-light); }
+        .bg-nuri-primary-lighter { background-color: var(--nuri-primary-lighter); }
+        .bg-nuri-primary-dark { background-color: var(--nuri-primary-dark); }
+        .bg-nuri-bg-light { background-color: var(--nuri-bg-light); }
+        .bg-nuri-bg-medium { background-color: var(--nuri-bg-medium); }
+        .bg-nuri-bg-dark { background-color: var(--nuri-bg-dark); }
+
         .text-nuri-primary { color: var(--nuri-primary); }
+        .text-nuri-primary-light { color: var(--nuri-primary-light); }
+        .text-nuri-primary-dark { color: var(--nuri-primary-dark); }
+        .text-nuri-icon-primary { color: var(--nuri-icon-primary); }
+        .text-nuri-icon-secondary { color: var(--nuri-icon-secondary); }
+        .text-nuri-icon-tertiary { color: var(--nuri-icon-tertiary); }
+        .text-nuri-icon-light { color: var(--nuri-icon-light); }
+
         .border-nuri-primary { border-color: var(--nuri-primary); }
+        .border-nuri-primary-light { border-color: var(--nuri-primary-light); }
+        .border-nuri-bg-medium { border-color: var(--nuri-bg-medium); }
+
         .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+        .hover\:bg-nuri-primary-light:hover { background-color: var(--nuri-primary); }
     </style>
 </head>
 <body class="bg-white font-sans">
@@ -28,56 +66,56 @@
         <!-- Quick Actions -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <!-- Mood Tracking -->
-            <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-6 border border-yellow-200">
+            <div class="bg-gradient-to-br from-nuri-bg-light to-nuri-bg-medium rounded-xl p-6 border border-nuri-primary-light">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                        <i data-lucide="smile" class="w-6 h-6 text-yellow-600"></i>
+                    <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center">
+                        <i data-lucide="smile" class="w-6 h-6 text-nuri-icon-primary"></i>
                     </div>
                     <span class="text-2xl">😊</span>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Mood Tracker</h3>
+                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Mood Tracker</h3>
                 <p class="text-gray-600 text-sm mb-4">Log how you're feeling with mood levels, symptoms, and notes</p>
-                <button class="w-full bg-yellow-500 text-white py-2 rounded-lg hover:bg-yellow-600 transition-colors">
+                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
                     Track Mood
                 </button>
             </div>
 
             <!-- Symptom Tracking -->
-            <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-6 border border-red-200">
+            <div class="bg-gradient-to-br from-nuri-bg-light to-nuri-bg-medium rounded-xl p-6 border border-nuri-primary-light">
                 <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                        <i data-lucide="activity" class="w-6 h-6 text-red-600"></i>
+                    <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center">
+                        <i data-lucide="activity" class="w-6 h-6 text-nuri-icon-secondary"></i>
                     </div>
                     <span class="text-2xl">🩺</span>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Symptom Tracker</h3>
+                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Symptom Tracker</h3>
                 <p class="text-gray-600 text-sm mb-4">Log symptoms with severity, triggers, and detailed notes</p>
-                <button class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
+                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
                     Log Symptoms
                 </button>
             </div>
         </div>
         
         <!-- Today's Summary -->
-        <div class="bg-gray-50 rounded-xl p-6 mb-8">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Today's Wellness Summary</h2>
+        <div class="bg-nuri-bg-light rounded-xl p-6 mb-8 border border-nuri-primary-lighter">
+            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Today's Wellness Summary</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white rounded-lg p-4 text-center">
+                <div class="bg-white rounded-lg p-4 text-center border border-nuri-primary-lighter">
                     <div class="text-2xl mb-2">😊</div>
                     <div class="text-sm text-gray-600">Current Mood</div>
-                    <div class="text-lg font-semibold text-gray-800">Good</div>
+                    <div class="text-lg font-semibold text-nuri-icon-primary">Good</div>
                 </div>
-                <div class="bg-white rounded-lg p-4 text-center">
+                <div class="bg-white rounded-lg p-4 text-center border border-nuri-primary-lighter">
                     <div class="text-2xl mb-2">🩺</div>
                     <div class="text-sm text-gray-600">Symptoms Tracked</div>
-                    <div class="text-lg font-semibold text-gray-800">3</div>
+                    <div class="text-lg font-semibold text-nuri-icon-secondary">3</div>
                 </div>
             </div>
         </div>
         
         <!-- Recent Entries -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Recent Wellness Entries</h2>
+        <div class="bg-white rounded-xl border border-nuri-primary-light p-6">
+            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Recent Wellness Entries</h2>
             <div class="space-y-4">
                 <div class="flex items-center justify-between py-3 border-b border-gray-100">
                     <div class="flex items-center space-x-3">
