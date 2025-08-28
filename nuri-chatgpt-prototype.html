@@ -116,6 +116,74 @@
         #conversationState {
             transition: opacity 0.3s ease-in-out;
         }
+
+        /* Mobile input positioning - ChatGPT style */
+        @media (max-width: 767px) {
+            /* Make initial state input stick to bottom on mobile */
+            #initialState {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding-bottom: 120px; /* Account for fixed input */
+                padding-top: 2rem;
+            }
+
+            #initialState .max-w-3xl {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            #initialState .text-center {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-bottom: 0;
+            }
+
+            /* Position mobile input at bottom */
+            .mobile-bottom-input {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 16px;
+                z-index: 30;
+            }
+
+            /* Hide desktop inputs on mobile */
+            #initialState .max-w-3xl.mx-auto.mb-8 {
+                display: none !important;
+            }
+
+            /* Adjust conversation input for mobile */
+            #conversationInput {
+                display: none !important;
+            }
+
+            /* Add padding to conversation state to account for fixed input */
+            #conversationState {
+                padding-bottom: 120px !important;
+            }
+
+            /* Ensure main content area accounts for fixed input */
+            .mobile-content-padding {
+                padding-bottom: 120px;
+            }
+
+            /* Hide desktop input on mobile */
+            #initialState .hidden.md\\:block {
+                display: none !important;
+            }
+
+            /* Adjust mobile header to account for fixed input */
+            .lg\\:hidden {
+                position: relative;
+                z-index: 40;
+            }
+        }
     </style>
 </head>
 <body class="bg-white font-sans">
@@ -237,9 +305,7 @@
                 </button>
                 <span id="mobileTitle" class="font-semibold text-gray-800">Nuri Assistant</span>
                 <div class="flex items-center space-x-2">
-                    <button id="mobileProfileButton" class="p-2 rounded-md hover:bg-gray-100">
-                        <i data-lucide="user" class="w-5 h-5"></i>
-                    </button>
+                    <!-- Account icon removed -->
                 </div>
             </div>
 
@@ -250,7 +316,7 @@
                 <!-- Chat Page -->
                 <div id="chatPage" class="h-full">
                     <!-- Initial State - Centered Welcome -->
-                    <div id="initialState" class="h-full flex flex-col items-center justify-center p-8">
+                    <div id="initialState" class="h-full flex flex-col items-center justify-center p-8 md:p-8">
                         <div class="w-full max-w-3xl mx-auto">
                             <!-- Logo and Title -->
                             <div class="text-center mb-8">
@@ -262,8 +328,8 @@
                                 <h1 class="text-3xl font-semibold text-gray-800 mb-8">What can I help with?</h1>
                             </div>
 
-                            <!-- Centered Input -->
-                            <div class="max-w-3xl mx-auto mb-8">
+                            <!-- Centered Input - Desktop, Bottom Input - Mobile -->
+                            <div class="max-w-3xl mx-auto mb-8 md:mb-8 hidden md:block">
                                 <div class="relative">
                                     <textarea
                                         id="initialMessageInput"
@@ -310,7 +376,7 @@
             </div>
 
             <!-- Conversation Input Area (hidden initially) -->
-            <div id="conversationInput" class="hidden p-4 border-t border-gray-200 bg-white">
+            <div id="conversationInput" class="hidden p-4 bg-white md:relative">
                 <div class="max-w-4xl mx-auto">
                     <div class="relative">
                         <textarea
@@ -333,10 +399,71 @@
                             </button>
                         </div>
                     </div>
-                    <div class="mt-3 text-xs text-gray-500 text-center">
+                    <div class="mt-3 text-xs text-gray-500 text-center hidden md:block">
                         Nuri can make mistakes. Check important info.
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Input Areas (ChatGPT Style) -->
+    <!-- Mobile Initial Input (shown only on mobile when in initial state) -->
+    <div id="mobileInitialInput" class="md:hidden mobile-bottom-input">
+        <div class="max-w-3xl mx-auto">
+            <div class="relative">
+                <textarea
+                    id="mobileInitialMessageInput"
+                    placeholder="Message Nuri"
+                    class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
+                    rows="1"
+                    style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
+                ></textarea>
+                <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                    <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                        <i data-lucide="paperclip" class="w-4 h-4"></i>
+                    </button>
+                    <button
+                        id="mobileInitialSendButton"
+                        class="p-1.5 bg-gray-200 text-gray-400 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled
+                    >
+                        <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-3 text-xs text-gray-500 text-center">
+                Nuri can make mistakes. Check important info.
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Conversation Input (shown only on mobile when in conversation state) -->
+    <div id="mobileConversationInput" class="md:hidden mobile-bottom-input hidden">
+        <div class="max-w-3xl mx-auto">
+            <div class="relative">
+                <textarea
+                    id="mobileMessageInput"
+                    placeholder="Message Nuri"
+                    class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
+                    rows="1"
+                    style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
+                ></textarea>
+                <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                    <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                        <i data-lucide="paperclip" class="w-4 h-4"></i>
+                    </button>
+                    <button
+                        id="mobileSendButton"
+                        class="p-1.5 bg-gray-200 text-gray-400 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled
+                    >
+                        <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mt-3 text-xs text-gray-500 text-center">
+                Nuri can make mistakes. Check important info.
             </div>
         </div>
     </div>
@@ -432,6 +559,16 @@
         const initialSendButton = document.getElementById('initialSendButton');
         const initialSuggestionBtns = document.querySelectorAll('.suggestion-btn-initial');
 
+        // Mobile initial state elements
+        const mobileInitialInput = document.getElementById('mobileInitialInput');
+        const mobileInitialMessageInput = document.getElementById('mobileInitialMessageInput');
+        const mobileInitialSendButton = document.getElementById('mobileInitialSendButton');
+
+        // Mobile conversation state elements
+        const mobileConversationInput = document.getElementById('mobileConversationInput');
+        const mobileMessageInput = document.getElementById('mobileMessageInput');
+        const mobileSendButton = document.getElementById('mobileSendButton');
+
         // Conversation state elements
         const conversationState = document.getElementById('conversationState');
         const conversationInput = document.getElementById('conversationInput');
@@ -472,13 +609,25 @@
             conversationState.classList.add('hidden');
             conversationInput.classList.add('hidden');
 
+            // Show mobile initial input, hide mobile conversation input
+            if (mobileInitialInput) {
+                mobileInitialInput.classList.remove('hidden');
+            }
+            if (mobileConversationInput) {
+                mobileConversationInput.classList.add('hidden');
+            }
+
             // Clear messages
             messagesContainer.innerHTML = '';
 
-            // Clear inputs
+            // Clear inputs (both desktop and mobile)
             if (initialMessageInput) {
                 initialMessageInput.value = '';
                 initialSendButton.disabled = true;
+            }
+            if (mobileInitialMessageInput) {
+                mobileInitialMessageInput.value = '';
+                mobileInitialSendButton.disabled = true;
             }
             if (messageInput) {
                 messageInput.value = '';
@@ -567,6 +716,14 @@
                 // Hide initial state
                 initialState.classList.add('hidden');
 
+                // Hide mobile initial input and show mobile conversation input
+                if (mobileInitialInput) {
+                    mobileInitialInput.classList.add('hidden');
+                }
+                if (mobileConversationInput) {
+                    mobileConversationInput.classList.remove('hidden');
+                }
+
                 // Show conversation state with fade in
                 conversationState.classList.remove('hidden');
                 conversationInput.classList.remove('hidden');
@@ -575,9 +732,13 @@
                 conversationState.classList.add('fade-in');
                 conversationInput.classList.add('fade-in');
 
-                // Focus on conversation input
+                // Focus on appropriate input based on screen size
                 setTimeout(() => {
-                    messageInput.focus();
+                    if (window.innerWidth >= 768) {
+                        messageInput?.focus();
+                    } else {
+                        mobileMessageInput?.focus();
+                    }
                 }, 100);
             }, 300);
         }
@@ -619,10 +780,25 @@
             conversationState.scrollTop = conversationState.scrollHeight;
         }
 
-        // Initial state input functionality
-        initialMessageInput.addEventListener('input', function() {
+        // Initial state input functionality (Desktop)
+        initialMessageInput?.addEventListener('input', function() {
             const hasText = this.value.trim().length > 0;
             initialSendButton.disabled = !hasText;
+
+            // Sync with mobile input
+            if (mobileInitialMessageInput) {
+                mobileInitialMessageInput.value = this.value;
+                mobileInitialSendButton.disabled = !hasText;
+
+                // Update mobile send button style
+                if (hasText) {
+                    mobileInitialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                    mobileInitialSendButton.classList.add('bg-gray-800', 'text-white');
+                } else {
+                    mobileInitialSendButton.classList.remove('bg-gray-800', 'text-white');
+                    mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400');
+                }
+            }
 
             // Update send button style based on content
             if (hasText) {
@@ -638,10 +814,59 @@
             this.style.height = Math.min(this.scrollHeight, 200) + 'px';
         });
 
-        // Conversation state input functionality
-        messageInput.addEventListener('input', function() {
+        // Mobile initial state input functionality
+        mobileInitialMessageInput?.addEventListener('input', function() {
+            const hasText = this.value.trim().length > 0;
+            mobileInitialSendButton.disabled = !hasText;
+
+            // Sync with desktop input
+            if (initialMessageInput) {
+                initialMessageInput.value = this.value;
+                initialSendButton.disabled = !hasText;
+
+                // Update desktop send button style
+                if (hasText) {
+                    initialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                    initialSendButton.classList.add('bg-gray-800', 'text-white');
+                } else {
+                    initialSendButton.classList.remove('bg-gray-800', 'text-white');
+                    initialSendButton.classList.add('bg-gray-200', 'text-gray-400');
+                }
+            }
+
+            // Update send button style based on content
+            if (hasText) {
+                mobileInitialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                mobileInitialSendButton.classList.add('bg-gray-800', 'text-white');
+            } else {
+                mobileInitialSendButton.classList.remove('bg-gray-800', 'text-white');
+                mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400');
+            }
+
+            // Auto-resize textarea
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 200) + 'px';
+        });
+
+        // Conversation state input functionality (Desktop)
+        messageInput?.addEventListener('input', function() {
             const hasText = this.value.trim().length > 0;
             sendButton.disabled = !hasText;
+
+            // Sync with mobile input
+            if (mobileMessageInput) {
+                mobileMessageInput.value = this.value;
+                mobileSendButton.disabled = !hasText;
+
+                // Update mobile send button style
+                if (hasText) {
+                    mobileSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                    mobileSendButton.classList.add('bg-gray-800', 'text-white');
+                } else {
+                    mobileSendButton.classList.remove('bg-gray-800', 'text-white');
+                    mobileSendButton.classList.add('bg-gray-200', 'text-gray-400');
+                }
+            }
 
             // Update send button style based on content
             if (hasText) {
@@ -657,9 +882,47 @@
             this.style.height = Math.min(this.scrollHeight, 200) + 'px';
         });
 
+        // Mobile conversation state input functionality
+        mobileMessageInput?.addEventListener('input', function() {
+            const hasText = this.value.trim().length > 0;
+            mobileSendButton.disabled = !hasText;
+
+            // Sync with desktop input
+            if (messageInput) {
+                messageInput.value = this.value;
+                sendButton.disabled = !hasText;
+
+                // Update desktop send button style
+                if (hasText) {
+                    sendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                    sendButton.classList.add('bg-gray-800', 'text-white');
+                } else {
+                    sendButton.classList.remove('bg-gray-800', 'text-white');
+                    sendButton.classList.add('bg-gray-200', 'text-gray-400');
+                }
+            }
+
+            // Update send button style based on content
+            if (hasText) {
+                mobileSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                mobileSendButton.classList.add('bg-gray-800', 'text-white');
+            } else {
+                mobileSendButton.classList.remove('bg-gray-800', 'text-white');
+                mobileSendButton.classList.add('bg-gray-200', 'text-gray-400');
+            }
+
+            // Auto-resize textarea
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 200) + 'px';
+        });
+
         // Send message functionality for initial state
         function sendInitialMessage() {
-            const message = initialMessageInput.value.trim();
+            // Get message from either desktop or mobile input
+            const desktopMessage = initialMessageInput?.value.trim() || '';
+            const mobileMessage = mobileInitialMessageInput?.value.trim() || '';
+            const message = desktopMessage || mobileMessage;
+
             if (!message) return;
 
             // Switch to conversation state
@@ -668,10 +931,21 @@
             // Add user message
             addMessage(message, true);
 
-            // Clear initial input
-            initialMessageInput.value = '';
-            initialMessageInput.style.height = 'auto';
-            initialSendButton.disabled = true;
+            // Clear both inputs
+            if (initialMessageInput) {
+                initialMessageInput.value = '';
+                initialMessageInput.style.height = 'auto';
+                initialSendButton.disabled = true;
+                initialSendButton.classList.remove('bg-gray-800', 'text-white');
+                initialSendButton.classList.add('bg-gray-200', 'text-gray-400');
+            }
+            if (mobileInitialMessageInput) {
+                mobileInitialMessageInput.value = '';
+                mobileInitialMessageInput.style.height = 'auto';
+                mobileInitialSendButton.disabled = true;
+                mobileInitialSendButton.classList.remove('bg-gray-800', 'text-white');
+                mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400');
+            }
 
             // Simulate AI response after a delay
             setTimeout(() => {
@@ -681,16 +955,31 @@
 
         // Send message functionality for conversation state
         function sendMessage() {
-            const message = messageInput.value.trim();
+            // Get message from either desktop or mobile input
+            const desktopMessage = messageInput?.value.trim() || '';
+            const mobileMessage = mobileMessageInput?.value.trim() || '';
+            const message = desktopMessage || mobileMessage;
+
             if (!message) return;
 
             // Add user message
             addMessage(message, true);
 
-            // Clear input
-            messageInput.value = '';
-            messageInput.style.height = 'auto';
-            sendButton.disabled = true;
+            // Clear both inputs
+            if (messageInput) {
+                messageInput.value = '';
+                messageInput.style.height = 'auto';
+                sendButton.disabled = true;
+                sendButton.classList.remove('bg-gray-800', 'text-white');
+                sendButton.classList.add('bg-gray-200', 'text-gray-400');
+            }
+            if (mobileMessageInput) {
+                mobileMessageInput.value = '';
+                mobileMessageInput.style.height = 'auto';
+                mobileSendButton.disabled = true;
+                mobileSendButton.classList.remove('bg-gray-800', 'text-white');
+                mobileSendButton.classList.add('bg-gray-200', 'text-gray-400');
+            }
 
             // Simulate AI response after a delay
             setTimeout(() => {
@@ -698,18 +987,36 @@
             }, 1000);
         }
 
-        // Event listeners for initial state
-        initialSendButton.addEventListener('click', sendInitialMessage);
-        initialMessageInput.addEventListener('keydown', function(e) {
+        // Event listeners for initial state (Desktop)
+        initialSendButton?.addEventListener('click', sendInitialMessage);
+        initialMessageInput?.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 sendInitialMessage();
             }
         });
 
-        // Event listeners for conversation state
-        sendButton.addEventListener('click', sendMessage);
-        messageInput.addEventListener('keydown', function(e) {
+        // Event listeners for mobile initial state
+        mobileInitialSendButton?.addEventListener('click', sendInitialMessage);
+        mobileInitialMessageInput?.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendInitialMessage();
+            }
+        });
+
+        // Event listeners for conversation state (Desktop)
+        sendButton?.addEventListener('click', sendMessage);
+        messageInput?.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Event listeners for mobile conversation state
+        mobileSendButton?.addEventListener('click', sendMessage);
+        mobileMessageInput?.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
                 sendMessage();
@@ -743,17 +1050,34 @@
                 sidebar.classList.remove('-translate-x-full');
                 sidebarOverlay.classList.add('hidden');
                 document.body.classList.remove('overflow-hidden');
+
+                // Hide mobile input on desktop
+                if (mobileInitialInput) {
+                    mobileInitialInput.classList.add('hidden');
+                }
             } else {
                 // Mobile/Tablet: hide sidebar by default
                 if (!sidebarOverlay.classList.contains('hidden')) {
                     // Only close if overlay is visible (sidebar is open)
                     closeSidebar();
                 }
+
+                // Show mobile input on mobile if in initial state
+                if (isInitialState && mobileInitialInput) {
+                    mobileInitialInput.classList.remove('hidden');
+                }
             }
         }
 
         window.addEventListener('resize', handleResize);
         handleResize(); // Initial call
+
+        // Initialize mobile input visibility on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.innerWidth < 768 && isInitialState && mobileInitialInput) {
+                mobileInitialInput.classList.remove('hidden');
+            }
+        });
 
         // Modal functionality (only for settings now)
         const modalContainer = document.getElementById('modalContainer');
@@ -790,17 +1114,13 @@
         // Profile dropdown functionality
         const profileMenuButton = document.getElementById('profileMenuButton');
         const profileDropdown = document.getElementById('profileDropdown');
-        const mobileProfileButton = document.getElementById('mobileProfileButton');
 
         profileMenuButton?.addEventListener('click', function(e) {
             e.stopPropagation();
             profileDropdown.classList.toggle('hidden');
         });
 
-        // Mobile profile button opens settings directly
-        mobileProfileButton?.addEventListener('click', function() {
-            openModal('settings');
-        });
+        // Mobile profile button removed
 
         // Close dropdown when clicking outside
         document.addEventListener('click', function(e) {
