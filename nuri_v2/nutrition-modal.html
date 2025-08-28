@@ -7,14 +7,65 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
+        /* Nutrition Modal - Green-focused for health with orange energy/calorie accents */
         :root {
+            /* Primary Brand Colors */
+            --nuri-green: #00AF9F;             /* Main brand green */
+            --nuri-orange: #FF611A;            /* Brand orange for energy/calories */
+
+            /* Green Variations (Primary for health/nutrition) */
+            --nuri-green-hover: #009688;       /* Darker green for hover */
+            --nuri-green-light: #4DB6AC;       /* Light green for health metrics */
+            --nuri-green-lighter: #80CBC4;     /* Lighter green for backgrounds */
+            --nuri-green-lightest: #B2DFDB;    /* Very light green for subtle backgrounds */
+            --nuri-green-dark: #00695C;        /* Dark green for emphasis */
+
+            /* Orange Variations (Energy/calorie indicators) */
+            --nuri-orange-light: #FF8A65;      /* Light orange for energy */
+            --nuri-orange-lighter: #FFAB91;    /* Lighter orange for backgrounds */
+            --nuri-orange-lightest: #FFCCBC;   /* Very light orange for subtle backgrounds */
+            --nuri-orange-dark: #D84315;       /* Dark orange for emphasis */
+
+            /* Background variations */
+            --nuri-bg-green-light: #F5FFFE;    /* Very subtle green background */
+            --nuri-bg-green-medium: #E0F2F1;   /* Light green background */
+            --nuri-bg-orange-light: #FFF3E7;   /* Very subtle orange background */
+            --nuri-bg-orange-medium: #FFF3E0;  /* Light orange background */
+
+            /* Legacy compatibility */
             --nuri-primary: #00AF9F;
             --nuri-primary-hover: #009688;
         }
+
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
         .border-nuri-primary { border-color: var(--nuri-primary); }
         .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+
+        /* Nutrition-specific styles */
+        .nutrition-health {
+            background: linear-gradient(135deg, var(--nuri-bg-green-light), var(--nuri-bg-green-medium));
+            border: 1px solid var(--nuri-green-lighter);
+            color: var(--nuri-green-dark);
+        }
+
+        .nutrition-energy {
+            background: linear-gradient(135deg, var(--nuri-bg-orange-light), var(--nuri-bg-orange-medium));
+            border: 1px solid var(--nuri-orange-lighter);
+            color: var(--nuri-orange-dark);
+        }
+
+        .calorie-metric {
+            color: var(--nuri-orange);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .health-metric {
+            color: var(--nuri-green);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
         
         .modal-enter {
             animation: modalEnter 0.3s ease-out;

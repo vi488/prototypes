@@ -7,14 +7,68 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
+        /* Exercise Modal - Orange-focused for activity/energy with green achievement accents */
         :root {
+            /* Primary Brand Colors */
+            --nuri-green: #00AF9F;             /* Main brand green */
+            --nuri-orange: #FF611A;            /* Brand orange for activity/energy */
+
+            /* Orange Variations (Primary for exercise/activity) */
+            --nuri-orange-hover: #E5540F;      /* Darker orange for hover */
+            --nuri-orange-light: #FF8A65;      /* Light orange for accents */
+            --nuri-orange-lighter: #FFAB91;    /* Lighter orange for backgrounds */
+            --nuri-orange-lightest: #FFCCBC;   /* Very light orange for subtle backgrounds */
+            --nuri-orange-dark: #D84315;       /* Dark orange for emphasis */
+
+            /* Green Variations (Achievement/success accents) */
+            --nuri-green-hover: #009688;       /* Darker green for hover */
+            --nuri-green-light: #4DB6AC;       /* Light green for achievements */
+            --nuri-green-lighter: #80CBC4;     /* Lighter green for backgrounds */
+            --nuri-green-dark: #00695C;        /* Dark green for emphasis */
+
+            /* Background variations */
+            --nuri-bg-orange-light: #FFF3E7;   /* Very subtle orange background */
+            --nuri-bg-orange-medium: #FFF3E0;  /* Light orange background */
+            --nuri-bg-green-light: #F5FFFE;    /* Very subtle green background */
+            --nuri-bg-green-medium: #E0F2F1;   /* Light green background */
+
+            /* Legacy compatibility */
             --nuri-primary: #00AF9F;
             --nuri-primary-hover: #009688;
         }
+
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
         .border-nuri-primary { border-color: var(--nuri-primary); }
         .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+
+        /* Exercise-specific styles */
+        .exercise-active {
+            background: linear-gradient(135deg, var(--nuri-bg-orange-light), var(--nuri-bg-orange-medium));
+            border: 1px solid var(--nuri-orange-lighter);
+            color: var(--nuri-orange-dark);
+        }
+
+        .exercise-completed {
+            background: linear-gradient(135deg, var(--nuri-bg-green-light), var(--nuri-bg-green-medium));
+            border: 1px solid var(--nuri-green-lighter);
+            color: var(--nuri-green-dark);
+        }
+
+        .intensity-high {
+            background-color: var(--nuri-orange);
+            color: white;
+        }
+
+        .intensity-medium {
+            background-color: var(--nuri-orange-light);
+            color: white;
+        }
+
+        .intensity-low {
+            background-color: var(--nuri-orange-lightest);
+            color: var(--nuri-orange-dark);
+        }
         
         .modal-enter {
             animation: modalEnter 0.3s ease-out;

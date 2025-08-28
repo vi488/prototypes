@@ -8,14 +8,62 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* Progress Dashboard - Dual-color system for achievements vs active goals */
         :root {
+            /* Primary Brand Colors */
+            --nuri-green: #00AF9F;             /* Main brand green */
+            --nuri-orange: #FF611A;            /* Brand orange */
+
+            /* Green Variations (Achievements & Success) */
+            --nuri-green-hover: #009688;       /* Darker green for hover */
+            --nuri-green-light: #4DB6AC;       /* Light green for accents */
+            --nuri-green-lighter: #80CBC4;     /* Lighter green for backgrounds */
+            --nuri-green-lightest: #B2DFDB;    /* Very light green for subtle backgrounds */
+            --nuri-green-dark: #00695C;        /* Dark green for emphasis */
+
+            /* Orange Variations (Active Goals & Energy) */
+            --nuri-orange-hover: #E5540F;      /* Darker orange for hover */
+            --nuri-orange-light: #FF8A65;      /* Light orange for accents */
+            --nuri-orange-lighter: #FFAB91;    /* Lighter orange for backgrounds */
+            --nuri-orange-lightest: #FFCCBC;   /* Very light orange for subtle backgrounds */
+            --nuri-orange-dark: #D84315;       /* Dark orange for emphasis */
+
+            /* Background variations */
+            --nuri-bg-green-light: #F5FFFE;    /* Very subtle green background */
+            --nuri-bg-green-medium: #E0F2F1;   /* Light green background */
+            --nuri-bg-orange-light: #FFF3E7;   /* Very subtle orange background */
+            --nuri-bg-orange-medium: #FFF3E0;  /* Light orange background */
+
+            /* Legacy compatibility */
             --nuri-primary: #00AF9F;
             --nuri-primary-hover: #009688;
         }
+
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
         .border-nuri-primary { border-color: var(--nuri-primary); }
         .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+
+        /* Enhanced Progress Dashboard Styles */
+        .achievement-card {
+            background: linear-gradient(135deg, var(--nuri-bg-green-light), var(--nuri-bg-green-medium));
+            border-left: 4px solid var(--nuri-green);
+        }
+
+        .active-goal-card {
+            background: linear-gradient(135deg, var(--nuri-bg-orange-light), var(--nuri-bg-orange-medium));
+            border-left: 4px solid var(--nuri-orange);
+        }
+
+        .progress-metric-success {
+            color: var(--nuri-green-dark);
+            font-weight: 700;
+        }
+
+        .progress-metric-active {
+            color: var(--nuri-orange-dark);
+            font-weight: 700;
+        }
         
         .modal-enter {
             animation: modalEnter 0.3s ease-out;
@@ -74,7 +122,8 @@
             <div class="p-6 max-h-[calc(90vh-180px)] overflow-y-auto">
                 <!-- Overview Cards -->
                 <div class="grid grid-cols-4 gap-6 mb-8">
-                    <div class="bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl p-6 text-white">
+                    <!-- Active Goals - Orange theme for ongoing activity -->
+                    <div class="active-goal-card rounded-xl p-6 text-white">
                         <div class="flex items-center justify-between mb-4">
                             <i data-lucide="target" class="w-8 h-8"></i>
                             <span class="text-2xl font-bold">85%</span>
@@ -82,8 +131,9 @@
                         <h3 class="text-lg font-semibold mb-1">Weekly Goals</h3>
                         <p class="text-sm opacity-90">4 of 5 completed</p>
                     </div>
-                    
-                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white">
+
+                    <!-- Streak - Orange theme for ongoing activity -->
+                    <div class="active-goal-card rounded-xl p-6 text-white">
                         <div class="flex items-center justify-between mb-4">
                             <i data-lucide="flame" class="w-8 h-8"></i>
                             <span class="text-2xl font-bold">12</span>
@@ -91,8 +141,9 @@
                         <h3 class="text-lg font-semibold mb-1">Day Streak</h3>
                         <p class="text-sm opacity-90">Keep it going!</p>
                     </div>
-                    
-                    <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white">
+
+                    <!-- Tokens - Green theme for achievements/rewards -->
+                    <div class="achievement-card rounded-xl p-6 text-white">
                         <div class="flex items-center justify-between mb-4">
                             <i data-lucide="coins" class="w-8 h-8"></i>
                             <span class="text-2xl font-bold">1,250</span>
@@ -100,8 +151,9 @@
                         <h3 class="text-lg font-semibold mb-1">Total Tokens</h3>
                         <p class="text-sm opacity-90">+150 this week</p>
                     </div>
-                    
-                    <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6 text-white">
+
+                    <!-- Improvement - Green theme for positive achievements -->
+                    <div class="achievement-card rounded-xl p-6 text-white">
                         <div class="flex items-center justify-between mb-4">
                             <i data-lucide="trending-up" class="w-8 h-8"></i>
                             <span class="text-2xl font-bold">+15%</span>

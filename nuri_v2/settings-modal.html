@@ -7,14 +7,64 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
+        /* Settings Modal - Context-aware colors for different setting types */
         :root {
+            /* Primary Brand Colors */
+            --nuri-green: #00AF9F;             /* Main brand green */
+            --nuri-orange: #FF611A;            /* Brand orange */
+
+            /* Green Variations (Positive settings, confirmations) */
+            --nuri-green-hover: #009688;       /* Darker green for hover */
+            --nuri-green-light: #4DB6AC;       /* Light green for accents */
+            --nuri-green-lighter: #80CBC4;     /* Lighter green for backgrounds */
+            --nuri-green-lightest: #B2DFDB;    /* Very light green for subtle backgrounds */
+            --nuri-green-dark: #00695C;        /* Dark green for emphasis */
+
+            /* Orange Variations (Warnings, important settings) */
+            --nuri-orange-hover: #E5540F;      /* Darker orange for hover */
+            --nuri-orange-light: #FF8A65;      /* Light orange for accents */
+            --nuri-orange-lighter: #FFAB91;    /* Lighter orange for backgrounds */
+            --nuri-orange-lightest: #FFCCBC;   /* Very light orange for subtle backgrounds */
+            --nuri-orange-dark: #D84315;       /* Dark orange for emphasis */
+
+            /* Background variations */
+            --nuri-bg-green-light: #F5FFFE;    /* Very subtle green background */
+            --nuri-bg-green-medium: #E0F2F1;   /* Light green background */
+            --nuri-bg-orange-light: #FFF3E7;   /* Very subtle orange background */
+            --nuri-bg-orange-medium: #FFF3E0;  /* Light orange background */
+
+            /* Legacy compatibility */
             --nuri-primary: #00AF9F;
             --nuri-primary-hover: #009688;
         }
+
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
         .border-nuri-primary { border-color: var(--nuri-primary); }
         .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+
+        /* Enhanced Settings Styles */
+        .setting-success {
+            background-color: var(--nuri-bg-green-light);
+            border: 1px solid var(--nuri-green-lighter);
+            color: var(--nuri-green-dark);
+        }
+
+        .setting-warning {
+            background-color: var(--nuri-bg-orange-light);
+            border: 1px solid var(--nuri-orange-lighter);
+            color: var(--nuri-orange-dark);
+        }
+
+        .setting-section-wellness {
+            border-left: 4px solid var(--nuri-green);
+            background-color: var(--nuri-bg-green-light);
+        }
+
+        .setting-section-activity {
+            border-left: 4px solid var(--nuri-orange);
+            background-color: var(--nuri-bg-orange-light);
+        }
         
         .modal-enter {
             animation: modalEnter 0.3s ease-out;
@@ -69,7 +119,16 @@
         }
         
         input:checked + .toggle-slider {
-            background-color: var(--nuri-primary);
+            background-color: var(--nuri-green);
+        }
+
+        /* Context-aware toggle colors */
+        .toggle-wellness input:checked + .toggle-slider {
+            background-color: var(--nuri-green);
+        }
+
+        .toggle-activity input:checked + .toggle-slider {
+            background-color: var(--nuri-orange);
         }
         
         input:checked + .toggle-slider:before {

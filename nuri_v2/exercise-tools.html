@@ -7,39 +7,41 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        /* Exercise Tools - Orange-focused (Activity & Energy) with Green accents */
+        /* Exercise Tools - Orange-focused (Activity & Energy) with Green achievement accents */
         :root {
             /* Primary Brand Colors */
             --nuri-green: #00AF9F;             /* Main brand green */
-            --nuri-orange: #FF611A;            /* Brand orange - used for borders/text, not fills */
+            --nuri-orange: #FF611A;            /* Brand orange - primary for activity/energy */
 
-            /* Orange Variations (Outline/Border Style) */
-            --nuri-orange-hover: #E5540F;      /* Darker orange for hover text */
-            --nuri-orange-light: #FF8A65;      /* Light orange for hover backgrounds */
-            --nuri-orange-lighter: #FFAB91;    /* Lighter orange for subtle backgrounds */
-            --nuri-orange-lightest: #FFCCBC;   /* Very light orange for button hover backgrounds */
+            /* Orange Variations (Primary for Activity/Energy) */
+            --nuri-orange-hover: #E5540F;      /* Darker orange for hover */
+            --nuri-orange-light: #FF8A65;      /* Light orange for accents */
+            --nuri-orange-lighter: #FFAB91;    /* Lighter orange for backgrounds */
+            --nuri-orange-lightest: #FFCCBC;   /* Very light orange for subtle backgrounds */
             --nuri-orange-dark: #D84315;       /* Dark orange for emphasis */
             --nuri-orange-darker: #BF360C;     /* Darker orange for strong emphasis */
 
-            /* Green Variations (Accent for Exercise) */
+            /* Green Variations (Achievement/Success accents) */
+            --nuri-green-hover: #009688;       /* Darker green for hover */
             --nuri-green-light: #4DB6AC;       /* Light green for accents */
             --nuri-green-lighter: #80CBC4;     /* Lighter green for backgrounds */
             --nuri-green-lightest: #B2DFDB;    /* Very light green for subtle backgrounds */
             --nuri-green-dark: #00695C;        /* Dark green for emphasis */
 
             /* Background variations */
-            --nuri-bg-orange-light: #FFF3E0;   /* Very light orange background */
-            --nuri-bg-orange-medium: #FFCCBC;  /* Medium light orange background */
-            --nuri-bg-green-light: #E0F2F1;    /* Very light green background */
+            --nuri-bg-orange-light: #FFF3E7;   /* Very subtle orange background */
+            --nuri-bg-orange-medium: #FFF3E0;  /* Light orange background */
+            --nuri-bg-green-light: #F5FFFE;    /* Very light green background */
+            --nuri-bg-green-medium: #E0F2F1;   /* Medium green background */
 
-            /* Exercise-specific colors */
-            --nuri-exercise-primary: #FF611A;  /* Orange for exercise, activity, energy */
-            --nuri-exercise-accent: #4DB6AC;   /* Green accent for health, balance */
-            --nuri-exercise-success: #00AF9F;  /* Green for achievements, goals */
-            --nuri-exercise-energy: #FF8A65;   /* Light orange for energy, activity */
+            /* Exercise-specific contextual colors */
+            --nuri-exercise-energy: #FF611A;   /* Orange for activity, energy, exercise */
+            --nuri-exercise-active: #FF8A65;   /* Light orange for active states */
+            --nuri-exercise-success: #00AF9F;  /* Green for achievements, completed goals */
+            --nuri-exercise-progress: #4DB6AC; /* Light green for progress indicators */
         }
 
-        /* Exercise Utility Classes */
+        /* Enhanced Exercise Utility Classes */
         .bg-nuri-orange { background-color: var(--nuri-orange); }
         .bg-nuri-orange-light { background-color: var(--nuri-orange-light); }
         .bg-nuri-orange-lighter { background-color: var(--nuri-orange-lighter); }
@@ -48,25 +50,56 @@
         .bg-nuri-bg-orange-light { background-color: var(--nuri-bg-orange-light); }
         .bg-nuri-bg-orange-medium { background-color: var(--nuri-bg-orange-medium); }
         .bg-nuri-bg-green-light { background-color: var(--nuri-bg-green-light); }
+        .bg-nuri-bg-green-medium { background-color: var(--nuri-bg-green-medium); }
 
         .text-nuri-orange { color: var(--nuri-orange); }
         .text-nuri-orange-light { color: var(--nuri-orange-light); }
         .text-nuri-orange-dark { color: var(--nuri-orange-dark); }
         .text-nuri-orange-darker { color: var(--nuri-orange-darker); }
+        .text-nuri-green { color: var(--nuri-green); }
         .text-nuri-green-light { color: var(--nuri-green-light); }
         .text-nuri-green-dark { color: var(--nuri-green-dark); }
-        .text-nuri-exercise-primary { color: var(--nuri-exercise-primary); }
-        .text-nuri-exercise-accent { color: var(--nuri-exercise-accent); }
-        .text-nuri-exercise-success { color: var(--nuri-exercise-success); }
         .text-nuri-exercise-energy { color: var(--nuri-exercise-energy); }
+        .text-nuri-exercise-active { color: var(--nuri-exercise-active); }
+        .text-nuri-exercise-success { color: var(--nuri-exercise-success); }
+        .text-nuri-exercise-progress { color: var(--nuri-exercise-progress); }
 
         .border-nuri-orange { border-color: var(--nuri-orange); }
         .border-nuri-orange-light { border-color: var(--nuri-orange-light); }
         .border-nuri-orange-lighter { border-color: var(--nuri-orange-lighter); }
         .border-nuri-green-light { border-color: var(--nuri-green-light); }
+        .border-nuri-green-lighter { border-color: var(--nuri-green-lighter); }
 
         .hover\:bg-nuri-orange:hover { background-color: var(--nuri-orange-hover); }
         .hover\:bg-nuri-orange-light:hover { background-color: var(--nuri-orange); }
+
+        /* Exercise-specific component styles */
+        .exercise-energy-metric {
+            color: var(--nuri-exercise-energy);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .exercise-success-metric {
+            color: var(--nuri-exercise-success);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .exercise-progress-ring {
+            stroke: var(--nuri-orange);
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.5s ease;
+        }
+
+        .exercise-achievement-badge {
+            background: linear-gradient(135deg, var(--nuri-bg-green-medium), var(--nuri-bg-green-light));
+            border: 1px solid var(--nuri-green-lighter);
+            border-left: 4px solid var(--nuri-green);
+            color: var(--nuri-green-dark);
+        }
 
         /* Contextual Button Styles - Adapt to container color */
         .btn-orange-light {
@@ -111,13 +144,13 @@
                             <path class="text-nuri-orange-lighter" stroke="currentColor" stroke-width="3" fill="none"
                                   d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
                             <!-- Progress circle - Orange for progress -->
-                            <path class="text-nuri-orange" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"
+                            <path class="exercise-progress-ring" stroke="currentColor"
                                   stroke-dasharray="75, 100"
                                   d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
                         </svg>
                         <!-- Percentage text - Orange for emphasis -->
                         <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-lg font-bold text-nuri-orange">75%</span>
+                            <span class="exercise-energy-metric text-lg">75%</span>
                         </div>
                     </div>
                     <div class="text-sm text-gray-600">Weekly Goal</div>
@@ -125,7 +158,7 @@
                 </div>
                 <!-- Activity count - White background with orange theme for consistency -->
                 <div class="bg-white rounded-lg p-4 text-center border border-nuri-orange-lighter">
-                    <div class="text-2xl font-bold text-nuri-orange">5</div>
+                    <div class="exercise-energy-metric">5</div>
                     <div class="text-sm text-gray-600">Exercises</div>
                     <div class="text-xs text-nuri-orange-dark">This week</div>
                 </div>

@@ -124,7 +124,16 @@
         .panel-orange-light { background-color: #FFF3E7; }
         .panel-orange-medium { background-color: var(--nuri-orange-lighter); }
 
-        /* No hover effects for simplicity */
+        /* Enhanced tool selection states - colors only */
+        .tool-button.active-wellness {
+            background-color: var(--nuri-bg-green-medium);
+            color: var(--nuri-green-dark);
+        }
+
+        .tool-button.active-exercise {
+            background-color: var(--nuri-bg-orange-medium);
+            color: var(--nuri-orange-dark);
+        }
 
         /* Legacy compatibility */
         .bg-nuri-primary { background-color: var(--nuri-primary); }
@@ -355,8 +364,8 @@
                         <i data-lucide="apple" class="w-4 h-4 text-nuri-green"></i>
                         <span class="text-sm">Nutrition Tools</span>
                     </button>
-                    <button id="exercise-tool" onclick="loadToolPage('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-green-light text-gray-700 text-left tool-button">
-                        <i data-lucide="dumbbell" class="w-4 h-4 text-nuri-green"></i>
+                    <button id="exercise-tool" onclick="loadToolPage('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-orange-light text-gray-700 text-left tool-button">
+                        <i data-lucide="dumbbell" class="w-4 h-4 text-nuri-orange"></i>
                         <span class="text-sm">Exercise Tools</span>
                     </button>
                 </div>
