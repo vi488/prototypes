@@ -14,6 +14,11 @@
             --nuri-primary-light: #26C6DA;
             --nuri-primary-dark: #00695C;
         }
+
+        /* ChatGPT-like font family */
+        body {
+            font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
         
         .bg-nuri-primary { background-color: var(--nuri-primary); }
         .text-nuri-primary { color: var(--nuri-primary); }
@@ -140,9 +145,9 @@
                         <i data-lucide="plus" class="w-4 h-4"></i>
                         <span class="text-sm">New Chat</span>
                     </button>
-                    <button class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                    <button onclick="openSearchDialog()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
                         <i data-lucide="search" class="w-4 h-4"></i>
-                        <span class="text-sm">Search Chat</span>
+                        <span class="text-sm">Search chats</span>
                     </button>
                 </div>
             </div>
@@ -189,19 +194,32 @@
             </div>
             
             <!-- Sidebar Footer -->
-            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-gray-50">
-                <div class="space-y-2">
-                    <div class="flex items-center space-x-2 text-sm text-gray-600">
-                        <i data-lucide="coins" class="w-4 h-4"></i>
-                        <span>1,250 tokens</span>
-                    </div>
-                    <button onclick="openModal('settings')" class="w-full flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
-                        <i data-lucide="settings" class="w-4 h-4"></i>
-                        <span class="text-sm">Settings</span>
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+                <div class="relative">
+                    <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                        <div id="userAvatar" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background-color: #10a37f;">
+                            JD
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-sm font-medium">John Doe</div>
+                            <div class="text-xs text-gray-500">Free</div>
+                        </div>
+                        <i data-lucide="more-horizontal" class="w-4 h-4"></i>
                     </button>
-                    <div class="flex items-center space-x-2 p-2">
-                        <div class="w-6 h-6 bg-gray-400 rounded-full"></div>
-                        <span class="text-sm text-gray-700">John Doe</span>
+
+                    <!-- Profile Dropdown Menu -->
+                    <div id="profileDropdown" class="hidden absolute bottom-full left-0 right-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg">
+                        <div class="py-1">
+                            <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 text-gray-700">
+                                <i data-lucide="settings" class="w-4 h-4"></i>
+                                <span class="text-sm">Settings</span>
+                            </button>
+                            <div class="border-t border-gray-100"></div>
+                            <button class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 text-gray-700">
+                                <i data-lucide="log-out" class="w-4 h-4"></i>
+                                <span class="text-sm">Log out</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -219,11 +237,8 @@
                 </button>
                 <span id="mobileTitle" class="font-semibold text-gray-800">Nuri Assistant</span>
                 <div class="flex items-center space-x-2">
-                    <button class="p-2 rounded-md hover:bg-gray-100">
+                    <button id="mobileProfileButton" class="p-2 rounded-md hover:bg-gray-100">
                         <i data-lucide="user" class="w-5 h-5"></i>
-                    </button>
-                    <button onclick="openModal('settings')" class="p-2 rounded-md hover:bg-gray-100">
-                        <i data-lucide="settings" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
@@ -236,63 +251,46 @@
                 <div id="chatPage" class="h-full">
                     <!-- Initial State - Centered Welcome -->
                     <div id="initialState" class="h-full flex flex-col items-center justify-center p-8">
-                        <div class="text-center max-w-2xl">
-                            <div class="w-16 h-16 flex items-center justify-center mx-auto mb-6">
-                                <svg width="48" height="60" viewBox="0 0 95 121" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
-                                </svg>
-                            </div>
-                            <h1 class="text-3xl font-semibold text-gray-800 mb-4">Hello John! I'm Nuri, your personal wellness assistant.</h1>
-                            <p class="text-gray-600 text-lg mb-8">I can help you with nutrition, fitness, wellness tracking, and more. What would you like to work on today?</p>
-
-                            <!-- Centered Quick Suggestions -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8 max-w-lg mx-auto">
-                                <button class="suggestion-btn-initial px-6 py-3 bg-gray-50 text-gray-700 rounded-xl text-sm hover:bg-gray-100 transition-colors border border-gray-200">
-                                    "Plan a healthy breakfast"
-                                </button>
-                                <button class="suggestion-btn-initial px-6 py-3 bg-gray-50 text-gray-700 rounded-xl text-sm hover:bg-gray-100 transition-colors border border-gray-200">
-                                    "Start my fasting timer"
-                                </button>
-                                <button class="suggestion-btn-initial px-6 py-3 bg-gray-50 text-gray-700 rounded-xl text-sm hover:bg-gray-100 transition-colors border border-gray-200">
-                                    "Track my mood today"
-                                </button>
-                                <button class="suggestion-btn-initial px-6 py-3 bg-gray-50 text-gray-700 rounded-xl text-sm hover:bg-gray-100 transition-colors border border-gray-200">
-                                    "Show my progress"
-                                </button>
+                        <div class="w-full max-w-3xl mx-auto">
+                            <!-- Logo and Title -->
+                            <div class="text-center mb-8">
+                                <div class="w-12 h-12 flex items-center justify-center mx-auto mb-4">
+                                    <svg width="36" height="45" viewBox="0 0 95 121" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
+                                    </svg>
+                                </div>
+                                <h1 class="text-3xl font-semibold text-gray-800 mb-8">What can I help with?</h1>
                             </div>
 
                             <!-- Centered Input -->
-                            <div class="max-w-2xl mx-auto">
-                                <div class="flex items-end space-x-3">
-                                    <div class="flex-1 relative">
-                                        <textarea
-                                            id="initialMessageInput"
-                                            placeholder="Message Nuri..."
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent resize-none bg-white text-gray-800"
-                                            rows="1"
-                                            style="max-height: 120px;"
-                                        ></textarea>
-                                        <div class="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center space-x-1">
-                                            <button class="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
-                                                <i data-lucide="paperclip" class="w-4 h-4"></i>
-                                            </button>
-                                            <button class="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
-                                                <i data-lucide="mic" class="w-4 h-4"></i>
-                                            </button>
-                                        </div>
+                            <div class="max-w-3xl mx-auto mb-8">
+                                <div class="relative">
+                                    <textarea
+                                        id="initialMessageInput"
+                                        placeholder="Message Nuri"
+                                        class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
+                                        rows="1"
+                                        style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
+                                    ></textarea>
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                                        <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                                            <i data-lucide="paperclip" class="w-4 h-4"></i>
+                                        </button>
+                                        <button
+                                            id="initialSendButton"
+                                            class="p-1.5 bg-gray-200 text-gray-400 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                            disabled
+                                        >
+                                            <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                                        </button>
                                     </div>
-                                    <button
-                                        id="initialSendButton"
-                                        class="p-3 bg-gray-800 text-white rounded-xl hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                                        disabled
-                                    >
-                                        <i data-lucide="send" class="w-5 h-5"></i>
-                                    </button>
                                 </div>
-                                <div class="mt-2 text-xs text-gray-500 text-center">
-                                    Nuri can help with nutrition, fitness, wellness, and more. Ask anything!
+                                <div class="mt-3 text-xs text-gray-500 text-center">
+                                    Nuri can make mistakes. Check important info.
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
 
@@ -314,34 +312,29 @@
             <!-- Conversation Input Area (hidden initially) -->
             <div id="conversationInput" class="hidden p-4 border-t border-gray-200 bg-white">
                 <div class="max-w-4xl mx-auto">
-                    <div class="flex items-end space-x-3">
-                        <div class="flex-1 relative">
-                            <textarea
-                                id="messageInput"
-                                placeholder="Message Nuri..."
-                                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent resize-none bg-white text-gray-800"
-                                rows="1"
-                                style="max-height: 120px;"
-                            ></textarea>
-                            <div class="absolute right-2 top-1/2 transform -translate-y-1/2 flex items-center space-x-1">
-                                <button class="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
-                                    <i data-lucide="paperclip" class="w-4 h-4"></i>
-                                </button>
-                                <button class="p-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
-                                    <i data-lucide="mic" class="w-4 h-4"></i>
-                                </button>
-                            </div>
+                    <div class="relative">
+                        <textarea
+                            id="messageInput"
+                            placeholder="Message Nuri"
+                            class="w-full px-4 py-4 pr-16 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
+                            rows="1"
+                            style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
+                        ></textarea>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                            <button class="p-1.5 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100">
+                                <i data-lucide="paperclip" class="w-4 h-4"></i>
+                            </button>
+                            <button
+                                id="sendButton"
+                                class="p-1.5 bg-gray-200 text-gray-400 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                disabled
+                            >
+                                <i data-lucide="arrow-up" class="w-4 h-4"></i>
+                            </button>
                         </div>
-                        <button
-                            id="sendButton"
-                            class="p-3 bg-gray-800 text-white rounded-xl hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                            disabled
-                        >
-                            <i data-lucide="send" class="w-5 h-5"></i>
-                        </button>
                     </div>
-                    <div class="mt-2 text-xs text-gray-500 text-center">
-                        Nuri can help with nutrition, fitness, wellness, and more. Ask anything!
+                    <div class="mt-3 text-xs text-gray-500 text-center">
+                        Nuri can make mistakes. Check important info.
                     </div>
                 </div>
             </div>
@@ -351,6 +344,69 @@
     <!-- Modal Container for Feature Modals -->
     <div id="modalContainer" class="hidden fixed inset-0 z-50">
         <iframe id="modalFrame" class="w-full h-full border-0"></iframe>
+    </div>
+
+    <!-- Search Dialog -->
+    <div id="searchDialog" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 pt-20">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 max-h-[80vh] overflow-hidden">
+            <!-- Search Header -->
+            <div class="flex items-center p-4 border-b border-gray-200">
+                <div class="flex-1 relative">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search chats..."
+                        class="w-full px-4 py-3 text-base bg-transparent border-none outline-none text-gray-900 placeholder-gray-500"
+                        autocomplete="off"
+                    >
+                </div>
+                <button onclick="closeSearchDialog()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i data-lucide="x" class="w-5 h-5 text-gray-500"></i>
+                </button>
+            </div>
+
+            <!-- Search Results -->
+            <div class="max-h-96 overflow-y-auto">
+                <div id="searchResults" class="py-2">
+                    <!-- Default results when no search -->
+                    <div class="px-4 py-2">
+                        <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer" onclick="loadChatPage(); closeSearchDialog();">
+                            <i data-lucide="plus" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-sm text-gray-900">New chat</span>
+                        </div>
+                    </div>
+
+                    <!-- Chat History Section -->
+                    <div class="px-4 py-2">
+                        <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 px-3">Today</div>
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-sm text-gray-900">Nutrition planning help</span>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-sm text-gray-900">Mood tracking insights</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-4 py-2">
+                        <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 px-3">Yesterday</div>
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-sm text-gray-900">Fasting schedule setup</span>
+                            </div>
+                            <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-sm text-gray-900">Exercise routine planning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- JavaScript -->
@@ -568,9 +624,18 @@
             const hasText = this.value.trim().length > 0;
             initialSendButton.disabled = !hasText;
 
+            // Update send button style based on content
+            if (hasText) {
+                initialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                initialSendButton.classList.add('bg-gray-800', 'text-white');
+            } else {
+                initialSendButton.classList.remove('bg-gray-800', 'text-white');
+                initialSendButton.classList.add('bg-gray-200', 'text-gray-400');
+            }
+
             // Auto-resize textarea
             this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            this.style.height = Math.min(this.scrollHeight, 200) + 'px';
         });
 
         // Conversation state input functionality
@@ -578,9 +643,18 @@
             const hasText = this.value.trim().length > 0;
             sendButton.disabled = !hasText;
 
+            // Update send button style based on content
+            if (hasText) {
+                sendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                sendButton.classList.add('bg-gray-800', 'text-white');
+            } else {
+                sendButton.classList.remove('bg-gray-800', 'text-white');
+                sendButton.classList.add('bg-gray-200', 'text-gray-400');
+            }
+
             // Auto-resize textarea
             this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            this.style.height = Math.min(this.scrollHeight, 200) + 'px';
         });
 
         // Send message functionality for initial state
@@ -642,19 +716,23 @@
             }
         });
 
-        // Initial state suggestion functionality
-        initialSuggestionBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const suggestion = this.textContent.replace(/"/g, '');
-                initialMessageInput.value = suggestion;
-                initialMessageInput.focus();
-                initialSendButton.disabled = false;
-
-                // Auto-resize textarea
-                initialMessageInput.style.height = 'auto';
-                initialMessageInput.style.height = Math.min(initialMessageInput.scrollHeight, 120) + 'px';
-            });
-        });
+        // Initial state suggestion functionality (removed since no suggestion buttons)
+        // initialSuggestionBtns.forEach(btn => {
+        //     btn.addEventListener('click', function() {
+        //         const suggestion = this.textContent.trim();
+        //         initialMessageInput.value = suggestion;
+        //         initialMessageInput.focus();
+        //         initialSendButton.disabled = false;
+        //
+        //         // Update send button style
+        //         initialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+        //         initialSendButton.classList.add('bg-gray-800', 'text-white');
+        //
+        //         // Auto-resize textarea
+        //         initialMessageInput.style.height = 'auto';
+        //         initialMessageInput.style.height = Math.min(initialMessageInput.scrollHeight, 200) + 'px';
+        //     });
+        // });
 
 
 
@@ -709,11 +787,293 @@
             }
         });
 
+        // Profile dropdown functionality
+        const profileMenuButton = document.getElementById('profileMenuButton');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const mobileProfileButton = document.getElementById('mobileProfileButton');
+
+        profileMenuButton?.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('hidden');
+        });
+
+        // Mobile profile button opens settings directly
+        mobileProfileButton?.addEventListener('click', function() {
+            openModal('settings');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!profileMenuButton?.contains(e.target) && !profileDropdown?.contains(e.target)) {
+                profileDropdown?.classList.add('hidden');
+            }
+        });
+
+        // Close dropdown on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                profileDropdown?.classList.add('hidden');
+            }
+        });
+
+        // User avatar color generation
+        function generateAvatarColor(name) {
+            const colors = [
+                '#10a37f', // ChatGPT green
+                '#ff6b6b', // Red
+                '#4ecdc4', // Teal
+                '#45b7d1', // Blue
+                '#96ceb4', // Light green
+                '#feca57', // Yellow
+                '#ff9ff3', // Pink
+                '#54a0ff', // Light blue
+                '#5f27cd', // Purple
+                '#00d2d3'  // Cyan
+            ];
+
+            let hash = 0;
+            for (let i = 0; i < name.length; i++) {
+                hash = name.charCodeAt(i) + ((hash << 5) - hash);
+            }
+
+            return colors[Math.abs(hash) % colors.length];
+        }
+
+        function getUserInitials(name) {
+            return name.split(' ')
+                      .map(word => word.charAt(0).toUpperCase())
+                      .join('')
+                      .substring(0, 2);
+        }
+
+        // Initialize user avatar with protection against overwrites
+        function initializeUserAvatar(userName = 'John Doe', accountType = 'Free') {
+            const userAvatar = document.getElementById('userAvatar');
+
+            if (userAvatar) {
+                const initials = getUserInitials(userName);
+                const color = generateAvatarColor(userName);
+
+                // Function to set avatar content
+                function setAvatarContent() {
+                    userAvatar.textContent = initials;
+                    userAvatar.style.backgroundColor = color;
+                    console.log('Avatar set to:', initials, 'with color:', color);
+                }
+
+                // Set initial content
+                setAvatarContent();
+
+                // Create a MutationObserver to watch for changes to the avatar
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                            if (userAvatar.textContent !== initials) {
+                                console.log('Avatar content changed from', userAvatar.textContent, 'back to', initials);
+                                setAvatarContent();
+                            }
+                        }
+                    });
+                });
+
+                // Start observing
+                observer.observe(userAvatar, {
+                    childList: true,
+                    characterData: true,
+                    subtree: true
+                });
+            }
+
+            // Update name and account type in profile button text areas only
+            const nameElement = document.querySelector('#profileMenuButton .text-sm.font-medium');
+            const accountElement = document.querySelector('#profileMenuButton .text-xs.text-gray-500');
+
+            if (nameElement) {
+                nameElement.textContent = userName;
+                console.log('Name updated to:', userName);
+            }
+            if (accountElement) {
+                accountElement.textContent = accountType;
+                console.log('Account type updated to:', accountType);
+            }
+        }
+
+        // Initialize avatar on page load with delay to ensure all scripts are loaded
+        setTimeout(() => {
+            initializeUserAvatar();
+        }, 500);
+
+        // Also initialize after Lucide icons are created
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                initializeUserAvatar();
+            }, 1000);
+        });
+
+        // Initialize Lucide icons first
+        lucide.createIcons();
+
+        // Search dialog functionality
+        const searchDialog = document.getElementById('searchDialog');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        function openSearchDialog() {
+            searchDialog.classList.remove('hidden');
+            setTimeout(() => {
+                searchInput.focus();
+            }, 100);
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSearchDialog() {
+            searchDialog.classList.add('hidden');
+            searchInput.value = '';
+            document.body.classList.remove('overflow-hidden');
+            // Reset to default results
+            showDefaultSearchResults();
+        }
+
+        function showDefaultSearchResults() {
+            searchResults.innerHTML = `
+                <!-- Default results when no search -->
+                <div class="px-4 py-2">
+                    <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer" onclick="loadChatPage(); closeSearchDialog();">
+                        <i data-lucide="plus" class="w-4 h-4 text-gray-500"></i>
+                        <span class="text-sm text-gray-900">New chat</span>
+                    </div>
+                </div>
+
+                <!-- Chat History Section -->
+                <div class="px-4 py-2">
+                    <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 px-3">Today</div>
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-sm text-gray-900">Nutrition planning help</span>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-sm text-gray-900">Mood tracking insights</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-4 py-2">
+                    <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 px-3">Yesterday</div>
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-sm text-gray-900">Fasting schedule setup</span>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                            <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                            <span class="text-sm text-gray-900">Exercise routine planning</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        // Search functionality
+        searchInput?.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+
+            if (query === '') {
+                showDefaultSearchResults();
+                return;
+            }
+
+            // Filter chats based on search query
+            const chats = [
+                { title: 'Nutrition planning help', date: 'Today' },
+                { title: 'Mood tracking insights', date: 'Today' },
+                { title: 'Fasting schedule setup', date: 'Yesterday' },
+                { title: 'Exercise routine planning', date: 'Yesterday' },
+                { title: 'Weight loss goals discussion', date: 'Last week' },
+                { title: 'Healthy meal prep ideas', date: 'Last week' }
+            ];
+
+            const filteredChats = chats.filter(chat =>
+                chat.title.toLowerCase().includes(query)
+            );
+
+            if (filteredChats.length === 0) {
+                searchResults.innerHTML = `
+                    <div class="px-4 py-8 text-center">
+                        <i data-lucide="search" class="w-8 h-8 text-gray-400 mx-auto mb-2"></i>
+                        <p class="text-sm text-gray-500">No chats found for "${query}"</p>
+                    </div>
+                `;
+            } else {
+                let resultsHTML = '';
+                const groupedChats = {};
+
+                filteredChats.forEach(chat => {
+                    if (!groupedChats[chat.date]) {
+                        groupedChats[chat.date] = [];
+                    }
+                    groupedChats[chat.date].push(chat);
+                });
+
+                Object.keys(groupedChats).forEach(date => {
+                    resultsHTML += `
+                        <div class="px-4 py-2">
+                            <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 px-3">${date}</div>
+                            <div class="space-y-1">
+                    `;
+
+                    groupedChats[date].forEach(chat => {
+                        resultsHTML += `
+                            <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
+                                <span class="text-sm text-gray-900">${chat.title}</span>
+                            </div>
+                        `;
+                    });
+
+                    resultsHTML += `
+                            </div>
+                        </div>
+                    `;
+                });
+
+                searchResults.innerHTML = resultsHTML;
+            }
+
+            lucide.createIcons();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+K or Cmd+K to open search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                openSearchDialog();
+            }
+
+            // Escape to close search
+            if (e.key === 'Escape' && !searchDialog.classList.contains('hidden')) {
+                closeSearchDialog();
+            }
+        });
+
+        // Close search when clicking outside
+        searchDialog?.addEventListener('click', function(e) {
+            if (e.target === searchDialog) {
+                closeSearchDialog();
+            }
+        });
+
         // Make functions globally available
         window.openModal = openModal;
         window.closeModal = closeModal;
         window.loadChatPage = loadChatPage;
         window.loadToolPage = loadToolPage;
+        window.initializeUserAvatar = initializeUserAvatar;
+        window.openSearchDialog = openSearchDialog;
+        window.closeSearchDialog = closeSearchDialog;
     </script>
 </body>
 </html>

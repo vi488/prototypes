@@ -22,79 +22,57 @@
         <!-- Header -->
         <div class="mb-8">
             <h1 class="text-2xl font-semibold text-gray-800 mb-2">Nutrition Tools</h1>
-            <p class="text-gray-600">Track your meals, monitor calories, and achieve your nutrition goals</p>
+            <p class="text-gray-600">Log your meals and track fasting sessions to monitor your nutrition</p>
         </div>
-        
+
         <!-- Today's Progress -->
         <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-6 mb-8 border border-green-200">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Today's Nutrition</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white rounded-lg p-4 text-center">
                     <div class="text-2xl font-bold text-nuri-primary">1,247</div>
-                    <div class="text-sm text-gray-600">Calories</div>
-                    <div class="text-xs text-gray-500">of 2,000 goal</div>
+                    <div class="text-sm text-gray-600">Calories Today</div>
+                    <div class="text-xs text-gray-500">from logged meals</div>
                 </div>
                 <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-blue-500">89g</div>
-                    <div class="text-sm text-gray-600">Carbs</div>
-                    <div class="text-xs text-gray-500">45% of intake</div>
-                </div>
-                <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-red-500">67g</div>
-                    <div class="text-sm text-gray-600">Protein</div>
-                    <div class="text-xs text-gray-500">34% of intake</div>
-                </div>
-                <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-yellow-500">45g</div>
-                    <div class="text-sm text-gray-600">Fat</div>
-                    <div class="text-xs text-gray-500">21% of intake</div>
+                    <div class="text-2xl font-bold text-blue-500">14h</div>
+                    <div class="text-sm text-gray-600">Fasting Time</div>
+                    <div class="text-xs text-gray-500">current session</div>
                 </div>
             </div>
         </div>
         
         <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <!-- Log Meal -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Meal Logger -->
             <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
                 <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="plus" class="w-6 h-6 text-orange-600"></i>
+                    <i data-lucide="utensils" class="w-6 h-6 text-orange-600"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Log Meal</h3>
-                <p class="text-gray-600 text-sm mb-4">Add breakfast, lunch, dinner, or snacks</p>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Meal Logger</h3>
+                <p class="text-gray-600 text-sm mb-4">Log meals by type with ingredients and symptoms tracking</p>
                 <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary transition-colors">
-                    Add Food
+                    Log Meal
                 </button>
             </div>
-            
-            <!-- Scan Barcode -->
+
+            <!-- Fasting Timer -->
             <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
                 <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="scan" class="w-6 h-6 text-blue-600"></i>
+                    <i data-lucide="clock" class="w-6 h-6 text-blue-600"></i>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Scan Barcode</h3>
-                <p class="text-gray-600 text-sm mb-4">Quickly log packaged foods</p>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Fasting Timer</h3>
+                <p class="text-gray-600 text-sm mb-4">Start and track intermittent fasting sessions</p>
                 <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors">
-                    Scan Now
-                </button>
-            </div>
-            
-            <!-- Water Intake -->
-            <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="droplets" class="w-6 h-6 text-cyan-600"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Water Intake</h3>
-                <p class="text-gray-600 text-sm mb-4">Track your daily hydration</p>
-                <button class="w-full bg-cyan-500 text-white py-2 rounded-lg hover:bg-cyan-600 transition-colors">
-                    Add Water
+                    Start Fasting
                 </button>
             </div>
         </div>
         
-        <!-- Today's Meals -->
+        <!-- Recent Meals -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Today's Meals</h2>
-            
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Recent Meals</h2>
+
             <!-- Breakfast -->
             <div class="mb-6">
                 <div class="flex items-center justify-between mb-3">
@@ -109,7 +87,7 @@
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-800">Oatmeal with berries</p>
-                                <p class="text-xs text-gray-600">1 cup</p>
+                                <p class="text-xs text-gray-600">Today, 8:30 AM</p>
                             </div>
                         </div>
                         <span class="text-sm font-medium text-gray-800">287 cal</span>
@@ -121,79 +99,76 @@
                             </div>
                             <div>
                                 <p class="text-sm font-medium text-gray-800">Coffee with milk</p>
-                                <p class="text-xs text-gray-600">1 cup</p>
+                                <p class="text-xs text-gray-600">Today, 8:45 AM</p>
                             </div>
                         </div>
                         <span class="text-sm font-medium text-gray-800">100 cal</span>
                     </div>
                 </div>
             </div>
-            
-            <!-- Lunch -->
-            <div class="mb-6">
+        </div>
+
+        <!-- Current Fasting Session -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Current Fasting Session</h2>
+
+            <!-- Active Fasting Display -->
+            <div class="bg-blue-50 rounded-lg p-4 mb-4">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-medium text-gray-800">🌞 Lunch</h3>
-                    <span class="text-sm text-gray-600">560 calories</span>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="clock" class="w-5 h-5 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-800">16:8 Intermittent Fasting</h3>
+                            <p class="text-sm text-gray-600">Started yesterday at 8:00 PM</p>
+                        </div>
+                    </div>
+                    <span class="text-lg font-bold text-blue-600">14h 23m</span>
                 </div>
+
+                <!-- Progress Bar -->
+                <div class="mb-3">
+                    <div class="flex items-center justify-between text-sm text-gray-600 mb-1">
+                        <span>Progress</span>
+                        <span>14h 23m / 16h</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-500 h-2 rounded-full" style="width: 89%"></div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-3">
+                    <button class="flex-1 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors text-sm">
+                        End Fast
+                    </button>
+                    <button class="flex-1 bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600 transition-colors text-sm">
+                        Pause
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Fasting History -->
+            <div class="space-y-3">
+                <h3 class="font-medium text-gray-800">Recent Fasting Sessions</h3>
                 <div class="space-y-2">
                     <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                                <i data-lucide="salad" class="w-4 h-4 text-green-600"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-800">Grilled chicken salad</p>
-                                <p class="text-xs text-gray-600">1 large bowl</p>
-                            </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">16:8 Fast</p>
+                            <p class="text-xs text-gray-600">Yesterday • Completed</p>
                         </div>
-                        <span class="text-sm font-medium text-gray-800">560 cal</span>
+                        <span class="text-sm font-medium text-green-600">16h 45m</span>
+                    </div>
+                    <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">14:10 Fast</p>
+                            <p class="text-xs text-gray-600">2 days ago • Completed</p>
+                        </div>
+                        <span class="text-sm font-medium text-green-600">14h 30m</span>
                     </div>
                 </div>
             </div>
-            
-            <!-- Add Meal Buttons -->
-            <div class="grid grid-cols-2 gap-3">
-                <button class="py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-nuri-primary hover:text-nuri-primary transition-colors text-sm">
-                    + Add Dinner
-                </button>
-                <button class="py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-nuri-primary hover:text-nuri-primary transition-colors text-sm">
-                    + Add Snack
-                </button>
-            </div>
-        </div>
-        
-        <!-- Water Intake -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">💧 Water Intake</h2>
-            <div class="flex items-center justify-between mb-4">
-                <span class="text-gray-600">Today's Progress</span>
-                <span class="text-sm text-gray-600">6 / 8 glasses</span>
-            </div>
-            <div class="flex space-x-2 mb-4">
-                <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
-                <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
-                <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
-                <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
-                <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
-                <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
-                <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
-                <div class="w-8 h-8 bg-gray-200 rounded-full"></div>
-            </div>
-            <button class="w-full bg-cyan-500 text-white py-2 rounded-lg hover:bg-cyan-600 transition-colors">
-                + Add Glass of Water
-            </button>
-        </div>
-        
-        <!-- Nutrition Tips -->
-        <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-xl p-6 border border-orange-200">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">🥗 Nutrition Tip</h2>
-            <p class="text-gray-700 mb-4">
-                <strong>Eat the rainbow:</strong> Include colorful fruits and vegetables in your meals. 
-                Different colors provide different nutrients and antioxidants that support overall health.
-            </p>
-            <button class="bg-nuri-primary text-white px-4 py-2 rounded-lg hover:bg-nuri-primary transition-colors text-sm">
-                Learn More
-            </button>
         </div>
     </div>
     
