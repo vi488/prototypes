@@ -90,7 +90,60 @@
         
         /* Sidebar animations */
         .sidebar-transition {
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+        }
+
+        /* Collapsed sidebar styles */
+        .sidebar-collapsed {
+            width: 64px !important;
+        }
+
+        .sidebar-collapsed .sidebar-content {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sidebar-collapsed .sidebar-icons {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sidebar-icons {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Ensure logo is always clickable in collapsed state */
+        .sidebar-collapsed .sidebar-icons #logoToggle {
+            pointer-events: auto;
+        }
+
+        .sidebar-content {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Logo hover effect */
+        .logo-hover-toggle {
+            transition: opacity 0.2s ease-in-out;
+            pointer-events: none; /* Prevent hover overlay from blocking clicks */
+        }
+
+        /* Main content transition */
+        .main-content-transition {
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        /* Desktop collapsed state adjustments */
+        @media (min-width: 1024px) {
+            .sidebar-collapsed + .main-content-transition {
+                margin-left: 64px;
+            }
+        }
+
+        /* Main content transition for sidebar collapse */
+        .main-content-transition {
+            transition: margin-left 0.3s ease-in-out;
         }
         
         /* Message animations */
@@ -254,29 +307,44 @@
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
         <div id="sidebar" class="sidebar-transition fixed inset-y-0 left-0 z-50 w-80 bg-gray-50 border-r border-gray-200 transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0">
-            <!-- Sidebar Header -->
-            <div class="flex items-center justify-between p-4 border-b border-gray-200">
-                <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 flex items-center justify-center">
-                        <svg width="24" height="30" viewBox="0 0 95 121" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
-                        </svg>
+            <!-- Expanded Sidebar Content -->
+            <div class="sidebar-content">
+                <!-- Sidebar Header -->
+                <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                    <div class="flex items-center space-x-2">
+                        <div class="relative group">
+                            <div class="w-8 h-8 flex items-center justify-center cursor-pointer" id="logoToggleExpanded">
+                                <svg width="24" height="30" viewBox="0 0 95 121" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
+                                </svg>
+                            </div>
+                            <!-- Toggle icon on hover for expanded state -->
+                            <div class="absolute inset-0 flex items-center justify-center bg-gray-50 rounded-md opacity-0 group-hover:opacity-100 logo-hover-toggle">
+                                <i data-lucide="panel-left-close" class="w-5 h-5 text-gray-600"></i>
+                            </div>
+                        </div>
+                        <span class="text-lg font-semibold text-nuri-primary-dark">Nuri</span>
                     </div>
-                    <span class="text-lg font-semibold text-nuri-primary-dark">Nuri</span>
+                    <div class="flex items-center space-x-1">
+                        <!-- Desktop sidebar close button -->
+                        <button id="sidebarCollapseDesktop" class="hidden lg:block p-1 rounded-md hover:bg-gray-200 text-gray-600 hover:text-gray-800" title="Close sidebar">
+                            <i data-lucide="panel-left-close" class="w-5 h-5"></i>
+                        </button>
+                        <!-- Mobile sidebar close button -->
+                        <button id="sidebarClose" class="lg:hidden p-1 rounded-md hover:bg-gray-200">
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                        </button>
+                    </div>
                 </div>
-                <button id="sidebarClose" class="lg:hidden p-1 rounded-md hover:bg-gray-200">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
 
             <!-- Top Group: New Chat & Search -->
             <div class="p-4 border-b border-gray-200">
                 <div class="space-y-1">
-                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg bg-nuri-bg-medium text-nuri-primary-dark text-left nav-button">
+                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left nav-button">
                         <i data-lucide="plus" class="w-4 h-4"></i>
                         <span class="text-sm">New Chat</span>
                     </button>
-                    <button onclick="openSearchDialog()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                    <button onclick="openSearchDialog()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left">
                         <i data-lucide="search" class="w-4 h-4"></i>
                         <span class="text-sm">Search chats</span>
                     </button>
@@ -286,15 +354,15 @@
             <!-- Tools Group -->
             <div class="px-4 pb-4 border-b border-gray-200">
                 <div class="space-y-1">
-                    <button id="wellness-tool" onclick="loadToolPage('wellness')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left tool-button">
+                    <button id="wellness-tool" onclick="loadToolPage('wellness')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left tool-button">
                         <i data-lucide="heart" class="w-4 h-4"></i>
                         <span class="text-sm">Wellness Tools</span>
                     </button>
-                    <button id="nutrition-tool" onclick="loadToolPage('nutrition')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left tool-button">
+                    <button id="nutrition-tool" onclick="loadToolPage('nutrition')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left tool-button">
                         <i data-lucide="apple" class="w-4 h-4"></i>
                         <span class="text-sm">Nutrition Tools</span>
                     </button>
-                    <button id="exercise-tool" onclick="loadToolPage('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left tool-button">
+                    <button id="exercise-tool" onclick="loadToolPage('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left tool-button">
                         <i data-lucide="dumbbell" class="w-4 h-4"></i>
                         <span class="text-sm">Exercise Tools</span>
                     </button>
@@ -305,19 +373,19 @@
             <div class="px-4 pb-4">
                 <h3 class="text-sm font-medium text-gray-700 mb-3">Chats</h3>
                 <div class="space-y-1">
-                    <div class="flex items-center space-x-3 p-2 rounded-lg bg-nuri-bg-medium text-nuri-primary-dark cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-600 cursor-pointer">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
                         <span class="text-sm truncate">Nutrition planning help</span>
                     </div>
-                    <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-600 cursor-pointer">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
                         <span class="text-sm truncate">Mood tracking insights</span>
                     </div>
-                    <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-600 cursor-pointer">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
                         <span class="text-sm truncate">Fasting schedule setup</span>
                     </div>
-                    <div class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-600 cursor-pointer">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
                         <span class="text-sm truncate">Exercise routine planning</span>
                     </div>
@@ -327,7 +395,7 @@
             <!-- Sidebar Footer -->
             <div class="absolute bottom-0 left-0 right-0 p-4">
                 <div class="relative">
-                    <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 text-gray-700 text-left">
+                    <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left">
                         <div id="userAvatar" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background-color: #10a37f;">
                             JD
                         </div>
@@ -341,17 +409,59 @@
                     <!-- Profile Dropdown Menu -->
                     <div id="profileDropdown" class="hidden absolute bottom-full left-0 right-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg">
                         <div class="py-1">
-                            <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 text-gray-700">
+                            <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700">
                                 <i data-lucide="settings" class="w-4 h-4"></i>
                                 <span class="text-sm">Settings</span>
                             </button>
                             <div class="border-t border-gray-100"></div>
-                            <button class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 text-gray-700">
+                            <button class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700">
                                 <i data-lucide="log-out" class="w-4 h-4"></i>
                                 <span class="text-sm">Log out</span>
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Collapsed Sidebar Icons -->
+            <div class="sidebar-icons absolute inset-0 flex flex-col">
+                <!-- Logo with hover toggle -->
+                <div class="p-4 border-b border-gray-200 flex justify-center">
+                    <div class="relative group">
+                        <div class="w-8 h-8 flex items-center justify-center cursor-pointer" id="logoToggle">
+                            <svg width="24" height="30" viewBox="0 0 95 121" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M47.5222 0.280029C73.484 0.280029 94.5275 21.332 94.5496 47.3259V73.2332C94.5496 99.2273 73.506 120.28 47.5222 120.28C21.5387 120.28 0.494873 99.2054 0.494873 73.2332V47.3259C0.495128 21.3322 21.5389 0.280301 47.5222 0.280029ZM81.5144 47.3259C81.5141 28.0156 65.345 12.4276 45.8464 13.3855C27.6102 14.2784 13.5964 30.041 13.5964 48.3064V73.2332C13.5964 82.7033 17.4912 91.2596 23.7585 97.4207C30.57 104.126 42.104 99.2492 42.1042 89.6921V83.3572C42.1042 80.9407 40.3193 78.8719 37.9255 78.5671C25.9132 77.0866 18.4492 67.6167 19.6677 54.2498C19.8201 52.4864 21.2344 51.0712 22.9753 50.9187C31.6572 50.128 38.705 53.0041 42.9871 58.4021C44.2709 60.0205 45.4565 62.1451 47.5222 62.1453C49.6516 62.1452 50.8531 59.9257 52.1912 58.2693C56.4862 52.9527 63.489 50.1341 72.0916 50.9187C73.8325 51.0929 75.2478 52.5081 75.4001 54.2498C76.6187 67.6167 69.132 77.0867 57.1414 78.5671C54.7477 78.872 52.9637 80.9407 52.9636 83.3572V89.6921C52.9639 99.2492 64.4752 104.126 71.3083 97.4207C77.5758 91.2596 81.4714 82.7034 81.4714 73.2332H81.5144V47.3259ZM44.9343 25.5339C45.7791 23.0692 49.2653 23.0692 50.1101 25.5339C51.958 30.925 55.8817 35.3557 61.0095 37.8425L61.5554 38.1072C63.9465 39.2672 63.4953 42.8014 60.8894 43.324L59.9167 43.5193C55.496 44.4059 51.6264 47.054 49.2 50.8542C48.4175 52.0797 46.6279 52.0797 45.8455 50.8542C43.4191 47.054 39.5494 44.4059 35.1287 43.5193L34.155 43.324C31.549 42.8013 31.0985 39.267 33.49 38.1072L34.0359 37.8425C39.1636 35.3557 43.0864 30.9249 44.9343 25.5339Z" fill="#00AF9F"/>
+                            </svg>
+                        </div>
+                        <!-- Toggle icon on hover -->
+                        <div class="absolute inset-0 flex items-center justify-center bg-gray-50 rounded-md opacity-0 group-hover:opacity-100 logo-hover-toggle">
+                            <i data-lucide="panel-left-open" class="w-5 h-5 text-gray-600"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Icon buttons -->
+                <div class="p-2 border-b border-gray-200 space-y-1">
+                    <button onclick="loadChatPage()" class="w-full p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 flex justify-center" title="New Chat">
+                        <i data-lucide="plus" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="openSearchDialog()" class="w-full p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 flex justify-center" title="Search chats">
+                        <i data-lucide="search" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <!-- Tool icons -->
+                <div class="p-2 space-y-1">
+                    <button onclick="loadToolPage('wellness')" class="w-full p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 flex justify-center" title="Wellness Tools">
+                        <i data-lucide="heart" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('nutrition')" class="w-full p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 flex justify-center" title="Nutrition Tools">
+                        <i data-lucide="apple" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('exercise')" class="w-full p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 flex justify-center" title="Exercise Tools">
+                        <i data-lucide="dumbbell" class="w-5 h-5"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -360,7 +470,7 @@
         <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col lg:ml-0">
+        <div class="flex-1 flex flex-col lg:ml-0 main-content-transition">
             <!-- Mobile Header -->
             <div class="lg:hidden flex items-center justify-between p-4 border-b border-gray-200 bg-white">
                 <button id="sidebarToggle" class="p-2 rounded-md hover:bg-gray-100">
@@ -652,9 +762,65 @@
             document.body.classList.remove('overflow-hidden');
         }
 
+        // Desktop sidebar collapse functionality
+        let sidebarCollapsed = false;
+        const sidebarCollapseDesktop = document.getElementById('sidebarCollapseDesktop');
+        const mainContent = document.querySelector('.main-content-transition');
+
+        function toggleDesktopSidebar() {
+            if (sidebarCollapsed) {
+                // Expand sidebar
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.remove('lg:-translate-x-full');
+                if (mainContent) {
+                    mainContent.classList.remove('lg:ml-0');
+                }
+                sidebarCollapseDesktop.innerHTML = '<i data-lucide="panel-left-close" class="w-5 h-5"></i>';
+                sidebarCollapseDesktop.title = 'Close sidebar';
+                sidebarCollapsed = false;
+            } else {
+                // Collapse sidebar
+                sidebar.classList.add('lg:-translate-x-full');
+                if (mainContent) {
+                    mainContent.classList.add('lg:ml-0');
+                }
+                sidebarCollapseDesktop.innerHTML = '<i data-lucide="panel-left-open" class="w-5 h-5"></i>';
+                sidebarCollapseDesktop.title = 'Open sidebar';
+                sidebarCollapsed = true;
+            }
+            // Re-initialize Lucide icons
+            lucide.createIcons();
+        }
+
+        // Desktop sidebar collapse functionality
+        let isDesktopSidebarCollapsed = false;
+
+        function toggleDesktopSidebar() {
+            isDesktopSidebarCollapsed = !isDesktopSidebarCollapsed;
+
+            if (isDesktopSidebarCollapsed) {
+                sidebar.classList.add('sidebar-collapsed');
+            } else {
+                sidebar.classList.remove('sidebar-collapsed');
+            }
+
+            // Re-initialize Lucide icons after DOM changes
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
+        }
+
         sidebarToggle?.addEventListener('click', openSidebar);
         sidebarClose?.addEventListener('click', closeSidebar);
         sidebarOverlay?.addEventListener('click', closeSidebar);
+        sidebarCollapseDesktop?.addEventListener('click', toggleDesktopSidebar);
+
+        // Logo toggle functionality for both states
+        const logoToggleExpanded = document.getElementById('logoToggleExpanded');
+        const logoToggleCollapsed = document.getElementById('logoToggle');
+
+        logoToggleExpanded?.addEventListener('click', toggleDesktopSidebar);
+        logoToggleCollapsed?.addEventListener('click', toggleDesktopSidebar);
 
         // Page management
         let currentPage = 'chat';
@@ -700,8 +866,107 @@
             // Update mobile title
             mobileTitle.textContent = 'Nuri Assistant';
 
-            // Update navigation highlighting
-            updateNavigationHighlight('chat');
+            // Clear all navigation highlighting (New Chat should never be highlighted)
+            updateNavigationHighlight('none');
+
+            // Close sidebar on mobile when item is selected
+            if (window.innerWidth < 1024) {
+                closeSidebar();
+            }
+        }
+
+        // Sample conversation data
+        const sampleConversations = {
+            'Nutrition planning help': [
+                { message: "Hi Nuri! I need help planning my meals for the week. I'm trying to eat healthier but I'm not sure where to start.", isUser: true },
+                { message: "I'd be happy to help you plan nutritious meals! Let me start by asking a few questions to personalize your meal plan. What are your main health goals right now?", isUser: false },
+                { message: "I want to lose about 10 pounds and have more energy throughout the day. I also have a pretty busy schedule, so I need something simple.", isUser: true },
+                { message: "Perfect! For weight loss and sustained energy, I recommend focusing on balanced meals with lean proteins, complex carbs, and healthy fats. Here's a simple weekly plan:\n\n**Breakfast ideas:**\n• Greek yogurt with berries and nuts\n• Overnight oats with chia seeds\n• Veggie omelet with whole grain toast\n\n**Lunch/Dinner:**\n• Grilled chicken with quinoa and roasted vegetables\n• Salmon with sweet potato and steamed broccoli\n• Turkey and avocado wrap with mixed greens\n\nWould you like me to create a detailed shopping list for these meals?", isUser: false },
+                { message: "Yes, that would be amazing! And can you suggest some healthy snacks too?", isUser: true },
+                { message: "Absolutely! Here are some energy-boosting snacks:\n\n**Quick & Healthy Snacks:**\n• Apple slices with almond butter\n• Hummus with carrot sticks\n• Mixed nuts and seeds\n• Greek yogurt with a drizzle of honey\n• Hard-boiled eggs\n\nI'll prepare a complete shopping list organized by food categories. These snacks will help maintain your energy levels between meals while supporting your weight loss goals.", isUser: false }
+            ],
+            'Mood tracking insights': [
+                { message: "I've been feeling pretty stressed lately and my mood has been all over the place. Can you help me understand what might be affecting it?", isUser: true },
+                { message: "I'm sorry to hear you're feeling stressed. Mood fluctuations are completely normal, and there are many factors that can influence how we feel. Let's explore some patterns together. Can you tell me about your sleep schedule lately?", isUser: false },
+                { message: "My sleep has been terrible. I've been staying up late working and then I can't fall asleep because my mind is racing.", isUser: true },
+                { message: "Sleep quality has a huge impact on mood and stress levels. When we don't get enough restorative sleep, our emotional regulation suffers. Here are some strategies that can help:\n\n**Sleep Hygiene Tips:**\n• Set a consistent bedtime routine\n• Avoid screens 1 hour before bed\n• Try relaxation techniques like deep breathing\n• Keep your bedroom cool and dark\n\n**For Racing Thoughts:**\n• Keep a journal by your bed to write down worries\n• Practice the 4-7-8 breathing technique\n• Try progressive muscle relaxation\n\nHow does your diet and exercise routine look? These also significantly impact mood.", isUser: false },
+                { message: "I've been eating a lot of takeout and haven't exercised in weeks. I know I should but I just feel too tired and overwhelmed.", isUser: true },
+                { message: "That's a very common cycle - stress leads to poor sleep and eating habits, which then increases stress. Let's break this gently:\n\n**Small Steps to Start:**\n• 10-minute walks during lunch breaks\n• Prepare simple, nutritious meals (even just adding a salad to takeout helps)\n• Set a phone alarm for bedtime routine\n\n**Mood Tracking Suggestion:**\nI recommend tracking your mood, sleep, food, and activity for a week. This will help us identify patterns and triggers. Would you like me to suggest a simple tracking method?", isUser: false }
+            ],
+            'Fasting schedule setup': [
+                { message: "I'm interested in trying intermittent fasting but I'm not sure how to start safely. Can you help me set up a schedule?", isUser: true },
+                { message: "Great choice! Intermittent fasting can have wonderful health benefits when done properly. Let's start with some basics. Have you done any form of fasting before, and do you have any medical conditions I should know about?", isUser: false },
+                { message: "I've never done fasting before, and I'm generally healthy. I just want to try it for weight management and the health benefits I've heard about.", isUser: true },
+                { message: "Perfect! For beginners, I recommend starting with the 16:8 method - it's the most sustainable and research-backed approach.\n\n**16:8 Method:**\n• Fast for 16 hours, eat within 8 hours\n• Example: Eat between 12 PM - 8 PM, fast from 8 PM - 12 PM next day\n• You can drink water, black coffee, or plain tea during fasting\n\n**Getting Started:**\n• Week 1-2: Try 12:12 (12 hour fast) to ease in\n• Week 3+: Progress to 16:8\n• Listen to your body and adjust as needed\n\nWhat's your current eating schedule like? This will help me suggest the best fasting window for your lifestyle.", isUser: false },
+                { message: "I usually eat breakfast around 7 AM, lunch at noon, and dinner around 7 PM. I also tend to snack in the evening while watching TV.", isUser: true },
+                { message: "Based on your current schedule, here are two options:\n\n**Option 1: Skip Breakfast**\n• Eating window: 12 PM - 8 PM\n• Keep your lunch and dinner times\n• Eliminates evening snacking naturally\n\n**Option 2: Early Eating**\n• Eating window: 10 AM - 6 PM\n• Early breakfast, normal lunch, earlier dinner\n• Better for morning energy needs\n\n**Tips for Success:**\n• Stay hydrated during fasting hours\n• Keep busy during typical snack times\n• Plan nutritious meals during eating windows\n• Start gradually - don't rush the process\n\nWhich option feels more doable for your lifestyle?", isUser: false }
+            ],
+            'Exercise routine planning': [
+                { message: "I want to start working out regularly but I'm a complete beginner. Can you help me create a routine that won't overwhelm me?", isUser: true },
+                { message: "Absolutely! Starting a fitness journey is exciting, and I love that you want to begin gradually. That's the key to long-term success. Tell me about your current activity level and any physical limitations or preferences you have.", isUser: false },
+                { message: "I'm pretty sedentary right now - I work at a desk all day. No major physical limitations, but I get winded easily. I prefer working out at home if possible.", isUser: true },
+                { message: "Perfect! Home workouts are convenient and effective. Let's start with a beginner-friendly routine that builds gradually:\n\n**Week 1-2: Foundation Building**\n• 3 days per week, 15-20 minutes\n• Focus: Basic movements and building habit\n\n**Sample Beginner Routine:**\n• 5-minute warm-up (marching in place, arm circles)\n• 10 minutes: Bodyweight exercises (modified push-ups, squats, planks)\n• 5-minute cool-down (stretching)\n\n**Progression Plan:**\n• Week 3-4: Increase to 25 minutes\n• Week 5-6: Add 4th workout day\n• Week 7+: Introduce new exercises\n\nWould you like me to detail specific exercises for your first week?", isUser: false },
+                { message: "Yes, please! And how do I know if I'm pushing myself too hard or not hard enough?", isUser: true },
+                { message: "Great question! Here's your detailed first week plan:\n\n**Beginner Workout (3x per week):**\n\n**Warm-up (5 min):**\n• Marching in place - 2 minutes\n• Arm circles - 30 seconds each direction\n• Gentle stretches - 2 minutes\n\n**Main Workout (10 min):**\n• Wall push-ups - 2 sets of 5-8 reps\n• Chair-assisted squats - 2 sets of 8-10 reps\n• Modified plank (knees down) - 2 sets of 15-20 seconds\n• Standing marches - 2 sets of 20 (10 each leg)\n\n**Cool-down (5 min):**\n• Deep breathing and stretching\n\n**Intensity Guidelines:**\n• You should be able to hold a conversation\n• Slight breathlessness is good, gasping is too much\n• Muscle fatigue is normal, sharp pain is not\n• Rate of Perceived Exertion: Aim for 5-6 out of 10\n\nHow does this sound for getting started?", isUser: false }
+            ]
+        };
+
+        function selectChat(chatElement) {
+            // Clear all highlights (tools and chats) - this ensures only one item is selected
+            updateNavigationHighlight('none');
+
+            // Highlight selected chat
+            chatElement.classList.add('bg-nuri-bg-medium', 'text-nuri-primary-dark');
+            chatElement.classList.remove('text-gray-600');
+
+            // Get chat title from the element
+            const chatTitle = chatElement.querySelector('span').textContent.trim();
+
+            // Load conversation history for this chat
+            loadConversationHistory(chatTitle);
+
+            // Close sidebar on mobile when chat is selected
+            if (window.innerWidth < 1024) {
+                closeSidebar();
+            }
+        }
+
+        function loadConversationHistory(chatTitle) {
+            // First, ensure we're on the chat page (not tool page)
+            currentPage = 'chat';
+            chatPage.classList.remove('hidden');
+            toolPage.classList.add('hidden');
+
+            // Switch to conversation state
+            isInitialState = false;
+            initialState.classList.add('hidden');
+            conversationState.classList.remove('hidden');
+            conversationInput.classList.remove('hidden');
+
+            // Handle mobile inputs
+            if (mobileInitialInput) {
+                mobileInitialInput.classList.add('hidden');
+            }
+            if (mobileConversationInput) {
+                mobileConversationInput.classList.remove('hidden');
+            }
+
+            // Clear existing messages
+            messagesContainer.innerHTML = '';
+
+            // Load conversation data
+            const conversation = sampleConversations[chatTitle];
+            if (conversation) {
+                // Add each message with a slight delay for better UX
+                conversation.forEach((msg, index) => {
+                    setTimeout(() => {
+                        addMessage(msg.message, msg.isUser);
+                    }, index * 100); // 100ms delay between messages
+                });
+            }
+
+            // Update mobile title
+            mobileTitle.textContent = chatTitle;
         }
 
         function updateNavigationHighlight(activeType) {
@@ -712,20 +977,22 @@
                 btn.classList.add('text-gray-700');
             });
 
-            // Clear new chat highlight
+            // Clear all chat highlights
+            const chatItems = document.querySelectorAll('.px-4.pb-4 .space-y-1 > div');
+            chatItems.forEach(item => {
+                item.classList.remove('bg-nuri-bg-medium', 'text-nuri-primary-dark');
+                item.classList.add('text-gray-600');
+            });
+
+            // New Chat button should never be highlighted (always stays in normal state)
             const newChatBtn = document.getElementById('new-chat');
             if (newChatBtn) {
                 newChatBtn.classList.remove('bg-nuri-bg-medium', 'text-nuri-primary-dark');
                 newChatBtn.classList.add('text-gray-700');
             }
 
-            // Highlight active item
-            if (activeType === 'chat') {
-                if (newChatBtn) {
-                    newChatBtn.classList.add('bg-nuri-bg-medium', 'text-nuri-primary-dark');
-                    newChatBtn.classList.remove('text-gray-700');
-                }
-            } else {
+            // Highlight active item (only tools, never New Chat)
+            if (activeType !== 'chat') {
                 const activeBtn = document.getElementById(activeType + '-tool');
                 if (activeBtn) {
                     activeBtn.classList.add('bg-nuri-bg-medium', 'text-nuri-primary-dark');
@@ -761,6 +1028,11 @@
 
                 // Update navigation highlighting
                 updateNavigationHighlight(toolType);
+
+                // Close sidebar on mobile when item is selected
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
             }
         }
 
@@ -806,15 +1078,46 @@
             }, 300);
         }
 
+        // Function to convert basic markdown to HTML
+        function markdownToHtml(text) {
+            // Convert line breaks to <br> tags
+            let html = text.replace(/\n/g, '<br>');
+
+            // Convert **bold** to <strong>
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            // Convert bullet points (• or -) to proper list items
+            html = html.replace(/^[•\-]\s+(.+)$/gm, '<li>$1</li>');
+
+            // Wrap consecutive list items in <ul> tags
+            html = html.replace(/(<li>.*<\/li>)(\s*<br>\s*<li>.*<\/li>)*/g, function(match) {
+                // Remove <br> tags between list items
+                const cleanMatch = match.replace(/<br>\s*(?=<li>)/g, '');
+                return '<ul class="list-disc list-inside space-y-1 my-2">' + cleanMatch + '</ul>';
+            });
+
+            // Convert section headers (text followed by colon and line break)
+            html = html.replace(/\*\*([^*]+):\*\*<br>/g, '<div class="font-semibold text-nuri-primary-dark mt-3 mb-1">$1:</div>');
+
+            // Clean up any remaining <br> tags that are now unnecessary
+            html = html.replace(/<br>\s*<ul>/g, '<ul>');
+            html = html.replace(/<\/ul>\s*<br>/g, '</ul>');
+
+            return html;
+        }
+
         function addMessage(content, isUser = false) {
             const messageDiv = document.createElement('div');
             messageDiv.className = isUser ? 'flex justify-end' : 'flex justify-start';
+
+            // Convert markdown to HTML for better formatting
+            const formattedContent = isUser ? content : markdownToHtml(content);
 
             if (isUser) {
                 messageDiv.innerHTML = `
                     <div class="flex items-start space-x-3 max-w-2xl">
                         <div class="px-4 py-3 rounded-2xl rounded-tr-md message-animate" style="background-color: #e9e9e980; color: #1f2937;">
-                            <p>${content}</p>
+                            <div>${formattedContent}</div>
                         </div>
                         <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
                             <i data-lucide="user" class="w-4 h-4 text-white"></i>
@@ -828,7 +1131,7 @@
                             <i data-lucide="bot" class="w-4 h-4 text-gray-600"></i>
                         </div>
                         <div class="bg-nuri-bg-light text-nuri-primary-dark px-4 py-3 rounded-2xl rounded-tl-md message-animate">
-                            <p>${content}</p>
+                            <div>${formattedContent}</div>
                         </div>
                     </div>
                 `;
