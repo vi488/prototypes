@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finu - Investment Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        :root {
+            --finu-primary: #497AFF;
+            --finu-primary-hover: #3B5FE6;
+        }
+        .bg-finu-primary { background-color: var(--finu-primary); }
+        .text-finu-primary { color: var(--finu-primary); }
+        .border-finu-primary { border-color: var(--finu-primary); }
+        .hover\:bg-finu-primary:hover { background-color: var(--finu-primary-hover); }
+
+        .modal-enter {
+            animation: modalEnter 0.3s ease-out;
+        }
+
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Modal Overlay -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <!-- Modal Content -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden modal-enter">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-finu-primary rounded-full flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800">Investment Tracker</h2>
+                        <p class="text-sm text-gray-600">Monitor portfolio performance and investment goals</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i data-lucide="x" class="w-5 h-5 text-gray-500"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="flex h-[calc(90vh-180px)]">
+                <!-- Left Panel - Quick Add Investment -->
+                <div class="w-1/3 p-6 border-r border-gray-200 bg-gray-50">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Add Investment</h3>
+
+                    <!-- Investment Type Selection -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Investment Type</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button class="flex items-center space-x-2 p-3 border border-gray-400 bg-gray-100 text-gray-700 rounded-lg investment-type selected">
+                                <i data-lucide="trending-up" class="w-4 h-4"></i>
+                                <span class="text-sm">Stocks</span>
+                            </button>
+                            <button class="flex items-center space-x-2 p-3 border border-gray-200 text-gray-700 rounded-lg hover:border-gray-300 investment-type">
+                                <i data-lucide="building" class="w-4 h-4"></i>
+                                <span class="text-sm">Bonds</span>
+                            </button>
+                            <button class="flex items-center space-x-2 p-3 border border-gray-200 text-gray-700 rounded-lg hover:border-gray-300 investment-type">
+                                <i data-lucide="pie-chart" class="w-4 h-4"></i>
+                                <span class="text-sm">ETF</span>
+                            </button>
+                            <button class="flex items-center space-x-2 p-3 border border-gray-200 text-gray-700 rounded-lg hover:border-gray-300 investment-type">
+                                <i data-lucide="bitcoin" class="w-4 h-4"></i>
+                                <span class="text-sm">Crypto</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Amount -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Investment Amount</label>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-600">$</span>
+                            <input type="number" value="1000" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-finu-primary focus:border-transparent">
+                        </div>
+                    </div>
+
+                    <!-- Risk Level -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Risk Level</label>
+                        <div class="space-y-2">
+                            <button class="w-full flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-finu-primary hover:bg-finu-primary hover:bg-opacity-5 risk-btn">
+                                <span class="text-sm">Conservative</span>
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-gray-200 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-gray-200 rounded-full"></div>
+                                </div>
+                            </button>
+                            <button class="w-full flex items-center justify-between p-3 border border-gray-400 bg-gray-100 rounded-lg risk-btn selected">
+                                <span class="text-sm text-gray-700">Moderate</span>
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-gray-200 rounded-full"></div>
+                                </div>
+                            </button>
+                            <button class="w-full flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-finu-primary hover:bg-finu-primary hover:bg-opacity-5 risk-btn">
+                                <span class="text-sm">Aggressive</span>
+                                <div class="flex space-x-1">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Investment Notes (Optional)</label>
+                        <textarea
+                            placeholder="Why are you making this investment?"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-finu-primary focus:border-transparent resize-none"
+                            rows="3"
+                        ></textarea>
+                    </div>
+
+                    <!-- Quick Add Button -->
+                    <button class="w-full bg-finu-primary text-white py-3 rounded-lg hover:bg-finu-primary transition-colors font-medium">
+                        <i data-lucide="plus" class="w-4 h-4 inline mr-2"></i>
+                        Add Investment
+                    </button>
+                </div>
+
+                <!-- Right Panel - Portfolio Overview -->
+                <div class="flex-1 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800">Portfolio Overview</h3>
+                        <button class="text-finu-primary hover:text-finu-primary font-medium text-sm">
+                            <i data-lucide="plus" class="w-4 h-4 inline mr-1"></i>
+                            Add Position
+                        </button>
+                    </div>
+                    
+                    <!-- Portfolio Summary -->
+                    <div class="grid grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white rounded-lg p-4 shadow-sm text-center">
+                            <div class="text-2xl font-bold text-finu-primary">$47,250</div>
+                            <div class="text-xs text-gray-600">Total Value</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm text-center">
+                            <div class="text-2xl font-bold text-green-600">+12.5%</div>
+                            <div class="text-xs text-gray-600">Total Return</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm text-center">
+                            <div class="text-2xl font-bold text-finu-primary">8</div>
+                            <div class="text-xs text-gray-600">Holdings</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-sm text-center">
+                            <div class="text-2xl font-bold text-blue-600">$2,847</div>
+                            <div class="text-xs text-gray-600">Today's Gain</div>
+                        </div>
+                    </div>
+
+                    <!-- Investment Holdings -->
+                    <div class="space-y-4">
+                        <!-- Holding 1 -->
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                        <i data-lucide="trending-up" class="w-5 h-5 text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">AAPL</h4>
+                                        <p class="text-sm text-gray-600">Apple Inc. • Stock</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-4 gap-4 text-center">
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-gray-800">50</div>
+                                    <div class="text-xs text-gray-600">Shares</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-gray-800">$175.50</div>
+                                    <div class="text-xs text-gray-600">Price</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-gray-800">$8,775</div>
+                                    <div class="text-xs text-gray-600">Value</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-green-600">+8.2%</div>
+                                    <div class="text-xs text-gray-600">Return</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Holding 2 -->
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                        <i data-lucide="pie-chart" class="w-5 h-5 text-green-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">SPY</h4>
+                                        <p class="text-sm text-gray-600">S&P 500 ETF • ETF</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-4 gap-4 text-center">
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-gray-800">25</div>
+                                    <div class="text-xs text-gray-600">Shares</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-gray-800">$445.20</div>
+                                    <div class="text-xs text-gray-600">Price</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-gray-800">$11,130</div>
+                                    <div class="text-xs text-gray-600">Value</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-green-600">+15.7%</div>
+                                    <div class="text-xs text-gray-600">Return</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Holding 3 -->
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                                        <i data-lucide="bitcoin" class="w-5 h-5 text-red-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">BTC</h4>
+                                        <p class="text-sm text-gray-600">Bitcoin • Crypto</p>
+                                    </div>
+                                </div>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-4 gap-4 text-center">
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-gray-800">0.5</div>
+                                    <div class="text-xs text-gray-600">Coins</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-gray-800">$43,250</div>
+                                    <div class="text-xs text-gray-600">Price</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-gray-800">$21,625</div>
+                                    <div class="text-xs text-gray-600">Value</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-2">
+                                    <div class="text-sm font-medium text-red-600">-3.2%</div>
+                                    <div class="text-xs text-gray-600">Return</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add Investment Button -->
+                        <button class="w-full py-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-500 hover:border-finu-primary hover:text-finu-primary transition-colors">
+                            <i data-lucide="plus" class="w-5 h-5 inline mr-2"></i>
+                            Add another investment
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex items-center justify-between p-6 border-t border-gray-200 bg-gray-50">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 text-sm text-gray-600">
+                        <i data-lucide="coins" class="w-4 h-4"></i>
+                        <span>+50 tokens earned today</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-sm text-gray-600">
+                        <i data-lucide="target" class="w-4 h-4"></i>
+                        <span>Goal: $50,000 portfolio value</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="closeModal()" class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors">
+                        Close
+                    </button>
+                    <button class="bg-finu-primary text-white px-6 py-2 rounded-lg hover:bg-finu-primary transition-colors">
+                        Save Portfolio
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function closeModal() {
+            window.parent.postMessage('closeModal', '*');
+        }
+
+        // Investment type selection
+        const investmentTypes = document.querySelectorAll('.investment-type');
+        investmentTypes.forEach(btn => {
+            btn.addEventListener('click', function() {
+                investmentTypes.forEach(b => {
+                    b.classList.remove('border-gray-400', 'bg-gray-100', 'text-gray-700', 'selected');
+                    b.classList.add('border-gray-200', 'text-gray-700');
+                });
+                this.classList.add('border-gray-400', 'bg-gray-100', 'text-gray-700', 'selected');
+                this.classList.remove('border-gray-200');
+            });
+        });
+
+        // Risk level selection
+        const riskBtns = document.querySelectorAll('.risk-btn');
+        riskBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                riskBtns.forEach(b => {
+                    b.classList.remove('border-gray-400', 'bg-gray-100', 'selected');
+                    b.classList.add('border-gray-200');
+                    b.querySelector('span').classList.remove('text-gray-700');
+                    b.querySelector('span').classList.add('text-gray-600');
+                });
+                this.classList.add('border-gray-400', 'bg-gray-100', 'selected');
+                this.classList.remove('border-gray-200');
+                this.querySelector('span').classList.add('text-gray-700');
+                this.querySelector('span').classList.remove('text-gray-600');
+            });
+        });
+    </script>
+</body>
+</html>

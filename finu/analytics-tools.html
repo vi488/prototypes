@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Tools - Finu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Finu Brand Colors */
+        :root {
+            /* Main Brand Blue Palette */
+            --finu-primary: #497AFF;           /* Main brand blue */
+            --finu-primary-hover: #3B5FE6;     /* Darker blue for hover */
+            --finu-primary-light: #6B8FFF;     /* Light blue for accents */
+            --finu-primary-lighter: #8FA8FF;   /* Lighter blue for backgrounds */
+            --finu-primary-lightest: #B3C1FF;  /* Very light blue for subtle backgrounds */
+            --finu-primary-dark: #2E4FCC;      /* Dark blue for emphasis */
+            --finu-primary-darker: #1E3399;    /* Darker blue for strong emphasis */
+
+            /* Background variations */
+            --finu-bg-light: #F8FAFF;          /* Subtle light background */
+            --finu-bg-medium: #E6EDFF;         /* Medium light blue background */
+            --finu-bg-dark: #6B8FFF;           /* Medium blue background */
+
+            /* Icon Blues - Harmonious variations */
+            --finu-icon-primary: #497AFF;      /* Primary icons */
+            --finu-icon-secondary: #5B8CFF;    /* Secondary icons */
+            --finu-icon-tertiary: #7BA3FF;     /* Tertiary icons */
+            --finu-icon-light: #9BB8FF;        /* Light icons */
+        }
+
+        /* Utility Classes */
+        .bg-finu-primary { background-color: var(--finu-primary); }
+        .bg-finu-primary-light { background-color: var(--finu-primary-light); }
+        .bg-finu-primary-lighter { background-color: var(--finu-primary-lighter); }
+        .bg-finu-primary-dark { background-color: var(--finu-primary-dark); }
+        .bg-finu-bg-light { background-color: var(--finu-bg-light); }
+        .bg-finu-bg-medium { background-color: var(--finu-bg-medium); }
+        .bg-finu-bg-dark { background-color: var(--finu-bg-dark); }
+
+        .text-finu-primary { color: var(--finu-primary); }
+        .text-finu-primary-light { color: var(--finu-primary-light); }
+        .text-finu-primary-dark { color: var(--finu-primary-dark); }
+        .text-finu-icon-primary { color: var(--finu-icon-primary); }
+        .text-finu-icon-secondary { color: var(--finu-icon-secondary); }
+        .text-finu-icon-tertiary { color: var(--finu-icon-tertiary); }
+        .text-finu-icon-light { color: var(--finu-icon-light); }
+
+        .border-finu-primary { border-color: var(--finu-primary); }
+        .border-finu-primary-light { border-color: var(--finu-primary-light); }
+        .border-finu-bg-medium { border-color: var(--finu-bg-medium); }
+
+        .hover\:bg-finu-primary:hover { background-color: var(--finu-primary-hover); }
+        .hover\:bg-finu-primary-light:hover { background-color: var(--finu-primary); }
+    </style>
+</head>
+<body class="bg-white font-sans">
+    <div class="p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Financial Analytics</h1>
+            <p class="text-gray-600">Analyze your spending patterns and track financial performance</p>
+        </div>
+
+        <!-- Today's Summary -->
+        <div class="bg-gradient-to-r from-finu-bg-light to-finu-bg-medium rounded-xl p-6 mb-8 border border-finu-primary-light">
+            <h2 class="text-xl font-semibold text-finu-primary-dark mb-4">Monthly Overview</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg p-4 text-center">
+                    <!-- Circular Progress Chart -->
+                    <div class="relative w-20 h-20 mx-auto mb-3">
+                        <svg class="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
+                            <!-- Background circle -->
+                            <path class="text-finu-primary-lighter" stroke="currentColor" stroke-width="3" fill="none"
+                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                            <!-- Progress circle -->
+                            <path class="text-finu-icon-primary" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"
+                                  stroke-dasharray="65, 100"
+                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        </svg>
+                        <!-- Percentage text in center -->
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-lg font-bold text-finu-icon-primary">65%</span>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-600">Budget Used</div>
+                    <div class="text-xs text-gray-500">This month</div>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center">
+                    <div class="text-2xl font-bold text-finu-icon-secondary">$2,847</div>
+                    <div class="text-sm text-gray-600">Net Income</div>
+                    <div class="text-xs text-gray-500">This month</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Spending Analysis -->
+            <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 bg-finu-bg-medium rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="pie-chart" class="w-6 h-6 text-finu-icon-primary"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Spending Analysis</h3>
+                <p class="text-gray-600 text-sm mb-4">View spending patterns by category and identify trends</p>
+                <button class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
+                    View Analysis
+                </button>
+            </div>
+
+            <!-- Income Trends -->
+            <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                <div class="w-12 h-12 bg-finu-bg-medium rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="trending-up" class="w-6 h-6 text-finu-icon-secondary"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Income Trends</h3>
+                <p class="text-gray-600 text-sm mb-4">Track income sources and growth over time</p>
+                <button class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
+                    View Trends
+                </button>
+            </div>
+        </div>
+        
+        <!-- Key Metrics -->
+        <div class="bg-white rounded-xl border border-finu-primary-light p-6 mb-8">
+            <h2 class="text-xl font-semibold text-finu-primary-dark mb-4">Key Financial Metrics</h2>
+
+            <div class="space-y-4">
+                <!-- Metric 1 -->
+                <div class="flex items-center justify-between py-3 border-b border-finu-primary-lighter">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-finu-bg-medium rounded-lg flex items-center justify-center">
+                            <i data-lucide="dollar-sign" class="w-4 h-4 text-finu-icon-primary"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-finu-primary-dark">Monthly Savings Rate</div>
+                            <div class="text-sm text-gray-600">Target: 20% • Current: 18%</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-orange-600">↗ Improving</span>
+                        <div class="w-6 h-6 bg-orange-100 rounded flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-3 h-3 text-orange-600"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metric 2 -->
+                <div class="flex items-center justify-between py-3 border-b border-finu-primary-lighter">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="credit-card" class="w-4 h-4 text-green-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">Debt-to-Income Ratio</div>
+                            <div class="text-sm text-gray-600">Target: <15% • Current: 12%</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-green-600">✓ On Track</span>
+                        <div class="w-6 h-6 bg-green-100 rounded flex items-center justify-center">
+                            <i data-lucide="check" class="w-3 h-3 text-green-600"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Metric 3 -->
+                <div class="flex items-center justify-between py-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="target" class="w-4 h-4 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">Emergency Fund Coverage</div>
+                            <div class="text-sm text-gray-600">Target: 6 months • Current: 4.2 months</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-blue-600">↗ Building</span>
+                        <div class="w-6 h-6 bg-blue-100 rounded flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-3 h-3 text-blue-600"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Insights -->
+        <div class="bg-white rounded-xl border border-finu-primary-light p-6">
+            <h2 class="text-xl font-semibold text-finu-primary-dark mb-4">Recent Financial Insights</h2>
+
+            <div class="space-y-4">
+                <!-- Insight 1 -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="trending-down" class="w-4 h-4 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">Dining Out Decreased</div>
+                            <div class="text-sm text-gray-600">Today • Down 23% from last month</div>
+                        </div>
+                    </div>
+                    <span class="text-sm font-medium text-green-600">-$127</span>
+                </div>
+
+                <!-- Insight 2 -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="piggy-bank" class="w-4 h-4 text-green-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">Savings Goal Progress</div>
+                            <div class="text-sm text-gray-600">Yesterday • Emergency fund +$500</div>
+                        </div>
+                    </div>
+                    <span class="text-sm font-medium text-blue-600">+$500</span>
+                </div>
+
+                <!-- Insight 3 -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="alert-triangle" class="w-4 h-4 text-purple-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">Budget Alert: Entertainment</div>
+                            <div class="text-sm text-gray-600">2 days ago • 85% of monthly budget used</div>
+                        </div>
+                    </div>
+                    <span class="text-sm font-medium text-orange-600">$340/$400</span>
+                </div>
+
+                <!-- Insight 4 -->
+                <div class="flex items-center justify-between py-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-4 h-4 text-orange-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium text-gray-800">Income Increase Detected</div>
+                            <div class="text-sm text-gray-600">3 days ago • Freelance income +15%</div>
+                        </div>
+                    </div>
+                    <span class="text-sm font-medium text-green-600">+$280</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Add click handlers for buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('button')) {
+                const buttonText = e.target.textContent.trim();
+                console.log('Analytics action clicked:', buttonText);
+
+                // Simple visual feedback
+                e.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 150);
+            }
+        });
+    </script>
+</body>
+</html>

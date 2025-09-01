@@ -3,89 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuri - ChatGPT-like Design Prototype</title>
+    <title>Finu - ChatGPT-like Design Prototype</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        /* Custom Nuri Brand Colors - Comprehensive Green Palette */
+        /* Custom Finu Brand Colors - Comprehensive Blue Palette */
         :root {
-            /* Main Brand Green Palette */
-            --nuri-primary: #00AF9F;           /* Main brand green */
-            --nuri-primary-hover: #009688;     /* Darker green for hover */
-            --nuri-primary-light: #4DD0E1;     /* Light green for accents */
-            --nuri-primary-lighter: #80E5FF;   /* Very light green */
-            --nuri-primary-dark: #00695C;      /* Dark green for emphasis */
+            /* Main Brand Blue Palette */
+            --finu-primary: #497AFF;           /* Main brand blue */
+            --finu-primary-hover: #3B5FE6;     /* Darker blue for hover */
+            --finu-primary-light: #F3FAFF;     /* Light blue for accents */
+            --finu-primary-lighter: #E6F2FF;   /* Very light blue */
+            --finu-primary-dark: #043178;      /* Dark blue for emphasis */
 
-            /* Background Greens */
-            --nuri-bg-light: #F5FFFE;          /* Subtle light background - consistent with V2 */
-            --nuri-bg-medium: #B2EBF2;         /* Medium light background */
-            --nuri-bg-dark: #4DB6AC;           /* Medium background */
+            /* Background Blues */
+            --finu-bg-light: #F3FAFF;          /* Subtle light background */
+            --finu-bg-medium: #E6F2FF;         /* Medium light background */
+            --finu-bg-dark: #497AFF;           /* Medium background */
 
-            /* Icon Greens - Harmonious variations */
-            --nuri-icon-primary: #00AF9F;      /* Primary icons */
-            --nuri-icon-secondary: #26A69A;    /* Secondary icons */
-            --nuri-icon-tertiary: #4DD0E1;     /* Tertiary icons */
-            --nuri-icon-light: #80CBC4;        /* Light icons */
+            /* Icon Blues - Harmonious variations */
+            --finu-icon-primary: #497AFF;      /* Primary icons */
+            --finu-icon-secondary: #5B8CFF;    /* Secondary icons */
+            --finu-icon-tertiary: #7DA3FF;     /* Tertiary icons */
+            --finu-icon-light: #A0BAFF;        /* Light icons */
 
-            /* Button Greens - Consistent system */
-            --nuri-btn-primary: #00AF9F;       /* Primary buttons */
-            --nuri-btn-primary-hover: #009688; /* Primary button hover */
-            --nuri-btn-secondary: #26A69A;     /* Secondary buttons */
-            --nuri-btn-secondary-hover: #00695C; /* Secondary button hover */
+            /* Button Blues - Consistent system */
+            --finu-btn-primary: #497AFF;       /* Primary buttons */
+            --finu-btn-primary-hover: #3B5FE6; /* Primary button hover */
+            --finu-btn-secondary: #5B8CFF;     /* Secondary buttons */
+            --finu-btn-secondary-hover: #043178; /* Secondary button hover */
         }
 
         /* ChatGPT-like font family */
         body {
             font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
-        
-        /* Comprehensive Green Palette Utility Classes */
+
+        /* Comprehensive Blue Palette Utility Classes */
 
         /* Background Colors */
-        .bg-nuri-primary { background-color: var(--nuri-primary); }
-        .bg-nuri-primary-light { background-color: var(--nuri-primary-light); }
-        .bg-nuri-primary-lighter { background-color: var(--nuri-primary-lighter); }
-        .bg-nuri-primary-dark { background-color: var(--nuri-primary-dark); }
-        .bg-nuri-bg-light { background-color: var(--nuri-bg-light); }
-        .bg-nuri-bg-medium { background-color: var(--nuri-bg-medium); }
-        .bg-nuri-bg-dark { background-color: var(--nuri-bg-dark); }
+        .bg-finu-primary { background-color: var(--finu-primary); }
+        .bg-finu-primary-light { background-color: var(--finu-primary-light); }
+        .bg-finu-primary-lighter { background-color: var(--finu-primary-lighter); }
+        .bg-finu-primary-dark { background-color: var(--finu-primary-dark); }
+        .bg-finu-bg-light { background-color: var(--finu-bg-light); }
+        .bg-finu-bg-medium { background-color: var(--finu-bg-medium); }
+        .bg-finu-bg-dark { background-color: var(--finu-bg-dark); }
 
         /* Text Colors */
-        .text-nuri-primary { color: var(--nuri-primary); }
-        .text-nuri-primary-light { color: var(--nuri-primary-light); }
-        .text-nuri-primary-dark { color: var(--nuri-primary-dark); }
-        .text-nuri-icon-primary { color: var(--nuri-icon-primary); }
-        .text-nuri-icon-secondary { color: var(--nuri-icon-secondary); }
-        .text-nuri-icon-tertiary { color: var(--nuri-icon-tertiary); }
-        .text-nuri-icon-light { color: var(--nuri-icon-light); }
+        .text-finu-primary { color: var(--finu-primary); }
+        .text-finu-primary-light { color: var(--finu-primary-light); }
+        .text-finu-primary-dark { color: var(--finu-primary-dark); }
+        .text-finu-icon-primary { color: var(--finu-icon-primary); }
+        .text-finu-icon-secondary { color: var(--finu-icon-secondary); }
+        .text-finu-icon-tertiary { color: var(--finu-icon-tertiary); }
+        .text-finu-icon-light { color: var(--finu-icon-light); }
 
         /* Border Colors */
-        .border-nuri-primary { border-color: var(--nuri-primary); }
-        .border-nuri-primary-light { border-color: var(--nuri-primary-light); }
-        .border-nuri-bg-medium { border-color: var(--nuri-bg-medium); }
+        .border-finu-primary { border-color: var(--finu-primary); }
+        .border-finu-primary-light { border-color: var(--finu-primary-light); }
+        .border-finu-bg-medium { border-color: var(--finu-bg-medium); }
 
         /* Hover States */
-        .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
-        .hover\:bg-nuri-primary-light:hover { background-color: var(--nuri-primary); }
-        .hover\:text-nuri-primary:hover { color: var(--nuri-primary); }
-        .hover\:text-nuri-primary-dark:hover { color: var(--nuri-primary-dark); }
+        .hover\:bg-finu-primary:hover { background-color: var(--finu-primary-hover); }
+        .hover\:bg-finu-primary-light:hover { background-color: var(--finu-primary); }
+        .hover\:text-finu-primary:hover { color: var(--finu-primary); }
+        .hover\:text-finu-primary-dark:hover { color: var(--finu-primary-dark); }
 
         /* Button System - Consistent across app */
-        .btn-nuri-primary {
-            background-color: var(--nuri-btn-primary);
+        .btn-finu-primary {
+            background-color: var(--finu-btn-primary);
             color: white;
             transition: background-color 0.2s ease;
         }
-        .btn-nuri-primary:hover {
-            background-color: var(--nuri-btn-primary-hover);
+        .btn-finu-primary:hover {
+            background-color: var(--finu-btn-primary-hover);
         }
-        .btn-nuri-secondary {
-            background-color: var(--nuri-btn-secondary);
+        .btn-finu-secondary {
+            background-color: var(--finu-btn-secondary);
             color: white;
             transition: background-color 0.2s ease;
         }
-        .btn-nuri-secondary:hover {
-            background-color: var(--nuri-btn-secondary-hover);
+        .btn-finu-secondary:hover {
+            background-color: var(--finu-btn-secondary-hover);
         }
         
         /* Sidebar animations */
@@ -314,14 +314,14 @@
                     <div class="flex items-center space-x-2">
                         <div class="relative group">
                             <div class="w-8 h-8 flex items-center justify-center cursor-pointer" id="logoToggleExpanded">
-                                <img src="nuri_logo.svg" alt="Nuri Logo" class="w-6 h-8">
+                                <img src="Finu_logo.svg" alt="Finu Logo" class="w-6 h-8">
                             </div>
                             <!-- Toggle icon on hover for expanded state -->
                             <div class="absolute inset-0 flex items-center justify-center bg-gray-50 rounded-md opacity-0 group-hover:opacity-100 logo-hover-toggle">
                                 <i data-lucide="panel-left-close" class="w-5 h-5 text-gray-600"></i>
                             </div>
                         </div>
-                        <span class="text-lg font-semibold text-nuri-primary-dark">Nuri</span>
+                        <span class="text-lg font-semibold text-finu-primary-dark">Finu</span>
                     </div>
                     <div class="flex items-center space-x-1">
                         <!-- Desktop sidebar close button -->
@@ -338,31 +338,37 @@
             <!-- Top Group: New Chat & Search -->
             <div class="p-4 border-b border-gray-200">
                 <div class="space-y-1">
-                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left nav-button">
+                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 text-left nav-button">
                         <i data-lucide="plus" class="w-4 h-4"></i>
                         <span class="text-sm">New Chat</span>
                     </button>
-                    <button onclick="openSearchDialog()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left">
+                    <button onclick="openSearchDialog()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 text-left">
                         <i data-lucide="search" class="w-4 h-4"></i>
                         <span class="text-sm">Search chats</span>
                     </button>
                 </div>
             </div>
 
+
+
             <!-- Tools Group -->
             <div class="px-4 pb-4 border-b border-gray-200">
                 <div class="space-y-1">
-                    <button id="wellness-tool" onclick="loadToolPage('wellness')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left tool-button">
-                        <i data-lucide="heart" class="w-4 h-4"></i>
-                        <span class="text-sm">Wellness Tools</span>
+                    <button id="transactions-tool" onclick="loadToolPage('transactions')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 text-left tool-button">
+                        <i data-lucide="credit-card" class="w-4 h-4"></i>
+                        <span class="text-sm">Transactions</span>
                     </button>
-                    <button id="nutrition-tool" onclick="loadToolPage('nutrition')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left tool-button">
-                        <i data-lucide="apple" class="w-4 h-4"></i>
-                        <span class="text-sm">Nutrition Tools</span>
+                    <button id="goals-tool" onclick="loadToolPage('goals')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 text-left tool-button">
+                        <i data-lucide="target" class="w-4 h-4"></i>
+                        <span class="text-sm">Financial Goals</span>
                     </button>
-                    <button id="exercise-tool" onclick="loadToolPage('exercise')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left tool-button">
-                        <i data-lucide="dumbbell" class="w-4 h-4"></i>
-                        <span class="text-sm">Exercise Tools</span>
+                    <button id="analytics-tool" onclick="loadToolPage('analytics')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 text-left tool-button">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                        <span class="text-sm">Analytics</span>
+                    </button>
+                    <button id="tokens-tool" onclick="loadToolPage('tokens')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 text-left tool-button">
+                        <i data-lucide="coins" class="w-4 h-4"></i>
+                        <span class="text-sm">$FIN Tokens</span>
                     </button>
                 </div>
             </div>
@@ -371,21 +377,21 @@
             <div class="px-4 pb-4">
                 <h3 class="text-sm font-medium text-gray-700 mb-3">Chats</h3>
                 <div class="space-y-1">
-                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-600 cursor-pointer">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate">Nutrition planning help</span>
+                        <span class="text-sm truncate">Budget planning help</span>
                     </div>
-                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-600 cursor-pointer">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate">Mood tracking insights</span>
+                        <span class="text-sm truncate">Investment advice</span>
                     </div>
-                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-600 cursor-pointer">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate">Fasting schedule setup</span>
+                        <span class="text-sm truncate">Savings goal setup</span>
                     </div>
-                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-600 cursor-pointer">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate">Exercise routine planning</span>
+                        <span class="text-sm truncate">Expense tracking tips</span>
                     </div>
                 </div>
             </div>
@@ -393,8 +399,8 @@
             <!-- Sidebar Footer -->
             <div class="absolute bottom-0 left-0 right-0 p-4">
                 <div class="relative">
-                    <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 text-left">
-                        <div id="userAvatar" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background-color: #10a37f;">
+                    <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 text-left">
+                        <div id="userAvatar" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background-color: #497AFF;">
                             JD
                         </div>
                         <div class="flex-1">
@@ -407,12 +413,12 @@
                     <!-- Profile Dropdown Menu -->
                     <div id="profileDropdown" class="hidden absolute bottom-full left-0 right-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg">
                         <div class="py-1">
-                            <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700">
+                            <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700">
                                 <i data-lucide="settings" class="w-4 h-4"></i>
                                 <span class="text-sm">Settings</span>
                             </button>
                             <div class="border-t border-gray-100"></div>
-                            <button class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700">
+                            <button class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700">
                                 <i data-lucide="log-out" class="w-4 h-4"></i>
                                 <span class="text-sm">Log out</span>
                             </button>
@@ -428,7 +434,7 @@
                 <div class="p-4 border-b border-gray-200 flex justify-center">
                     <div class="relative group">
                         <div class="w-8 h-8 flex items-center justify-center cursor-pointer" id="logoToggle">
-                            <img src="nuri_logo.svg" alt="Nuri Logo" class="w-6 h-8">
+                            <img src="Finu_logo.svg" alt="Finu Logo" class="w-6 h-8">
                         </div>
                         <!-- Toggle icon on hover -->
                         <div class="absolute inset-0 flex items-center justify-center bg-gray-50 rounded-md opacity-0 group-hover:opacity-100 logo-hover-toggle">
@@ -439,24 +445,29 @@
 
                 <!-- Icon buttons -->
                 <div class="p-2 border-b border-gray-200 space-y-1">
-                    <button onclick="loadChatPage()" class="w-full p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 flex justify-center" title="New Chat">
+                    <button onclick="loadChatPage()" class="w-full p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 flex justify-center" title="New Chat">
                         <i data-lucide="plus" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="openSearchDialog()" class="w-full p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 flex justify-center" title="Search chats">
+                    <button onclick="openSearchDialog()" class="w-full p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 flex justify-center" title="Search chats">
                         <i data-lucide="search" class="w-5 h-5"></i>
                     </button>
                 </div>
 
+
+
                 <!-- Tool icons -->
                 <div class="p-2 space-y-1">
-                    <button onclick="loadToolPage('wellness')" class="w-full p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 flex justify-center" title="Wellness Tools">
-                        <i data-lucide="heart" class="w-5 h-5"></i>
+                    <button onclick="loadToolPage('transactions')" class="w-full p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 flex justify-center" title="Transactions">
+                        <i data-lucide="credit-card" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="loadToolPage('nutrition')" class="w-full p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 flex justify-center" title="Nutrition Tools">
-                        <i data-lucide="apple" class="w-5 h-5"></i>
+                    <button onclick="loadToolPage('goals')" class="w-full p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 flex justify-center" title="Financial Goals">
+                        <i data-lucide="target" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="loadToolPage('exercise')" class="w-full p-2 rounded-lg hover:bg-nuri-bg-medium hover:text-nuri-primary-dark text-gray-700 flex justify-center" title="Exercise Tools">
-                        <i data-lucide="dumbbell" class="w-5 h-5"></i>
+                    <button onclick="loadToolPage('analytics')" class="w-full p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 flex justify-center" title="Analytics">
+                        <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('tokens')" class="w-full p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 flex justify-center" title="$FIN Tokens">
+                        <i data-lucide="coins" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
@@ -472,7 +483,7 @@
                 <button id="sidebarToggle" class="p-2 rounded-md hover:bg-gray-100">
                     <i data-lucide="menu" class="w-5 h-5"></i>
                 </button>
-                <span id="mobileTitle" class="font-semibold text-nuri-primary-dark">Nuri Assistant</span>
+                <span id="mobileTitle" class="font-semibold text-finu-primary-dark">Finu Assistant</span>
                 <div class="flex items-center space-x-2">
                     <!-- Account icon removed -->
                 </div>
@@ -490,17 +501,19 @@
                             <!-- Logo and Title -->
                             <div class="text-center mb-8">
                                 <div class="w-12 h-12 flex items-center justify-center mx-auto mb-4">
-                                    <img src="nuri_logo.svg" alt="Nuri Logo" class="w-9 h-12">
+                                    <img src="Finu_logo.svg" alt="Finu Logo" class="w-9 h-12">
                                 </div>
-                                <h1 class="text-3xl font-semibold text-nuri-primary-dark mb-8">What can I help with?</h1>
+                                <h1 class="text-3xl font-semibold text-finu-primary-dark mb-8">What can I help with?</h1>
                             </div>
+
+
 
                             <!-- Centered Input - Desktop, Bottom Input - Mobile -->
                             <div class="max-w-3xl mx-auto mb-8 md:mb-8 hidden md:block">
                                 <div class="relative">
                                     <textarea
                                         id="initialMessageInput"
-                                        placeholder="Message Nuri"
+                                        placeholder="Message Finu"
                                         class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                                         rows="1"
                                         style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -519,7 +532,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3 text-xs text-gray-500 text-center">
-                                    Nuri can make mistakes. Check important info.
+                                    Finu can make mistakes. Check important info.
                                 </div>
                             </div>
 
@@ -548,7 +561,7 @@
                     <div class="relative">
                         <textarea
                             id="messageInput"
-                            placeholder="Message Nuri"
+                            placeholder="Message Finu"
                             class="w-full px-4 py-4 pr-16 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                             rows="1"
                             style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -567,7 +580,7 @@
                         </div>
                     </div>
                     <div class="mt-3 text-xs text-gray-500 text-center hidden md:block">
-                        Nuri can make mistakes. Check important info.
+                        Finu can make mistakes. Check important info.
                     </div>
                 </div>
             </div>
@@ -581,7 +594,7 @@
             <div class="relative">
                 <textarea
                     id="mobileInitialMessageInput"
-                    placeholder="Message Nuri"
+                    placeholder="Message Finu"
                     class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                     rows="1"
                     style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -600,7 +613,7 @@
                 </div>
             </div>
             <div class="mt-3 text-xs text-gray-500 text-center">
-                Nuri can make mistakes. Check important info.
+                Finu can make mistakes. Check important info.
             </div>
         </div>
     </div>
@@ -611,7 +624,7 @@
             <div class="relative">
                 <textarea
                     id="mobileMessageInput"
-                    placeholder="Message Nuri"
+                    placeholder="Message Finu"
                     class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                     rows="1"
                     style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -630,7 +643,7 @@
                 </div>
             </div>
             <div class="mt-3 text-xs text-gray-500 text-center">
-                Nuri can make mistakes. Check important info.
+                Finu can make mistakes. Check important info.
             </div>
         </div>
     </div>
@@ -816,6 +829,17 @@
         logoToggleExpanded?.addEventListener('click', toggleDesktopSidebar);
         logoToggleCollapsed?.addEventListener('click', toggleDesktopSidebar);
 
+        // Financial data management
+        let financialData = {
+            totalBalance: 1000.00,
+            monthlyIncome: 1000.00,
+            monthlyExpenses: 0.00,
+            transactionCount: 1,
+            tokenBalance: 50,
+            netIncome: 1000.00,
+            goalsProgress: 0
+        };
+
         // Page management
         let currentPage = 'chat';
 
@@ -858,7 +882,7 @@
             }
 
             // Update mobile title
-            mobileTitle.textContent = 'Nuri Assistant';
+            mobileTitle.textContent = 'Finu Assistant';
 
             // Clear all navigation highlighting (New Chat should never be highlighted)
             updateNavigationHighlight('none');
@@ -869,39 +893,105 @@
             }
         }
 
+        // Enhanced message handling with financial context
+        function handleSendMessage(message) {
+            if (!message.trim()) return;
+
+            // Switch to conversation state
+            isInitialState = false;
+            initialState.classList.add('hidden');
+            conversationState.classList.remove('hidden');
+            conversationInput.classList.remove('hidden');
+
+            // Show mobile conversation input, hide mobile initial input
+            if (mobileConversationInput) {
+                mobileConversationInput.classList.remove('hidden');
+            }
+            if (mobileInitialInput) {
+                mobileInitialInput.classList.add('hidden');
+            }
+
+            // Add user message
+            addMessage(message, 'user');
+
+            // Clear inputs
+            if (initialMessageInput) initialMessageInput.value = '';
+            if (mobileInitialMessageInput) mobileInitialMessageInput.value = '';
+            if (messageInput) messageInput.value = '';
+            if (mobileMessageInput) mobileMessageInput.value = '';
+
+            // Update send button states
+            updateSendButtonStates();
+
+            // Generate AI response with financial context
+            setTimeout(() => {
+                const response = generateFinancialResponse(message);
+                addMessage(response, 'ai');
+            }, 1000);
+        }
+
+        // Generate AI response with financial context
+        function generateFinancialResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+
+            if (message.includes('balance') || message.includes('money') || message.includes('account')) {
+                return `Your current balance is $${financialData.totalBalance.toFixed(2)}. This month you've earned $${financialData.monthlyIncome.toFixed(2)} and spent $${financialData.monthlyExpenses.toFixed(2)}, giving you a net income of $${financialData.netIncome.toFixed(2)}. You have ${financialData.transactionCount} transaction(s) recorded and ${financialData.tokenBalance} $FIN tokens available.`;
+            }
+
+            if (message.includes('spend') || message.includes('expense') || message.includes('budget')) {
+                if (financialData.monthlyExpenses === 0) {
+                    return `You haven't recorded any expenses this month yet. This is a great opportunity to start tracking your spending! I can help you:\n\n• Set up expense categories\n• Create a monthly budget\n• Track your spending patterns\n• Set savings goals\n\nWould you like to add your first transaction or create a budget plan?`;
+                } else {
+                    return `Based on your spending data, you've spent $${financialData.monthlyExpenses.toFixed(2)} this month. Here are some insights:\n\n• Your largest expense category needs review\n• Consider the 50/30/20 budgeting rule\n• You could save an additional $${(financialData.monthlyIncome * 0.1).toFixed(2)} monthly\n\nWould you like me to help you create a detailed budget or analyze your spending patterns?`;
+                }
+            }
+
+            if (message.includes('goal') || message.includes('save') || message.includes('target')) {
+                return `Great question about financial goals! With your current net income of $${financialData.netIncome.toFixed(2)} per month, here's what I recommend:\n\n**Emergency Fund**: Aim for 3-6 months of expenses\n**Savings Goal**: Start with 20% of income ($${(financialData.monthlyIncome * 0.2).toFixed(2)}/month)\n**Investment**: Consider index funds after emergency fund\n\nYour current goals progress is at ${financialData.goalsProgress}%. Would you like me to help you set up specific financial goals?`;
+            }
+
+            if (message.includes('token') || message.includes('reward') || message.includes('$fin')) {
+                return `You currently have ${financialData.tokenBalance} $FIN tokens! These tokens are earned by:\n\n• Completing financial goals\n• Daily app usage\n• Adding transactions\n• Achieving milestones\n\nYou can use tokens for:\n• Premium AI analysis (10 tokens)\n• Advanced export features (5 tokens)\n• Priority support (20 tokens)\n\nWould you like to see your token history or learn about earning more rewards?`;
+            }
+
+            if (message.includes('analyz') || message.includes('insight') || message.includes('pattern')) {
+                return `I've analyzed your financial data:\n\n**Current Status:**\n• Balance: $${financialData.totalBalance.toFixed(2)}\n• Monthly Income: $${financialData.monthlyIncome.toFixed(2)}\n• Monthly Expenses: $${financialData.monthlyExpenses.toFixed(2)}\n• Savings Rate: ${((financialData.netIncome / financialData.monthlyIncome) * 100).toFixed(1)}%\n\n**Recommendations:**\n• Your savings rate is excellent - keep it up!\n• Consider automating your savings\n• Track expenses to identify optimization opportunities\n\nWould you like a detailed breakdown of any specific area?`;
+            }
+
+            return `I'm here to help with your finances! I can assist you with:\n\n• **Budget Planning** - Create and manage budgets\n• **Expense Tracking** - Monitor your spending\n• **Goal Setting** - Plan for major purchases\n• **Investment Advice** - Build wealth over time\n• **Debt Management** - Pay off debts efficiently\n• **Token Rewards** - Earn $FIN tokens for achievements\n\nWhat would you like to focus on today?`;
+        }
+
         // Sample conversation data
         const sampleConversations = {
-            'Nutrition planning help': [
-                { message: "Hi Nuri! I need help planning my meals for the week. I'm trying to eat healthier but I'm not sure where to start.", isUser: true },
-                { message: "I'd be happy to help you plan nutritious meals! Let me start by asking a few questions to personalize your meal plan. What are your main health goals right now?", isUser: false },
-                { message: "I want to lose about 10 pounds and have more energy throughout the day. I also have a pretty busy schedule, so I need something simple.", isUser: true },
-                { message: "Perfect! For weight loss and sustained energy, I recommend focusing on balanced meals with lean proteins, complex carbs, and healthy fats. Here's a simple weekly plan:\n\n**Breakfast ideas:**\n• Greek yogurt with berries and nuts\n• Overnight oats with chia seeds\n• Veggie omelet with whole grain toast\n\n**Lunch/Dinner:**\n• Grilled chicken with quinoa and roasted vegetables\n• Salmon with sweet potato and steamed broccoli\n• Turkey and avocado wrap with mixed greens\n\nWould you like me to create a detailed shopping list for these meals?", isUser: false },
-                { message: "Yes, that would be amazing! And can you suggest some healthy snacks too?", isUser: true },
-                { message: "Absolutely! Here are some energy-boosting snacks:\n\n**Quick & Healthy Snacks:**\n• Apple slices with almond butter\n• Hummus with carrot sticks\n• Mixed nuts and seeds\n• Greek yogurt with a drizzle of honey\n• Hard-boiled eggs\n\nI'll prepare a complete shopping list organized by food categories. These snacks will help maintain your energy levels between meals while supporting your weight loss goals.", isUser: false }
+            'Budget planning help': [
+                { message: "Hi Finu! I need help creating a budget for the month. I'm trying to save money but I'm not sure where to start.", isUser: true },
+                { message: "I'd be happy to help you create a personalized budget! Let me start by asking a few questions to understand your financial situation. What are your main financial goals right now?", isUser: false },
+                { message: "I want to save about $500 per month and pay off my credit card debt. I also have irregular income, so I need something flexible.", isUser: true },
+                { message: "Perfect! For saving $500/month and debt payoff with irregular income, I recommend the 50/30/20 flexible budgeting approach. Here's a framework that adapts to income changes:\n\n**Flexible Budget Strategy:**\n• Track your lowest monthly income as baseline\n• 50% for needs (rent, utilities, groceries)\n• 30% for wants (entertainment, dining out)\n• 20% for savings and debt payment\n\n**Debt Payoff Plan:**\n• List all debts by interest rate (avalanche method)\n• Pay minimums on all, extra on highest rate\n• When income is higher, put extra toward debt\n\nWould you like me to help you set up specific categories or create a debt payoff timeline?", isUser: false },
+                { message: "Yes, that would be amazing! And can you help me track my expenses too?", isUser: true },
+                { message: "Absolutely! Here are some expense tracking strategies:\n\n**Tracking Methods:**\n• Use apps like Mint, YNAB, or even a simple spreadsheet\n• Take photos of receipts immediately\n• Check bank statements weekly\n• Categorize expenses (housing, food, transport, etc.)\n• Set spending alerts on your phone\n\nI'll help you set up categories that work for your lifestyle. Consistent tracking is key to reaching your $500 savings goal!", isUser: false }
             ],
-            'Mood tracking insights': [
-                { message: "I've been feeling pretty stressed lately and my mood has been all over the place. Can you help me understand what might be affecting it?", isUser: true },
-                { message: "I'm sorry to hear you're feeling stressed. Mood fluctuations are completely normal, and there are many factors that can influence how we feel. Let's explore some patterns together. Can you tell me about your sleep schedule lately?", isUser: false },
-                { message: "My sleep has been terrible. I've been staying up late working and then I can't fall asleep because my mind is racing.", isUser: true },
-                { message: "Sleep quality has a huge impact on mood and stress levels. When we don't get enough restorative sleep, our emotional regulation suffers. Here are some strategies that can help:\n\n**Sleep Hygiene Tips:**\n• Set a consistent bedtime routine\n• Avoid screens 1 hour before bed\n• Try relaxation techniques like deep breathing\n• Keep your bedroom cool and dark\n\n**For Racing Thoughts:**\n• Keep a journal by your bed to write down worries\n• Practice the 4-7-8 breathing technique\n• Try progressive muscle relaxation\n\nHow does your diet and exercise routine look? These also significantly impact mood.", isUser: false },
-                { message: "I've been eating a lot of takeout and haven't exercised in weeks. I know I should but I just feel too tired and overwhelmed.", isUser: true },
-                { message: "That's a very common cycle - stress leads to poor sleep and eating habits, which then increases stress. Let's break this gently:\n\n**Small Steps to Start:**\n• 10-minute walks during lunch breaks\n• Prepare simple, nutritious meals (even just adding a salad to takeout helps)\n• Set a phone alarm for bedtime routine\n\n**Mood Tracking Suggestion:**\nI recommend tracking your mood, sleep, food, and activity for a week. This will help us identify patterns and triggers. Would you like me to suggest a simple tracking method?", isUser: false }
+            'Investment advice': [
+                { message: "I'm new to investing and have about $1000 to start with. I'm 25 years old and want to build long-term wealth. Where should I begin?", isUser: true },
+                { message: "Great question! Starting at 25 gives you a huge advantage with compound growth. Here's a beginner-friendly approach for your situation:", isUser: false },
+                { message: "That sounds good, but I'm worried about losing money. How risky is investing really?", isUser: true },
+                { message: "Your concern is completely valid! Here's how to manage investment risk:\n\n**Risk Management:**\n• Diversify across different assets (don't put all eggs in one basket)\n• Start with low-cost index funds (spread risk across hundreds of companies)\n• Invest for long-term (10+ years reduces short-term volatility impact)\n• Never invest money you need within 5 years\n\n**Getting Started Safely:**\n• Emergency fund first (3-6 months expenses)\n• Pay off high-interest debt (>6% interest)\n• Start with target-date funds (automatically balanced)\n• Dollar-cost averaging (invest same amount monthly)\n\n**Historical Context:**\n• S&P 500 has averaged ~10% annually over 90+ years\n• Yes, there are down years, but time smooths out volatility\n• The biggest risk is actually NOT investing (inflation erodes cash value)\n\nWould you like me to walk you through setting up your first investment account?", isUser: false }
             ],
-            'Fasting schedule setup': [
-                { message: "I'm interested in trying intermittent fasting but I'm not sure how to start safely. Can you help me set up a schedule?", isUser: true },
-                { message: "Great choice! Intermittent fasting can have wonderful health benefits when done properly. Let's start with some basics. Have you done any form of fasting before, and do you have any medical conditions I should know about?", isUser: false },
-                { message: "I've never done fasting before, and I'm generally healthy. I just want to try it for weight management and the health benefits I've heard about.", isUser: true },
-                { message: "Perfect! For beginners, I recommend starting with the 16:8 method - it's the most sustainable and research-backed approach.\n\n**16:8 Method:**\n• Fast for 16 hours, eat within 8 hours\n• Example: Eat between 12 PM - 8 PM, fast from 8 PM - 12 PM next day\n• You can drink water, black coffee, or plain tea during fasting\n\n**Getting Started:**\n• Week 1-2: Try 12:12 (12 hour fast) to ease in\n• Week 3+: Progress to 16:8\n• Listen to your body and adjust as needed\n\nWhat's your current eating schedule like? This will help me suggest the best fasting window for your lifestyle.", isUser: false },
-                { message: "I usually eat breakfast around 7 AM, lunch at noon, and dinner around 7 PM. I also tend to snack in the evening while watching TV.", isUser: true },
-                { message: "Based on your current schedule, here are two options:\n\n**Option 1: Skip Breakfast**\n• Eating window: 12 PM - 8 PM\n• Keep your lunch and dinner times\n• Eliminates evening snacking naturally\n\n**Option 2: Early Eating**\n• Eating window: 10 AM - 6 PM\n• Early breakfast, normal lunch, earlier dinner\n• Better for morning energy needs\n\n**Tips for Success:**\n• Stay hydrated during fasting hours\n• Keep busy during typical snack times\n• Plan nutritious meals during eating windows\n• Start gradually - don't rush the process\n\nWhich option feels more doable for your lifestyle?", isUser: false }
+            'Savings goal setup': [
+                { message: "I want to start saving for a house down payment but I'm not sure how much I need or how to get started. Can you help me set up a savings plan?", isUser: true },
+                { message: "Absolutely! Saving for a house is a great goal. Let's start with some basics. What's your target timeline for buying a house, and do you have a rough idea of the price range you're looking at?", isUser: false },
+                { message: "I'm hoping to buy in about 3-4 years, and I'm looking at houses around $300,000. I've never saved for something this big before.", isUser: true },
+                { message: "Perfect! For a $300,000 house, here's what you'll typically need:\n\n**Down Payment Options:**\n• 20% down = $60,000 (avoids PMI)\n• 10% down = $30,000 (good middle ground)\n• 5% down = $15,000 (minimum for many loans)\n\n**Additional Costs:**\n• Closing costs: $6,000-$9,000 (2-3% of home price)\n• Moving expenses: $2,000-$5,000\n• Emergency fund: 3-6 months of new housing costs\n\n**3-Year Savings Plan (for 10% down):**\n• Total needed: ~$40,000 ($30k down + $10k costs)\n• Monthly savings needed: ~$1,100\n\nWhat's your current monthly income and expenses? This will help me create a realistic savings strategy.", isUser: false },
+                { message: "My take-home is about $4,000/month, and my current expenses are around $3,200. So I have about $800 left over each month.", isUser: true },
+                { message: "Great! You're already in a good position with $800 monthly surplus. Here's a strategic approach:\n\n**Optimized Savings Plan:**\n• House fund: $700/month ($25,200 over 3 years)\n• Keep $100 for increased emergency fund\n• Look for ways to boost income or cut expenses for the extra $400/month needed\n\n**Savings Strategy:**\n• Open high-yield savings account (2-4% APY)\n• Automate transfers on payday\n• Consider CDs for portions you won't need soon\n• Track progress monthly\n\n**Boosting Savings:**\n• Side gig or freelance work\n• Sell unused items\n• Reduce subscription services\n• Cook at home more often\n\nWould you like help setting up the automated savings plan?", isUser: false }
             ],
-            'Exercise routine planning': [
-                { message: "I want to start working out regularly but I'm a complete beginner. Can you help me create a routine that won't overwhelm me?", isUser: true },
-                { message: "Absolutely! Starting a fitness journey is exciting, and I love that you want to begin gradually. That's the key to long-term success. Tell me about your current activity level and any physical limitations or preferences you have.", isUser: false },
-                { message: "I'm pretty sedentary right now - I work at a desk all day. No major physical limitations, but I get winded easily. I prefer working out at home if possible.", isUser: true },
-                { message: "Perfect! Home workouts are convenient and effective. Let's start with a beginner-friendly routine that builds gradually:\n\n**Week 1-2: Foundation Building**\n• 3 days per week, 15-20 minutes\n• Focus: Basic movements and building habit\n\n**Sample Beginner Routine:**\n• 5-minute warm-up (marching in place, arm circles)\n• 10 minutes: Bodyweight exercises (modified push-ups, squats, planks)\n• 5-minute cool-down (stretching)\n\n**Progression Plan:**\n• Week 3-4: Increase to 25 minutes\n• Week 5-6: Add 4th workout day\n• Week 7+: Introduce new exercises\n\nWould you like me to detail specific exercises for your first week?", isUser: false },
-                { message: "Yes, please! And how do I know if I'm pushing myself too hard or not hard enough?", isUser: true },
-                { message: "Great question! Here's your detailed first week plan:\n\n**Beginner Workout (3x per week):**\n\n**Warm-up (5 min):**\n• Marching in place - 2 minutes\n• Arm circles - 30 seconds each direction\n• Gentle stretches - 2 minutes\n\n**Main Workout (10 min):**\n• Wall push-ups - 2 sets of 5-8 reps\n• Chair-assisted squats - 2 sets of 8-10 reps\n• Modified plank (knees down) - 2 sets of 15-20 seconds\n• Standing marches - 2 sets of 20 (10 each leg)\n\n**Cool-down (5 min):**\n• Deep breathing and stretching\n\n**Intensity Guidelines:**\n• You should be able to hold a conversation\n• Slight breathlessness is good, gasping is too much\n• Muscle fatigue is normal, sharp pain is not\n• Rate of Perceived Exertion: Aim for 5-6 out of 10\n\nHow does this sound for getting started?", isUser: false }
+            'Expense tracking tips': [
+                { message: "I'm terrible at tracking my expenses and always wonder where my money goes. Can you help me set up a system that actually works?", isUser: true },
+                { message: "Absolutely! You're not alone - expense tracking is challenging but so important for financial health. The key is finding a method that fits your lifestyle. Tell me about your spending habits - do you use cash, cards, or a mix?", isUser: false },
+                { message: "I mostly use my debit card and credit card. I rarely carry cash. I've tried apps before but I always forget to log things.", isUser: true },
+                { message: "Perfect! Since you use cards, we can leverage automation to make tracking effortless:\n\n**Automated Tracking Methods:**\n• Link bank accounts to Mint, YNAB, or Personal Capital\n• Use your bank's spending categories feature\n• Set up account alerts for large purchases\n• Take photos of receipts immediately (Google Keep, Evernote)\n\n**Simple Manual Backup:**\n• Weekly 10-minute money date with yourself\n• Review last week's transactions\n• Categorize any uncategorized spending\n• Note any unusual patterns\n\n**Categories to Track:**\n• Fixed (rent, insurance, subscriptions)\n• Variable necessities (groceries, gas, utilities)\n• Discretionary (dining out, entertainment, shopping)\n• Savings and debt payments\n\nWould you like me to help you set up one of these automated systems?", isUser: false },
+                { message: "Yes, that sounds much better than manual entry! Which app do you recommend for beginners?", isUser: true },
+                { message: "For beginners, I recommend starting with **Mint** - here's why:\n\n**Mint Advantages:**\n• Completely free\n• Automatic transaction import\n• Simple, clean interface\n• Good mobile app\n• Automatic categorization (with manual override)\n• Bill reminders and credit score monitoring\n\n**Getting Started with Mint:**\n1. Sign up and link your main accounts\n2. Let it import 2-3 months of transactions\n3. Review and correct any miscategorized items\n4. Set up budget categories based on your spending\n5. Enable mobile notifications for large purchases\n\n**Pro Tips:**\n• Check it weekly, not daily (avoid obsessing)\n• Focus on trends, not individual transactions\n• Use the 'Goals' feature for motivation\n• Set realistic budget amounts based on actual spending\n\nShall I walk you through setting up your first budget categories?", isUser: false }
             ]
         };
 
@@ -910,7 +1000,7 @@
             updateNavigationHighlight('none');
 
             // Highlight selected chat
-            chatElement.classList.add('bg-nuri-bg-medium', 'text-nuri-primary-dark');
+            chatElement.classList.add('bg-finu-bg-medium', 'text-finu-primary-dark');
             chatElement.classList.remove('text-gray-600');
 
             // Get chat title from the element
@@ -967,21 +1057,21 @@
             // Clear all tool button highlights
             const toolButtons = document.querySelectorAll('.tool-button');
             toolButtons.forEach(btn => {
-                btn.classList.remove('bg-nuri-bg-medium', 'text-nuri-primary-dark');
+                btn.classList.remove('bg-finu-bg-medium', 'text-finu-primary-dark');
                 btn.classList.add('text-gray-700');
             });
 
             // Clear all chat highlights
             const chatItems = document.querySelectorAll('.px-4.pb-4 .space-y-1 > div');
             chatItems.forEach(item => {
-                item.classList.remove('bg-nuri-bg-medium', 'text-nuri-primary-dark');
+                item.classList.remove('bg-finu-bg-medium', 'text-finu-primary-dark');
                 item.classList.add('text-gray-600');
             });
 
             // New Chat button should never be highlighted (always stays in normal state)
             const newChatBtn = document.getElementById('new-chat');
             if (newChatBtn) {
-                newChatBtn.classList.remove('bg-nuri-bg-medium', 'text-nuri-primary-dark');
+                newChatBtn.classList.remove('bg-finu-bg-medium', 'text-finu-primary-dark');
                 newChatBtn.classList.add('text-gray-700');
             }
 
@@ -989,7 +1079,7 @@
             if (activeType !== 'chat') {
                 const activeBtn = document.getElementById(activeType + '-tool');
                 if (activeBtn) {
-                    activeBtn.classList.add('bg-nuri-bg-medium', 'text-nuri-primary-dark');
+                    activeBtn.classList.add('bg-finu-bg-medium', 'text-finu-primary-dark');
                     activeBtn.classList.remove('text-gray-700');
                 }
             }
@@ -1004,9 +1094,10 @@
 
             // Load appropriate tool page
             const toolUrls = {
-                'wellness': 'wellness-tools.html',
-                'nutrition': 'nutrition-tools.html',
-                'exercise': 'exercise-tools.html'
+                'transactions': 'transactions-tools.html',
+                'goals': 'goals-tools.html',
+                'analytics': 'analytics-tools.html',
+                'tokens': 'tokens-tools.html'
             };
 
             if (toolUrls[toolType]) {
@@ -1014,11 +1105,12 @@
 
                 // Update mobile title
                 const titles = {
-                    'wellness': 'Wellness Tools',
-                    'nutrition': 'Nutrition Tools',
-                    'exercise': 'Exercise Tools'
+                    'transactions': 'Transactions',
+                    'goals': 'Financial Goals',
+                    'analytics': 'Analytics',
+                    'tokens': '$FIN Tokens'
                 };
-                mobileTitle.textContent = titles[toolType] || 'Nuri Tools';
+                mobileTitle.textContent = titles[toolType] || 'Finu Tools';
 
                 // Update navigation highlighting
                 updateNavigationHighlight(toolType);
@@ -1091,7 +1183,7 @@
             });
 
             // Convert section headers (text followed by colon and line break)
-            html = html.replace(/\*\*([^*]+):\*\*<br>/g, '<div class="font-semibold text-nuri-primary-dark mt-3 mb-1">$1:</div>');
+            html = html.replace(/\*\*([^*]+):\*\*<br>/g, '<div class="font-semibold text-finu-primary-dark mt-3 mb-1">$1:</div>');
 
             // Clean up any remaining <br> tags that are now unnecessary
             html = html.replace(/<br>\s*<ul>/g, '<ul>');
@@ -1124,7 +1216,7 @@
                         <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
                             <i data-lucide="bot" class="w-4 h-4 text-gray-600"></i>
                         </div>
-                        <div class="bg-nuri-bg-light text-nuri-primary-dark px-4 py-3 rounded-2xl rounded-tl-md message-animate">
+                        <div class="bg-finu-bg-light text-finu-primary-dark px-4 py-3 rounded-2xl rounded-tl-md message-animate">
                             <div>${formattedContent}</div>
                         </div>
                     </div>
@@ -1153,9 +1245,9 @@
                 // Update mobile send button style
                 if (hasText) {
                     mobileInitialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                    mobileInitialSendButton.classList.add('bg-nuri-primary', 'text-white');
+                    mobileInitialSendButton.classList.add('bg-finu-primary', 'text-white');
                 } else {
-                    mobileInitialSendButton.classList.remove('bg-nuri-primary', 'text-white');
+                    mobileInitialSendButton.classList.remove('bg-finu-primary', 'text-white');
                     mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400');
                 }
             }
@@ -1163,9 +1255,9 @@
             // Update send button style based on content
             if (hasText) {
                 initialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                initialSendButton.classList.add('bg-nuri-primary', 'text-white');
+                initialSendButton.classList.add('bg-finu-primary', 'text-white');
             } else {
-                initialSendButton.classList.remove('bg-nuri-primary', 'text-white');
+                initialSendButton.classList.remove('bg-finu-primary', 'text-white');
                 initialSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 
@@ -1187,9 +1279,9 @@
                 // Update desktop send button style
                 if (hasText) {
                     initialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                    initialSendButton.classList.add('bg-nuri-primary', 'text-white');
+                    initialSendButton.classList.add('bg-finu-primary', 'text-white');
                 } else {
-                    initialSendButton.classList.remove('bg-nuri-primary', 'text-white');
+                    initialSendButton.classList.remove('bg-finu-primary', 'text-white');
                     initialSendButton.classList.add('bg-gray-200', 'text-gray-400');
                 }
             }
@@ -1197,9 +1289,9 @@
             // Update send button style based on content
             if (hasText) {
                 mobileInitialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                mobileInitialSendButton.classList.add('bg-nuri-primary', 'text-white');
+                mobileInitialSendButton.classList.add('bg-finu-primary', 'text-white');
             } else {
-                mobileInitialSendButton.classList.remove('bg-nuri-primary', 'text-white');
+                mobileInitialSendButton.classList.remove('bg-finu-primary', 'text-white');
                 mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 
@@ -1221,9 +1313,9 @@
                 // Update mobile send button style
                 if (hasText) {
                     mobileSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                    mobileSendButton.classList.add('bg-nuri-primary', 'text-white');
+                    mobileSendButton.classList.add('bg-finu-primary', 'text-white');
                 } else {
-                    mobileSendButton.classList.remove('bg-nuri-primary', 'text-white');
+                    mobileSendButton.classList.remove('bg-finu-primary', 'text-white');
                     mobileSendButton.classList.add('bg-gray-200', 'text-gray-400');
                 }
             }
@@ -1231,9 +1323,9 @@
             // Update send button style based on content
             if (hasText) {
                 sendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                sendButton.classList.add('bg-nuri-primary', 'text-white');
+                sendButton.classList.add('bg-finu-primary', 'text-white');
             } else {
-                sendButton.classList.remove('bg-nuri-primary', 'text-white');
+                sendButton.classList.remove('bg-finu-primary', 'text-white');
                 sendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 
@@ -1255,9 +1347,9 @@
                 // Update desktop send button style
                 if (hasText) {
                     sendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                    sendButton.classList.add('bg-nuri-primary', 'text-white');
+                    sendButton.classList.add('bg-finu-primary', 'text-white');
                 } else {
-                    sendButton.classList.remove('bg-nuri-primary', 'text-white');
+                    sendButton.classList.remove('bg-finu-primary', 'text-white');
                     sendButton.classList.add('bg-gray-200', 'text-gray-400');
                 }
             }
@@ -1265,9 +1357,9 @@
             // Update send button style based on content
             if (hasText) {
                 mobileSendButton.classList.remove('bg-gray-200', 'text-gray-400');
-                mobileSendButton.classList.add('bg-nuri-primary', 'text-white');
+                mobileSendButton.classList.add('bg-finu-primary', 'text-white');
             } else {
-                mobileSendButton.classList.remove('bg-nuri-primary', 'text-white');
+                mobileSendButton.classList.remove('bg-finu-primary', 'text-white');
                 mobileSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 
@@ -1296,14 +1388,14 @@
                 initialMessageInput.value = '';
                 initialMessageInput.style.height = 'auto';
                 initialSendButton.disabled = true;
-                initialSendButton.classList.remove('bg-nuri-primary', 'text-white');
+                initialSendButton.classList.remove('bg-finu-primary', 'text-white');
                 initialSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
             if (mobileInitialMessageInput) {
                 mobileInitialMessageInput.value = '';
                 mobileInitialMessageInput.style.height = 'auto';
                 mobileInitialSendButton.disabled = true;
-                mobileInitialSendButton.classList.remove('bg-nuri-primary', 'text-white');
+                mobileInitialSendButton.classList.remove('bg-finu-primary', 'text-white');
                 mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 
@@ -1330,14 +1422,14 @@
                 messageInput.value = '';
                 messageInput.style.height = 'auto';
                 sendButton.disabled = true;
-                sendButton.classList.remove('bg-nuri-primary', 'text-white');
+                sendButton.classList.remove('bg-finu-primary', 'text-white');
                 sendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
             if (mobileMessageInput) {
                 mobileMessageInput.value = '';
                 mobileMessageInput.style.height = 'auto';
                 mobileSendButton.disabled = true;
-                mobileSendButton.classList.remove('bg-nuri-primary', 'text-white');
+                mobileSendButton.classList.remove('bg-finu-primary', 'text-white');
                 mobileSendButton.classList.add('bg-gray-200', 'text-gray-400');
             }
 

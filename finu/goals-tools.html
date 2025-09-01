@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Goals Tools - Finu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Finu Brand Colors */
+        :root {
+            /* Main Brand Blue Palette */
+            --finu-primary: #497AFF;           /* Main brand blue */
+            --finu-primary-hover: #3B5FE6;     /* Darker blue for hover */
+            --finu-primary-light: #6B8FFF;     /* Light blue for accents */
+            --finu-primary-lighter: #8FA8FF;   /* Lighter blue for backgrounds */
+            --finu-primary-lightest: #B3C1FF;  /* Very light blue for subtle backgrounds */
+            --finu-primary-dark: #2E4FCC;      /* Dark blue for emphasis */
+            --finu-primary-darker: #1E3399;    /* Darker blue for strong emphasis */
+
+            /* Background variations */
+            --finu-bg-light: #F8FAFF;          /* Subtle light background */
+            --finu-bg-medium: #E6EDFF;         /* Medium light blue background */
+            --finu-bg-dark: #6B8FFF;           /* Medium blue background */
+
+            /* Icon Blues - Harmonious variations */
+            --finu-icon-primary: #497AFF;      /* Primary icons */
+            --finu-icon-secondary: #5B8CFF;    /* Secondary icons */
+            --finu-icon-tertiary: #7BA3FF;     /* Tertiary icons */
+            --finu-icon-light: #9BB8FF;        /* Light icons */
+        }
+
+        /* Utility Classes */
+        .bg-finu-primary { background-color: var(--finu-primary); }
+        .bg-finu-primary-light { background-color: var(--finu-primary-light); }
+        .bg-finu-primary-lighter { background-color: var(--finu-primary-lighter); }
+        .bg-finu-primary-dark { background-color: var(--finu-primary-dark); }
+        .bg-finu-bg-light { background-color: var(--finu-bg-light); }
+        .bg-finu-bg-medium { background-color: var(--finu-bg-medium); }
+        .bg-finu-bg-dark { background-color: var(--finu-bg-dark); }
+
+        .text-finu-primary { color: var(--finu-primary); }
+        .text-finu-primary-light { color: var(--finu-primary-light); }
+        .text-finu-primary-dark { color: var(--finu-primary-dark); }
+        .text-finu-icon-primary { color: var(--finu-icon-primary); }
+        .text-finu-icon-secondary { color: var(--finu-icon-secondary); }
+        .text-finu-icon-tertiary { color: var(--finu-icon-tertiary); }
+        .text-finu-icon-light { color: var(--finu-icon-light); }
+
+        .border-finu-primary { border-color: var(--finu-primary); }
+        .border-finu-primary-light { border-color: var(--finu-primary-light); }
+        .border-finu-bg-medium { border-color: var(--finu-bg-medium); }
+
+        .hover\:bg-finu-primary:hover { background-color: var(--finu-primary-hover); }
+        .hover\:bg-finu-primary-light:hover { background-color: var(--finu-primary); }
+    </style>
+</head>
+<body class="bg-white font-sans">
+    <div class="p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Financial Goals Tools</h1>
+            <p class="text-gray-600">Set and track your financial goals to achieve your dreams and build wealth</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Savings Goals -->
+            <div class="bg-gradient-to-br from-finu-bg-light to-finu-bg-medium rounded-xl p-6 border border-finu-primary-light">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-finu-bg-medium rounded-full flex items-center justify-center">
+                        <i data-lucide="piggy-bank" class="w-6 h-6 text-finu-icon-primary"></i>
+                    </div>
+                    <span class="text-2xl">🎯</span>
+                </div>
+                <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Savings Goals</h3>
+                <p class="text-gray-600 text-sm mb-4">Create savings goals for emergency funds, vacations, or major purchases</p>
+                <button class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
+                    Create Goal
+                </button>
+            </div>
+
+            <!-- Debt Payoff -->
+            <div class="bg-gradient-to-br from-finu-bg-light to-finu-bg-medium rounded-xl p-6 border border-finu-primary-light">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-finu-bg-medium rounded-full flex items-center justify-center">
+                        <i data-lucide="credit-card" class="w-6 h-6 text-finu-icon-secondary"></i>
+                    </div>
+                    <span class="text-2xl">💳</span>
+                </div>
+                <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Debt Payoff Goals</h3>
+                <p class="text-gray-600 text-sm mb-4">Set goals to pay off credit cards, loans, and other debts</p>
+                <button class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
+                    Add Debt Goal
+                </button>
+            </div>
+        </div>
+
+        <!-- Today's Summary -->
+        <div class="bg-finu-bg-light rounded-xl p-6 mb-8 border border-finu-primary-lighter">
+            <h2 class="text-xl font-semibold text-finu-primary-dark mb-4">Goals Progress Summary</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg p-4 text-center border border-finu-primary-lighter">
+                    <div class="text-2xl mb-2">🎯</div>
+                    <div class="text-sm text-gray-600">Active Goals</div>
+                    <div class="text-lg font-semibold text-finu-icon-primary">5</div>
+                </div>
+                <div class="bg-white rounded-lg p-4 text-center border border-finu-primary-lighter">
+                    <div class="text-2xl mb-2">💰</div>
+                    <div class="text-sm text-gray-600">Total Progress</div>
+                    <div class="text-lg font-semibold text-finu-icon-secondary">$12,847</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Entries -->
+        <div class="bg-white rounded-xl border border-finu-primary-light p-6">
+            <h2 class="text-xl font-semibold text-finu-primary-dark mb-4">Recent Goal Activities</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl">🎯</div>
+                        <div>
+                            <div class="font-medium text-gray-800">Emergency Fund: +$500</div>
+                            <div class="text-sm text-gray-600">Today, 2:30 PM</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-green-600">$3,500 / $10,000</div>
+                </div>
+
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl">🏠</div>
+                        <div>
+                            <div class="font-medium text-gray-800">House Down Payment: +$1,200</div>
+                            <div class="text-sm text-gray-600">Today, 1:15 PM</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-blue-600">$15,200 / $50,000</div>
+                </div>
+
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl">💳</div>
+                        <div>
+                            <div class="font-medium text-gray-800">Credit Card Debt: -$300</div>
+                            <div class="text-sm text-gray-600">Yesterday, 6:00 PM</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-orange-600">$2,100 remaining</div>
+                </div>
+
+                <div class="flex items-center justify-between py-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl">✈️</div>
+                        <div>
+                            <div class="font-medium text-gray-800">Vacation Fund: +$150</div>
+                            <div class="text-sm text-gray-600">Yesterday, 3:45 PM</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-purple-600">$1,850 / $5,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Add click handlers for buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('button')) {
+                const buttonText = e.target.textContent.trim();
+                console.log('Goal action clicked:', buttonText);
+
+                // Here you would typically handle the specific action
+                // For now, just show a simple feedback
+                e.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 150);
+            }
+        });
+    </script>
+</body>
+</html>

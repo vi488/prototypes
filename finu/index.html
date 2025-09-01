@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finu ChatGPT-like Design Prototypes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        :root {
+            --finu-primary: #497AFF;
+            --finu-primary-hover: #3B5FE6;
+        }
+        .bg-finu-primary { background-color: var(--finu-primary); }
+        .text-finu-primary { color: var(--finu-primary); }
+        .border-finu-primary { border-color: var(--finu-primary); }
+        .hover\:bg-finu-primary:hover { background-color: var(--finu-primary-hover); }
+        
+        .prototype-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .prototype-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 flex items-center justify-center">
+                    <svg width="36" height="32" viewBox="0 0 133 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M72.9463 6.10352e-05C106.076 0.000451618 132.936 26.8604 132.916 60.011C132.915 93.1409 106.056 120 72.9264 120H7.39925C1.51437 120 -1.58072 113.015 2.39005 108.657L6.46263 104.177C12.5912 97.4371 14.8511 87.8873 11.9193 79.2742C9.8626 73.2061 8.74352 66.7292 8.74352 59.9891C8.74397 26.859 35.6024 6.10352e-05 68.7326 6.10352e-05H72.9463ZM28.2314 65.0202C24.6155 65.0202 21.76 68.1609 22.6089 71.6757C27.8633 93.432 47.4604 109.594 70.8305 109.594C71.2743 109.594 71.7168 109.588 72.1578 109.576C76.1393 109.47 79.0234 105.996 79.0234 102.013V88.9466C79.0234 75.7313 68.3122 65.0206 55.097 65.0202H28.2314ZM112.988 65.0202C99.7726 65.0202 89.0617 75.7311 89.0617 88.9466V100.146C89.0617 103.02 91.9599 104.973 94.4853 103.6C107.278 96.6458 116.67 84.2262 119.527 69.4757C119.985 67.109 118.088 65.0202 115.677 65.0202H112.988ZM89.0418 31.0535C89.0418 44.269 99.7527 54.9799 112.968 54.9799H115.681C118.091 54.9799 119.988 52.8922 119.531 50.5261C116.678 35.7571 107.275 23.3218 94.4639 16.3661C91.9386 14.9949 89.0418 16.9479 89.0418 19.8215V31.0535ZM70.8305 10.3863C47.4521 10.3863 27.8495 26.5589 22.6034 48.3267C21.7565 51.841 24.6117 54.9799 28.2266 54.9799H55.0751C68.2906 54.9799 79.0015 44.269 79.0015 31.0535V17.9645C79.0015 13.9802 76.1151 10.5068 72.1322 10.4033C71.6996 10.392 71.2657 10.3864 70.8305 10.3863Z" fill="#497AFF"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Finu ChatGPT-like Design Prototypes</h1>
+                    <p class="text-gray-600">Interactive prototypes showcasing the new ChatGPT-inspired interface</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Overview -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Prototype Overview</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="smartphone" class="w-8 h-8 text-blue-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Mobile Responsive</h3>
+                    <p class="text-sm text-gray-600">Optimized for desktop, tablet, and mobile devices</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="zap" class="w-8 h-8 text-green-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Interactive</h3>
+                    <p class="text-sm text-gray-600">Fully functional with real interactions and animations</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="palette" class="w-8 h-8 text-purple-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Branded</h3>
+                    <p class="text-sm text-gray-600">Uses authentic Finu colors, icons, and styling</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Prototype -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Main ChatGPT-like Interface</h2>
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                <div class="aspect-video bg-gradient-to-br from-finu-primary to-blue-600 relative">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <i data-lucide="message-circle" class="w-16 h-16 mx-auto mb-4 opacity-80"></i>
+                            <h3 class="text-2xl font-bold mb-2">Main Chat Interface</h3>
+                            <p class="text-lg opacity-90">ChatGPT-like design with integrated tool pages</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Complete Chat Interface</h3>
+                    <p class="text-gray-600 mb-4">The main prototype with exact ChatGPT-like interface, including centered initial state, profile dropdown menu, and ChatGPT-style input design.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="monitor" class="w-4 h-4"></i>
+                                <span>Desktop</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="tablet" class="w-4 h-4"></i>
+                                <span>Tablet</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="smartphone" class="w-4 h-4"></i>
+                                <span>Mobile</span>
+                            </span>
+                        </div>
+                        <a href="finu-chatgpt-prototype.html" target="_blank" class="bg-finu-primary text-white px-6 py-2 rounded-lg hover:bg-finu-primary transition-colors">
+                            View Prototype
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool Pages & Modals -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Tool Pages & Modals</h2>
+            <p class="text-gray-600 mb-6">Individual prototypes for financial tools (integrated pages) and feature modals (popup overlays).</p>
+
+            <!-- Tool Pages Section -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">🔧 Integrated Tool Pages</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Transactions -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
+                        <i data-lucide="credit-card" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Transactions</h3>
+                        <p class="text-sm text-gray-600 mb-4">Income and expense tracking, transaction categorization, and spending analysis.</p>
+                        <a href="transactions-tools.html" target="_blank" class="text-finu-primary hover:text-finu-primary font-medium text-sm">
+                            View Page →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Financial Goals -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                        <i data-lucide="target" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Financial Goals</h3>
+                        <p class="text-sm text-gray-600 mb-4">Savings goals, debt payoff plans, investment targets, and progress tracking.</p>
+                        <a href="goals-tools.html" target="_blank" class="text-finu-primary hover:text-finu-primary font-medium text-sm">
+                            View Page →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Analytics -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-purple-400 to-violet-500 flex items-center justify-center">
+                        <i data-lucide="bar-chart-3" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Analytics</h3>
+                        <p class="text-sm text-gray-600 mb-4">Financial insights, spending patterns, budget analysis, and performance metrics.</p>
+                        <a href="analytics-tools.html" target="_blank" class="text-finu-primary hover:text-finu-primary font-medium text-sm">
+                            View Page →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Modals Section -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">📱 Feature Modals (Legacy)</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Budget Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center">
+                        <i data-lucide="calculator" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Budget Planner</h3>
+                        <p class="text-sm text-gray-600 mb-4">Budget creation, expense categories, income tracking, and spending limits.</p>
+                        <a href="budget-modal.html" target="_blank" class="text-finu-primary hover:text-finu-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Investment Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-green-400 to-green-500 flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Investment Tracker</h3>
+                        <p class="text-sm text-gray-600 mb-4">Portfolio tracking, performance analysis, asset allocation, and investment goals.</p>
+                        <a href="investment-modal.html" target="_blank" class="text-finu-primary hover:text-finu-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Debt Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-red-400 to-red-500 flex items-center justify-center">
+                        <i data-lucide="credit-card" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Debt Payoff</h3>
+                        <p class="text-sm text-gray-600 mb-4">Debt tracking, payoff strategies, payment schedules, and progress monitoring.</p>
+                        <a href="debt-modal.html" target="_blank" class="text-finu-primary hover:text-finu-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- $FIN Tokens Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center">
+                        <i data-lucide="coins" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">$FIN Tokens</h3>
+                        <p class="text-sm text-gray-600 mb-4">Reward tokens, earning activities, redemption options, and token balance tracking.</p>
+                        <a href="tokens-modal.html" target="_blank" class="text-finu-primary hover:text-finu-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Financial Dashboard Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center">
+                        <i data-lucide="bar-chart-3" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Financial Dashboard</h3>
+                        <p class="text-sm text-gray-600 mb-4">Charts, analytics, insights, and comprehensive financial progress tracking.</p>
+                        <a href="dashboard-modal.html" target="_blank" class="text-finu-primary hover:text-finu-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Settings Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-gray-400 to-gray-500 flex items-center justify-center">
+                        <i data-lucide="settings" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Settings</h3>
+                        <p class="text-sm text-gray-600 mb-4">Profile management, notifications, preferences, privacy, and support.</p>
+                        <a href="settings-modal.html" target="_blank" class="text-finu-primary hover:text-finu-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">How to Use the Prototypes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Main Prototype Features</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-finu-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Click hamburger menu (mobile) to open/close sidebar</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-finu-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Click financial tools in sidebar to open feature pages</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-finu-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Use tool selector bar to switch between features</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-finu-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Type in message input and click send button</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-finu-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Click quick suggestions to populate input field</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Testing Responsive Design</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="monitor" class="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0"></i>
+                            <span><strong>Desktop (1024px+):</strong> Full sidebar always visible</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="tablet" class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0"></i>
+                            <span><strong>Tablet (768-1023px):</strong> Collapsible sidebar</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="smartphone" class="w-4 h-4 text-purple-500 mt-0.5 flex-shrink-0"></i>
+                            <span><strong>Mobile (<768px):</strong> Sidebar as overlay</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="refresh-cw" class="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0"></i>
+                            <span>Resize browser window to test responsive behavior</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="text-center text-sm text-gray-500">
+                <p>Finu ChatGPT-like Design Prototypes • Created August 27, 2025</p>
+                <p class="mt-1">Interactive prototypes for stakeholder review and development planning</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
