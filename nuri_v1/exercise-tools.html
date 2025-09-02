@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercise Tools - Nuri</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        /* Comprehensive Green Palette - Consistent with main app */
+        /* Nuri Brand Colors - Keep prototype brand colors */
         :root {
             /* Main Brand Green Palette */
             --nuri-primary: #00AF9F;           /* Main brand green */
@@ -19,7 +18,7 @@
             --nuri-primary-darker: #004D40;    /* Darker green for strong emphasis */
 
             /* Background variations */
-            --nuri-bg-light: #F5FFFE;          /* Subtle light background - consistent with V2 */
+            --nuri-bg-light: #F5FFFE;          /* Subtle light background */
             --nuri-bg-medium: #B2DFDB;         /* Medium light green background */
             --nuri-bg-dark: #4DB6AC;           /* Medium green background */
 
@@ -31,240 +30,629 @@
         }
 
         /* Utility Classes */
-        .bg-nuri-primary { background-color: var(--nuri-primary); }
-        .bg-nuri-primary-light { background-color: var(--nuri-primary-light); }
-        .bg-nuri-primary-lighter { background-color: var(--nuri-primary-lighter); }
-        .bg-nuri-primary-dark { background-color: var(--nuri-primary-dark); }
-        .bg-nuri-bg-light { background-color: var(--nuri-bg-light); }
-        .bg-nuri-bg-medium { background-color: var(--nuri-bg-medium); }
-        .bg-nuri-bg-dark { background-color: var(--nuri-bg-dark); }
+        .bg-nuri-primary { background-color: var(--nuri-primary) !important; }
+        .bg-nuri-primary-light { background-color: var(--nuri-primary-light) !important; }
+        .bg-nuri-primary-lighter { background-color: var(--nuri-primary-lighter) !important; }
+        .bg-nuri-primary-dark { background-color: var(--nuri-primary-dark) !important; }
+        .bg-nuri-bg-light { background-color: var(--nuri-bg-light) !important; }
+        .bg-nuri-bg-medium { background-color: var(--nuri-bg-medium) !important; }
+        .bg-nuri-bg-dark { background-color: var(--nuri-bg-dark) !important; }
 
-        .text-nuri-primary { color: var(--nuri-primary); }
-        .text-nuri-primary-light { color: var(--nuri-primary-light); }
-        .text-nuri-primary-dark { color: var(--nuri-primary-dark); }
-        .text-nuri-icon-primary { color: var(--nuri-icon-primary); }
-        .text-nuri-icon-secondary { color: var(--nuri-icon-secondary); }
-        .text-nuri-icon-tertiary { color: var(--nuri-icon-tertiary); }
-        .text-nuri-icon-light { color: var(--nuri-icon-light); }
+        .text-nuri-primary { color: var(--nuri-primary) !important; }
+        .text-nuri-primary-light { color: var(--nuri-primary-light) !important; }
+        .text-nuri-primary-dark { color: var(--nuri-primary-dark) !important; }
+        .text-nuri-icon-primary { color: var(--nuri-icon-primary) !important; }
+        .text-nuri-icon-secondary { color: var(--nuri-icon-secondary) !important; }
+        .text-nuri-icon-tertiary { color: var(--nuri-icon-tertiary) !important; }
+        .text-nuri-icon-light { color: var(--nuri-icon-light) !important; }
 
-        .border-nuri-primary { border-color: var(--nuri-primary); }
-        .border-nuri-primary-light { border-color: var(--nuri-primary-light); }
-        .border-nuri-bg-medium { border-color: var(--nuri-bg-medium); }
+        .border-nuri-primary { border-color: var(--nuri-primary) !important; }
+        .border-nuri-primary-light { border-color: var(--nuri-primary-light) !important; }
+        .border-nuri-bg-medium { border-color: var(--nuri-bg-medium) !important; }
 
-        .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
-        .hover\:bg-nuri-primary-light:hover { background-color: var(--nuri-primary); }
+        .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover) !important; }
+        .hover\:bg-nuri-primary-light:hover { background-color: var(--nuri-primary) !important; }
     </style>
 </head>
 <body class="bg-white font-sans">
-    <div class="p-6">
-        <!-- Header -->
-        <div class="mb-8">
-            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Exercise Tools</h1>
-            <p class="text-gray-600">Set fitness goals and track your exercise activities</p>
-        </div>
-
-        <!-- Today's Summary -->
-        <div class="bg-gradient-to-r from-nuri-bg-light to-nuri-bg-medium rounded-xl p-6 mb-8 border border-nuri-primary-light">
-            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Weekly Progress</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white rounded-lg p-4 text-center">
-                    <!-- Circular Progress Chart -->
-                    <div class="relative w-20 h-20 mx-auto mb-3">
-                        <svg class="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
-                            <!-- Background circle -->
-                            <path class="text-nuri-primary-lighter" stroke="currentColor" stroke-width="3" fill="none"
-                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                            <!-- Progress circle -->
-                            <path class="text-nuri-icon-primary" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"
-                                  stroke-dasharray="75, 100"
-                                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                        </svg>
-                        <!-- Percentage text in center -->
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-lg font-bold text-nuri-icon-primary">75%</span>
+    <main class="flex-1">
+        <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 py-2 sm:py-4 min-h-screen">
+            <div class="space-y-3 sm:space-y-4 lg:space-y-6">
+                <!-- Header Section -->
+                <div class="relative overflow-hidden rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4">
+                    <div class="relative z-10">
+                        <div class="text-center mb-2 sm:mb-3">
+                            <div class="inline-flex items-center space-x-2 mb-3 sm:mb-4">
+                                <div class="w-5 h-5 sm:w-6 sm:h-6 bg-nuri-primary rounded-md flex items-center justify-center">
+                                    <img src="nuri_logo.svg" alt="Nuri Logo" class="w-3 h-3 sm:w-5 sm:h-5">
+                                </div>
+                                <div>
+                                    <h1 class="text-base sm:text-lg font-bold text-nuri-primary">Good afternoon, vi!</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 sm:gap-3">
+                            <div class="bg-white rounded-md sm:rounded-lg p-2 border border-stone-200">
+                                <div class="flex items-center space-x-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity w-4 h-4 sm:w-5 sm:h-5 text-nuri-primary">
+                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                    </svg>
+                                    <div>
+                                        <div class="text-xs sm:text-sm font-bold text-stone-800">0%</div>
+                                        <div class="text-xs text-stone-600 hidden sm:block">Weekly Goal</div>
+                                        <div class="text-xs text-stone-600 sm:hidden">Goal</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-md sm:rounded-lg p-2 border border-stone-200">
+                                <div class="flex items-center space-x-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy w-4 h-4 sm:w-5 sm:h-5 text-nuri-primary">
+                                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                        <path d="M4 22h16"></path>
+                                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                    </svg>
+                                    <div>
+                                        <div class="text-xs sm:text-sm font-bold text-stone-800">0</div>
+                                        <div class="text-xs text-stone-600 hidden sm:block">Exercises Done</div>
+                                        <div class="text-xs text-stone-600 sm:hidden">Exercises</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="text-sm text-gray-600">Weekly Goal</div>
-                    <div class="text-xs text-gray-500">Progress</div>
                 </div>
-                <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-nuri-icon-secondary">5</div>
-                    <div class="text-sm text-gray-600">Exercises</div>
-                    <div class="text-xs text-gray-500">This week</div>
+
+                <!-- Main Content Grid -->
+                <div class="rounded-lg overflow-hidden">
+                    <div class="p-2 sm:p-3">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+                            <!-- Goals Tracker Section -->
+                            <div>
+                                <h3 class="text-base font-semibold text-stone-800 mb-3">Goals Tracker</h3>
+                                <div class="space-y-6">
+                                    <!-- Daily Goals Overview -->
+                                    <div class="bg-white rounded-2xl border border-stone-200 p-6">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-10 h-10 bg-stone-100 rounded-xl flex items-center justify-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target w-5 h-5 text-nuri-primary">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <circle cx="12" cy="12" r="6"></circle>
+                                                        <circle cx="12" cy="12" r="2"></circle>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <h2 class="text-lg font-semibold text-stone-800">Daily Goals</h2>
+                                                    <p class="text-sm text-stone-600">Complete goals to earn points</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="text-2xl font-bold text-nuri-primary">0</div>
+                                                <div class="text-xs text-stone-600">Points Earned</div>
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-4">
+                                            <div class="bg-stone-100 rounded-xl p-3 text-center">
+                                                <div class="text-xl font-bold text-nuri-primary">0</div>
+                                                <div class="text-xs text-nuri-primary">Completed</div>
+                                            </div>
+                                            <div class="bg-stone-100 rounded-xl p-3 text-center">
+                                                <div class="text-xl font-bold text-stone-700">0</div>
+                                                <div class="text-xs text-stone-600">Remaining</div>
+                                            </div>
+                                            <div class="bg-stone-100 rounded-xl p-3 text-center">
+                                                <div class="text-xl font-bold text-stone-700">0</div>
+                                                <div class="text-xs text-stone-600">Total Goals</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Add New Goal -->
+                                    <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6">
+                                        <h3 class="text-lg font-semibold text-stone-800 mb-4">Add New Goal</h3>
+                                        <div class="space-y-4">
+                                            <div>
+                                                <label class="block text-sm font-medium text-stone-700 mb-2">Goal Description</label>
+                                                <input type="text" placeholder="Enter your goal..." class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-stone-800" value="">
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-stone-700 mb-2">Category</label>
+                                                    <select class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-stone-800">
+                                                        <option value="Nutrition">Nutrition</option>
+                                                        <option value="Exercise">Exercise</option>
+                                                        <option value="Mental Health">Mental Health</option>
+                                                        <option value="Sleep">Sleep</option>
+                                                        <option value="Hydration">Hydration</option>
+                                                        <option value="Personal">Personal</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="block text-sm font-medium text-stone-700 mb-2">Points (1-200)</label>
+                                                    <input type="number" min="1" max="200" class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-stone-800" value="25">
+                                                </div>
+                                            </div>
+                                            <button disabled class="w-full text-white px-6 py-3 rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 bg-nuri-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-4 h-4">
+                                                    <path d="M5 12h14"></path>
+                                                    <path d="M12 5v14"></path>
+                                                </svg>
+                                                <span>Add Goal</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Your Goals List -->
+                                    <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <h3 class="text-lg font-semibold text-stone-800">Your Goals</h3>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <p class="text-center py-8 text-stone-600">No goals yet. Add one to get started!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Exercise Tracker Section -->
+                            <div>
+                                <h3 class="text-base font-semibold text-stone-800 mb-3">Exercise Tracker</h3>
+                                <div class="space-y-4 sm:space-y-6">
+                                    <!-- Exercise Stats -->
+                                    <div class="bg-white rounded-xl sm:rounded-2xl border border-stone-200 p-4 sm:p-6">
+                                        <div class="flex items-center justify-between mb-4 sm:mb-6">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-stone-100 rounded-lg sm:rounded-xl flex items-center justify-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity w-4 h-4 sm:w-5 sm:h-5 text-nuri-primary">
+                                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <h2 class="text-lg sm:text-xl font-bold text-stone-800">Exercise Tracker</h2>
+                                                    <p class="text-xs sm:text-sm text-stone-600">Track exercises and earn rewards</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-right">
+                                                <div class="text-xl sm:text-2xl font-bold text-nuri-primary">0m</div>
+                                                <div class="text-xs text-stone-600">Today</div>
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                                            <div class="bg-white/70 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/50">
+                                                <div class="flex items-center space-x-2 sm:space-x-3">
+                                                    <div class="w-6 h-6 sm:w-8 sm:h-8 bg-stone-100 rounded-md sm:rounded-lg flex items-center justify-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-3 h-3 sm:w-4 sm:h-4 text-nuri-primary">
+                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-sm sm:text-base font-bold text-stone-800">0m</div>
+                                                        <div class="text-xs text-stone-600">Duration</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="bg-white/70 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/50">
+                                                <div class="flex items-center space-x-2 sm:space-x-3">
+                                                    <div class="w-6 h-6 sm:w-8 sm:h-8 bg-stone-100 rounded-md sm:rounded-lg flex items-center justify-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flame w-3 h-3 sm:w-4 sm:h-4 text-nuri-primary">
+                                                            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-sm sm:text-base font-bold text-stone-800">0</div>
+                                                        <div class="text-xs text-stone-600">Calories</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="bg-white/70 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/50">
+                                                <div class="flex items-center space-x-2 sm:space-x-3">
+                                                    <div class="w-6 h-6 sm:w-8 sm:h-8 bg-stone-200 rounded-md sm:rounded-lg flex items-center justify-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy w-3 h-3 sm:w-4 sm:h-4 text-nuri-primary">
+                                                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                                            <path d="M4 22h16"></path>
+                                                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                                                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-sm sm:text-base font-bold text-stone-800">0</div>
+                                                        <div class="text-xs text-stone-600">Exercises</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="bg-white/70 backdrop-blur-sm rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/50">
+                                                <div class="flex items-center space-x-2 sm:space-x-3">
+                                                    <div class="w-6 h-6 sm:w-8 sm:h-8 bg-stone-100 rounded-md sm:rounded-lg flex items-center justify-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-target w-3 h-3 sm:w-4 sm:h-4 text-nuri-primary">
+                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                            <circle cx="12" cy="12" r="6"></circle>
+                                                            <circle cx="12" cy="12" r="2"></circle>
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <div class="text-sm sm:text-base font-bold text-stone-800">0%</div>
+                                                        <div class="text-xs text-stone-600">Weekly Goal</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 sm:mt-6 flex items-center justify-center">
+                                            <div class="relative w-24 h-24 sm:w-32 sm:h-32">
+                                                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                                                    <circle cx="50" cy="50" r="42" fill="none" stroke="#e5e7eb" stroke-width="8"></circle>
+                                                    <circle cx="50" cy="50" r="42" fill="none" stroke="#00AF9F" stroke-width="8" stroke-dasharray="263.89378290154264" stroke-dashoffset="263.89378290154264" class="transition-all duration-1000 ease-out" stroke-linecap="round"></circle>
+                                                </svg>
+                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                    <div class="text-center">
+                                                        <div class="text-lg sm:text-xl font-bold text-stone-800">0%</div>
+                                                        <div class="text-xs text-stone-600">Weekly</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- AI Exercise Suggestions -->
+                                    <div class="bg-white rounded-xl sm:rounded-2xl border border-stone-200 p-4 sm:p-6">
+                                        <div class="flex items-center space-x-3 mb-4 sm:mb-6">
+                                            <div class="w-6 h-6 sm:w-8 sm:h-8 bg-stone-100 rounded-lg flex items-center justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-4 h-4 text-nuri-primary">
+                                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                                </svg>
+                                            </div>
+                                            <h3 class="text-base sm:text-lg font-semibold text-stone-800">AI Exercise Suggestions</h3>
+                                        </div>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                                            <div class="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 border border-stone-200">
+                                                <div class="flex items-start justify-between mb-2">
+                                                    <div class="flex-1">
+                                                        <h4 class="text-sm sm:text-base font-semibold text-stone-800">15 min Full-Body Stretch</h4>
+                                                        <div class="flex items-center space-x-2 text-xs sm:text-sm text-stone-600 mt-1">
+                                                            <span>yoga</span>
+                                                            <span>•</span>
+                                                            <span>15 min</span>
+                                                        </div>
+                                                        <p class="text-xs text-stone-500 mt-1">Perfect for morning energy</p>
+                                                    </div>
+                                                </div>
+                                                <button class="w-full flex items-center justify-center space-x-2 text-white px-3 sm:px-4 py-2 rounded-lg font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed bg-nuri-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play w-3 h-3 sm:w-4 sm:h-4">
+                                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                                    </svg>
+                                                    <span>Start Exercise</span>
+                                                </button>
+                                            </div>
+                                            <div class="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 border border-stone-200">
+                                                <div class="flex items-start justify-between mb-2">
+                                                    <div class="flex-1">
+                                                        <h4 class="text-sm sm:text-base font-semibold text-stone-800">Quick HIIT Session</h4>
+                                                        <div class="flex items-center space-x-2 text-xs sm:text-sm text-stone-600 mt-1">
+                                                            <span>hiit</span>
+                                                            <span>•</span>
+                                                            <span>20 min</span>
+                                                        </div>
+                                                        <p class="text-xs text-stone-500 mt-1">Boost metabolism</p>
+                                                    </div>
+                                                </div>
+                                                <button class="w-full flex items-center justify-center space-x-2 text-white px-3 sm:px-4 py-2 rounded-lg font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed bg-nuri-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play w-3 h-3 sm:w-4 sm:h-4">
+                                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                                    </svg>
+                                                    <span>Start Exercise</span>
+                                                </button>
+                                            </div>
+                                            <div class="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 border border-stone-200">
+                                                <div class="flex items-start justify-between mb-2">
+                                                    <div class="flex-1">
+                                                        <h4 class="text-sm sm:text-base font-semibold text-stone-800">Evening Walk</h4>
+                                                        <div class="flex items-center space-x-2 text-xs sm:text-sm text-stone-600 mt-1">
+                                                            <span>cardio</span>
+                                                            <span>•</span>
+                                                            <span>25 min</span>
+                                                        </div>
+                                                        <p class="text-xs text-stone-500 mt-1">Reduce stress levels</p>
+                                                    </div>
+                                                </div>
+                                                <button class="w-full flex items-center justify-center space-x-2 text-white px-3 sm:px-4 py-2 rounded-lg font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed bg-nuri-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play w-3 h-3 sm:w-4 sm:h-4">
+                                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                                    </svg>
+                                                    <span>Start Exercise</span>
+                                                </button>
+                                            </div>
+                                            <div class="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 border border-stone-200">
+                                                <div class="flex items-start justify-between mb-2">
+                                                    <div class="flex-1">
+                                                        <h4 class="text-sm sm:text-base font-semibold text-stone-800">Core Strengthening</h4>
+                                                        <div class="flex items-center space-x-2 text-xs sm:text-sm text-stone-600 mt-1">
+                                                            <span>strength</span>
+                                                            <span>•</span>
+                                                            <span>12 min</span>
+                                                        </div>
+                                                        <p class="text-xs text-stone-500 mt-1">Improve posture</p>
+                                                    </div>
+                                                </div>
+                                                <button class="w-full flex items-center justify-center space-x-2 text-white px-3 sm:px-4 py-2 rounded-lg font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed bg-nuri-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play w-3 h-3 sm:w-4 sm:h-4">
+                                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                                    </svg>
+                                                    <span>Start Exercise</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Log Exercise Section -->
+                                    <div class="bg-white rounded-xl sm:rounded-2xl border border-stone-200 p-4 sm:p-6">
+                                        <div class="flex items-center justify-between mb-4 sm:mb-6">
+                                            <h3 class="text-base sm:text-lg font-semibold text-stone-800">Log Exercise</h3>
+                                            <div class="bg-stone-100 px-2 sm:px-3 py-1 rounded-full">
+                                                <span class="text-xs sm:text-sm font-bold text-nuri-primary">+2 pts per minute</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4 sm:mb-6">
+                                            <label class="block text-sm font-medium text-stone-700 mb-3">Exercise Type</label>
+                                            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+                                                <button class="p-3 sm:p-4 rounded-lg sm:rounded-xl text-center transition-all duration-200 border-2 bg-stone-50 scale-105 border-nuri-primary text-nuri-primary">
+                                                    <div class="text-lg sm:text-xl mb-1">🏃</div>
+                                                    <div class="text-xs sm:text-sm font-medium">Cardio</div>
+                                                </button>
+                                                <button class="p-3 sm:p-4 rounded-lg sm:rounded-xl text-center transition-all duration-200 border-2 border-stone-200 bg-white text-stone-700 hover:border-stone-300 hover:bg-stone-50">
+                                                    <div class="text-lg sm:text-xl mb-1">💪</div>
+                                                    <div class="text-xs sm:text-sm font-medium">Strength</div>
+                                                </button>
+                                                <button class="p-3 sm:p-4 rounded-lg sm:rounded-xl text-center transition-all duration-200 border-2 border-stone-200 bg-white text-stone-700 hover:border-stone-300 hover:bg-stone-50">
+                                                    <div class="text-lg sm:text-xl mb-1">🧘</div>
+                                                    <div class="text-xs sm:text-sm font-medium">Yoga</div>
+                                                </button>
+                                                <button class="p-3 sm:p-4 rounded-lg sm:rounded-xl text-center transition-all duration-200 border-2 border-stone-200 bg-white text-stone-700 hover:border-stone-300 hover:bg-stone-50">
+                                                    <div class="text-lg sm:text-xl mb-1">⚡</div>
+                                                    <div class="text-xs sm:text-sm font-medium">HIIT</div>
+                                                </button>
+                                                <button class="p-3 sm:p-4 rounded-lg sm:rounded-xl text-center transition-all duration-200 border-2 border-stone-200 bg-white text-stone-700 hover:border-stone-300 hover:bg-stone-50">
+                                                    <div class="text-lg sm:text-xl mb-1">🏊</div>
+                                                    <div class="text-xs sm:text-sm font-medium">Swimming</div>
+                                                </button>
+                                                <button class="p-3 sm:p-4 rounded-lg sm:rounded-xl text-center transition-all duration-200 border-2 border-stone-200 bg-white text-stone-700 hover:border-stone-300 hover:bg-stone-50">
+                                                    <div class="text-lg sm:text-xl mb-1">🚴</div>
+                                                    <div class="text-xs sm:text-sm font-medium">Cycling</div>
+                                                </button>
+                                                <button class="p-3 sm:p-4 rounded-lg sm:rounded-xl text-center transition-all duration-200 border-2 border-stone-200 bg-white text-stone-700 hover:border-stone-300 hover:bg-stone-50">
+                                                    <div class="text-lg sm:text-xl mb-1">🎯</div>
+                                                    <div class="text-xs sm:text-sm font-medium">Other</div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
+                                            <div>
+                                                <label class="block text-sm font-medium text-stone-700 mb-2">Exercise Name</label>
+                                                <input type="text" placeholder="e.g., Morning Run" class="w-full px-3 sm:px-4 py-2 sm:py-3 border border-stone-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-stone-800 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed" value="">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm font-medium text-stone-700 mb-2">Duration (minutes)</label>
+                                                <input type="number" min="1" max="300" class="w-full px-3 sm:px-4 py-2 sm:py-3 border border-stone-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-stone-800 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed" value="30">
+                                            </div>
+                                        </div>
+                                        <div class="mb-4 sm:mb-6">
+                                            <label class="block text-sm font-medium text-stone-700 mb-2">Calories Burned</label>
+                                            <div class="flex space-x-3">
+                                                <input type="number" class="flex-1 px-3 sm:px-4 py-2 sm:py-3 border border-stone-300 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 bg-white text-stone-800 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed" value="240">
+                                                <button class="px-3 sm:px-4 py-2 sm:py-3 bg-stone-200 text-stone-700 rounded-lg sm:rounded-xl hover:bg-stone-300 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed">Auto</button>
+                                            </div>
+                                            <p class="text-xs text-stone-500 mt-1">Auto-calculated: 240 calories</p>
+                                        </div>
+                                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 mb-4 sm:mb-6">
+                                            <button disabled class="flex items-center justify-center space-x-2 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base bg-nuri-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-timer w-3 h-3 sm:w-4 sm:h-4">
+                                                    <line x1="10" x2="14" y1="2" y2="2"></line>
+                                                    <line x1="12" x2="15" y1="14" y2="11"></line>
+                                                    <circle cx="12" cy="14" r="8"></circle>
+                                                </svg>
+                                                <span>Start Timer</span>
+                                            </button>
+                                            <button disabled class="flex items-center justify-center space-x-2 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base bg-nuri-primary">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-3 h-3 sm:w-4 sm:h-4">
+                                                    <path d="M5 12h14"></path>
+                                                    <path d="M12 5v14"></path>
+                                                </svg>
+                                                <span>Log Exercise</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Recent Exercises -->
+                                    <div class="bg-white rounded-xl sm:rounded-2xl border border-stone-200 p-4 sm:p-6">
+                                        <button class="w-full flex items-center justify-between p-3 bg-white rounded-xl border border-stone-200 hover:bg-stone-50 transition-colors mb-4">
+                                            <div class="flex items-center space-x-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up w-5 h-5 text-brand-primary">
+                                                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                                                    <polyline points="16 7 22 7 22 13"></polyline>
+                                                </svg>
+                                                <h3 class="text-base sm:text-lg font-semibold text-stone-800">Recent Exercises</h3>
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-5 h-5 text-stone-600">
+                                                <path d="m9 18 6-6-6-6"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <!-- Goals Tracker -->
-            <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="target" class="w-6 h-6 text-nuri-icon-primary"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Goals Tracker</h3>
-                <p class="text-gray-600 text-sm mb-4">Set and track fitness goals with categories and points</p>
-                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
-                    Manage Goals
-                </button>
-            </div>
+    </main>
 
-            <!-- Exercise Tracker -->
-            <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="activity" class="w-6 h-6 text-nuri-icon-secondary"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Exercise Tracker</h3>
-                <p class="text-gray-600 text-sm mb-4">Log exercises with type, duration, and calories burned</p>
-                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
-                    Log Exercise
-                </button>
-            </div>
-        </div>
-        
-        <!-- Current Goals -->
-        <div class="bg-white rounded-xl border border-nuri-primary-light p-6 mb-8">
-            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Current Goals</h2>
-
-            <div class="space-y-4">
-                <!-- Goal 1 -->
-                <div class="flex items-center justify-between py-3 border-b border-nuri-primary-lighter">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-nuri-bg-medium rounded-lg flex items-center justify-center">
-                            <i data-lucide="target" class="w-4 h-4 text-nuri-icon-primary"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-nuri-primary-dark">Exercise 3 times this week</div>
-                            <div class="text-sm text-gray-600">Exercise • 25 points</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <span class="text-sm text-nuri-icon-secondary">2/3</span>
-                        <button class="w-6 h-6 border-2 border-nuri-primary-lighter rounded hover:border-nuri-primary hover:bg-nuri-bg-light">
-                            <i data-lucide="check" class="w-3 h-3 text-nuri-icon-primary hidden"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Goal 2 -->
-                <div class="flex items-center justify-between py-3 border-b border-nuri-primary-lighter">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-nuri-bg-light rounded-lg flex items-center justify-center">
-                            <i data-lucide="target" class="w-4 h-4 text-nuri-icon-secondary"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-800">Walk 10,000 steps daily</div>
-                            <div class="text-sm text-gray-600">Personal • 30 points</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <span class="text-sm text-gray-600">8,543/10,000</span>
-                        <button class="w-6 h-6 border-2 border-gray-300 rounded hover:border-nuri-primary hover:bg-nuri-primary-bg-light">
-                            <i data-lucide="check" class="w-3 h-3 text-green-500 hidden"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Goal 3 -->
-                <div class="flex items-center justify-between py-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="target" class="w-4 h-4 text-purple-600"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-800">Complete strength training</div>
-                            <div class="text-sm text-gray-600">Exercise • 50 points</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <span class="text-sm text-green-600">✓ Completed</span>
-                        <button class="w-6 h-6 border-2 border-green-500 bg-green-500 rounded">
-                            <i data-lucide="check" class="w-3 h-3 text-white"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Recent Exercises -->
-        <div class="bg-white rounded-xl border border-nuri-primary-light p-6">
-            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Recent Exercises</h2>
-
-            <div class="space-y-4">
-                <!-- Exercise 1 -->
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="dumbbell" class="w-4 h-4 text-blue-600"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-800">Strength Training</div>
-                            <div class="text-sm text-gray-600">Today, 2:30 PM • 45 min</div>
-                        </div>
-                    </div>
-                    <span class="text-sm font-medium text-gray-800">320 cal</span>
-                </div>
-
-                <!-- Exercise 2 -->
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="heart" class="w-4 h-4 text-green-600"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-800">Cardio</div>
-                            <div class="text-sm text-gray-600">Yesterday, 7:00 AM • 30 min</div>
-                        </div>
-                    </div>
-                    <span class="text-sm font-medium text-gray-800">280 cal</span>
-                </div>
-
-                <!-- Exercise 3 -->
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="activity" class="w-4 h-4 text-purple-600"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-800">Yoga</div>
-                            <div class="text-sm text-gray-600">2 days ago, 6:30 PM • 60 min</div>
-                        </div>
-                    </div>
-                    <span class="text-sm font-medium text-gray-800">150 cal</span>
-                </div>
-
-                <!-- Exercise 4 -->
-                <div class="flex items-center justify-between py-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="dumbbell" class="w-4 h-4 text-orange-600"></i>
-                        </div>
-                        <div>
-                            <div class="font-medium text-gray-800">Weight Training</div>
-                            <div class="text-sm text-gray-600">3 days ago, 5:00 PM • 50 min</div>
-                        </div>
-                    </div>
-                    <span class="text-sm font-medium text-gray-800">380 cal</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <script>
-        lucide.createIcons();
-        
-        // Add click handlers for buttons
+        // State management
+        let goalDescription = '';
+        let selectedCategory = 'Personal';
+        let goalPoints = 25;
+        let selectedExerciseType = 'cardio'; // Default to cardio as it's selected
+        let exerciseName = '';
+        let exerciseDuration = 30;
+        let exerciseCalories = 240;
+
+        // Goal form handling
+        const goalInput = document.querySelector('input[placeholder="Enter your goal..."]');
+        const categorySelect = document.querySelector('select');
+        const pointsInput = document.querySelector('input[value="25"]');
+        const addGoalBtn = document.querySelector('button[disabled]');
+
+        // Exercise form handling
+        const exerciseNameInput = document.querySelector('input[placeholder="e.g., Morning Run"]');
+        const durationInput = document.querySelector('input[value="30"]');
+        const caloriesInput = document.querySelector('input[value="240"]');
+        const exerciseTypeButtons = document.querySelectorAll('button[class*="p-3"][class*="rounded-lg"]');
+        const startTimerBtn = document.querySelectorAll('button[disabled]')[1];
+        const logExerciseBtn = document.querySelectorAll('button[disabled]')[2];
+
+        // Update button states
+        function updateAddGoalButton() {
+            if (addGoalBtn) {
+                if (goalDescription.trim()) {
+                    addGoalBtn.disabled = false;
+                    addGoalBtn.classList.remove('opacity-50');
+                } else {
+                    addGoalBtn.disabled = true;
+                    addGoalBtn.classList.add('opacity-50');
+                }
+            }
+        }
+
+        function updateExerciseButtons() {
+            if (startTimerBtn && logExerciseBtn) {
+                if (selectedExerciseType && exerciseName.trim()) {
+                    startTimerBtn.disabled = false;
+                    startTimerBtn.classList.remove('opacity-50');
+                    logExerciseBtn.disabled = false;
+                    logExerciseBtn.classList.remove('opacity-50');
+                } else {
+                    startTimerBtn.disabled = true;
+                    startTimerBtn.classList.add('opacity-50');
+                    logExerciseBtn.disabled = true;
+                    logExerciseBtn.classList.add('opacity-50');
+                }
+            }
+        }
+
+        // Exercise type selection - Updated for new HTML structure
+        const exerciseButtons = document.querySelectorAll('button[class*="p-3"][class*="rounded-lg"]');
+        exerciseButtons.forEach((btn, index) => {
+            // Skip the first few buttons that aren't exercise type buttons
+            if (index < 7) { // Only the exercise type buttons
+                btn.addEventListener('click', function() {
+                    // Remove previous selection from all exercise type buttons
+                    exerciseButtons.forEach((b, i) => {
+                        if (i < 7) {
+                            b.classList.remove('border-nuri-primary', 'text-nuri-primary', 'scale-105');
+                            b.classList.add('border-stone-200', 'text-stone-700');
+                        }
+                    });
+
+                    // Add selection to clicked button
+                    this.classList.remove('border-stone-200', 'text-stone-700');
+                    this.classList.add('border-nuri-primary', 'text-nuri-primary', 'scale-105');
+
+                    // Set exercise type based on button text
+                    const buttonText = this.textContent.toLowerCase();
+                    if (buttonText.includes('cardio')) selectedExerciseType = 'cardio';
+                    else if (buttonText.includes('strength')) selectedExerciseType = 'strength';
+                    else if (buttonText.includes('yoga')) selectedExerciseType = 'yoga';
+                    else if (buttonText.includes('hiit')) selectedExerciseType = 'hiit';
+                    else if (buttonText.includes('swimming')) selectedExerciseType = 'swimming';
+                    else if (buttonText.includes('cycling')) selectedExerciseType = 'cycling';
+                    else selectedExerciseType = 'other';
+
+                    updateExerciseButtons();
+                });
+            }
+        });
+
+        // Event listeners for goal form
+        goalInput?.addEventListener('input', function() {
+            goalDescription = this.value;
+            updateAddGoalButton();
+        });
+
+        categorySelect?.addEventListener('change', function() {
+            selectedCategory = this.value;
+        });
+
+        pointsInput?.addEventListener('input', function() {
+            goalPoints = parseInt(this.value) || 25;
+        });
+
+        // Event listeners for exercise form
+        exerciseNameInput?.addEventListener('input', function() {
+            exerciseName = this.value;
+            updateExerciseButtons();
+        });
+
+        durationInput?.addEventListener('input', function() {
+            exerciseDuration = parseInt(this.value) || 30;
+            // Auto-calculate calories based on duration (rough estimate)
+            exerciseCalories = exerciseDuration * 8; // 8 calories per minute average
+            if (caloriesInput) {
+                caloriesInput.value = exerciseCalories;
+            }
+            updateCaloriesDisplay();
+        });
+
+        caloriesInput?.addEventListener('input', function() {
+            exerciseCalories = parseInt(this.value) || 0;
+            updateCaloriesDisplay();
+        });
+
+        // Auto-calculate calories button
+        const autoBtn = document.querySelector('button[class*="bg-stone-200"]');
+        autoBtn?.addEventListener('click', function() {
+            exerciseCalories = exerciseDuration * 8; // 8 calories per minute average
+            if (caloriesInput) {
+                caloriesInput.value = exerciseCalories;
+            }
+            updateCaloriesDisplay();
+        });
+
+        function updateCaloriesDisplay() {
+            const displayElement = document.querySelector('p[class*="text-xs"][class*="text-stone-500"]');
+            if (displayElement && displayElement.textContent.includes('Auto-calculated:')) {
+                displayElement.textContent = `Auto-calculated: ${exerciseCalories} calories`;
+            }
+        }
+
+        // AI Exercise buttons functionality
+        const aiExerciseButtons = document.querySelectorAll('button[class*="bg-nuri-primary"][class*="w-full"]');
+        aiExerciseButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const exerciseCard = this.closest('div[class*="bg-white"][class*="rounded-lg"]');
+                const exerciseName = exerciseCard.querySelector('h4').textContent;
+                alert(`Starting ${exerciseName}!`);
+            });
+        });
+
+        // General button click feedback
         document.addEventListener('click', function(e) {
             if (e.target.matches('button')) {
-                const buttonText = e.target.textContent.trim();
-                console.log('Clicked:', buttonText);
-                
-                // Simple visual feedback
                 e.target.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     e.target.style.transform = 'scale(1)';
                 }, 150);
             }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default values and states
+            updateAddGoalButton();
+            updateExerciseButtons();
         });
     </script>
 </body>

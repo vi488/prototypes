@@ -63,102 +63,245 @@
             <p class="text-gray-600">Track your mood and monitor symptoms to understand your wellness patterns</p>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <!-- Mood Tracking -->
-            <div class="bg-gradient-to-br from-nuri-bg-light to-nuri-bg-medium rounded-xl p-6 border border-nuri-primary-light">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center">
-                        <i data-lucide="smile" class="w-6 h-6 text-nuri-icon-primary"></i>
-                    </div>
-                    <span class="text-2xl">😊</span>
-                </div>
-                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Mood Tracker</h3>
-                <p class="text-gray-600 text-sm mb-4">Log how you're feeling with mood levels, symptoms, and notes</p>
-                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
-                    Track Mood
-                </button>
-            </div>
+        <!-- Mood Tracking Section -->
+        <div class="bg-nuri-bg-light rounded-xl border border-nuri-primary-lighter p-6 mb-8">
+            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-6">Mood Tracking</h2>
 
-            <!-- Symptom Tracking -->
-            <div class="bg-gradient-to-br from-nuri-bg-light to-nuri-bg-medium rounded-xl p-6 border border-nuri-primary-light">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center">
-                        <i data-lucide="activity" class="w-6 h-6 text-nuri-icon-secondary"></i>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Mood Entry Form -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-nuri-primary-dark">How are you feeling?</h3>
+                        <span class="text-sm text-nuri-icon-primary font-medium">+15 pts</span>
                     </div>
-                    <span class="text-2xl">🩺</span>
+
+                    <!-- Mood Selection -->
+                    <div class="flex justify-center space-x-3 mb-6">
+                        <button class="mood-btn p-3 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 transition-all" data-mood="sad">
+                            <span class="text-2xl">😔</span>
+                        </button>
+                        <button class="mood-btn p-3 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 transition-all" data-mood="neutral">
+                            <span class="text-2xl">😕</span>
+                        </button>
+                        <button class="mood-btn p-3 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 transition-all" data-mood="okay">
+                            <span class="text-2xl">😐</span>
+                        </button>
+                        <button class="mood-btn p-3 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 transition-all" data-mood="good">
+                            <span class="text-2xl">🙂</span>
+                        </button>
+                        <button class="mood-btn p-3 rounded-xl bg-white hover:bg-gray-50 border border-gray-200 transition-all" data-mood="happy">
+                            <span class="text-2xl">😊</span>
+                        </button>
+                    </div>
+
+                    <!-- Quick Symptoms -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-3">Any symptoms?</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="symptom-btn px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Headache</button>
+                            <button class="symptom-btn px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Fatigue</button>
+                            <button class="symptom-btn px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Bloating</button>
+                            <button class="symptom-btn px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Nausea</button>
+                            <button class="symptom-btn px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Cramps</button>
+                            <button class="symptom-btn px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Energy</button>
+                            <button class="symptom-btn px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Focus</button>
+                            <button class="symptom-btn px-3 py-1 text-xs bg-white border border-gray-200 rounded-full hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Sleep</button>
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Additional notes (optional)</h4>
+                        <textarea class="w-full p-3 border border-gray-200 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent" rows="2" placeholder="How are you feeling today? Any specific thoughts or observations..."></textarea>
+                    </div>
+
+                    <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors disabled:opacity-50" disabled>
+                        Save Mood & Symptoms
+                    </button>
                 </div>
-                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Symptom Tracker</h3>
-                <p class="text-gray-600 text-sm mb-4">Log symptoms with severity, triggers, and detailed notes</p>
-                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
-                    Log Symptoms
-                </button>
+
+                <!-- Recent Mood History -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i data-lucide="clock" class="w-5 h-5 text-nuri-icon-primary"></i>
+                        <h3 class="text-lg font-semibold text-nuri-primary-dark">Recent Mood History</h3>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="text-center py-8">
+                            <i data-lucide="smile" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
+                            <p class="text-gray-500 text-sm">No mood entries yet</p>
+                            <p class="text-gray-400 text-xs">Log your first mood above!</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <!-- Today's Summary -->
+
+        <!-- Symptom Tracking Section -->
+        <div class="bg-nuri-bg-light rounded-xl border border-nuri-primary-lighter p-6 mb-8">
+            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-6">Symptom Tracking</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Symptom Entry Form -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-nuri-bg-medium rounded-full flex items-center justify-center">
+                                    <i data-lucide="activity" class="w-5 h-5 text-nuri-icon-secondary"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-nuri-primary-dark">Log Your Symptoms</h3>
+                                    <p class="text-sm text-gray-600">+10 pts per symptom</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Symptom Selection -->
+                        <div class="mb-4">
+                            <h4 class="text-sm font-medium text-gray-700 mb-3">Select Symptoms</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Joint Pain</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Mood Changes</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Sleep Issues</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Digestive Issues</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Skin Problems</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Headache</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Fatigue</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Bloating</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Nausea</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Cramps</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Dizziness</button>
+                                <button class="symptom-select-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Heartburn</button>
+                            </div>
+                        </div>
+
+                        <!-- Custom Symptom -->
+                        <div class="mb-4">
+                            <h4 class="text-sm font-medium text-gray-700 mb-2">Add Custom Symptom</h4>
+                            <div class="flex space-x-2">
+                                <input type="text" class="flex-1 p-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent" placeholder="Enter custom symptom">
+                                <button class="p-2 bg-nuri-primary text-white rounded-lg hover:bg-nuri-primary-hover transition-colors">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Severity Level -->
+                        <div class="mb-4">
+                            <h4 class="text-sm font-medium text-gray-700 mb-3">Severity Level</h4>
+                            <div class="flex space-x-2">
+                                <button class="severity-btn flex-1 p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors text-center" data-severity="1">
+                                    <div class="font-medium text-sm">Mild</div>
+                                    <div class="text-xs">1</div>
+                                </button>
+                                <button class="severity-btn flex-1 p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors text-center" data-severity="2">
+                                    <div class="font-medium text-sm">Light</div>
+                                    <div class="text-xs">2</div>
+                                </button>
+                                <button class="severity-btn flex-1 p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors text-center" data-severity="3">
+                                    <div class="font-medium text-sm">Moderate</div>
+                                    <div class="text-xs">3</div>
+                                </button>
+                                <button class="severity-btn flex-1 p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors text-center" data-severity="4">
+                                    <div class="font-medium text-sm">Severe</div>
+                                    <div class="text-xs">4</div>
+                                </button>
+                                <button class="severity-btn flex-1 p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors text-center" data-severity="5">
+                                    <div class="font-medium text-sm">Extreme</div>
+                                    <div class="text-xs">5</div>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-2">Barely noticeable</p>
+                        </div>
+
+                        <!-- Possible Triggers -->
+                        <div class="mb-4">
+                            <h4 class="text-sm font-medium text-gray-700 mb-3">Possible Triggers</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Stress</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Poor Sleep</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Dehydration</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Dairy</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Gluten</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Sugar</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Caffeine</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Alcohol</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Large Meal</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Skipped Meal</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Weather</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Exercise</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Hormones</button>
+                                <button class="trigger-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Medication</button>
+                            </div>
+                        </div>
+
+                        <!-- Additional Notes -->
+                        <div class="mb-4">
+                            <h4 class="text-sm font-medium text-gray-700 mb-2">Additional Notes</h4>
+                            <textarea class="w-full p-3 border border-gray-200 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent" rows="2" placeholder="Any additional details about your symptoms..."></textarea>
+                        </div>
+
+                        <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors disabled:opacity-50" disabled>
+                            Log Symptoms
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Symptom History & Correlations -->
+                <div class="space-y-6">
+                    <!-- Symptom History -->
+                    <div class="bg-white rounded-xl border border-gray-200 p-4">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <i data-lucide="history" class="w-5 h-5 text-nuri-icon-primary"></i>
+                            <h3 class="text-lg font-semibold text-nuri-primary-dark">Symptom History</h3>
+                        </div>
+                        <div class="text-center py-6">
+                            <i data-lucide="activity" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
+                            <p class="text-gray-500 text-sm">No symptoms logged yet</p>
+                            <p class="text-gray-400 text-xs">Log your first symptom above!</p>
+                        </div>
+                    </div>
+
+                    <!-- Symptom Correlations -->
+                    <div class="bg-white rounded-xl border border-gray-200 p-4">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <i data-lucide="trending-up" class="w-5 h-5 text-nuri-icon-secondary"></i>
+                            <h3 class="text-lg font-semibold text-nuri-primary-dark">Symptom Correlations</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-nuri-bg-light rounded-lg border border-nuri-primary-lighter">
+                                <p class="text-sm text-gray-800">Headaches often occur after dairy consumption</p>
+                                <p class="text-xs text-nuri-icon-primary font-medium">Strong correlation</p>
+                            </div>
+                            <div class="p-3 bg-nuri-bg-light rounded-lg border border-nuri-primary-lighter">
+                                <p class="text-sm text-gray-800">Fatigue increases with poor sleep quality</p>
+                                <p class="text-xs text-nuri-icon-secondary font-medium">Moderate correlation</p>
+                            </div>
+                            <div class="p-3 bg-nuri-bg-light rounded-lg border border-nuri-primary-lighter">
+                                <p class="text-sm text-gray-800">Bloating reduces with smaller meal portions</p>
+                                <p class="text-xs text-gray-500 font-medium">Weak correlation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Today's Wellness Summary -->
         <div class="bg-nuri-bg-light rounded-xl p-6 mb-8 border border-nuri-primary-lighter">
             <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Today's Wellness Summary</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white rounded-lg p-4 text-center border border-nuri-primary-lighter">
-                    <div class="text-2xl mb-2">😊</div>
-                    <div class="text-sm text-gray-600">Current Mood</div>
-                    <div class="text-lg font-semibold text-nuri-icon-primary">Good</div>
+                    <div class="text-2xl mb-2">—</div>
+                    <div class="text-sm text-gray-600">Mood Today</div>
+                    <div class="text-lg font-semibold text-nuri-icon-primary">Not logged</div>
                 </div>
                 <div class="bg-white rounded-lg p-4 text-center border border-nuri-primary-lighter">
-                    <div class="text-2xl mb-2">🩺</div>
+                    <div class="text-2xl mb-2">0</div>
                     <div class="text-sm text-gray-600">Symptoms Tracked</div>
-                    <div class="text-lg font-semibold text-nuri-icon-secondary">3</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Recent Entries -->
-        <div class="bg-white rounded-xl border border-nuri-primary-light p-6">
-            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Recent Wellness Entries</h2>
-            <div class="space-y-4">
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                    <div class="flex items-center space-x-3">
-                        <div class="text-2xl">😊</div>
-                        <div>
-                            <div class="font-medium text-gray-800">Mood: Happy</div>
-                            <div class="text-sm text-gray-600">Today, 2:30 PM</div>
-                        </div>
-                    </div>
-                    <div class="text-sm text-gray-500">Level 4/5</div>
-                </div>
-
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                    <div class="flex items-center space-x-3">
-                        <div class="text-2xl">🩺</div>
-                        <div>
-                            <div class="font-medium text-gray-800">Symptom: Headache</div>
-                            <div class="text-sm text-gray-600">Today, 1:15 PM</div>
-                        </div>
-                    </div>
-                    <div class="text-sm text-gray-500">Severity: 3/5</div>
-                </div>
-
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                    <div class="flex items-center space-x-3">
-                        <div class="text-2xl">😐</div>
-                        <div>
-                            <div class="font-medium text-gray-800">Mood: Neutral</div>
-                            <div class="text-sm text-gray-600">Yesterday, 6:00 PM</div>
-                        </div>
-                    </div>
-                    <div class="text-sm text-gray-500">Level 3/5</div>
-                </div>
-
-                <div class="flex items-center justify-between py-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="text-2xl">🩺</div>
-                        <div>
-                            <div class="font-medium text-gray-800">Symptom: Fatigue</div>
-                            <div class="text-sm text-gray-600">Yesterday, 3:45 PM</div>
-                        </div>
-                    </div>
-                    <div class="text-sm text-gray-500">Severity: 2/5</div>
+                    <div class="text-lg font-semibold text-nuri-icon-secondary">Today</div>
                 </div>
             </div>
         </div>
@@ -166,15 +309,163 @@
     
     <script>
         lucide.createIcons();
-        
-        // Add click handlers for buttons
+
+        // State management
+        let selectedMood = null;
+        let selectedSymptoms = [];
+        let selectedSeverity = null;
+        let selectedTriggers = [];
+        let selectedSymptomsForLogging = [];
+
+        // Mood selection functionality
+        document.querySelectorAll('.mood-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove previous selection
+                document.querySelectorAll('.mood-btn').forEach(b => {
+                    b.classList.remove('border-nuri-primary', 'bg-nuri-primary', 'text-white');
+                    b.classList.add('border-gray-200', 'bg-white');
+                });
+
+                // Add selection to clicked button
+                this.classList.remove('border-gray-200', 'bg-white');
+                this.classList.add('border-nuri-primary', 'bg-nuri-primary', 'text-white');
+
+                selectedMood = this.dataset.mood;
+                updateMoodSaveButton();
+            });
+        });
+
+        // Quick symptom selection for mood tracking
+        document.querySelectorAll('.symptom-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const symptom = this.textContent.trim();
+
+                if (this.classList.contains('bg-nuri-primary')) {
+                    // Deselect
+                    this.classList.remove('bg-nuri-primary', 'text-white', 'border-nuri-primary');
+                    this.classList.add('bg-white', 'border-gray-200');
+                    selectedSymptoms = selectedSymptoms.filter(s => s !== symptom);
+                } else {
+                    // Select
+                    this.classList.remove('bg-white', 'border-gray-200');
+                    this.classList.add('bg-nuri-primary', 'text-white', 'border-nuri-primary');
+                    selectedSymptoms.push(symptom);
+                }
+
+                updateMoodSaveButton();
+            });
+        });
+
+        // Symptom selection for detailed logging
+        document.querySelectorAll('.symptom-select-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const symptom = this.textContent.trim();
+
+                if (this.classList.contains('bg-nuri-primary')) {
+                    // Deselect
+                    this.classList.remove('bg-nuri-primary', 'text-white', 'border-nuri-primary');
+                    this.classList.add('bg-white', 'border-gray-200');
+                    selectedSymptomsForLogging = selectedSymptomsForLogging.filter(s => s !== symptom);
+                } else {
+                    // Select
+                    this.classList.remove('bg-white', 'border-gray-200');
+                    this.classList.add('bg-nuri-primary', 'text-white', 'border-nuri-primary');
+                    selectedSymptomsForLogging.push(symptom);
+                }
+
+                updateSymptomSaveButton();
+            });
+        });
+
+        // Severity selection
+        document.querySelectorAll('.severity-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove previous selection
+                document.querySelectorAll('.severity-btn').forEach(b => {
+                    b.classList.remove('border-nuri-primary', 'bg-nuri-primary', 'text-white');
+                    b.classList.add('border-gray-200', 'bg-white');
+                });
+
+                // Add selection to clicked button
+                this.classList.remove('border-gray-200', 'bg-white');
+                this.classList.add('border-nuri-primary', 'bg-nuri-primary', 'text-white');
+
+                selectedSeverity = this.dataset.severity;
+                updateSymptomSaveButton();
+
+                // Update severity description
+                const descriptions = {
+                    '1': 'Barely noticeable',
+                    '2': 'Mild discomfort',
+                    '3': 'Moderate discomfort',
+                    '4': 'Severe discomfort',
+                    '5': 'Extreme discomfort'
+                };
+
+                const descElement = document.querySelector('.severity-btn').parentElement.nextElementSibling;
+                if (descElement && descElement.tagName === 'P') {
+                    descElement.textContent = descriptions[selectedSeverity];
+                }
+            });
+        });
+
+        // Trigger selection
+        document.querySelectorAll('.trigger-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const trigger = this.textContent.trim();
+
+                if (this.classList.contains('bg-nuri-primary')) {
+                    // Deselect
+                    this.classList.remove('bg-nuri-primary', 'text-white', 'border-nuri-primary');
+                    this.classList.add('bg-white', 'border-gray-200');
+                    selectedTriggers = selectedTriggers.filter(t => t !== trigger);
+                } else {
+                    // Select
+                    this.classList.remove('bg-white', 'border-gray-200');
+                    this.classList.add('bg-nuri-primary', 'text-white', 'border-nuri-primary');
+                    selectedTriggers.push(trigger);
+                }
+
+                updateSymptomSaveButton();
+            });
+        });
+
+        // Update save button states
+        function updateMoodSaveButton() {
+            const saveBtn = document.querySelector('button[disabled]:contains("Save Mood & Symptoms")') ||
+                           document.querySelector('button:contains("Save Mood & Symptoms")');
+            if (saveBtn) {
+                if (selectedMood) {
+                    saveBtn.disabled = false;
+                    saveBtn.classList.remove('opacity-50');
+                } else {
+                    saveBtn.disabled = true;
+                    saveBtn.classList.add('opacity-50');
+                }
+            }
+        }
+
+        function updateSymptomSaveButton() {
+            const saveBtn = document.querySelector('button[disabled]:contains("Log Symptoms")') ||
+                           document.querySelector('button:contains("Log Symptoms")');
+            if (saveBtn) {
+                if (selectedSymptomsForLogging.length > 0) {
+                    saveBtn.disabled = false;
+                    saveBtn.classList.remove('opacity-50');
+                } else {
+                    saveBtn.disabled = true;
+                    saveBtn.classList.add('opacity-50');
+                }
+            }
+        }
+
+        // General button click feedback
         document.addEventListener('click', function(e) {
-            if (e.target.matches('button')) {
-                const buttonText = e.target.textContent.trim();
-                console.log('Clicked:', buttonText);
-                
-                // Here you would typically handle the specific action
-                // For now, just show a simple feedback
+            if (e.target.matches('button') && !e.target.classList.contains('mood-btn') &&
+                !e.target.classList.contains('symptom-btn') && !e.target.classList.contains('symptom-select-btn') &&
+                !e.target.classList.contains('severity-btn') && !e.target.classList.contains('trigger-btn')) {
+
+                // Visual feedback for other buttons
                 e.target.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     e.target.style.transform = 'scale(1)';

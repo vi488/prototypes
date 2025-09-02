@@ -53,170 +53,265 @@
 
         .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
         .hover\:bg-nuri-primary-light:hover { background-color: var(--nuri-primary); }
+
+        /* Mobile optimizations - Remove any chatbox elements */
+        @media (max-width: 767px) {
+            /* Hide any potential chatbox or input elements on mobile */
+            .mobile-bottom-input,
+            .fixed.bottom-0,
+            .chatbox,
+            .chat-input {
+                display: none !important;
+            }
+
+            /* Ensure proper mobile spacing without chatbox */
+            body {
+                padding-bottom: 0 !important;
+            }
+
+            /* Mobile-specific layout adjustments */
+            .grid.grid-cols-1.lg\\:grid-cols-2 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            /* Compact mobile spacing */
+            .p-6 {
+                padding: 1rem;
+            }
+
+            .mb-8 {
+                margin-bottom: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-white font-sans">
     <div class="p-6">
-        <!-- Header -->
+        <!-- Header with Logo and Greeting (exact match to website) -->
         <div class="mb-8">
-            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Nutrition Tools</h1>
-            <p class="text-gray-600">Log your meals and track fasting sessions to monitor your nutrition</p>
-        </div>
+            <div class="flex items-center space-x-3 mb-6">
+                <img src="nuri_logo.svg" alt="Nuri Logo" class="w-8 h-10">
+                <h1 class="text-2xl font-semibold text-gray-800">Good afternoon, Dangvi!</h1>
+            </div>
 
-        <!-- Today's Progress -->
-        <div class="bg-gradient-to-r from-nuri-bg-light to-nuri-bg-medium rounded-xl p-6 mb-8 border border-nuri-primary-light">
-            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Today's Nutrition</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-nuri-icon-primary">1,247</div>
+            <!-- Today's Stats Cards (exact match to website) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="bg-white rounded-lg p-4 text-center border border-gray-100">
+                    <div class="flex items-center justify-center space-x-2 mb-2">
+                        <i data-lucide="utensils" class="w-5 h-5 text-nuri-primary"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-900">0</div>
                     <div class="text-sm text-gray-600">Calories Today</div>
-                    <div class="text-xs text-gray-500">from logged meals</div>
                 </div>
-                <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-nuri-icon-secondary">14h</div>
+                <div class="bg-white rounded-lg p-4 text-center border border-gray-100">
+                    <div class="flex items-center justify-center space-x-2 mb-2">
+                        <i data-lucide="clock" class="w-5 h-5 text-nuri-primary"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-900">0h</div>
                     <div class="text-sm text-gray-600">Fasting Time</div>
-                    <div class="text-xs text-gray-500">current session</div>
                 </div>
             </div>
         </div>
         
-        <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <!-- Meal Logger -->
-            <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="utensils" class="w-6 h-6 text-nuri-icon-primary"></i>
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Left Column -->
+            <div class="space-y-6">
+                <!-- Meal Logging Section -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">Meal Logging</h2>
+
+                    <!-- Meal Entry Form -->
+                    <div class="bg-gradient-to-br from-nuri-bg-light to-nuri-bg-medium rounded-xl p-6 border border-nuri-primary-light">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-nuri-primary-dark">Log Your Meal</h3>
+                            <span class="text-sm text-nuri-primary font-medium">+25 pts per meal</span>
+                        </div>
+
+                    <!-- Meal Type Selection -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-3">Meal Type</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button class="meal-type-btn flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors" data-meal="breakfast">
+                                <span class="text-lg mb-1">🌅</span>
+                                <span class="text-sm">Breakfast</span>
+                            </button>
+                            <button class="meal-type-btn flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors" data-meal="lunch">
+                                <span class="text-lg mb-1">☀️</span>
+                                <span class="text-sm">Lunch</span>
+                            </button>
+                            <button class="meal-type-btn flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors" data-meal="dinner">
+                                <span class="text-lg mb-1">🌙</span>
+                                <span class="text-sm">Dinner</span>
+                            </button>
+                            <button class="meal-type-btn flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors" data-meal="snack">
+                                <span class="text-lg mb-1">🍎</span>
+                                <span class="text-sm">Snack</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Meal Photo Upload -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Meal Photo</h4>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-nuri-primary transition-colors cursor-pointer">
+                            <i data-lucide="camera" class="w-8 h-8 text-gray-400 mx-auto mb-2"></i>
+                            <p class="text-sm text-gray-600">Upload meal photo</p>
+                            <p class="text-xs text-gray-500">Click to browse or drag & drop</p>
+                            <p class="text-xs text-gray-400 mt-1">Supports: JPG, PNG, GIF (max 5MB)</p>
+                        </div>
+                    </div>
+
+                    <!-- Meal Name -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Meal Name</h4>
+                        <input type="text" class="w-full p-3 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent" placeholder="e.g., Grilled chicken with vegetables">
+                    </div>
+
+                    <!-- Ingredients -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Ingredients</h4>
+                        <div class="flex space-x-2">
+                            <input type="text" class="flex-1 p-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent" placeholder="Add ingredient">
+                            <button class="p-2 bg-nuri-primary text-white rounded-lg hover:bg-nuri-primary-hover transition-colors">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Post-Meal Feelings -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-medium text-gray-700 mb-3">How do you feel after eating?</h4>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button class="feeling-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Energy boost</button>
+                            <button class="feeling-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Fatigue</button>
+                            <button class="feeling-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Bloating</button>
+                            <button class="feeling-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Satisfied</button>
+                            <button class="feeling-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Still hungry</button>
+                            <button class="feeling-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Nausea</button>
+                            <button class="feeling-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Happy</button>
+                            <button class="feeling-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Sleepy</button>
+                            <button class="feeling-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Alert</button>
+                            <button class="feeling-btn px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors">Craving sweets</button>
+                        </div>
+                    </div>
+
+                        <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors disabled:opacity-50" disabled>
+                            Save Meal
+                        </button>
+                    </div>
                 </div>
-                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Meal Logger</h3>
-                <p class="text-gray-600 text-sm mb-4">Log meals by type with ingredients and symptoms tracking</p>
-                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
-                    Log Meal
-                </button>
+
+                <!-- Today's Meals Section (Below Meal Logging) -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <button id="todaysMealsToggle" class="w-full text-left hover:bg-gray-50 transition-colors rounded-lg p-2 -m-2">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="utensils" class="w-5 h-5 text-nuri-primary"></i>
+                                <h3 class="text-lg font-semibold text-gray-800">Today's Meals</h3>
+                            </div>
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 transform transition-transform" id="todaysMealsChevron"></i>
+                        </div>
+                    </button>
+
+                    <div id="todaysMealsContent" class="mt-4">
+                        <div class="text-center py-8">
+                            <i data-lucide="utensils" class="w-12 h-12 text-gray-300 mx-auto mb-3"></i>
+                            <p class="text-gray-500 text-sm">No meals logged today</p>
+                            <p class="text-gray-400 text-xs">Log your first meal above!</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Fasting Timer -->
-            <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-nuri-bg-medium rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="clock" class="w-6 h-6 text-nuri-icon-secondary"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-nuri-primary-dark mb-2">Fasting Timer</h3>
-                <p class="text-gray-600 text-sm mb-4">Start and track intermittent fasting sessions</p>
-                <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors">
-                    Start Fasting
-                </button>
-            </div>
-        </div>
-        
-        <!-- Recent Meals -->
-        <div class="bg-white rounded-xl border border-nuri-primary-light p-6 mb-8">
-            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Recent Meals</h2>
 
-            <!-- Breakfast -->
-            <div class="mb-6">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-medium text-gray-800">🌅 Breakfast</h3>
-                    <span class="text-sm text-gray-600">387 calories</span>
-                </div>
-                <div class="space-y-2">
-                    <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-nuri-primary-bg-medium rounded-lg flex items-center justify-center">
-                                <i data-lucide="wheat" class="w-4 h-4 text-nuri-primary"></i>
+            <!-- Right Column -->
+            <div class="space-y-6">
+                <!-- Fasting Timer Section -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6">Fasting Timer</h2>
+
+                    <!-- Current Status -->
+                    <div class="bg-gradient-to-br from-nuri-bg-light to-nuri-bg-medium rounded-xl p-6 border border-nuri-primary-light">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-10 h-10 bg-nuri-bg-medium rounded-full flex items-center justify-center">
+                                <i data-lucide="clock" class="w-5 h-5 text-nuri-primary"></i>
                             </div>
                             <div>
-                                <p class="text-sm font-medium text-gray-800">Oatmeal with berries</p>
-                                <p class="text-xs text-gray-600">Today, 8:30 AM</p>
+                                <h3 class="text-lg font-semibold text-nuri-primary-dark">Ready to Fast</h3>
                             </div>
                         </div>
-                        <span class="text-sm font-medium text-gray-800">287 cal</span>
-                    </div>
-                    <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-nuri-primary-bg-light rounded-lg flex items-center justify-center">
-                                <i data-lucide="coffee" class="w-4 h-4 text-nuri-primary-light"></i>
+
+                        <p class="text-sm text-gray-600 mb-2">16:8 • Target: 16 hours</p>
+                        <div class="text-sm text-nuri-primary font-medium mb-4">+160 pts when complete</div>
+
+                        <div class="text-center mb-4">
+                            <div class="w-24 h-24 mx-auto bg-white rounded-full flex items-center justify-center border-4 border-nuri-primary-lighter mb-4">
+                                <div class="text-center">
+                                    <div class="text-lg font-bold text-nuri-primary">0:00</div>
+                                    <div class="text-xs text-gray-500">16:00 left</div>
+                                    <div class="text-xs text-nuri-icon-secondary">0%</div>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-800">Coffee with milk</p>
-                                <p class="text-xs text-gray-600">Today, 8:45 AM</p>
+                        </div>
+
+                        <button class="w-full bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors flex items-center justify-center space-x-2">
+                            <i data-lucide="play" class="w-4 h-4"></i>
+                            <span>Start Fast</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Fasting Windows Section (Below Fasting Timer) -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-nuri-primary-dark mb-4">Fasting Windows</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button class="fasting-window-btn flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors text-left" data-window="16:8">
+                            <div class="font-medium">16:8</div>
+                            <div class="text-sm opacity-75">Intermittent</div>
+                            <div class="text-sm opacity-75">16h window</div>
+                        </button>
+                        <button class="fasting-window-btn flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors text-left" data-window="18:6">
+                            <div class="font-medium">18:6</div>
+                            <div class="text-sm opacity-75">Extended</div>
+                            <div class="text-sm opacity-75">18h window</div>
+                        </button>
+                        <button class="fasting-window-btn flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors text-left" data-window="20:4">
+                            <div class="font-medium">20:4</div>
+                            <div class="text-sm opacity-75">Warrior</div>
+                            <div class="text-sm opacity-75">20h window</div>
+                        </button>
+                        <button class="fasting-window-btn flex flex-col items-center justify-center p-3 bg-white border border-gray-200 rounded-lg hover:border-nuri-primary hover:bg-nuri-primary hover:text-white transition-colors text-left" data-window="24:0">
+                            <div class="font-medium">24:0</div>
+                            <div class="text-sm opacity-75">Full Day</div>
+                            <div class="text-sm opacity-75">24h window</div>
+                        </button>
+                    </div>
+
+                    <!-- Current Session Stats -->
+                    <div class="mt-6 grid grid-cols-3 gap-4">
+                        <div class="text-center">
+                            <div class="flex items-center justify-center space-x-1 mb-2">
+                                <i data-lucide="target" class="w-4 h-4 text-nuri-icon-primary"></i>
+                                <span class="text-xs text-gray-600">Current Goal</span>
                             </div>
+                            <div class="text-lg font-semibold text-nuri-primary">16h</div>
                         </div>
-                        <span class="text-sm font-medium text-gray-800">100 cal</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Current Fasting Session -->
-        <div class="bg-white rounded-xl border border-nuri-primary-light p-6">
-            <h2 class="text-xl font-semibold text-nuri-primary-dark mb-4">Current Fasting Session</h2>
-
-            <!-- Active Fasting Display -->
-            <div class="bg-nuri-bg-light rounded-lg p-4 mb-4 border border-nuri-primary-lighter">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-nuri-bg-medium rounded-full flex items-center justify-center">
-                            <i data-lucide="clock" class="w-5 h-5 text-nuri-icon-tertiary"></i>
+                        <div class="text-center">
+                            <div class="flex items-center justify-center space-x-1 mb-2">
+                                <i data-lucide="clock" class="w-4 h-4 text-nuri-icon-secondary"></i>
+                                <span class="text-xs text-gray-600">Time Elapsed</span>
+                            </div>
+                            <div class="text-lg font-semibold text-nuri-icon-secondary">0:00</div>
                         </div>
-                        <div>
-                            <h3 class="font-medium text-nuri-primary-dark">16:8 Intermittent Fasting</h3>
-                            <p class="text-sm text-gray-600">Started yesterday at 8:00 PM</p>
+                        <div class="text-center">
+                            <div class="flex items-center justify-center space-x-1 mb-2">
+                                <i data-lucide="trending-up" class="w-4 h-4 text-nuri-icon-tertiary"></i>
+                                <span class="text-xs text-gray-600">Progress</span>
+                            </div>
+                            <div class="text-lg font-semibold text-nuri-icon-tertiary">0%</div>
                         </div>
-                    </div>
-                    <span class="text-lg font-bold text-nuri-icon-secondary">14h 23m</span>
-                </div>
-
-                <!-- Enhanced Progress Bar -->
-                <div class="mb-3">
-                    <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
-                        <span>Fasting Progress</span>
-                        <span class="text-nuri-icon-secondary font-medium">14h 23m / 16h</span>
-                    </div>
-                    <!-- Multi-layer Progress Bar -->
-                    <div class="relative w-full bg-nuri-primary-lighter rounded-full h-3">
-                        <!-- Completed time (current progress) -->
-                        <div class="absolute top-0 left-0 bg-nuri-icon-secondary h-3 rounded-full transition-all duration-300" style="width: 89%"></div>
-                        <!-- Time markers -->
-                        <div class="absolute top-0 left-0 w-full h-3 flex items-center">
-                            <!-- Current time marker -->
-                            <div class="absolute bg-nuri-primary h-4 w-0.5 rounded-full" style="left: 89%; transform: translateX(-50%)"></div>
-                        </div>
-                    </div>
-                    <!-- Time labels -->
-                    <div class="flex justify-between text-xs text-gray-500 mt-1">
-                        <span>Start</span>
-                        <span class="text-nuri-icon-primary font-medium">Current: 14h 23m</span>
-                        <span>Goal: 16h</span>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex space-x-3">
-                    <button class="flex-1 bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors text-sm">
-                        End Fast
-                    </button>
-                    <button class="flex-1 bg-nuri-primary text-white py-2 rounded-lg hover:bg-nuri-primary-hover transition-colors text-sm">
-                        Pause
-                    </button>
-                </div>
-            </div>
-
-            <!-- Recent Fasting History -->
-            <div class="space-y-3">
-                <h3 class="font-medium text-gray-800">Recent Fasting Sessions</h3>
-                <div class="space-y-2">
-                    <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
-                        <div>
-                            <p class="text-sm font-medium text-gray-800">16:8 Fast</p>
-                            <p class="text-xs text-gray-600">Yesterday • Completed</p>
-                        </div>
-                        <span class="text-sm font-medium text-green-600">16h 45m</span>
-                    </div>
-                    <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
-                        <div>
-                            <p class="text-sm font-medium text-gray-800">14:10 Fast</p>
-                            <p class="text-xs text-gray-600">2 days ago • Completed</p>
-                        </div>
-                        <span class="text-sm font-medium text-green-600">14h 30m</span>
                     </div>
                 </div>
             </div>
@@ -225,14 +320,163 @@
     
     <script>
         lucide.createIcons();
-        
-        // Add click handlers for buttons
+
+        // State management
+        let selectedMealType = null;
+        let selectedFeelings = [];
+        let selectedFastingWindow = '16:8';
+
+        // Today's Meals toggle functionality
+        document.getElementById('todaysMealsToggle').addEventListener('click', function() {
+            const content = document.getElementById('todaysMealsContent');
+            const chevron = document.getElementById('todaysMealsChevron');
+
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                chevron.classList.add('rotate-180');
+                // Add active state to button
+                this.classList.add('bg-gray-50');
+            } else {
+                content.style.display = 'none';
+                chevron.classList.remove('rotate-180');
+                // Remove active state from button
+                this.classList.remove('bg-gray-50');
+            }
+        });
+
+
+
+        // Meal type selection
+        document.querySelectorAll('.meal-type-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove previous selection
+                document.querySelectorAll('.meal-type-btn').forEach(b => {
+                    b.classList.remove('border-nuri-primary', 'bg-nuri-primary', 'text-white');
+                    b.classList.add('border-gray-200', 'bg-white');
+                });
+
+                // Add selection to clicked button
+                this.classList.remove('border-gray-200', 'bg-white');
+                this.classList.add('border-nuri-primary', 'bg-nuri-primary', 'text-white');
+
+                selectedMealType = this.dataset.meal;
+                updateMealSaveButton();
+            });
+        });
+
+        // Post-meal feelings selection
+        document.querySelectorAll('.feeling-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const feeling = this.textContent.trim();
+
+                if (this.classList.contains('bg-nuri-primary')) {
+                    // Deselect
+                    this.classList.remove('bg-nuri-primary', 'text-white', 'border-nuri-primary');
+                    this.classList.add('bg-white', 'border-gray-200');
+                    selectedFeelings = selectedFeelings.filter(f => f !== feeling);
+                } else {
+                    // Select
+                    this.classList.remove('bg-white', 'border-gray-200');
+                    this.classList.add('bg-nuri-primary', 'text-white', 'border-nuri-primary');
+                    selectedFeelings.push(feeling);
+                }
+
+                updateMealSaveButton();
+            });
+        });
+
+        // Fasting window selection
+        document.querySelectorAll('.fasting-window-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove previous selection
+                document.querySelectorAll('.fasting-window-btn').forEach(b => {
+                    b.classList.remove('border-nuri-primary', 'bg-nuri-primary', 'text-white');
+                    b.classList.add('border-gray-200', 'bg-white');
+                });
+
+                // Add selection to clicked button
+                this.classList.remove('border-gray-200', 'bg-white');
+                this.classList.add('border-nuri-primary', 'bg-nuri-primary', 'text-white');
+
+                selectedFastingWindow = this.dataset.window;
+                updateFastingDisplay();
+            });
+        });
+
+        // Update meal save button state
+        function updateMealSaveButton() {
+            const saveBtn = document.querySelector('button[disabled]:contains("Save Meal")') ||
+                           document.querySelector('button:contains("Save Meal")');
+            if (saveBtn) {
+                const mealName = document.querySelector('input[placeholder*="Grilled chicken"]').value;
+                if (selectedMealType && mealName.trim()) {
+                    saveBtn.disabled = false;
+                    saveBtn.classList.remove('opacity-50');
+                } else {
+                    saveBtn.disabled = true;
+                    saveBtn.classList.add('opacity-50');
+                }
+            }
+        }
+
+        // Update fasting display based on selected window
+        function updateFastingDisplay() {
+            const windows = {
+                '16:8': { target: '16 hours', points: 160 },
+                '18:6': { target: '18 hours', points: 180 },
+                '20:4': { target: '20 hours', points: 200 },
+                '24:0': { target: '24 hours', points: 240 }
+            };
+
+            const window = windows[selectedFastingWindow];
+            if (window) {
+                // Update display elements
+                const targetElement = document.querySelector('.text-sm.text-gray-600');
+                if (targetElement && targetElement.textContent.includes('Target:')) {
+                    targetElement.textContent = `${selectedFastingWindow} • Target: ${window.target}`;
+                }
+
+                const pointsElement = document.querySelector('.text-nuri-icon-primary.font-medium');
+                if (pointsElement && pointsElement.textContent.includes('pts')) {
+                    pointsElement.textContent = `+${window.points} pts when complete`;
+                }
+
+                // Update goal display
+                const goalElement = document.querySelector('.text-lg.font-semibold.text-nuri-primary');
+                if (goalElement && goalElement.textContent.includes('h')) {
+                    goalElement.textContent = window.target.split(' ')[0];
+                }
+            }
+        }
+
+        // Meal name input listener
+        document.querySelector('input[placeholder*="Grilled chicken"]')?.addEventListener('input', updateMealSaveButton);
+
+        // Initialize default fasting window selection and other defaults
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Today's Meals as expanded (matching live website)
+            const content = document.getElementById('todaysMealsContent');
+            const chevron = document.getElementById('todaysMealsChevron');
+            const toggle = document.getElementById('todaysMealsToggle');
+
+            // Show content by default
+            content.style.display = 'block';
+            chevron.classList.add('rotate-180');
+            toggle.classList.add('bg-gray-50');
+
+            // Initialize default fasting window selection
+            const defaultWindow = document.querySelector('.fasting-window-btn[data-window="16:8"]');
+            if (defaultWindow) {
+                defaultWindow.click();
+            }
+        });
+
+        // General button click feedback
         document.addEventListener('click', function(e) {
-            if (e.target.matches('button')) {
-                const buttonText = e.target.textContent.trim();
-                console.log('Clicked:', buttonText);
-                
-                // Simple visual feedback
+            if (e.target.matches('button') && !e.target.classList.contains('meal-type-btn') &&
+                !e.target.classList.contains('feeling-btn') && !e.target.classList.contains('fasting-window-btn')) {
+
+                // Visual feedback for other buttons
                 e.target.style.transform = 'scale(0.95)';
                 setTimeout(() => {
                     e.target.style.transform = 'scale(1)';

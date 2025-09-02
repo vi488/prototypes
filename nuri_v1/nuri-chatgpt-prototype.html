@@ -1439,13 +1439,17 @@
             }
         });
 
-        // Modal functionality (only for settings now)
+        // Modal functionality (only for settings)
         const modalContainer = document.getElementById('modalContainer');
         const modalFrame = document.getElementById('modalFrame');
 
         function openModal(type) {
-            if (type === 'settings') {
-                modalFrame.src = 'settings-modal.html';
+            const modalUrls = {
+                'settings': 'settings-modal.html'
+            };
+
+            if (modalUrls[type]) {
+                modalFrame.src = modalUrls[type];
                 modalContainer.classList.remove('hidden');
                 document.body.classList.add('overflow-hidden');
             }
@@ -1456,6 +1460,13 @@
             modalFrame.src = '';
             document.body.classList.remove('overflow-hidden');
         }
+
+        // Listen for modal close messages from iframe modals
+        window.addEventListener('message', function(event) {
+            if (event.data === 'closeModal') {
+                closeModal();
+            }
+        });
 
         // Listen for close modal messages from iframes
         window.addEventListener('message', function(event) {
