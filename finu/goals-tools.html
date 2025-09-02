@@ -9,25 +9,29 @@
     <style>
         /* Finu Brand Colors */
         :root {
-            /* Main Brand Blue Palette */
+            /* Main Brand Blue Palette - Updated per brand guidelines */
             --finu-primary: #497AFF;           /* Main brand blue */
             --finu-primary-hover: #3B5FE6;     /* Darker blue for hover */
-            --finu-primary-light: #6B8FFF;     /* Light blue for accents */
-            --finu-primary-lighter: #8FA8FF;   /* Lighter blue for backgrounds */
-            --finu-primary-lightest: #B3C1FF;  /* Very light blue for subtle backgrounds */
-            --finu-primary-dark: #2E4FCC;      /* Dark blue for emphasis */
-            --finu-primary-darker: #1E3399;    /* Darker blue for strong emphasis */
+            --finu-primary-light: #F3FAFF;     /* Light blue for accents - brand secondary */
+            --finu-primary-lighter: #E6F2FF;   /* Very light blue */
+            --finu-primary-dark: #043178;      /* Dark blue for emphasis - brand tertiary */
 
-            /* Background variations */
-            --finu-bg-light: #F8FAFF;          /* Subtle light background */
-            --finu-bg-medium: #E6EDFF;         /* Medium light blue background */
-            --finu-bg-dark: #6B8FFF;           /* Medium blue background */
+            /* Background Blues */
+            --finu-bg-light: #F3FAFF;          /* Subtle light background - brand secondary */
+            --finu-bg-medium: #E6F2FF;         /* Medium light background */
+            --finu-bg-dark: #497AFF;           /* Medium background - brand primary */
 
             /* Icon Blues - Harmonious variations */
             --finu-icon-primary: #497AFF;      /* Primary icons */
             --finu-icon-secondary: #5B8CFF;    /* Secondary icons */
-            --finu-icon-tertiary: #7BA3FF;     /* Tertiary icons */
-            --finu-icon-light: #9BB8FF;        /* Light icons */
+            --finu-icon-tertiary: #7DA3FF;     /* Tertiary icons */
+            --finu-icon-light: #A0BAFF;        /* Light icons */
+
+            /* Button Blues - Consistent system */
+            --finu-btn-primary: #497AFF;       /* Primary buttons */
+            --finu-btn-primary-hover: #3B5FE6; /* Primary button hover */
+            --finu-btn-secondary: #5B8CFF;     /* Secondary buttons */
+            --finu-btn-secondary-hover: #043178; /* Secondary button hover */
         }
 
         /* Utility Classes */
@@ -81,25 +85,25 @@
                 <div class="text-lg font-semibold text-finu-icon-primary">0</div>
             </div>
             <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
-                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
+                <div class="w-8 h-8 bg-finu-primary-light rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-finu-primary"></i>
                 </div>
                 <div class="text-sm text-gray-600">Completed</div>
-                <div class="text-lg font-semibold text-green-600">0</div>
+                <div class="text-lg font-semibold text-finu-primary">0</div>
             </div>
             <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
-                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <i data-lucide="trending-up" class="w-4 h-4 text-blue-600"></i>
+                <div class="w-8 h-8 bg-finu-primary-light rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="trending-up" class="w-4 h-4 text-finu-primary-dark"></i>
                 </div>
                 <div class="text-sm text-gray-600">On Track</div>
-                <div class="text-lg font-semibold text-blue-600">0</div>
+                <div class="text-lg font-semibold text-finu-primary-dark">0</div>
             </div>
             <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
-                <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <i data-lucide="percent" class="w-4 h-4 text-orange-600"></i>
+                <div class="w-8 h-8 bg-finu-primary-light rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="percent" class="w-4 h-4 text-finu-primary-hover"></i>
                 </div>
                 <div class="text-sm text-gray-600">Avg Progress</div>
-                <div class="text-lg font-semibold text-orange-600">0.0%</div>
+                <div class="text-lg font-semibold text-finu-primary-hover">0.0%</div>
             </div>
         </div>
 

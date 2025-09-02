@@ -181,17 +181,17 @@
         }
         
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: var(--finu-primary-light);
             border-radius: 3px;
         }
-        
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
+            background: var(--finu-primary);
             border-radius: 3px;
         }
-        
+
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
+            background: var(--finu-primary-hover);
         }
         
         /* Mobile bottom sheet */
@@ -396,7 +396,7 @@
             <div class="absolute bottom-0 left-0 right-0 p-4">
                 <div class="relative">
                     <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 text-left">
-                        <div id="userAvatar" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background-color: #497AFF;">
+                        <div id="userAvatar" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium bg-finu-primary">
                             JD
                         </div>
                         <div class="flex-1">
@@ -412,7 +412,7 @@
                             <!-- User Info Section -->
                             <div class="px-3 py-2 border-b border-gray-100">
                                 <div class="flex items-center space-x-3">
-                                    <div id="userAvatarDropdown" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background-color: #497AFF;">
+                                    <div id="userAvatarDropdown" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium bg-finu-primary">
                                         JD
                                     </div>
                                     <div class="flex-1">
@@ -1231,7 +1231,7 @@
             if (isUser) {
                 messageDiv.innerHTML = `
                     <div class="flex items-start space-x-3 max-w-2xl">
-                        <div class="px-4 py-3 rounded-2xl rounded-tr-md message-animate" style="background-color: #e9e9e980; color: #1f2937;">
+                        <div class="px-4 py-3 rounded-2xl rounded-tr-md message-animate" style="background-color: var(--finu-primary-light); color: var(--finu-primary-dark);">
                             <div>${formattedContent}</div>
                         </div>
                         <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center flex-shrink-0">
@@ -1659,16 +1659,16 @@
         // User avatar color generation
         function generateAvatarColor(name) {
             const colors = [
-                '#10a37f', // ChatGPT green
-                '#ff6b6b', // Red
-                '#4ecdc4', // Teal
-                '#45b7d1', // Blue
-                '#96ceb4', // Light green
-                '#feca57', // Yellow
-                '#ff9ff3', // Pink
-                '#54a0ff', // Light blue
-                '#5f27cd', // Purple
-                '#00d2d3'  // Cyan
+                '#497AFF', // Finu primary blue
+                '#043178', // Finu dark blue
+                '#3B5FE6', // Finu hover blue
+                '#5B8CFF', // Finu secondary blue
+                '#7DA3FF', // Finu tertiary blue
+                '#A0BAFF', // Finu light blue
+                '#6B8FFF', // Finu accent blue
+                '#8FA8FF', // Finu lighter blue
+                '#B3C1FF', // Finu lightest blue
+                '#2E4FCC'  // Finu primary dark
             ];
 
             let hash = 0;

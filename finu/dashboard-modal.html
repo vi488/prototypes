@@ -9,13 +9,15 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --nuri-primary: #00AF9F;
-            --nuri-primary-hover: #009688;
+            --finu-primary: #497AFF;
+            --finu-primary-hover: #3B5FE6;
+            --finu-primary-light: #F3FAFF;
+            --finu-primary-dark: #043178;
         }
-        .bg-nuri-primary { background-color: var(--nuri-primary); }
-        .text-nuri-primary { color: var(--nuri-primary); }
-        .border-nuri-primary { border-color: var(--nuri-primary); }
-        .hover\:bg-nuri-primary:hover { background-color: var(--nuri-primary-hover); }
+        .bg-finu-primary { background-color: var(--finu-primary); }
+        .text-finu-primary { color: var(--finu-primary); }
+        .border-finu-primary { border-color: var(--finu-primary); }
+        .hover\:bg-finu-primary:hover { background-color: var(--finu-primary-hover); }
         
         .modal-enter {
             animation: modalEnter 0.3s ease-out;
@@ -144,11 +146,11 @@
                         <div class="relative inline-block mb-4">
                             <svg class="w-32 h-32 progress-ring">
                                 <circle cx="64" cy="64" r="28" stroke="#e5e7eb" stroke-width="6" fill="transparent"/>
-                                <circle cx="64" cy="64" r="28" stroke="var(--nuri-primary)" stroke-width="6" fill="transparent" 
+                                <circle cx="64" cy="64" r="28" stroke="var(--finu-primary)" stroke-width="6" fill="transparent"
                                         class="progress-ring-circle" style="stroke-dasharray: 176; stroke-dashoffset: 35;"/>
                             </svg>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="text-2xl font-bold text-nuri-primary">80%</span>
+                                <span class="text-2xl font-bold text-finu-primary">80%</span>
                             </div>
                         </div>
                         <p class="text-sm text-gray-600">4 of 5 daily goals met</p>
@@ -160,11 +162,11 @@
                         <div class="relative inline-block mb-4">
                             <svg class="w-32 h-32 progress-ring">
                                 <circle cx="64" cy="64" r="28" stroke="#e5e7eb" stroke-width="6" fill="transparent"/>
-                                <circle cx="64" cy="64" r="28" stroke="#3b82f6" stroke-width="6" fill="transparent" 
+                                <circle cx="64" cy="64" r="28" stroke="var(--finu-primary)" stroke-width="6" fill="transparent"
                                         class="progress-ring-circle" style="stroke-dasharray: 176; stroke-dashoffset: 70;"/>
                             </svg>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="text-2xl font-bold text-blue-500">60%</span>
+                                <span class="text-2xl font-bold text-finu-primary">60%</span>
                             </div>
                         </div>
                         <p class="text-sm text-gray-600">3 of 5 workouts completed</p>
@@ -176,11 +178,11 @@
                         <div class="relative inline-block mb-4">
                             <svg class="w-32 h-32 progress-ring">
                                 <circle cx="64" cy="64" r="28" stroke="#e5e7eb" stroke-width="6" fill="transparent"/>
-                                <circle cx="64" cy="64" r="28" stroke="#8b5cf6" stroke-width="6" fill="transparent" 
+                                <circle cx="64" cy="64" r="28" stroke="var(--finu-primary-dark)" stroke-width="6" fill="transparent"
                                         class="progress-ring-circle" style="stroke-dasharray: 176; stroke-dashoffset: 18;"/>
                             </svg>
                             <div class="absolute inset-0 flex items-center justify-center">
-                                <span class="text-2xl font-bold text-purple-500">90%</span>
+                                <span class="text-2xl font-bold" style="color: var(--finu-primary-dark);">90%</span>
                             </div>
                         </div>
                         <p class="text-sm text-gray-600">Daily tracking consistent</p>
@@ -335,12 +337,12 @@
                     datasets: [{
                         label: 'Mood Score',
                         data: [7, 8, 6, 5, 7, 8, 7],
-                        borderColor: '#458500',
-                        backgroundColor: 'rgba(69, 133, 0, 0.1)',
+                        borderColor: '#497AFF',
+                        backgroundColor: 'rgba(73, 122, 255, 0.1)',
                         tension: 0.4,
                         fill: true,
-                        pointBackgroundColor: '#458500',
-                        pointBorderColor: '#458500'
+                        pointBackgroundColor: '#497AFF',
+                        pointBorderColor: '#497AFF'
                     }]
                 },
                 options: {
@@ -379,7 +381,7 @@
                     labels: ['Exercise', 'Nutrition', 'Mood', 'Fasting'],
                     datasets: [{
                         data: [25, 35, 20, 20],
-                        backgroundColor: ['#3b82f6', '#458500', '#8b5cf6', '#f59e0b'],
+                        backgroundColor: ['#497AFF', '#043178', '#3B5FE6', '#5B8CFF'],
                         borderWidth: 0,
                         cutout: '60%'
                     }]
