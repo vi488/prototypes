@@ -89,7 +89,7 @@
                 </div>
                 <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Add Income</h3>
                 <p class="text-gray-600 text-sm mb-4">Log salary, freelance work, or other income sources</p>
-                <button class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
+                <button onclick="openTransactionModal('income')" class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
                     Add Income
                 </button>
             </div>
@@ -101,7 +101,7 @@
                 </div>
                 <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Add Expense</h3>
                 <p class="text-gray-600 text-sm mb-4">Track spending across different categories</p>
-                <button class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
+                <button onclick="openTransactionModal('expense')" class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
                     Add Expense
                 </button>
             </div>
@@ -226,9 +226,24 @@
     <script>
         lucide.createIcons();
 
+        // Function to open transaction modal
+        function openTransactionModal(type) {
+            try {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage('openAddTransactionModal', '*');
+                } else {
+                    console.log('Opening transaction modal for:', type);
+                    alert('Transaction modal would open here for: ' + type);
+                }
+            } catch (e) {
+                console.log('Error opening transaction modal:', e);
+                alert('Transaction modal would open here for: ' + type);
+            }
+        }
+
         // Add click handlers for buttons
         document.addEventListener('click', function(e) {
-            if (e.target.matches('button')) {
+            if (e.target.matches('button') && !e.target.onclick) {
                 const buttonText = e.target.textContent.trim();
                 console.log('Transaction action clicked:', buttonText);
 

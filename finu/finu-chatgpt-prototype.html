@@ -7,9 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        /* Custom Finu Brand Colors - Comprehensive Blue Palette */
+        /* Custom Finu Brand Colors - Updated Brand Palette */
         :root {
-            /* Main Brand Blue Palette */
+            /* Main Brand Blue Palette - Updated per requirements */
             --finu-primary: #497AFF;           /* Main brand blue */
             --finu-primary-hover: #3B5FE6;     /* Darker blue for hover */
             --finu-primary-light: #F3FAFF;     /* Light blue for accents */
@@ -1540,6 +1540,14 @@
                 modalFrame.src = 'settings-modal.html';
                 modalContainer.classList.remove('hidden');
                 document.body.classList.add('overflow-hidden');
+            } else if (type === 'add-transaction') {
+                modalFrame.src = 'add-transaction-modal.html';
+                modalContainer.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            } else if (type === 'add-goal') {
+                modalFrame.src = 'add-goal-modal.html';
+                modalContainer.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
             }
         }
 
@@ -1549,10 +1557,14 @@
             document.body.classList.remove('overflow-hidden');
         }
 
-        // Listen for close modal messages from iframes
+        // Listen for messages from iframes
         window.addEventListener('message', function(event) {
             if (event.data === 'closeModal') {
                 closeModal();
+            } else if (event.data === 'openAddGoalModal') {
+                openModal('add-goal');
+            } else if (event.data === 'openAddTransactionModal') {
+                openModal('add-transaction');
             }
         });
 

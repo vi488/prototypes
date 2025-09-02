@@ -75,7 +75,7 @@
                 </div>
                 <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Savings Goals</h3>
                 <p class="text-gray-600 text-sm mb-4">Create savings goals for emergency funds, vacations, or major purchases</p>
-                <button class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
+                <button onclick="openGoalModal()" class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
                     Create Goal
                 </button>
             </div>
@@ -90,7 +90,7 @@
                 </div>
                 <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Debt Payoff Goals</h3>
                 <p class="text-gray-600 text-sm mb-4">Set goals to pay off credit cards, loans, and other debts</p>
-                <button class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
+                <button onclick="openGoalModal()" class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
                     Add Debt Goal
                 </button>
             </div>
@@ -167,9 +167,24 @@
     <script>
         lucide.createIcons();
 
+        // Function to open goal modal
+        function openGoalModal() {
+            try {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage('openAddGoalModal', '*');
+                } else {
+                    console.log('Opening goal modal');
+                    alert('Goal modal would open here');
+                }
+            } catch (e) {
+                console.log('Error opening goal modal:', e);
+                alert('Goal modal would open here');
+            }
+        }
+
         // Add click handlers for buttons
         document.addEventListener('click', function(e) {
-            if (e.target.matches('button')) {
+            if (e.target.matches('button') && !e.target.onclick) {
                 const buttonText = e.target.textContent.trim();
                 console.log('Goal action clicked:', buttonText);
 
