@@ -59,166 +59,129 @@
     <div class="p-6">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Transaction Tools</h1>
-            <p class="text-gray-600">Track your income and expenses to monitor your financial health</p>
-        </div>
-
-        <!-- Today's Progress -->
-        <div class="bg-gradient-to-r from-finu-bg-light to-finu-bg-medium rounded-xl p-6 mb-8 border border-finu-primary-light">
-            <h2 class="text-xl font-semibold text-finu-primary-dark mb-4">Today's Transactions</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-green-600">+$1,247</div>
-                    <div class="text-sm text-gray-600">Income Today</div>
-                    <div class="text-xs text-gray-500">from logged transactions</div>
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-semibold text-gray-800 mb-2">Transactions</h1>
+                    <p class="text-gray-600">Track and manage your financial transactions</p>
+                    <p class="text-sm text-gray-500 mt-1">Current Balance: $1,000.00</p>
                 </div>
-                <div class="bg-white rounded-lg p-4 text-center">
-                    <div class="text-2xl font-bold text-red-600">-$387</div>
-                    <div class="text-sm text-gray-600">Expenses Today</div>
-                    <div class="text-xs text-gray-500">total spending</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <!-- Income Logger -->
-            <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-finu-bg-medium rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="trending-up" class="w-6 h-6 text-finu-icon-primary"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Add Income</h3>
-                <p class="text-gray-600 text-sm mb-4">Log salary, freelance work, or other income sources</p>
-                <button onclick="openTransactionModal('income')" class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
-                    Add Income
-                </button>
-            </div>
-
-            <!-- Expense Logger -->
-            <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-finu-bg-medium rounded-full flex items-center justify-center mb-4">
-                    <i data-lucide="credit-card" class="w-6 h-6 text-finu-icon-secondary"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Add Expense</h3>
-                <p class="text-gray-600 text-sm mb-4">Track spending across different categories</p>
-                <button onclick="openTransactionModal('expense')" class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
-                    Add Expense
-                </button>
-            </div>
-        </div>
-
-        <!-- Recent Transactions -->
-        <div class="bg-white rounded-xl border border-finu-primary-light p-6 mb-8">
-            <h2 class="text-xl font-semibold text-finu-primary-dark mb-4">Recent Transactions</h2>
-
-            <!-- Income Section -->
-            <div class="mb-6">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-medium text-gray-800">💰 Income</h3>
-                    <span class="text-sm text-green-600">+$1,247</span>
-                </div>
-                <div class="space-y-2">
-                    <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                                <i data-lucide="briefcase" class="w-4 h-4 text-green-600"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-800">Salary Payment</p>
-                                <p class="text-xs text-gray-600">Today, 9:00 AM</p>
-                            </div>
-                        </div>
-                        <span class="text-sm font-medium text-green-600">+$1,200</span>
-                    </div>
-                    <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <i data-lucide="laptop" class="w-4 h-4 text-blue-600"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-800">Freelance Project</p>
-                                <p class="text-xs text-gray-600">Today, 10:30 AM</p>
-                            </div>
-                        </div>
-                        <span class="text-sm font-medium text-green-600">+$47</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Monthly Budget Overview -->
-        <div class="bg-white rounded-xl border border-finu-primary-light p-6">
-            <h2 class="text-xl font-semibold text-finu-primary-dark mb-4">Monthly Budget Progress</h2>
-
-            <!-- Active Budget Display -->
-            <div class="bg-finu-bg-light rounded-lg p-4 mb-4 border border-finu-primary-lighter">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-finu-bg-medium rounded-full flex items-center justify-center">
-                            <i data-lucide="pie-chart" class="w-5 h-5 text-finu-icon-tertiary"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-medium text-finu-primary-dark">September 2024 Budget</h3>
-                            <p class="text-sm text-gray-600">Started September 1st</p>
-                        </div>
-                    </div>
-                    <span class="text-lg font-bold text-finu-icon-secondary">$2,847 left</span>
-                </div>
-
-                <!-- Enhanced Progress Bar -->
-                <div class="mb-3">
-                    <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
-                        <span>Budget Progress</span>
-                        <span class="text-finu-icon-secondary font-medium">$1,153 / $4,000</span>
-                    </div>
-                    <!-- Multi-layer Progress Bar -->
-                    <div class="relative w-full bg-finu-primary-lighter rounded-full h-3">
-                        <!-- Spent amount (current progress) -->
-                        <div class="absolute top-0 left-0 bg-finu-icon-secondary h-3 rounded-full transition-all duration-300" style="width: 29%"></div>
-                        <!-- Progress markers -->
-                        <div class="absolute top-0 left-0 w-full h-3 flex items-center">
-                            <!-- Current spending marker -->
-                            <div class="absolute bg-finu-primary h-4 w-0.5 rounded-full" style="left: 29%; transform: translateX(-50%)"></div>
-                        </div>
-                    </div>
-                    <!-- Amount labels -->
-                    <div class="flex justify-between text-xs text-gray-500 mt-1">
-                        <span>$0</span>
-                        <span class="text-finu-icon-primary font-medium">Spent: $1,153</span>
-                        <span>Budget: $4,000</span>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex space-x-3">
-                    <button class="flex-1 bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors text-sm">
-                        View Categories
+                <div class="flex items-center space-x-2">
+                    <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                        <span>Refresh</span>
                     </button>
-                    <button class="flex-1 bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors text-sm">
-                        Adjust Budget
+                    <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Export CSV</span>
+                    </button>
+                    <button class="flex items-center space-x-2 px-4 py-2 bg-finu-primary text-white rounded-lg hover:bg-finu-primary-hover transition-colors">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>Add Transaction</span>
                     </button>
                 </div>
             </div>
+        </div>
 
-            <!-- Recent Budget History -->
-            <div class="space-y-3">
-                <h3 class="font-medium text-gray-800">Previous Months</h3>
-                <div class="space-y-2">
-                    <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
-                        <div>
-                            <p class="text-sm font-medium text-gray-800">August 2024</p>
-                            <p class="text-xs text-gray-600">Completed • Under budget</p>
-                        </div>
-                        <span class="text-sm font-medium text-green-600">-$247 saved</span>
+
+
+        <!-- Search and Filter Section -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Search -->
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="search" class="w-4 h-4 text-gray-400"></i>
                     </div>
-                    <div class="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg">
-                        <div>
-                            <p class="text-sm font-medium text-gray-800">July 2024</p>
-                            <p class="text-xs text-gray-600">Completed • Over budget</p>
-                        </div>
-                        <span class="text-sm font-medium text-red-600">+$156 over</span>
-                    </div>
+                    <input type="text" placeholder="Search transactions..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-finu-primary focus:border-transparent">
                 </div>
+
+                <!-- Type Filter -->
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="filter" class="w-4 h-4 text-gray-400"></i>
+                    </div>
+                    <select class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-finu-primary focus:border-transparent appearance-none">
+                        <option value="all" selected>All Types</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+
+                <!-- Category Filter -->
+                <div>
+                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-finu-primary focus:border-transparent">
+                        <option value="all" selected>All Categories</option>
+                        <option value="housing">Housing & Rent</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="insurance">Insurance</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="travel">Travel</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="personal">Personal Care</option>
+                        <option value="subscriptions">Subscriptions</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="groceries">Groceries & Food</option>
+                        <option value="education">Education</option>
+                        <option value="salary">Salary</option>
+                        <option value="business">Business Income</option>
+                        <option value="freelance">Freelance</option>
+                        <option value="sidehustle">Side Hustle</option>
+                        <option value="dividends">Dividends</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="investment">Investment Returns</option>
+                        <option value="rental">Rental Income</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction Table Section -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-gray-200">
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Date</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Description</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Category</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Type</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Amount</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="py-3 px-4">
+                                <div class="text-sm text-gray-900">Sep 1, 2025</div>
+                            </td>
+                            <td class="py-3 px-4">
+                                <div class="text-sm text-gray-900">Initial Salary income setup during onboarding</div>
+                            </td>
+                            <td class="py-3 px-4">
+                                <div class="text-sm text-gray-900">Salary</div>
+                            </td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    income
+                                </span>
+                            </td>
+                            <td class="py-3 px-4">
+                                <div class="text-sm font-medium text-green-600">+$1,000.00</div>
+                            </td>
+                            <td class="py-3 px-4">
+                                <div class="flex items-center space-x-2">
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="edit" class="w-4 h-4"></i>
+                                    </button>
+                                    <button class="p-1 text-gray-400 hover:text-red-600">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -226,24 +189,9 @@
     <script>
         lucide.createIcons();
 
-        // Function to open transaction modal
-        function openTransactionModal(type) {
-            try {
-                if (window.parent && window.parent !== window) {
-                    window.parent.postMessage('openAddTransactionModal', '*');
-                } else {
-                    console.log('Opening transaction modal for:', type);
-                    alert('Transaction modal would open here for: ' + type);
-                }
-            } catch (e) {
-                console.log('Error opening transaction modal:', e);
-                alert('Transaction modal would open here for: ' + type);
-            }
-        }
-
         // Add click handlers for buttons
         document.addEventListener('click', function(e) {
-            if (e.target.matches('button') && !e.target.onclick) {
+            if (e.target.matches('button')) {
                 const buttonText = e.target.textContent.trim();
                 console.log('Transaction action clicked:', buttonText);
 
@@ -253,6 +201,23 @@
                     e.target.style.transform = 'scale(1)';
                 }, 150);
             }
+        });
+
+        // Add search functionality
+        const searchInput = document.querySelector('input[placeholder="Search transactions..."]');
+        if (searchInput) {
+            searchInput.addEventListener('input', function(e) {
+                console.log('Searching for:', e.target.value);
+                // Here you would implement actual search functionality
+            });
+        }
+
+        // Add filter functionality
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', function(e) {
+                console.log('Filter changed:', e.target.value);
+                // Here you would implement actual filtering functionality
+            });
         });
     </script>
 </body>

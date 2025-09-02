@@ -59,108 +59,68 @@
     <div class="p-6">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Financial Goals Tools</h1>
-            <p class="text-gray-600">Set and track your financial goals to achieve your dreams and build wealth</p>
+            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Financial Goals</h1>
+            <p class="text-gray-600">Track your financial goals and progress</p>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <!-- Savings Goals -->
-            <div class="bg-gradient-to-br from-finu-bg-light to-finu-bg-medium rounded-xl p-6 border border-finu-primary-light">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-finu-bg-medium rounded-full flex items-center justify-center">
-                        <i data-lucide="piggy-bank" class="w-6 h-6 text-finu-icon-primary"></i>
-                    </div>
-                    <span class="text-2xl">🎯</span>
-                </div>
-                <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Savings Goals</h3>
-                <p class="text-gray-600 text-sm mb-4">Create savings goals for emergency funds, vacations, or major purchases</p>
-                <button onclick="openGoalModal()" class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
-                    Create Goal
-                </button>
-            </div>
-
-            <!-- Debt Payoff -->
-            <div class="bg-gradient-to-br from-finu-bg-light to-finu-bg-medium rounded-xl p-6 border border-finu-primary-light">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 bg-finu-bg-medium rounded-full flex items-center justify-center">
-                        <i data-lucide="credit-card" class="w-6 h-6 text-finu-icon-secondary"></i>
-                    </div>
-                    <span class="text-2xl">💳</span>
-                </div>
-                <h3 class="text-lg font-semibold text-finu-primary-dark mb-2">Debt Payoff Goals</h3>
-                <p class="text-gray-600 text-sm mb-4">Set goals to pay off credit cards, loans, and other debts</p>
-                <button onclick="openGoalModal()" class="w-full bg-finu-primary text-white py-2 rounded-lg hover:bg-finu-primary-hover transition-colors">
-                    Add Debt Goal
-                </button>
-            </div>
+        <!-- Add Goal Button -->
+        <div class="mb-6">
+            <button onclick="openGoalModal()" class="flex items-center space-x-2 px-4 py-2 bg-finu-primary text-white rounded-lg hover:bg-finu-primary-hover transition-colors">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                <span>Add Goal</span>
+            </button>
         </div>
 
-        <!-- Today's Summary -->
-        <div class="bg-finu-bg-light rounded-xl p-6 mb-8 border border-finu-primary-lighter">
-            <h2 class="text-xl font-semibold text-finu-primary-dark mb-4">Goals Progress Summary</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white rounded-lg p-4 text-center border border-finu-primary-lighter">
-                    <div class="text-2xl mb-2">🎯</div>
-                    <div class="text-sm text-gray-600">Active Goals</div>
-                    <div class="text-lg font-semibold text-finu-icon-primary">5</div>
+        <!-- Goals Statistics Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
+                <div class="w-8 h-8 bg-finu-bg-medium rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="target" class="w-4 h-4 text-finu-icon-primary"></i>
                 </div>
-                <div class="bg-white rounded-lg p-4 text-center border border-finu-primary-lighter">
-                    <div class="text-2xl mb-2">💰</div>
-                    <div class="text-sm text-gray-600">Total Progress</div>
-                    <div class="text-lg font-semibold text-finu-icon-secondary">$12,847</div>
+                <div class="text-sm text-gray-600">Total Goals</div>
+                <div class="text-lg font-semibold text-finu-icon-primary">0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
+                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
                 </div>
+                <div class="text-sm text-gray-600">Completed</div>
+                <div class="text-lg font-semibold text-green-600">0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="trending-up" class="w-4 h-4 text-blue-600"></i>
+                </div>
+                <div class="text-sm text-gray-600">On Track</div>
+                <div class="text-lg font-semibold text-blue-600">0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
+                <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="percent" class="w-4 h-4 text-orange-600"></i>
+                </div>
+                <div class="text-sm text-gray-600">Avg Progress</div>
+                <div class="text-lg font-semibold text-orange-600">0.0%</div>
             </div>
         </div>
 
-        <!-- Recent Entries -->
-        <div class="bg-white rounded-xl border border-finu-primary-light p-6">
-            <h2 class="text-xl font-semibold text-finu-primary-dark mb-4">Recent Goal Activities</h2>
-            <div class="space-y-4">
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                    <div class="flex items-center space-x-3">
-                        <div class="text-2xl">🎯</div>
-                        <div>
-                            <div class="font-medium text-gray-800">Emergency Fund: +$500</div>
-                            <div class="text-sm text-gray-600">Today, 2:30 PM</div>
-                        </div>
-                    </div>
-                    <div class="text-sm text-green-600">$3,500 / $10,000</div>
-                </div>
-
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                    <div class="flex items-center space-x-3">
-                        <div class="text-2xl">🏠</div>
-                        <div>
-                            <div class="font-medium text-gray-800">House Down Payment: +$1,200</div>
-                            <div class="text-sm text-gray-600">Today, 1:15 PM</div>
-                        </div>
-                    </div>
-                    <div class="text-sm text-blue-600">$15,200 / $50,000</div>
-                </div>
-
-                <div class="flex items-center justify-between py-3 border-b border-gray-100">
-                    <div class="flex items-center space-x-3">
-                        <div class="text-2xl">💳</div>
-                        <div>
-                            <div class="font-medium text-gray-800">Credit Card Debt: -$300</div>
-                            <div class="text-sm text-gray-600">Yesterday, 6:00 PM</div>
-                        </div>
-                    </div>
-                    <div class="text-sm text-orange-600">$2,100 remaining</div>
-                </div>
-
-                <div class="flex items-center justify-between py-3">
-                    <div class="flex items-center space-x-3">
-                        <div class="text-2xl">✈️</div>
-                        <div>
-                            <div class="font-medium text-gray-800">Vacation Fund: +$150</div>
-                            <div class="text-sm text-gray-600">Yesterday, 3:45 PM</div>
-                        </div>
-                    </div>
-                    <div class="text-sm text-purple-600">$1,850 / $5,000</div>
-                </div>
+        <!-- No Goals State -->
+        <div class="bg-white rounded-xl border border-gray-200 p-8 mb-8 text-center shadow-sm">
+            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="target" class="w-8 h-8 text-gray-400"></i>
             </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">No goals yet</h3>
+            <p class="text-gray-600 mb-4">Start by creating your first financial goal</p>
+            <button onclick="openGoalModal()" class="px-6 py-2 bg-finu-primary text-white rounded-lg hover:bg-finu-primary-hover transition-colors">
+                Create Your First Goal
+            </button>
+        </div>
+
+        <!-- Show Tips Button -->
+        <div class="text-center">
+            <button onclick="showTips()" class="flex items-center space-x-2 mx-auto px-4 py-2 text-finu-primary hover:bg-gray-100 rounded-lg transition-colors">
+                <i data-lucide="lightbulb" class="w-4 h-4"></i>
+                <span>Show tips</span>
+            </button>
         </div>
     </div>
 
@@ -182,20 +142,31 @@
             }
         }
 
-        // Add click handlers for buttons
-        document.addEventListener('click', function(e) {
-            if (e.target.matches('button') && !e.target.onclick) {
-                const buttonText = e.target.textContent.trim();
-                console.log('Goal action clicked:', buttonText);
 
-                // Here you would typically handle the specific action
-                // For now, just show a simple feedback
-                e.target.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    e.target.style.transform = 'scale(1)';
-                }, 150);
-            }
-        });
+
+        // Function to show tips
+        function showTips() {
+            console.log('Showing goal tips...');
+            // This would normally show a tips modal or tooltip
+            alert('Goal tips would be displayed here');
+        }
+
+        // Initialize goal statistics (would normally come from API)
+        function updateGoalStatistics() {
+            // This would normally fetch real data from the backend
+            const stats = {
+                totalGoals: 0,
+                completed: 0,
+                onTrack: 0,
+                avgProgress: 0.0
+            };
+
+            // Update the display (this is just for demonstration)
+            console.log('Goal statistics updated:', stats);
+        }
+
+        // Call initialization
+        updateGoalStatistics();
     </script>
 </body>
 </html>

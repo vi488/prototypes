@@ -366,10 +366,6 @@
                         <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
                         <span class="text-sm">Analytics</span>
                     </button>
-                    <button id="tokens-tool" onclick="loadToolPage('tokens')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 text-left tool-button">
-                        <i data-lucide="coins" class="w-4 h-4"></i>
-                        <span class="text-sm">$FIN Tokens</span>
-                    </button>
                 </div>
             </div>
 
@@ -413,14 +409,51 @@
                     <!-- Profile Dropdown Menu -->
                     <div id="profileDropdown" class="hidden absolute bottom-full left-0 right-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-lg">
                         <div class="py-1">
-                            <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700">
-                                <i data-lucide="settings" class="w-4 h-4"></i>
-                                <span class="text-sm">Settings</span>
+                            <!-- User Info Section -->
+                            <div class="px-3 py-2 border-b border-gray-100">
+                                <div class="flex items-center space-x-3">
+                                    <div id="userAvatarDropdown" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium" style="background-color: #497AFF;">
+                                        JD
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="text-sm font-medium">John Doe</div>
+                                        <div class="text-xs text-gray-500">vi@emergefy.com</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Token Balance -->
+                            <div class="px-3 py-2 border-b border-gray-100">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i data-lucide="coins" class="w-4 h-4 text-finu-primary"></i>
+                                        <span class="text-sm text-gray-700">Token Balance</span>
+                                    </div>
+                                    <span class="text-sm font-medium text-finu-primary">50</span>
+                                </div>
+                            </div>
+
+                            <!-- Menu Items -->
+                            <div class="py-1">
+                                <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700">
+                                    <i data-lucide="settings" class="w-4 h-4"></i>
+                                    <span class="text-sm">Profile Settings</span>
+                                </button>
+                                <button onclick="openModal('wallet-tokens')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700">
+                                    <i data-lucide="wallet" class="w-4 h-4"></i>
+                                    <span class="text-sm">Wallet & Tokens</span>
+                                </button>
+                            </div>
+
+                            <button onclick="openModal('subscription')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700">
+                                <i data-lucide="credit-card" class="w-4 h-4"></i>
+                                <span class="text-sm">Manage Subscription</span>
                             </button>
+
                             <div class="border-t border-gray-100"></div>
                             <button class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700">
                                 <i data-lucide="log-out" class="w-4 h-4"></i>
-                                <span class="text-sm">Log out</span>
+                                <span class="text-sm">Sign Out</span>
                             </button>
                         </div>
                     </div>
@@ -466,9 +499,7 @@
                     <button onclick="loadToolPage('analytics')" class="w-full p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 flex justify-center" title="Analytics">
                         <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="loadToolPage('tokens')" class="w-full p-2 rounded-lg hover:bg-finu-bg-medium hover:text-finu-primary-dark text-gray-700 flex justify-center" title="$FIN Tokens">
-                        <i data-lucide="coins" class="w-5 h-5"></i>
-                    </button>
+
                 </div>
             </div>
         </div>
@@ -689,11 +720,11 @@
                         <div class="space-y-1">
                             <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
                                 <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
-                                <span class="text-sm text-gray-900">Nutrition planning help</span>
+                                <span class="text-sm text-gray-900">Budget planning help</span>
                             </div>
                             <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
                                 <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
-                                <span class="text-sm text-gray-900">Mood tracking insights</span>
+                                <span class="text-sm text-gray-900">Investment advice</span>
                             </div>
                         </div>
                     </div>
@@ -703,11 +734,11 @@
                         <div class="space-y-1">
                             <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
                                 <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
-                                <span class="text-sm text-gray-900">Fasting schedule setup</span>
+                                <span class="text-sm text-gray-900">Savings goal setup</span>
                             </div>
                             <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
                                 <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
-                                <span class="text-sm text-gray-900">Exercise routine planning</span>
+                                <span class="text-sm text-gray-900">Expense tracking tips</span>
                             </div>
                         </div>
                     </div>
@@ -1096,8 +1127,7 @@
             const toolUrls = {
                 'transactions': 'transactions-tools.html',
                 'goals': 'goals-tools.html',
-                'analytics': 'analytics-tools.html',
-                'tokens': 'tokens-tools.html'
+                'analytics': 'analytics-tools.html'
             };
 
             if (toolUrls[toolType]) {
@@ -1107,8 +1137,7 @@
                 const titles = {
                     'transactions': 'Transactions',
                     'goals': 'Financial Goals',
-                    'analytics': 'Analytics',
-                    'tokens': '$FIN Tokens'
+                    'analytics': 'Analytics'
                 };
                 mobileTitle.textContent = titles[toolType] || 'Finu Tools';
 
@@ -1536,19 +1565,46 @@
         const modalFrame = document.getElementById('modalFrame');
 
         function openModal(type) {
-            if (type === 'settings') {
-                modalFrame.src = 'settings-modal.html';
-                modalContainer.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
-            } else if (type === 'add-transaction') {
-                modalFrame.src = 'add-transaction-modal.html';
-                modalContainer.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
-            } else if (type === 'add-goal') {
-                modalFrame.src = 'add-goal-modal.html';
-                modalContainer.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
+            let modalUrl = '';
+            switch(type) {
+                case 'settings':
+                    modalUrl = 'settings-modal.html';
+                    break;
+                case 'wallet-tokens':
+                    modalUrl = 'wallet-tokens-modal.html';
+                    break;
+                case 'subscription':
+                    modalUrl = 'subscription-modal.html';
+                    break;
+                case 'add-transaction':
+                    modalUrl = 'add-transaction-modal.html';
+                    break;
+                case 'add-goal':
+                    modalUrl = 'add-goal-modal.html';
+                    break;
+                case 'budget':
+                    modalUrl = 'budget-modal.html';
+                    break;
+                case 'investment':
+                    modalUrl = 'investment-modal.html';
+                    break;
+                case 'debt':
+                    modalUrl = 'debt-modal.html';
+                    break;
+                case 'dashboard':
+                    modalUrl = 'dashboard-modal.html';
+                    break;
+                case 'tokens':
+                    modalUrl = 'tokens-modal.html';
+                    break;
+                default:
+                    console.error('Unknown modal type:', type);
+                    return;
             }
+
+            modalFrame.src = modalUrl;
+            modalContainer.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
         }
 
         function closeModal() {
