@@ -78,7 +78,7 @@
                         <i data-lucide="download" class="w-4 h-4"></i>
                         <span>Export CSV</span>
                     </button>
-                    <button class="flex items-center space-x-2 px-4 py-2 bg-finu-primary text-white rounded-lg hover:bg-finu-primary-hover transition-colors">
+                    <button onclick="openTransactionModal()" class="flex items-center space-x-2 px-4 py-2 bg-finu-primary text-white rounded-lg hover:bg-finu-primary-hover transition-colors">
                         <i data-lucide="plus" class="w-4 h-4"></i>
                         <span>Add Transaction</span>
                     </button>
@@ -192,6 +192,21 @@
     
     <script>
         lucide.createIcons();
+
+        // Function to open transaction modal
+        function openTransactionModal() {
+            try {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage('openAddTransactionModal', '*');
+                } else {
+                    console.log('Opening transaction modal');
+                    alert('Transaction modal would open here');
+                }
+            } catch (e) {
+                console.log('Error opening transaction modal:', e);
+                alert('Transaction modal would open here');
+            }
+        }
 
         // Add click handlers for buttons
         document.addEventListener('click', function(e) {
