@@ -85,12 +85,10 @@
             <!-- Modal Header -->
             <div class="flex items-center justify-between p-6 border-b border-gray-200">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-nuri-primary rounded-full flex items-center justify-center">
-                        <i data-lucide="settings" class="w-5 h-5 text-white"></i>
-                    </div>
+                    <i data-lucide="arrow-left" class="w-6 h-6 text-gray-600"></i>
                     <div>
                         <h2 class="text-xl font-semibold text-gray-800">Settings</h2>
-                        <p class="text-sm text-gray-600">Manage your account and preferences</p>
+                        <p class="text-sm text-gray-600">Manage your account</p>
                     </div>
                 </div>
                 <button onclick="closeModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
@@ -107,23 +105,9 @@
                             <i data-lucide="user" class="w-4 h-4 flex-shrink-0"></i>
                             <span class="text-xs md:text-sm font-medium">Profile</span>
                         </button>
-                        <button onclick="showSection('notifications')" class="w-full md:w-full flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg border-2 border-transparent hover:bg-gray-100 text-gray-700 nav-item whitespace-nowrap">
-                            <i data-lucide="bell" class="w-4 h-4 flex-shrink-0"></i>
-                            <span class="text-xs md:text-sm font-medium">Notifications</span>
-                        </button>
-                        <button onclick="showSection('preferences')" class="w-full md:w-full flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg border-2 border-transparent hover:bg-gray-100 text-gray-700 nav-item whitespace-nowrap">
-                            <i data-lucide="sliders" class="w-4 h-4 flex-shrink-0"></i>
-                            <span class="text-xs md:text-sm font-medium">Preferences</span>
-                        </button>
-                        <button onclick="showSection('privacy')" class="w-full md:w-full flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg border-2 border-transparent hover:bg-gray-100 text-gray-700 nav-item whitespace-nowrap">
-                            <i data-lucide="shield" class="w-4 h-4 flex-shrink-0"></i>
-                            <span class="text-xs md:text-sm font-medium hidden sm:inline">Privacy & Security</span>
-                            <span class="text-xs md:text-sm font-medium sm:hidden">Privacy</span>
-                        </button>
-                        <button onclick="showSection('data')" class="w-full md:w-full flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg border-2 border-transparent hover:bg-gray-100 text-gray-700 nav-item whitespace-nowrap">
-                            <i data-lucide="database" class="w-4 h-4 flex-shrink-0"></i>
-                            <span class="text-xs md:text-sm font-medium hidden sm:inline">Data & Export</span>
-                            <span class="text-xs md:text-sm font-medium sm:hidden">Data</span>
+                        <button onclick="showSection('wallet')" class="w-full md:w-full flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg border-2 border-transparent hover:bg-gray-100 text-gray-700 nav-item whitespace-nowrap">
+                            <i data-lucide="wallet" class="w-4 h-4 flex-shrink-0"></i>
+                            <span class="text-xs md:text-sm font-medium">Wallet</span>
                         </button>
                         <button onclick="showSection('help')" class="w-full md:w-full flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg border-2 border-transparent hover:bg-gray-100 text-gray-700 nav-item whitespace-nowrap">
                             <i data-lucide="help-circle" class="w-4 h-4 flex-shrink-0"></i>
@@ -137,453 +121,521 @@
                 <div class="flex-1 p-4 md:p-6 overflow-y-auto">
                     <!-- Profile Section -->
                     <div id="profile-section" class="settings-section">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-6">Profile Information</h3>
-                        
+                        <h3 class="text-lg font-semibold text-gray-800 mb-6">Profile</h3>
+                        <p class="text-sm text-gray-600 mb-6">Manage your personal information and profile settings</p>
+
                         <!-- Profile Photo -->
                         <div class="flex items-center space-x-4 mb-6">
-                            <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center">
+                            <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center relative">
                                 <i data-lucide="user" class="w-8 h-8 text-gray-500"></i>
+                                <button class="absolute -bottom-1 -right-1 w-8 h-8 bg-nuri-primary rounded-full flex items-center justify-center hover:bg-nuri-primary transition-colors">
+                                    <i data-lucide="camera" class="w-4 h-4 text-white"></i>
+                                </button>
                             </div>
                             <div>
-                                <button class="bg-nuri-primary text-white px-4 py-2 rounded-lg hover:bg-nuri-primary transition-colors text-sm">
-                                    <i data-lucide="camera" class="w-4 h-4 inline mr-2"></i>
-                                    Change Photo
-                                </button>
-                                <p class="text-xs text-gray-500 mt-1">JPG, PNG up to 5MB</p>
+                                <h4 class="text-sm font-medium text-gray-800 mb-1">Profile Picture</h4>
+                                <p class="text-xs text-gray-500">Click the camera icon to upload a new profile picture</p>
                             </div>
                         </div>
-                        
+
                         <!-- Basic Info -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Display Name</label>
-                                <input type="text" value="John Doe" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <input type="text" value="Dangvi Dalat" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                                <input type="email" value="john.doe@example.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50" readonly>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth</label>
-                                <input type="date" value="1990-01-15" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
+                                <input type="email" value="vi@emergefy.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50" readonly>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Gender</label>
                                 <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
+                                    <option>Select Gender</option>
                                     <option>Male</option>
                                     <option>Female</option>
                                     <option>Other</option>
                                     <option>Prefer not to say</option>
                                 </select>
                             </div>
-                        </div>
-                        
-                        <!-- Health Goals -->
-                        <div class="mb-6">
-                            <label class="block text-sm font-medium text-gray-700 mb-3">Health Goals</label>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <label class="flex items-center space-x-2 p-2 border-2 border-nuri-primary rounded-lg hover:bg-gray-50 cursor-pointer">
-                                    <input type="checkbox" checked class="text-nuri-primary focus:ring-nuri-primary">
-                                    <span class="text-sm text-nuri-primary">Weight Loss</span>
-                                </label>
-                                <label class="flex items-center space-x-2 p-2 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                    <input type="checkbox" class="text-nuri-primary focus:ring-nuri-primary">
-                                    <span class="text-sm">Muscle Building</span>
-                                </label>
-                                <label class="flex items-center space-x-2 p-2 border-2 border-nuri-primary rounded-lg hover:bg-gray-50 cursor-pointer">
-                                    <input type="checkbox" checked class="text-nuri-primary focus:ring-nuri-primary">
-                                    <span class="text-sm text-nuri-primary">Better Sleep</span>
-                                </label>
-                                <label class="flex items-center space-x-2 p-2 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                    <input type="checkbox" class="text-nuri-primary focus:ring-nuri-primary">
-                                    <span class="text-sm">Stress Management</span>
-                                </label>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth</label>
+                                <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Height (cm)</label>
+                                <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Weight (kg)</label>
+                                <input type="number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
                             </div>
                         </div>
-                        
+
                         <!-- Activity Level -->
                         <div class="mb-6">
                             <label class="block text-sm font-medium text-gray-700 mb-3">Activity Level</label>
-                            <div class="space-y-2">
-                                <label class="flex items-center space-x-3 p-3 border-2 border-nuri-primary bg-white rounded-lg cursor-pointer">
-                                    <input type="radio" name="activity" checked class="text-nuri-primary focus:ring-nuri-primary">
+                            <div class="grid grid-cols-1 gap-2">
+                                <label class="flex items-start space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="activity" class="text-nuri-primary focus:ring-nuri-primary mt-1">
                                     <div>
-                                        <div class="font-medium text-sm text-nuri-primary">Moderately Active</div>
-                                        <div class="text-xs text-gray-600">Moderate exercise 3-5 days/week</div>
+                                        <div class="font-medium text-sm">Sedentary</div>
+                                        <div class="text-xs text-gray-600">Little to no exercise</div>
                                     </div>
                                 </label>
-                                <label class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                    <input type="radio" name="activity" class="text-nuri-primary focus:ring-nuri-primary">
+                                <label class="flex items-start space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="activity" class="text-nuri-primary focus:ring-nuri-primary mt-1">
                                     <div>
                                         <div class="font-medium text-sm">Lightly Active</div>
                                         <div class="text-xs text-gray-600">Light exercise 1-3 days/week</div>
                                     </div>
                                 </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Notifications Section -->
-                    <div id="notifications-section" class="settings-section hidden">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-6">Notification Preferences</h3>
-
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Meal Reminders</h4>
-                                    <p class="text-sm text-gray-600">Get reminded to log your meals</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider"></span>
+                                <label class="flex items-start space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="activity" class="text-nuri-primary focus:ring-nuri-primary mt-1">
+                                    <div>
+                                        <div class="font-medium text-sm">Moderately Active</div>
+                                        <div class="text-xs text-gray-600">Moderate exercise 3-5 days/week</div>
+                                    </div>
                                 </label>
-                            </div>
-
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Fasting Alerts</h4>
-                                    <p class="text-sm text-gray-600">Notifications for fasting windows</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider"></span>
+                                <label class="flex items-start space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="activity" class="text-nuri-primary focus:ring-nuri-primary mt-1">
+                                    <div>
+                                        <div class="font-medium text-sm">Very Active</div>
+                                        <div class="text-xs text-gray-600">Hard exercise 6-7 days/week</div>
+                                    </div>
                                 </label>
-                            </div>
-
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Mood Check-ins</h4>
-                                    <p class="text-sm text-gray-600">Daily mood tracking reminders</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </div>
-
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Weekly Reports</h4>
-                                    <p class="text-sm text-gray-600">Summary of your wellness progress</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </div>
-
-                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Email Notifications</h4>
-                                    <p class="text-sm text-gray-600">Receive notifications via email</p>
-                                </div>
-                                <label class="toggle-switch">
-                                    <input type="checkbox" checked>
-                                    <span class="toggle-slider"></span>
+                                <label class="flex items-start space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="activity" class="text-nuri-primary focus:ring-nuri-primary mt-1">
+                                    <div>
+                                        <div class="font-medium text-sm">Athlete</div>
+                                        <div class="text-xs text-gray-600">Very hard exercise, physical job</div>
+                                    </div>
                                 </label>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Preferences Section -->
-                    <div id="preferences-section" class="settings-section hidden">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-6">App Preferences</h3>
-
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Theme</label>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <label class="flex items-center space-x-3 p-3 border-2 border-nuri-primary bg-white rounded-lg cursor-pointer">
-                                        <input type="radio" name="theme" checked class="text-nuri-primary focus:ring-nuri-primary">
-                                        <i data-lucide="sun" class="w-4 h-4 text-nuri-primary"></i>
-                                        <span class="text-sm font-medium text-nuri-primary">Light</span>
-                                    </label>
-                                    <label class="flex items-center space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                        <input type="radio" name="theme" class="text-nuri-primary focus:ring-nuri-primary">
-                                        <i data-lucide="moon" class="w-4 h-4"></i>
-                                        <span class="text-sm font-medium">Dark</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
-                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                    <option>French</option>
-                                    <option>German</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Units</label>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <label class="flex items-center space-x-3 p-3 border-2 border-nuri-primary bg-white rounded-lg cursor-pointer">
-                                        <input type="radio" name="units" checked class="text-nuri-primary focus:ring-nuri-primary">
-                                        <span class="text-sm font-medium text-nuri-primary">Metric (kg, cm)</span>
-                                    </label>
-                                    <label class="flex items-center space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
-                                        <input type="radio" name="units" class="text-nuri-primary focus:ring-nuri-primary">
-                                        <span class="text-sm font-medium">Imperial (lbs, ft)</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Fasting Window</label>
-                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
-                                    <option>16:8 (16 hours fasting, 8 hours eating)</option>
-                                    <option>18:6 (18 hours fasting, 6 hours eating)</option>
-                                    <option>20:4 (20 hours fasting, 4 hours eating)</option>
-                                    <option>24:0 (Full day fasting)</option>
-                                    <option>No Fasting</option>
-                                </select>
+                        <!-- Health Goals -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Health Goals</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Weight Loss</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Weight Gain</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Muscle Building</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Better Sleep</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Stress Management</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Energy Boost</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Healthy Eating</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Exercise Tracking</button>
                             </div>
                         </div>
+
+                        <!-- Dietary Preferences -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Dietary Preferences</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Vegetarian</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Vegan</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Keto</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Paleo</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Mediterranean</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Low Carb</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Gluten Free</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">Dairy Free</button>
+                                <button class="p-2 border-2 border-gray-200 rounded-lg hover:border-nuri-primary hover:text-nuri-primary text-sm transition-colors">No Restrictions</button>
+                            </div>
+                        </div>
+
+                        <!-- Fasting Preference -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Fasting Preference</label>
+                            <div class="grid grid-cols-1 gap-2">
+                                <label class="flex items-start space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="fasting" class="text-nuri-primary focus:ring-nuri-primary mt-1">
+                                    <div>
+                                        <div class="font-medium text-sm">16:8</div>
+                                        <div class="text-xs text-gray-600">16 hours fasting, 8 hours eating</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="fasting" class="text-nuri-primary focus:ring-nuri-primary mt-1">
+                                    <div>
+                                        <div class="font-medium text-sm">18:6</div>
+                                        <div class="text-xs text-gray-600">18 hours fasting, 6 hours eating</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="fasting" class="text-nuri-primary focus:ring-nuri-primary mt-1">
+                                    <div>
+                                        <div class="font-medium text-sm">20:4</div>
+                                        <div class="text-xs text-gray-600">20 hours fasting, 4 hours eating</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="fasting" class="text-nuri-primary focus:ring-nuri-primary mt-1">
+                                    <div>
+                                        <div class="font-medium text-sm">24:0</div>
+                                        <div class="text-xs text-gray-600">Full day fasting</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-start space-x-3 p-3 border-2 border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="fasting" class="text-nuri-primary focus:ring-nuri-primary mt-1">
+                                    <div>
+                                        <div class="font-medium text-sm">No Fasting</div>
+                                        <div class="text-xs text-gray-600">I don't practice fasting</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Bio -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Bio</label>
+                            <textarea placeholder="Tell us about yourself..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent" rows="3"></textarea>
+                        </div>
+
+
                     </div>
 
-                    <!-- Privacy & Security Section -->
-                    <div id="privacy-section" class="settings-section hidden">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-6">Privacy & Security</h3>
+                    <!-- Wallet Section -->
+                    <div id="wallet-section" class="settings-section hidden">
+                        <!-- Wallet Tabs -->
+                        <div class="flex space-x-1 mb-6 bg-gray-100 p-1 rounded-lg">
+                            <button onclick="showWalletTab('overview')" class="flex-1 flex items-center justify-center space-x-2 px-4 py-2 rounded-md bg-white text-nuri-primary font-medium text-sm wallet-tab active">
+                                <i data-lucide="wallet" class="w-4 h-4"></i>
+                                <span>Overview</span>
+                            </button>
+                            <button onclick="showWalletTab('achievements')" class="flex-1 flex items-center justify-center space-x-2 px-4 py-2 rounded-md text-gray-600 font-medium text-sm wallet-tab">
+                                <i data-lucide="trophy" class="w-4 h-4"></i>
+                                <span>Achievements</span>
+                            </button>
+                        </div>
 
-                        <div class="space-y-6">
-                            <!-- Change Password -->
-                            <div class="bg-gray-50 rounded-lg p-4">
-                                <h4 class="font-medium text-gray-800 mb-4">Change Password</h4>
+                        <!-- Overview Tab -->
+                        <div id="wallet-overview" class="wallet-tab-content">
+                            <!-- Wallet Header -->
+                            <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <i data-lucide="wallet" class="w-6 h-6 text-nuri-primary"></i>
+                                    <h4 class="text-lg font-semibold text-gray-800">Your Wellness Wallet</h4>
+                                </div>
+                                <div class="text-sm text-gray-700 mb-2 font-medium">Web3 Wallet Setup</div>
+                                <div class="text-sm text-gray-600">Connect your MetaMask wallet to enable token conversions and view your Nuri balance.</div>
+                            </div>
+
+                            <!-- Points Conversion -->
+                            <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <i data-lucide="repeat" class="w-6 h-6 text-nuri-primary"></i>
+                                    <h4 class="text-lg font-semibold text-gray-800">Convert Points to Nuri Tokens</h4>
+                                </div>
+
+                                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
+                                    <div class="flex items-center space-x-2">
+                                        <i data-lucide="alert-circle" class="w-5 h-5 text-yellow-600"></i>
+                                        <div>
+                                            <p class="text-sm font-medium text-yellow-800">Wallet Required</p>
+                                            <p class="text-xs text-yellow-700">You need to connect your Web3 wallet to convert points to Nuri tokens.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-sm font-medium text-gray-700">Points</span>
+                                        <div class="flex items-center space-x-1">
+                                            <i data-lucide="star" class="w-4 h-4 text-yellow-500"></i>
+                                            <input type="number" value="100" disabled class="w-16 px-2 py-1 text-sm border border-gray-300 rounded bg-gray-100">
+                                        </div>
+                                    </div>
+                                    <i data-lucide="arrow-right" class="w-5 h-5 text-gray-400"></i>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-sm font-medium text-gray-700">Nuri Tokens</span>
+                                        <div class="flex items-center space-x-1">
+                                            <i data-lucide="coins" class="w-4 h-4 text-nuri-primary"></i>
+                                            <span class="text-sm font-medium">10.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p class="text-xs text-gray-500 mb-4">Minimum conversion: 100 points</p>
+
+                                <button disabled class="w-full bg-gray-200 text-gray-400 px-4 py-2 rounded-lg text-sm mb-2">
+                                    <i data-lucide="repeat" class="w-4 h-4 inline mr-2"></i>
+                                    Convert to Nuri Tokens
+                                </button>
+                                <p class="text-xs text-red-600">Not enough points! You have 0 points available.</p>
+                            </div>
+
+                            <!-- Token Balance -->
+                            <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                                <div class="flex items-center space-x-2 mb-4">
+                                    <i data-lucide="alert-circle" class="w-5 h-5 text-gray-500"></i>
+                                    <h4 class="text-lg font-semibold text-gray-800">Wallet Required</h4>
+                                </div>
+                                <p class="text-sm text-gray-600">Connect your wallet address to view your NURI token balance.</p>
+                            </div>
+
+                            <!-- Recent Earnings -->
+                            <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <i data-lucide="trending-up" class="w-6 h-6 text-nuri-primary"></i>
+                                    <h4 class="text-lg font-semibold text-gray-800">Recent Earnings</h4>
+                                </div>
+                                <p class="text-sm text-gray-500">No recent earnings to display</p>
+                            </div>
+
+                            <!-- Bonus Rewards -->
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <i data-lucide="gift" class="w-6 h-6 text-nuri-primary"></i>
+                                    <h4 class="text-lg font-semibold text-gray-800">Bonus Rewards</h4>
+                                </div>
+
                                 <div class="space-y-3">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
-                                        <input type="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
+                                    <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                                        <div>
+                                            <div class="font-medium text-sm text-gray-800">Weekend Wellness Bonus</div>
+                                            <div class="text-xs text-gray-600">Complete all weekend activities</div>
+                                        </div>
+                                        <div class="text-sm font-medium text-nuri-primary">+10 NURI tokens</div>
                                     </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
-                                        <input type="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
+
+                                    <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                                        <div>
+                                            <div class="font-medium text-sm text-gray-800">Friend Referral</div>
+                                            <div class="text-xs text-gray-600">Invite friends to join Nuri</div>
+                                        </div>
+                                        <div class="text-sm font-medium text-nuri-primary">+25 NURI per friend</div>
                                     </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
-                                        <input type="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent">
+
+                                    <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                                        <div>
+                                            <div class="font-medium text-sm text-gray-800">Monthly Wellness Challenge</div>
+                                            <div class="text-xs text-gray-600">30-day consistency challenge</div>
+                                        </div>
+                                        <div class="text-sm font-medium text-nuri-primary">+100 NURI tokens</div>
                                     </div>
-                                    <button class="bg-nuri-primary text-white px-4 py-2 rounded-lg hover:bg-nuri-primary transition-colors text-sm">
-                                        Update Password
-                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Achievements Tab -->
+                        <div id="wallet-achievements" class="wallet-tab-content hidden">
+                            <!-- Rewards Overview -->
+                            <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <i data-lucide="trophy" class="w-6 h-6 text-nuri-primary"></i>
+                                    <h4 class="text-lg font-semibold text-gray-800">Rewards Overview</h4>
+                                </div>
+
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-gray-800">0</div>
+                                        <div class="text-sm text-gray-600">Current Tokens</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-gray-800">0</div>
+                                        <div class="text-sm text-gray-600">Achievements</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-gray-800">0</div>
+                                        <div class="text-sm text-gray-600">Badges</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-gray-800">0</div>
+                                        <div class="text-sm text-gray-600">Daily Avg</div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="flex justify-between text-sm mb-1 text-gray-700">
+                                        <span>Achievement Progress</span>
+                                        <span>0/0</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-nuri-primary h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                    <div class="text-xs text-gray-600 mt-1">0.0% complete</div>
                                 </div>
                             </div>
 
-                            <!-- Privacy Settings -->
-                            <div class="space-y-4">
-                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                    <div>
-                                        <h4 class="font-medium text-gray-800">Profile Visibility</h4>
-                                        <p class="text-sm text-gray-600">Who can see your profile information</p>
+                            <!-- Current Streaks -->
+                            <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-4">Current Streaks</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="bg-white rounded-lg p-4 text-center">
+                                        <div class="text-sm font-medium text-gray-700">meal logging</div>
+                                        <div class="text-lg font-bold text-gray-800">0 days 🔥</div>
                                     </div>
-                                    <select class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-nuri-primary focus:border-transparent text-sm">
-                                        <option>Private</option>
-                                        <option>Friends Only</option>
-                                        <option>Public</option>
-                                    </select>
+                                    <div class="bg-white rounded-lg p-4 text-center">
+                                        <div class="text-sm font-medium text-gray-700">exercise</div>
+                                        <div class="text-lg font-bold text-gray-800">0 days 🔥</div>
+                                    </div>
+                                    <div class="bg-white rounded-lg p-4 text-center">
+                                        <div class="text-sm font-medium text-gray-700">mood tracking</div>
+                                        <div class="text-lg font-bold text-gray-800">0 days 🔥</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Rewards -->
+                            <div class="bg-gray-50 rounded-xl p-6">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <i data-lucide="zap" class="w-6 h-6 text-nuri-primary"></i>
+                                    <h4 class="text-lg font-semibold text-gray-800">Quick Rewards</h4>
                                 </div>
 
-                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                    <div>
-                                        <h4 class="font-medium text-gray-800">Data Sharing</h4>
-                                        <p class="text-sm text-gray-600">Share anonymized data for research</p>
-                                    </div>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox">
-                                        <span class="toggle-slider"></span>
-                                    </label>
-                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <button class="flex items-center justify-between p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <span class="text-2xl">🍽️</span>
+                                            <div class="text-left">
+                                                <div class="font-medium text-sm">Log Meal</div>
+                                                <div class="text-xs text-gray-600">+5 tokens</div>
+                                            </div>
+                                        </div>
+                                    </button>
 
-                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                                    <div>
-                                        <h4 class="font-medium text-gray-800">Analytics</h4>
-                                        <p class="text-sm text-gray-600">Help improve Nuri with usage analytics</p>
-                                    </div>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" checked>
-                                        <span class="toggle-slider"></span>
-                                    </label>
+                                    <button class="flex items-center justify-between p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <span class="text-2xl">💪</span>
+                                            <div class="text-left">
+                                                <div class="font-medium text-sm">Log Exercise</div>
+                                                <div class="text-xs text-gray-600">+10 tokens</div>
+                                            </div>
+                                        </div>
+                                    </button>
+
+                                    <button class="flex items-center justify-between p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <span class="text-2xl">😊</span>
+                                            <div class="text-left">
+                                                <div class="font-medium text-sm">Log Mood</div>
+                                                <div class="text-xs text-gray-600">+3 tokens</div>
+                                            </div>
+                                        </div>
+                                    </button>
+
+                                    <button class="flex items-center justify-between p-4 bg-white rounded-lg hover:bg-gray-50 transition-colors">
+                                        <div class="flex items-center space-x-3">
+                                            <span class="text-2xl">🤖</span>
+                                            <div class="text-left">
+                                                <div class="font-medium text-sm">AI Chat</div>
+                                                <div class="text-xs text-gray-600">+3 tokens</div>
+                                            </div>
+                                        </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Data & Export Section -->
-                    <div id="data-section" class="settings-section hidden">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-6">Data & Export</h3>
 
-                        <div class="space-y-6">
-                            <!-- Data Export -->
-                            <div class="bg-gray-50 rounded-lg p-4">
-                                <h4 class="font-medium text-gray-800 mb-2">Export Your Data</h4>
-                                <p class="text-sm text-gray-600 mb-4">Download a copy of all your wellness data</p>
-                                <button class="bg-nuri-primary text-white px-4 py-2 rounded-lg hover:bg-nuri-primary transition-colors text-sm">
-                                    <i data-lucide="download" class="w-4 h-4 inline mr-2"></i>
-                                    Export Data
-                                </button>
-                            </div>
-
-                            <!-- Data Import -->
-                            <div class="bg-gray-50 rounded-lg p-4">
-                                <h4 class="font-medium text-gray-800 mb-2">Import Data</h4>
-                                <p class="text-sm text-gray-600 mb-4">Import wellness data from other apps</p>
-                                <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors text-sm">
-                                    <i data-lucide="upload" class="w-4 h-4 inline mr-2"></i>
-                                    Import Data
-                                </button>
-                            </div>
-
-                            <!-- Storage Usage -->
-                            <div class="bg-gray-50 rounded-lg p-4">
-                                <h4 class="font-medium text-gray-800 mb-2">Storage Usage</h4>
-                                <div class="space-y-2">
-                                    <div class="flex justify-between text-sm">
-                                        <span class="text-gray-600">Meal logs</span>
-                                        <span class="font-medium">2.3 MB</span>
-                                    </div>
-                                    <div class="flex justify-between text-sm">
-                                        <span class="text-gray-600">Mood entries</span>
-                                        <span class="font-medium">0.8 MB</span>
-                                    </div>
-                                    <div class="flex justify-between text-sm">
-                                        <span class="text-gray-600">Exercise data</span>
-                                        <span class="font-medium">1.5 MB</span>
-                                    </div>
-                                    <div class="flex justify-between text-sm border-t pt-2">
-                                        <span class="font-medium text-gray-800">Total</span>
-                                        <span class="font-medium text-nuri-primary">4.6 MB</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Danger Zone -->
-                            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-                                <h4 class="font-medium text-red-800 mb-2">Danger Zone</h4>
-                                <p class="text-sm text-red-600 mb-4">These actions cannot be undone</p>
-                                <div class="space-y-2">
-                                    <button class="bg-red-100 text-red-700 px-4 py-2 rounded-lg hover:bg-red-200 transition-colors text-sm">
-                                        <i data-lucide="refresh-cw" class="w-4 h-4 inline mr-2"></i>
-                                        Reset All Data
-                                    </button>
-                                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors text-sm ml-2">
-                                        <i data-lucide="trash-2" class="w-4 h-4 inline mr-2"></i>
-                                        Delete Account
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- Help & Support Section -->
                     <div id="help-section" class="settings-section hidden">
                         <h3 class="text-lg font-semibold text-gray-800 mb-6">Help & Support</h3>
+                        <p class="text-sm text-gray-600 mb-6">Get help and support for using the app</p>
 
-                        <div class="space-y-4">
-                            <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition-colors">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <i data-lucide="book-open" class="w-5 h-5 text-gray-600"></i>
-                                        <div>
-                                            <h4 class="font-medium text-gray-800">User Guide</h4>
-                                            <p class="text-sm text-gray-600">Learn how to use Nuri effectively</p>
+                        <!-- Support Options -->
+                        <div class="mb-6">
+                            <h4 class="text-md font-semibold text-gray-800 mb-4">Support</h4>
+                            <div class="space-y-3">
+                                <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div>
+                                                <h5 class="font-medium text-gray-800">Help Center</h5>
+                                                <p class="text-sm text-gray-600">Browse our help articles</p>
+                                            </div>
                                         </div>
+                                        <i data-lucide="external-link" class="w-4 h-4 text-gray-400"></i>
                                     </div>
-                                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+                                </div>
+
+                                <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div>
+                                                <h5 class="font-medium text-gray-800">Contact Support</h5>
+                                                <p class="text-sm text-gray-600">Get help from our team</p>
+                                            </div>
+                                        </div>
+                                        <i data-lucide="external-link" class="w-4 h-4 text-gray-400"></i>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div>
+                                                <h5 class="font-medium text-gray-800">Report a Bug</h5>
+                                                <p class="text-sm text-gray-600">Let us know about issues</p>
+                                            </div>
+                                        </div>
+                                        <i data-lucide="external-link" class="w-4 h-4 text-gray-400"></i>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-3">
+                                            <div>
+                                                <h5 class="font-medium text-gray-800">Feature Request</h5>
+                                                <p class="text-sm text-gray-600">Suggest new features</p>
+                                            </div>
+                                        </div>
+                                        <i data-lucide="external-link" class="w-4 h-4 text-gray-400"></i>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition-colors">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <i data-lucide="message-circle" class="w-5 h-5 text-gray-600"></i>
-                                        <div>
-                                            <h4 class="font-medium text-gray-800">Contact Support</h4>
-                                            <p class="text-sm text-gray-600">Get help from our support team</p>
-                                        </div>
-                                    </div>
-                                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
-                                </div>
-                            </div>
-
-                            <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition-colors">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <i data-lucide="bug" class="w-5 h-5 text-gray-600"></i>
-                                        <div>
-                                            <h4 class="font-medium text-gray-800">Report a Bug</h4>
-                                            <p class="text-sm text-gray-600">Help us improve by reporting issues</p>
-                                        </div>
-                                    </div>
-                                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
-                                </div>
-                            </div>
-
-                            <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition-colors">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <i data-lucide="file-text" class="w-5 h-5 text-gray-600"></i>
-                                        <div>
-                                            <h4 class="font-medium text-gray-800">Privacy Policy</h4>
-                                            <p class="text-sm text-gray-600">Read our privacy policy</p>
-                                        </div>
-                                    </div>
-                                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
-                                </div>
-                            </div>
-
-                            <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition-colors">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-3">
-                                        <i data-lucide="scroll" class="w-5 h-5 text-gray-600"></i>
-                                        <div>
-                                            <h4 class="font-medium text-gray-800">Terms of Service</h4>
-                                            <p class="text-sm text-gray-600">Read our terms of service</p>
-                                        </div>
-                                    </div>
-                                    <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
-                                </div>
-                            </div>
-
-                            <!-- App Info -->
-                            <div class="bg-gray-50 rounded-lg p-4 mt-6">
-                                <h4 class="font-medium text-gray-800 mb-3">App Information</h4>
-                                <div class="space-y-2 text-sm">
+                        <!-- About Section -->
+                        <div class="mb-6">
+                            <h4 class="text-md font-semibold text-gray-800 mb-4">About</h4>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="space-y-3 text-sm">
                                     <div class="flex justify-between">
                                         <span class="text-gray-600">Version</span>
-                                        <span class="font-medium">2.1.0</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-600">Build</span>
-                                        <span class="font-medium">2024.08.27</span>
+                                        <span class="font-medium">1.0.0</span>
                                     </div>
                                     <div class="flex justify-between">
                                         <span class="text-gray-600">Last Updated</span>
-                                        <span class="font-medium">Aug 27, 2024</span>
+                                        <span class="font-medium">Jan 2025</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-600">Platform</span>
+                                        <span class="font-medium">Web</span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Legal Links -->
+                        <div class="space-y-2">
+                            <button class="w-full text-left bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors">
+                                <span class="text-sm font-medium text-gray-800">Privacy Policy</span>
+                            </button>
+                            <button class="w-full text-left bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors">
+                                <span class="text-sm font-medium text-gray-800">Terms of Service</span>
+                            </button>
+                            <button class="w-full text-left bg-gray-50 rounded-lg p-3 hover:bg-gray-100 transition-colors">
+                                <span class="text-sm font-medium text-gray-800">Open Source Licenses</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Modal Footer -->
-            <div class="flex flex-col sm:flex-row items-center justify-between p-4 md:p-6 border-t border-gray-200 bg-gray-50 space-y-3 sm:space-y-0">
-                <div class="flex items-center space-x-4 order-2 sm:order-1">
-                    <button class="text-red-600 hover:text-red-700 font-medium text-sm">
-                        <i data-lucide="log-out" class="w-4 h-4 inline mr-1"></i>
-                        Sign Out
-                    </button>
-                </div>
-                <div class="flex items-center space-x-3 order-1 sm:order-2 w-full sm:w-auto">
-                    <button onclick="closeModal()" class="flex-1 sm:flex-none px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors text-center">
-                        Cancel
-                    </button>
-                    <button class="flex-1 sm:flex-none bg-nuri-primary text-white px-6 py-2 rounded-lg hover:bg-nuri-primary transition-colors text-center">
-                        Save Changes
-                    </button>
-                </div>
+            <div class="flex items-center justify-end p-4 md:p-6 border-t border-gray-200 bg-gray-50 space-x-3">
+                <button onclick="closeModal()" class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors">
+                    Cancel
+                </button>
+                <button class="bg-nuri-primary text-white px-6 py-2 rounded-lg hover:bg-nuri-primary transition-colors">
+                    Save Changes
+                </button>
             </div>
         </div>
     </div>
@@ -614,6 +666,27 @@
             // Highlight active nav item
             event.target.closest('.nav-item').classList.add('border-nuri-primary', 'bg-white', 'text-nuri-primary', 'active');
             event.target.closest('.nav-item').classList.remove('border-transparent', 'text-gray-700');
+        }
+
+        // Wallet tab navigation
+        function showWalletTab(tabId) {
+            // Hide all wallet tab contents
+            const tabContents = document.querySelectorAll('.wallet-tab-content');
+            tabContents.forEach(content => content.classList.add('hidden'));
+
+            // Show selected tab content
+            document.getElementById('wallet-' + tabId).classList.remove('hidden');
+
+            // Update wallet tab navigation
+            const walletTabs = document.querySelectorAll('.wallet-tab');
+            walletTabs.forEach(tab => {
+                tab.classList.remove('bg-white', 'text-nuri-primary', 'active');
+                tab.classList.add('text-gray-600');
+            });
+
+            // Highlight active wallet tab
+            event.target.closest('.wallet-tab').classList.add('bg-white', 'text-nuri-primary', 'active');
+            event.target.closest('.wallet-tab').classList.remove('text-gray-600');
         }
 
         // Toggle switches
@@ -651,20 +724,22 @@
             }
         });
 
-        // Checkbox handling for health goals
-        document.addEventListener('change', function(e) {
-            if (e.target.type === 'checkbox' && !e.target.closest('.toggle-switch')) {
-                const label = e.target.closest('label');
-                if (e.target.checked) {
-                    label.classList.add('border-nuri-primary');
-                    label.classList.remove('border-gray-200');
-                    const spans = label.querySelectorAll('span');
-                    spans.forEach(span => span.classList.add('text-nuri-primary'));
+        // Button selection handling for health goals and dietary preferences
+        document.addEventListener('click', function(e) {
+            // Handle health goals and dietary preferences buttons
+            if (e.target.closest('button') && (
+                e.target.closest('button').parentElement.previousElementSibling?.textContent?.includes('Health Goals') ||
+                e.target.closest('button').parentElement.previousElementSibling?.textContent?.includes('Dietary Preferences')
+            )) {
+                const button = e.target.closest('button');
+
+                // Toggle selection state
+                if (button.classList.contains('border-nuri-primary')) {
+                    button.classList.remove('border-nuri-primary', 'text-nuri-primary');
+                    button.classList.add('border-gray-200');
                 } else {
-                    label.classList.remove('border-nuri-primary');
-                    label.classList.add('border-gray-200');
-                    const spans = label.querySelectorAll('span');
-                    spans.forEach(span => span.classList.remove('text-nuri-primary'));
+                    button.classList.add('border-nuri-primary', 'text-nuri-primary');
+                    button.classList.remove('border-gray-200');
                 }
             }
         });
