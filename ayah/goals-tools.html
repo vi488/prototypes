@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Goals Tools - ayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* ayah Brand Colors */
+        :root {
+            /* Main Brand Blue Palette - Updated per brand guidelines */
+            --ayah-primary: #6048EB;           /* Main brand blue */
+            --ayah-primary-hover: #4F3BC9;     /* Darker blue for hover */
+            --ayah-primary-light: #F4F1FF;     /* Light blue for accents - brand secondary */
+            --ayah-primary-lighter: #F4FDFF;   /* Very light blue */
+            --ayah-primary-dark: #043178;      /* Dark blue for emphasis - brand tertiary */
+
+            /* Background Blues */
+            --ayah-bg-light: #F4F1FF;          /* Subtle light background - brand secondary */
+            --ayah-bg-medium: #F4FDFF;         /* Medium light background */
+            --ayah-bg-dark: #6048EB;           /* Medium background - brand primary */
+
+            /* Icon Blues - Harmonious variations */
+            --ayah-icon-primary: #6048EB;      /* Primary icons */
+            --ayah-icon-secondary: #5B8CFF;    /* Secondary icons */
+            --ayah-icon-tertiary: #7DA3FF;     /* Tertiary icons */
+            --ayah-icon-light: #A0BAFF;        /* Light icons */
+
+            /* Button Blues - Consistent system */
+            --ayah-btn-primary: #6048EB;       /* Primary buttons */
+            --ayah-btn-primary-hover: #4F3BC9; /* Primary button hover */
+            --ayah-btn-secondary: #5B8CFF;     /* Secondary buttons */
+            --ayah-btn-secondary-hover: #043178; /* Secondary button hover */
+        }
+
+        /* Utility Classes */
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .bg-ayah-primary-lighter { background-color: var(--ayah-primary-lighter); }
+        .bg-ayah-primary-dark { background-color: var(--ayah-primary-dark); }
+        .bg-ayah-bg-light { background-color: var(--ayah-bg-light); }
+        .bg-ayah-bg-medium { background-color: var(--ayah-bg-medium); }
+        .bg-ayah-bg-dark { background-color: var(--ayah-bg-dark); }
+
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .text-ayah-primary-light { color: var(--ayah-primary-light); }
+        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
+        .text-ayah-icon-primary { color: var(--ayah-icon-primary); }
+        .text-ayah-icon-secondary { color: var(--ayah-icon-secondary); }
+        .text-ayah-icon-tertiary { color: var(--ayah-icon-tertiary); }
+        .text-ayah-icon-light { color: var(--ayah-icon-light); }
+
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .border-ayah-primary-light { border-color: var(--ayah-primary-light); }
+        .border-ayah-bg-medium { border-color: var(--ayah-bg-medium); }
+
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+        .hover\:bg-ayah-primary-light:hover { background-color: var(--ayah-primary); }
+    </style>
+</head>
+<body class="bg-white font-sans">
+    <div class="p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Learning Goals</h1>
+            <p class="text-gray-600">Track your Learning Goals and progress</p>
+        </div>
+
+        <!-- Add Goal Button -->
+        <div class="mb-6">
+            <button onclick="openGoalModal()" class="flex items-center space-x-2 px-4 py-2 bg-ayah-primary text-white rounded-lg hover:bg-ayah-primary-hover transition-colors">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                <span>Add Goal</span>
+            </button>
+        </div>
+
+        <!-- Goals Statistics Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
+                <div class="w-8 h-8 bg-ayah-bg-medium rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="target" class="w-4 h-4 text-ayah-icon-primary"></i>
+                </div>
+                <div class="text-sm text-gray-600">Total Goals</div>
+                <div class="text-lg font-semibold text-ayah-icon-primary">0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
+                <div class="w-8 h-8 bg-ayah-primary-light rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-ayah-primary"></i>
+                </div>
+                <div class="text-sm text-gray-600">Completed</div>
+                <div class="text-lg font-semibold text-ayah-primary">0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
+                <div class="w-8 h-8 bg-ayah-primary-light rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="trending-up" class="w-4 h-4 text-ayah-primary-dark"></i>
+                </div>
+                <div class="text-sm text-gray-600">On Track</div>
+                <div class="text-lg font-semibold text-ayah-primary-dark">0</div>
+            </div>
+            <div class="bg-white rounded-lg p-4 text-center border border-gray-200 shadow-sm">
+                <div class="w-8 h-8 bg-ayah-primary-light rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i data-lucide="percent" class="w-4 h-4 text-ayah-primary-hover"></i>
+                </div>
+                <div class="text-sm text-gray-600">Avg Progress</div>
+                <div class="text-lg font-semibold text-ayah-primary-hover">0.0%</div>
+            </div>
+        </div>
+
+        <!-- No Goals State -->
+        <div class="bg-white rounded-xl border border-gray-200 p-8 mb-8 text-center shadow-sm">
+            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="target" class="w-8 h-8 text-gray-400"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">No goals yet</h3>
+            <p class="text-gray-600 mb-4">Start by creating your first financial goal</p>
+            <button onclick="openGoalModal()" class="px-6 py-2 bg-ayah-primary text-white rounded-lg hover:bg-ayah-primary-hover transition-colors">
+                Create Your First Goal
+            </button>
+        </div>
+
+        <!-- Show Tips Button -->
+        <div class="text-center">
+            <button onclick="showTips()" class="flex items-center space-x-2 mx-auto px-4 py-2 text-ayah-primary hover:bg-gray-100 rounded-lg transition-colors">
+                <i data-lucide="lightbulb" class="w-4 h-4"></i>
+                <span>Show tips</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Function to open goal modal
+        function openGoalModal() {
+            try {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage('openAddGoalModal', '*');
+                } else {
+                    console.log('Opening goal modal');
+                    alert('Goal modal would open here');
+                }
+            } catch (e) {
+                console.log('Error opening goal modal:', e);
+                alert('Goal modal would open here');
+            }
+        }
+
+
+
+        // Function to show tips
+        function showTips() {
+            console.log('Showing goal tips...');
+            // This would normally show a tips modal or tooltip
+            alert('Goal tips would be displayed here');
+        }
+
+        // Initialize goal statistics (would normally come from API)
+        function updateGoalStatistics() {
+            // This would normally fetch real data from the backend
+            const stats = {
+                totalGoals: 0,
+                completed: 0,
+                onTrack: 0,
+                avgProgress: 0.0
+            };
+
+            // Update the display (this is just for demonstration)
+            console.log('Goal statistics updated:', stats);
+        }
+
+        // Call initialization
+        updateGoalStatistics();
+    </script>
+</body>
+</html>
