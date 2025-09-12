@@ -1008,10 +1008,9 @@
         }
 
         function loadConversationHistory(chatTitle) {
-            // First, ensure we're on the chat page (not tool page)
+            // First, ensure we're on the chat page
             currentPage = 'chat';
             chatPage.classList.remove('hidden');
-            toolPage.classList.add('hidden');
 
             // Switch to conversation state
             isInitialState = false;
