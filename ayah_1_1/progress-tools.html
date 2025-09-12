@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Tools - ayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* ayah Brand Colors */
+        :root {
+            /* Main Brand Blue Palette - Updated per brand guidelines */
+            --ayah-primary: #6048EB;           /* Main brand blue */
+            --ayah-primary-hover: #4F3BC9;     /* Darker blue for hover */
+            --ayah-primary-light: #F4F1FF;     /* Light blue for accents - brand secondary */
+            --ayah-primary-lighter: #F4FDFF;   /* Very light blue */
+            --ayah-primary-dark: #043178;      /* Dark blue for emphasis - brand tertiary */
+
+            /* Background Blues */
+            --ayah-bg-light: #F4F1FF;          /* Subtle light background - brand secondary */
+            --ayah-bg-medium: #F4FDFF;         /* Medium light background */
+            --ayah-bg-dark: #6048EB;           /* Medium background - brand primary */
+
+            /* Icon Blues - Harmonious variations */
+            --ayah-icon-primary: #6048EB;      /* Primary icons */
+            --ayah-icon-secondary: #5B8CFF;    /* Secondary icons */
+            --ayah-icon-tertiary: #7DA3FF;     /* Tertiary icons */
+            --ayah-icon-light: #A0BAFF;        /* Light icons */
+
+            /* Button Blues - Consistent system */
+            --ayah-btn-primary: #6048EB;       /* Primary buttons */
+            --ayah-btn-primary-hover: #4F3BC9; /* Primary button hover */
+            --ayah-btn-secondary: #5B8CFF;     /* Secondary buttons */
+            --ayah-btn-secondary-hover: #043178; /* Secondary button hover */
+        }
+
+        /* Utility Classes */
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .bg-ayah-primary-lighter { background-color: var(--ayah-primary-lighter); }
+        .bg-ayah-primary-dark { background-color: var(--ayah-primary-dark); }
+        .bg-ayah-bg-light { background-color: var(--ayah-bg-light); }
+        .bg-ayah-bg-medium { background-color: var(--ayah-bg-medium); }
+        .bg-ayah-bg-dark { background-color: var(--ayah-bg-dark); }
+
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .text-ayah-primary-light { color: var(--ayah-primary-light); }
+        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
+        .text-ayah-icon-primary { color: var(--ayah-icon-primary); }
+        .text-ayah-icon-secondary { color: var(--ayah-icon-secondary); }
+        .text-ayah-icon-tertiary { color: var(--ayah-icon-tertiary); }
+        .text-ayah-icon-light { color: var(--ayah-icon-light); }
+
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .border-ayah-primary-light { border-color: var(--ayah-primary-light); }
+        .border-ayah-bg-medium { border-color: var(--ayah-bg-medium); }
+
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+        .hover\:bg-ayah-primary-light:hover { background-color: var(--ayah-primary); }
+    </style>
+</head>
+<body class="bg-white font-sans">
+    <div class="p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Learning Progress</h1>
+            <p class="text-gray-600">Track your academic achievements and goal progress</p>
+        </div>
+
+        <!-- Learning Statistics Overview -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-800">This Week's Progress</h2>
+                    <p class="text-gray-600">Your learning activity summary</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                    </button>
+                    <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600">
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Current Learning Streak -->
+            <div class="bg-ayah-bg-light rounded-lg p-6 mb-6">
+                <div class="flex items-center space-x-3 mb-2">
+                    <i data-lucide="zap" class="w-5 h-5 text-ayah-icon-primary"></i>
+                    <span class="text-gray-600">Learning Streak</span>
+                </div>
+                <div class="text-3xl font-bold text-gray-900 mb-1">5 days</div>
+                <p class="text-sm text-gray-500">Keep it up! Last session: 2 hours ago</p>
+            </div>
+
+            <!-- Weekly Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-ayah-bg-light rounded-lg p-4">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i data-lucide="clock" class="w-4 h-4 text-orange-600"></i>
+                        <span class="text-sm text-orange-600">Study Time</span>
+                    </div>
+                    <div class="text-xl font-bold text-orange-600">3h 45m</div>
+                    <p class="text-xs text-gray-500">This week</p>
+                </div>
+                <div class="bg-ayah-bg-light rounded-lg p-4">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i data-lucide="brain" class="w-4 h-4 text-blue-600"></i>
+                        <span class="text-sm text-blue-600">Problems Solved</span>
+                    </div>
+                    <div class="text-xl font-bold text-blue-600">28</div>
+                    <p class="text-xs text-gray-500">This week</p>
+                </div>
+                <div class="bg-ayah-bg-light rounded-lg p-4">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i data-lucide="book-open" class="w-4 h-4 text-purple-600"></i>
+                        <span class="text-sm text-purple-600">Topics Learned</span>
+                    </div>
+                    <div class="text-xl font-bold text-purple-600">7</div>
+                    <p class="text-xs text-gray-500">This week</p>
+                </div>
+            </div>
+
+            <!-- Additional Stats -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="text-center">
+                    <div class="text-sm text-gray-600">Sessions Completed</div>
+                    <div class="text-lg font-semibold text-gray-900">12</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-sm text-gray-600">Goals Completed</div>
+                    <div class="text-lg font-semibold text-green-600">2</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Progress Chart -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">Learning Activity</h2>
+                <select class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent">
+                    <option value="7days" selected>Last 7 Days</option>
+                    <option value="4weeks">Last 4 Weeks</option>
+                    <option value="6months">Last 6 Months</option>
+                </select>
+            </div>
+
+
+
+            <!-- Exact Chart from Existing Website with Integrated Legend -->
+            <div class="h-80 w-full relative">
+                <svg role="application" tabindex="0" class="recharts-surface" width="100%" height="320" viewBox="0 0 809 320" style="width: 100%; height: 100%;">
+                    <title></title>
+                    <desc></desc>
+                    <defs>
+                        <clipPath id="recharts2-clip">
+                            <rect x="65" y="5" height="259" width="739"></rect>
+                        </clipPath>
+                    </defs>
+                    <g class="recharts-cartesian-grid">
+                        <g class="recharts-cartesian-grid-horizontal">
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="65" y1="264" x2="804" y2="264"></line>
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="65" y1="199.25" x2="804" y2="199.25"></line>
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="65" y1="134.5" x2="804" y2="134.5"></line>
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="65" y1="69.75" x2="804" y2="69.75"></line>
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="65" y1="5" x2="804" y2="5"></line>
+                        </g>
+                        <g class="recharts-cartesian-grid-vertical">
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="65" y1="5" x2="65" y2="264"></line>
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="188.16666666666669" y1="5" x2="188.16666666666669" y2="264"></line>
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="311.33333333333337" y1="5" x2="311.33333333333337" y2="264"></line>
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="434.5" y1="5" x2="434.5" y2="264"></line>
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="557.6666666666667" y1="5" x2="557.6666666666667" y2="264"></line>
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="680.8333333333334" y1="5" x2="680.8333333333334" y2="264"></line>
+                            <line stroke-dasharray="3 3" stroke="#ccc" fill="none" x="65" y="5" width="739" height="259" x1="804" y1="5" x2="804" y2="264"></line>
+                        </g>
+                    </g>
+                    <g class="recharts-layer recharts-cartesian-axis recharts-xAxis xAxis">
+                        <line height="30" orientation="bottom" x="65" y="264" width="739" class="recharts-cartesian-axis-line" stroke="#666" fill="none" x1="65" y1="264" x2="804" y2="264"></line>
+                        <g class="recharts-cartesian-axis-ticks">
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line height="30" orientation="bottom" x="65" y="264" width="739" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="65" y1="270" x2="65" y2="264"></line>
+                                <text height="30" orientation="bottom" width="739" stroke="none" x="65" y="272" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="middle" fill="#666">
+                                    <tspan x="65" dy="0.71em">Aug 27</tspan>
+                                </text>
+                            </g>
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line height="30" orientation="bottom" x="65" y="264" width="739" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="188.16666666666669" y1="270" x2="188.16666666666669" y2="264"></line>
+                                <text height="30" orientation="bottom" width="739" stroke="none" x="188.16666666666669" y="272" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="middle" fill="#666">
+                                    <tspan x="188.16666666666669" dy="0.71em">Aug 28</tspan>
+                                </text>
+                            </g>
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line height="30" orientation="bottom" x="65" y="264" width="739" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="311.33333333333337" y1="270" x2="311.33333333333337" y2="264"></line>
+                                <text height="30" orientation="bottom" width="739" stroke="none" x="311.33333333333337" y="272" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="middle" fill="#666">
+                                    <tspan x="311.33333333333337" dy="0.71em">Aug 29</tspan>
+                                </text>
+                            </g>
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line height="30" orientation="bottom" x="65" y="264" width="739" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="434.5" y1="270" x2="434.5" y2="264"></line>
+                                <text height="30" orientation="bottom" width="739" stroke="none" x="434.5" y="272" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="middle" fill="#666">
+                                    <tspan x="434.5" dy="0.71em">Aug 30</tspan>
+                                </text>
+                            </g>
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line height="30" orientation="bottom" x="65" y="264" width="739" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="557.6666666666667" y1="270" x2="557.6666666666667" y2="264"></line>
+                                <text height="30" orientation="bottom" width="739" stroke="none" x="557.6666666666667" y="272" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="middle" fill="#666">
+                                    <tspan x="557.6666666666667" dy="0.71em">Aug 31</tspan>
+                                </text>
+                            </g>
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line height="30" orientation="bottom" x="65" y="264" width="739" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="680.8333333333334" y1="270" x2="680.8333333333334" y2="264"></line>
+                                <text height="30" orientation="bottom" width="739" stroke="none" x="680.8333333333334" y="272" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="middle" fill="#666">
+                                    <tspan x="680.8333333333334" dy="0.71em">Sep 01</tspan>
+                                </text>
+                            </g>
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line height="30" orientation="bottom" x="65" y="264" width="739" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="804" y1="270" x2="804" y2="264"></line>
+                                <text height="30" orientation="bottom" width="739" stroke="none" x="785.484375" y="272" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="middle" fill="#666">
+                                    <tspan x="785.484375" dy="0.71em">Sep 02</tspan>
+                                </text>
+                            </g>
+                        </g>
+                    </g>
+                    <g class="recharts-layer recharts-cartesian-axis recharts-yAxis yAxis">
+                        <line orientation="left" width="60" x="5" y="5" height="259" class="recharts-cartesian-axis-line" stroke="#666" fill="none" x1="65" y1="5" x2="65" y2="264"></line>
+                        <g class="recharts-cartesian-axis-ticks">
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line orientation="left" width="60" x="5" y="5" height="259" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="59" y1="264" x2="65" y2="264"></line>
+                                <text orientation="left" width="60" height="259" stroke="none" x="57" y="264" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="end" fill="#666">
+                                    <tspan x="57" dy="0.355em">0</tspan>
+                                </text>
+                            </g>
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line orientation="left" width="60" x="5" y="5" height="259" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="59" y1="199.25" x2="65" y2="199.25"></line>
+                                <text orientation="left" width="60" height="259" stroke="none" x="57" y="199.25" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="end" fill="#666">
+                                    <tspan x="57" dy="0.355em">250</tspan>
+                                </text>
+                            </g>
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line orientation="left" width="60" x="5" y="5" height="259" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="59" y1="134.5" x2="65" y2="134.5"></line>
+                                <text orientation="left" width="60" height="259" stroke="none" x="57" y="134.5" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="end" fill="#666">
+                                    <tspan x="57" dy="0.355em">500</tspan>
+                                </text>
+                            </g>
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line orientation="left" width="60" x="5" y="5" height="259" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="59" y1="69.75" x2="65" y2="69.75"></line>
+                                <text orientation="left" width="60" height="259" stroke="none" x="57" y="69.75" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="end" fill="#666">
+                                    <tspan x="57" dy="0.355em">750</tspan>
+                                </text>
+                            </g>
+                            <g class="recharts-layer recharts-cartesian-axis-tick">
+                                <line orientation="left" width="60" x="5" y="5" height="259" class="recharts-cartesian-axis-tick-line" stroke="#666" fill="none" x1="59" y1="5" x2="65" y2="5"></line>
+                                <text orientation="left" width="60" height="259" stroke="none" x="57" y="10.5" class="recharts-text recharts-cartesian-axis-tick-value" text-anchor="end" fill="#666">
+                                    <tspan x="57" dy="0.355em">1000</tspan>
+                                </text>
+                            </g>
+                        </g>
+                    </g>
+                    <g class="recharts-layer recharts-area">
+                        <g class="recharts-layer">
+                            <path fill="#6048EB" fill-opacity="0.6" height="259" width="739" stroke="none" class="recharts-curve recharts-area-area" d="M65,264C106.056,264,147.111,264,188.167,264C229.222,264,270.278,264,311.333,264C352.389,264,393.444,264,434.5,264C475.556,264,516.611,264,557.667,264C598.722,264,639.778,5,680.833,5C721.889,5,762.944,134.5,804,264L804,264C762.944,264,721.889,264,680.833,264C639.778,264,598.722,264,557.667,264C516.611,264,475.556,264,434.5,264C393.444,264,352.389,264,311.333,264C270.278,264,229.222,264,188.167,264C147.111,264,106.056,264,65,264Z"></path>
+                            <path fill="none" fill-opacity="0.6" height="259" stroke="#6048EB" width="739" class="recharts-curve recharts-area-curve" d="M65,264C106.056,264,147.111,264,188.167,264C229.222,264,270.278,264,311.333,264C352.389,264,393.444,264,434.5,264C475.556,264,516.611,264,557.667,264C598.722,264,639.778,5,680.833,5C721.889,5,762.944,134.5,804,264"></path>
+                        </g>
+                    </g>
+                    <g class="recharts-layer recharts-area">
+                        <g class="recharts-layer">
+                            <path fill="#043178" fill-opacity="0.6" height="259" width="739" stroke="none" class="recharts-curve recharts-area-area" d="M65,264C106.056,264,147.111,264,188.167,264C229.222,264,270.278,264,311.333,264C352.389,264,393.444,264,434.5,264C475.556,264,516.611,264,557.667,264C598.722,264,639.778,5,680.833,5C721.889,5,762.944,134.5,804,264L804,264C762.944,134.5,721.889,5,680.833,5C639.778,5,598.722,264,557.667,264C516.611,264,475.556,264,434.5,264C393.444,264,352.389,264,311.333,264C270.278,264,229.222,264,188.167,264C147.111,264,106.056,264,65,264Z"></path>
+                            <path fill="none" fill-opacity="0.6" height="259" stroke="#043178" width="739" class="recharts-curve recharts-area-curve" d="M65,264C106.056,264,147.111,264,188.167,264C229.222,264,270.278,264,311.333,264C352.389,264,393.444,264,434.5,264C475.556,264,516.611,264,557.667,264C598.722,264,639.778,5,680.833,5C721.889,5,762.944,134.5,804,264"></path>
+                        </g>
+                    </g>
+
+                    <!-- Legend positioned at bottom like existing website -->
+                    <g class="recharts-legend-wrapper" transform="translate(5, 295)">
+                        <g class="recharts-default-legend">
+                            <!-- Study Time legend item -->
+                            <g class="recharts-legend-item legend-item-0" transform="translate(280, 0)">
+                                <svg aria-label="Study Time legend icon" class="recharts-surface" width="14" height="14" viewBox="0 0 32 32" x="0" y="0">
+                                    <path stroke-width="4" fill="none" stroke="#043178" d="M0,16h10.666666666666666 A5.333333333333333,5.333333333333333,0,1,1,21.333333333333332,16 H32M21.333333333333332,16 A5.333333333333333,5.333333333333333,0,1,1,10.666666666666666,16" class="recharts-legend-icon"></path>
+                                </svg>
+                                <text x="18" y="7" dy="0.355em" text-anchor="start" fill="#043178" font-size="12" font-family="Arial, sans-serif">Study Time</text>
+                            </g>
+
+                            <!-- Problems Solved legend item -->
+                            <g class="recharts-legend-item legend-item-1" transform="translate(380, 0)">
+                                <svg aria-label="Problems Solved legend icon" class="recharts-surface" width="14" height="14" viewBox="0 0 32 32" x="0" y="0">
+                                    <path stroke-width="4" fill="none" stroke="#6048EB" d="M0,16h10.666666666666666 A5.333333333333333,5.333333333333333,0,1,1,21.333333333333332,16 H32M21.333333333333332,16 A5.333333333333333,5.333333333333333,0,1,1,10.666666666666666,16" class="recharts-legend-icon"></path>
+                                </svg>
+                                <text x="18" y="7" dy="0.355em" text-anchor="start" fill="#6048EB" font-size="12" font-family="Arial, sans-serif">Problems Solved</text>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Learning Goals Progress -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-800">Goals Progress</h2>
+                    <p class="text-gray-600">Overview of your Learning Goals performance</p>
+                </div>
+                <button class="text-ayah-primary hover:text-ayah-primary-hover text-sm font-medium">
+                    View All Goals →
+                </button>
+            </div>
+
+            <!-- Goals Statistics Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
+                    <div class="w-8 h-8 bg-ayah-bg-medium rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i data-lucide="target" class="w-4 h-4 text-ayah-primary"></i>
+                    </div>
+                    <div class="text-sm text-gray-600">Active Goals</div>
+                    <div class="text-lg font-semibold text-ayah-primary">3</div>
+                </div>
+                <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
+                    </div>
+                    <div class="text-sm text-gray-600">Completed</div>
+                    <div class="text-lg font-semibold text-green-600">2</div>
+                </div>
+                <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
+                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i data-lucide="trending-up" class="w-4 h-4 text-blue-600"></i>
+                    </div>
+                    <div class="text-sm text-gray-600">On Track</div>
+                    <div class="text-lg font-semibold text-blue-600">2</div>
+                </div>
+                <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
+                    <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i data-lucide="percent" class="w-4 h-4 text-purple-600"></i>
+                    </div>
+                    <div class="text-sm text-gray-600">Avg Progress</div>
+                    <div class="text-lg font-semibold text-purple-600">68%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Steps Recommendations -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Next Steps</h2>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg">
+                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="brain" class="w-4 h-4 text-blue-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-900">Continue working on Math - you're almost there!</p>
+                        <p class="text-sm text-gray-600">12 of 20 problems completed (60%)</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-orange-50 rounded-lg">
+                    <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="clock" class="w-4 h-4 text-orange-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-900">Try a quick Science session to maintain your streak</p>
+                        <p class="text-sm text-gray-600">15 more minutes needed to reach your goal</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-green-50 rounded-lg">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="star" class="w-4 h-4 text-green-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-900">Great progress on History - consider setting a new challenge</p>
+                        <p class="text-sm text-gray-600">2 of 5 topics completed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Weekly Summary</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="text-sm text-gray-600 mb-1">Total Study Sessions</div>
+                    <div class="text-2xl font-bold text-gray-900">12</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-sm text-gray-600 mb-1">Subjects Studied</div>
+                    <div class="text-2xl font-bold text-gray-900">4</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-sm text-gray-600 mb-1">Period</div>
+                    <div class="text-2xl font-bold text-gray-900">Last 7 days</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Add click handlers for buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('button')) {
+                const buttonText = e.target.textContent.trim();
+                console.log('Progress action clicked:', buttonText);
+
+                // Simple visual feedback
+                e.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 150);
+            }
+        });
+    </script>
+</body>
+</html>

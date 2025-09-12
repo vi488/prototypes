@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ayah - $AYAH Tokens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        :root {
+            --ayah-primary: #6048EB;
+            --ayah-primary-hover: #4F3BC9;
+        }
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+
+        .modal-enter {
+            animation: modalEnter 0.3s ease-out;
+        }
+
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-circle {
+            stroke-dasharray: 283;
+            stroke-dashoffset: 85;
+            transition: stroke-dashoffset 0.5s ease-in-out;
+        }
+
+        .token-display {
+            font-family: 'Courier New', monospace;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes tokenGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(73, 122, 255, 0.3); }
+            50% { box-shadow: 0 0 30px rgba(73, 122, 255, 0.6); }
+        }
+
+        .token-glow {
+            animation: tokenGlow 2s ease-in-out infinite alternate;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Modal Overlay -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <!-- Modal Content -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden modal-enter">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-ayah-primary rounded-full flex items-center justify-center token-glow">
+                        <i data-lucide="coins" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-800">$AYAH Tokens</h2>
+                        <p class="text-sm text-gray-600">Earn rewards for financial achievements</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i data-lucide="x" class="w-5 h-5 text-gray-500"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="flex h-[calc(90vh-180px)]">
+                <!-- Left Panel - Token Balance -->
+                <div class="flex-1 p-8 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-white">
+                    <!-- Current Token Status -->
+                    <div class="text-center mb-8">
+                        <div class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-4">
+                            <div class="w-2 h-2 bg-blue-500 rounded-full mr-2 pulse-animation"></div>
+                            Active Streak: 7 days
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Token Balance</h3>
+                        <p class="text-gray-600">Earned through financial achievements</p>
+                    </div>
+
+                    <!-- Token Circle -->
+                    <div class="relative mb-8">
+                        <svg class="w-64 h-64 progress-ring">
+                            <circle
+                                cx="128"
+                                cy="128"
+                                r="45"
+                                stroke="var(--ayah-primary-light)"
+                                stroke-width="8"
+                                fill="transparent"
+                            />
+                            <circle
+                                cx="128"
+                                cy="128"
+                                r="45"
+                                stroke="var(--ayah-primary)"
+                                stroke-width="8"
+                                fill="transparent"
+                                class="progress-ring-circle"
+                            />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <div class="token-display text-gray-800">2,847</div>
+                            <p class="text-sm text-gray-600 mt-2">$AYAH Tokens</p>
+                            <p class="text-xs text-gray-500">≈ $28.47 value</p>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex space-x-4">
+                        <button class="px-6 py-3 bg-ayah-primary text-white rounded-lg hover:bg-ayah-primary-hover transition-colors">
+                            <i data-lucide="gift" class="w-4 h-4 inline mr-2"></i>
+                            Redeem Rewards
+                        </button>
+                        <button class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+                            <i data-lucide="history" class="w-4 h-4 inline mr-2"></i>
+                            View History
+                        </button>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-3 gap-4 mt-8 w-full max-w-md">
+                        <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                            <div class="text-2xl font-bold text-gray-800">147</div>
+                            <div class="text-xs text-gray-600">Today</div>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                            <div class="text-2xl font-bold text-gray-800">850</div>
+                            <div class="text-xs text-gray-600">This Week</div>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                            <div class="text-2xl font-bold text-gray-800">7</div>
+                            <div class="text-xs text-gray-600">Day Streak</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Rewards & History -->
+                <div class="w-1/3 p-6 border-l border-gray-200 bg-gray-50">
+                    <!-- Available Rewards -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Available Rewards</h4>
+                        <div class="space-y-2">
+                            <div class="p-3 bg-white border border-ayah-primary rounded-lg">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="font-medium text-gray-800">Premium Features</p>
+                                        <p class="text-xs text-gray-600">500 tokens</p>
+                                    </div>
+                                    <i data-lucide="star" class="w-4 h-4 text-ayah-primary"></i>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-white border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="font-medium text-gray-800">Gift Card $10</p>
+                                        <p class="text-xs text-gray-600">1,000 tokens</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-white border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="font-medium text-gray-800">Gift Card $25</p>
+                                        <p class="text-xs text-gray-600">2,500 tokens</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-white border border-gray-200 rounded-lg hover:border-gray-300 cursor-pointer">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="font-medium text-gray-800">Cash Out</p>
+                                        <p class="text-xs text-gray-600">Convert to USD</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Token Multiplier -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Current Multiplier</h4>
+                        <div class="bg-white rounded-lg p-4 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm font-medium text-gray-700">Base Rate</span>
+                                <span class="text-sm text-ayah-primary font-medium">1x</span>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-sm font-medium text-gray-700">Streak Bonus</span>
+                                <span class="text-sm text-green-600">+0.7x</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-ayah-primary h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Total multiplier: 1.7x • Next bonus at 10 days</p>
+                        </div>
+                    </div>
+
+                    <!-- Recent Earnings -->
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Recent Earnings</h4>
+                        <div class="space-y-3">
+                            <div class="bg-white rounded-lg p-3 shadow-sm">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-800">Budget Goal Met</p>
+                                        <p class="text-xs text-gray-600">Yesterday</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-green-600">+50</p>
+                                        <p class="text-xs text-gray-500">Tokens</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 shadow-sm">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-800">Debt Payment</p>
+                                        <p class="text-xs text-gray-600">2 days ago</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-green-600">+75</p>
+                                        <p class="text-xs text-gray-500">Tokens</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 shadow-sm">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-800">Savings Goal</p>
+                                        <p class="text-xs text-gray-600">3 days ago</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-green-600">+25</p>
+                                        <p class="text-xs text-gray-500">Tokens</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements -->
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Token Achievements</h4>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-3 p-2 bg-white rounded-lg shadow-sm">
+                                <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="award" class="w-4 h-4 text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Token Collector</p>
+                                    <p class="text-xs text-gray-600">Earned 1,000+ tokens</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 p-2 bg-white rounded-lg shadow-sm">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="target" class="w-4 h-4 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Streak Master</p>
+                                    <p class="text-xs text-gray-600">7-day earning streak</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="flex items-center justify-between p-6 border-t border-gray-200 bg-gray-50">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 text-sm text-gray-600">
+                        <i data-lucide="coins" class="w-4 h-4"></i>
+                        <span>Earn tokens daily with financial goals</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button onclick="closeModal()" class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors">
+                        Close
+                    </button>
+                    <button class="bg-ayah-primary text-white px-6 py-2 rounded-lg hover:bg-ayah-primary transition-colors">
+                        <i data-lucide="gift" class="w-4 h-4 inline mr-2"></i>
+                        Redeem Tokens
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function closeModal() {
+            window.parent.postMessage('closeModal', '*');
+        }
+
+        // Token counter animation
+        function animateTokens() {
+            const tokenDisplay = document.querySelector('.token-display');
+            const progressCircle = document.querySelector('.progress-ring-circle');
+
+            // Animate token count
+            let currentTokens = 2847;
+            let targetTokens = 2847;
+
+            // Simulate earning tokens
+            setInterval(() => {
+                if (Math.random() < 0.1) { // 10% chance to earn tokens
+                    targetTokens += Math.floor(Math.random() * 10) + 1;
+                }
+
+                if (currentTokens < targetTokens) {
+                    currentTokens++;
+                    tokenDisplay.textContent = currentTokens.toLocaleString();
+                }
+
+                // Update progress circle (70% towards next milestone)
+                const progress = 70;
+                const circumference = 2 * Math.PI * 45;
+                const offset = circumference - (progress / 100) * circumference;
+                progressCircle.style.strokeDashoffset = offset;
+            }, 100);
+        }
+
+        // Start token animation
+        animateTokens();
+
+        // Reward selection
+        const rewardButtons = document.querySelectorAll('[class*="p-3 bg-white border"]');
+        rewardButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove selection from all rewards
+                rewardButtons.forEach(b => {
+                    b.classList.remove('border-ayah-primary');
+                    b.classList.add('border-gray-200');
+                    const star = b.querySelector('[data-lucide="star"]');
+                    if (star) star.remove();
+                });
+
+                // Add selection to clicked reward
+                this.classList.remove('border-gray-200');
+                this.classList.add('border-ayah-primary');
+
+                // Add star icon if not already present
+                if (!this.querySelector('[data-lucide="star"]')) {
+                    const starIcon = document.createElement('i');
+                    starIcon.setAttribute('data-lucide', 'star');
+                    starIcon.className = 'w-4 h-4 text-ayah-primary';
+                    this.querySelector('.flex').appendChild(starIcon);
+
+                    // Re-initialize icons
+                    lucide.createIcons();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Goals Tools - Ayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Ayah Brand Colors - Pure Brand Color System (Following Nuri Pattern) */
+        :root {
+            /* Core Brand Colors - As specified */
+            --ayah-primary: #6048EB;           /* Primary brand purple - main brand color */
+            --ayah-secondary-1: #F4F1FF;       /* Light purple - for subtle backgrounds and accents */
+            --ayah-secondary-2: #F4FDFF;       /* Very light blue-purple - for gentle highlights */
+
+            /* Brand Purple Variations - Derived from primary */
+            --ayah-primary-hover: #4F3BC9;     /* Darker purple for hover states */
+            --ayah-primary-light: #8B7EF7;     /* Light purple for accents */
+            --ayah-primary-lighter: #A599F9;   /* Lighter purple for backgrounds */
+            --ayah-primary-lightest: #C4B5FB;  /* Very light purple for subtle backgrounds */
+            --ayah-primary-dark: #3A2A9E;      /* Dark purple for emphasis */
+            --ayah-primary-darker: #2D1B69;    /* Darker purple for strong emphasis */
+
+            /* Background Variations - Brand-based */
+            --ayah-bg-light: #F4F1FF;          /* Subtle light background - secondary-1 */
+            --ayah-bg-medium: #F4FDFF;         /* Medium light background - secondary-2 */
+            --ayah-bg-dark: #8B7EF7;           /* Medium purple background */
+
+            /* Icon Purples - Harmonious variations */
+            --ayah-icon-primary: #6048EB;      /* Primary icons */
+            --ayah-icon-secondary: #7C6EF0;    /* Secondary icons */
+            --ayah-icon-tertiary: #9B8DF3;     /* Tertiary icons */
+            --ayah-icon-light: #A599F9;        /* Light icons */
+
+            /* Neutral Colors for Eye Comfort */
+            --ayah-neutral-50: #FAFAFA;        /* Softest background - reduces eye strain */
+            --ayah-neutral-100: #F5F5F5;       /* Light background - comfortable reading */
+            --ayah-neutral-200: #E5E5E5;       /* Border color - subtle separation */
+            --ayah-neutral-300: #D4D4D4;       /* Disabled states */
+            --ayah-neutral-600: #525252;       /* Secondary text - good contrast */
+            --ayah-neutral-700: #404040;       /* Primary text - excellent contrast */
+            --ayah-neutral-800: #262626;       /* High emphasis text */
+            --ayah-neutral-900: #171717;       /* Maximum contrast text */
+        }
+
+        /* Brand Color Utility Classes - Following Nuri Pattern */
+
+        /* Background Colors - Brand Variations Only */
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .bg-ayah-primary-lighter { background-color: var(--ayah-primary-lighter); }
+        .bg-ayah-primary-lightest { background-color: var(--ayah-primary-lightest); }
+        .bg-ayah-primary-dark { background-color: var(--ayah-primary-dark); }
+        .bg-ayah-secondary-1 { background-color: var(--ayah-secondary-1); }
+        .bg-ayah-secondary-2 { background-color: var(--ayah-secondary-2); }
+        .bg-ayah-bg-light { background-color: var(--ayah-bg-light); }
+        .bg-ayah-bg-medium { background-color: var(--ayah-bg-medium); }
+        .bg-ayah-bg-dark { background-color: var(--ayah-bg-dark); }
+        .bg-ayah-neutral-50 { background-color: var(--ayah-neutral-50); }
+        .bg-ayah-neutral-100 { background-color: var(--ayah-neutral-100); }
+
+        /* Text Colors - Brand and Neutral Only */
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .text-ayah-primary-light { color: var(--ayah-primary-light); }
+        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
+        .text-ayah-icon-primary { color: var(--ayah-icon-primary); }
+        .text-ayah-icon-secondary { color: var(--ayah-icon-secondary); }
+        .text-ayah-icon-tertiary { color: var(--ayah-icon-tertiary); }
+        .text-ayah-icon-light { color: var(--ayah-icon-light); }
+        .text-ayah-neutral-600 { color: var(--ayah-neutral-600); }
+        .text-ayah-neutral-700 { color: var(--ayah-neutral-700); }
+        .text-ayah-neutral-800 { color: var(--ayah-neutral-800); }
+        .text-ayah-neutral-900 { color: var(--ayah-neutral-900); }
+
+        /* Border Colors - Brand Variations */
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .border-ayah-primary-light { border-color: var(--ayah-primary-light); }
+        .border-ayah-secondary-1 { border-color: var(--ayah-secondary-1); }
+        .border-ayah-bg-medium { border-color: var(--ayah-bg-medium); }
+        .border-ayah-neutral-200 { border-color: var(--ayah-neutral-200); }
+
+        /* Interactive States - Brand Color Feedback */
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+        .hover\:bg-ayah-primary-light:hover { background-color: var(--ayah-primary); }
+        .hover\:bg-ayah-secondary-1:hover { background-color: var(--ayah-primary-lighter); }
+        .hover\:text-ayah-primary:hover { color: var(--ayah-primary); }
+        .hover\:border-ayah-primary:hover { border-color: var(--ayah-primary); }
+
+        /* Mobile optimizations for full-width layout */
+        @media (max-width: 767px) {
+            /* Ensure proper mobile spacing */
+            .px-4 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            /* Mobile-specific layout adjustments */
+            .grid.grid-cols-2.sm\\:grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .grid.grid-cols-1.sm\\:grid-cols-2 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            /* Main content grid - stack columns on mobile */
+            .grid.grid-cols-1.lg\\:grid-cols-2 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            /* Compact mobile spacing */
+            .p-4.sm\\:p-6 {
+                padding: 1rem;
+            }
+
+            .py-6 {
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+
+            .space-y-6 > * + * {
+                margin-top: 1.5rem;
+            }
+
+            /* Mobile text adjustments */
+            .text-xl.sm\\:text-2xl {
+                font-size: 1.25rem;
+                line-height: 1.75rem;
+            }
+        }
+
+        /* Large screen optimizations */
+        @media (min-width: 1024px) {
+            .px-4.sm\\:px-6 {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white font-sans">
+    <!-- Full Width Container with Eye-Comfortable Background -->
+    <div class="min-h-screen bg-ayah-neutral-50">
+        <!-- Header with Optimal Contrast - Full Width -->
+        <div class="bg-white border-b border-ayah-neutral-200 sticky top-0 z-10 shadow-sm">
+            <div class="px-4 sm:px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-ayah-neutral-900">My Learning Goals</h1>
+                        <p class="text-sm text-ayah-neutral-600 mt-1">Track your progress and achieve success</p>
+                    </div>
+                    <!-- Primary Action - Maximum Emphasis with Brand Color -->
+                    <button onclick="openGoalModal()" class="bg-ayah-primary text-white px-4 py-2 rounded-lg hover:bg-ayah-primary-hover flex items-center space-x-2 shadow-sm transition-colors duration-200">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">New Goal</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Width Content Container -->
+        <div class="px-4 sm:px-6 py-6 space-y-6">
+            <!-- Quick Stats Overview - Balanced Color Usage -->
+            <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-ayah-neutral-200">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="text-center">
+                        <div class="text-2xl sm:text-3xl font-bold text-ayah-primary">3</div>
+                        <div class="text-xs sm:text-sm text-ayah-neutral-600">Active Goals</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl sm:text-3xl font-bold text-ayah-primary-light">65%</div>
+                        <div class="text-xs sm:text-sm text-ayah-neutral-600">Avg Progress</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl sm:text-3xl font-bold text-ayah-icon-secondary">12</div>
+                        <div class="text-xs sm:text-sm text-ayah-neutral-600">This Week</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl sm:text-3xl font-bold text-ayah-icon-tertiary">5</div>
+                        <div class="text-xs sm:text-sm text-ayah-neutral-600">Day Streak</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid - 2 Column Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Left Column - Active Goals -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-semibold text-ayah-neutral-900">Active Goals</h2>
+                        <span class="text-sm text-ayah-neutral-600">3 of 3 goals</span>
+                    </div>
+
+                    <!-- Goal Cards - Pure Brand Colors Only -->
+                    <div class="space-y-4">
+                        <!-- Goal 1: Low Progress - Brand Purple Light -->
+                        <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-ayah-neutral-200 border-l-4 border-l-ayah-primary-lighter">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-ayah-primary-lightest rounded-full flex items-center justify-center">
+                                        <span class="text-lg">📊</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-ayah-neutral-900">Solve 50 Math Problems</h3>
+                                        <p class="text-sm text-ayah-neutral-600">Math • Problems Goal</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-lg font-bold text-ayah-primary-lighter">12/50</div>
+                                    <div class="text-xs text-ayah-neutral-600">24%</div>
+                                </div>
+                            </div>
+
+                            <!-- Progress Bar with Brand Colors -->
+                            <div class="mb-3">
+                                <div class="w-full bg-ayah-neutral-200 rounded-full h-2">
+                                    <div class="bg-ayah-primary-lighter h-2 rounded-full transition-all duration-500" style="width: 24%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Activity with Clear Hierarchy -->
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-ayah-neutral-600">+3 problems</span>
+                                <button class="text-ayah-primary hover:text-ayah-primary-hover font-medium transition-colors duration-200">Continue</button>
+                            </div>
+                        </div>
+
+                        <!-- Goal 2: Good Progress - Brand Purple Medium -->
+                        <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-ayah-neutral-200 border-l-4 border-l-ayah-primary-light">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-ayah-bg-light rounded-full flex items-center justify-center">
+                                        <span class="text-lg">🔬</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-ayah-neutral-900">Study Science for 10 Hours</h3>
+                                        <p class="text-sm text-ayah-neutral-600">Science • Time Goal</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-lg font-bold text-ayah-primary-light">6.5/10h</div>
+                                    <div class="text-xs text-ayah-neutral-600">65%</div>
+                                </div>
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div class="mb-3">
+                                <div class="w-full bg-ayah-neutral-200 rounded-full h-2">
+                                    <div class="bg-ayah-primary-light h-2 rounded-full transition-all duration-500" style="width: 65%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Activity -->
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-ayah-neutral-600">+45 min yesterday</span>
+                                <button class="text-ayah-primary hover:text-ayah-primary-hover font-medium transition-colors duration-200">Continue</button>
+                            </div>
+                        </div>
+
+                        <!-- Goal 3: High Progress - Primary Brand Color -->
+                        <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-ayah-neutral-200 border-l-4 border-l-ayah-primary">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-ayah-secondary-1 rounded-full flex items-center justify-center">
+                                        <span class="text-lg">📚</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-ayah-neutral-900">Learn 15 History Topics</h3>
+                                        <p class="text-sm text-ayah-neutral-600">History • Topics Goal</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-lg font-bold text-ayah-primary">8/15</div>
+                                    <div class="text-xs text-ayah-neutral-600">53%</div>
+                                </div>
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div class="mb-3">
+                                <div class="w-full bg-ayah-neutral-200 rounded-full h-2">
+                                    <div class="bg-ayah-primary h-2 rounded-full transition-all duration-500" style="width: 53%"></div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Activity -->
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-ayah-neutral-600">+2 topics last session</span>
+                                <button class="text-ayah-primary hover:text-ayah-primary-hover font-medium transition-colors duration-200">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Recent Activity -->
+                <div class="space-y-6">
+                    <!-- Recent Activity - Tertiary Priority with Consistent Color Scheme -->
+                    <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-ayah-neutral-200">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold text-ayah-neutral-900">Recent Activity</h2>
+                            <button class="text-sm text-ayah-primary hover:text-ayah-primary-hover font-medium transition-colors duration-200">View All</button>
+                        </div>
+                        <div class="space-y-3">
+                            <!-- Activity Items - Simplified and Consistent -->
+                            <div class="flex items-center space-x-3 p-3 bg-ayah-secondary-1 rounded-lg border border-ayah-neutral-200">
+                                <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center border border-ayah-neutral-200">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-ayah-primary"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-ayah-neutral-900 truncate">Math Session - 3 problems solved</p>
+                                    <p class="text-xs text-ayah-neutral-600">15 minutes ago • 25 min session</p>
+                                </div>
+                                <div class="text-xs text-ayah-primary font-medium">+6%</div>
+                            </div>
+
+                            <div class="flex items-center space-x-3 p-3 bg-ayah-secondary-1 rounded-lg border border-ayah-neutral-200">
+                                <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center border border-ayah-neutral-200">
+                                    <i data-lucide="clock" class="w-4 h-4 text-ayah-primary"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-ayah-neutral-900 truncate">Science Study - Chemistry</p>
+                                    <p class="text-xs text-ayah-neutral-600">2 hours ago • 45 min session</p>
+                                </div>
+                                <div class="text-xs text-ayah-primary font-medium">+7.5%</div>
+                            </div>
+
+                            <div class="flex items-center space-x-3 p-3 bg-ayah-secondary-1 rounded-lg border border-ayah-neutral-200">
+                                <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center border border-ayah-neutral-200">
+                                    <i data-lucide="book-open" class="w-4 h-4 text-ayah-primary"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium text-ayah-neutral-900 truncate">History - World War II topics</p>
+                                    <p class="text-xs text-ayah-neutral-600">1 day ago • 30 min session</p>
+                                </div>
+                                <div class="text-xs text-ayah-primary font-medium">+13%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions - Secondary Priority with Brand Harmony -->
+            <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-ayah-neutral-200">
+                <h2 class="text-lg font-semibold text-ayah-neutral-900 mb-4">Quick Actions</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Suggested Goals - Primary Brand Color -->
+                    <div class="p-4 bg-ayah-secondary-1 rounded-lg border border-ayah-secondary-1">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="lightbulb" class="w-4 h-4 text-ayah-primary"></i>
+                            <span class="text-sm font-medium text-ayah-primary-dark">Suggested Goals</span>
+                        </div>
+                        <div class="space-y-2">
+                            <button onclick="createSuggestedGoal('Math', 'problems', 15)" class="w-full text-left p-3 bg-white rounded-lg border border-ayah-neutral-200 hover:border-ayah-primary hover:bg-ayah-bg-medium transition-colors duration-200">
+                                <div class="font-medium text-ayah-neutral-900 text-sm">📊 Solve 15 math problems</div>
+                                <div class="text-xs text-ayah-neutral-600">Perfect for building skills</div>
+                            </button>
+                            <button onclick="createSuggestedGoal('Science', 'time', 45)" class="w-full text-left p-3 bg-white rounded-lg border border-ayah-neutral-200 hover:border-ayah-primary hover:bg-ayah-bg-medium transition-colors duration-200">
+                                <div class="font-medium text-ayah-neutral-900 text-sm">🔬 Study science for 45 min</div>
+                                <div class="text-xs text-ayah-neutral-600">Great for exploration</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Goal Management - Neutral with Subtle Emphasis -->
+                    <div class="p-4 bg-ayah-neutral-100 rounded-lg border border-ayah-neutral-200">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="settings" class="w-4 h-4 text-ayah-neutral-600"></i>
+                            <span class="text-sm font-medium text-ayah-neutral-700">Goal Management</span>
+                        </div>
+                        <div class="space-y-2">
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-ayah-neutral-200 hover:border-ayah-primary-light hover:bg-ayah-bg-medium transition-colors duration-200">
+                                <div class="font-medium text-ayah-neutral-900 text-sm">📈 View Progress History</div>
+                                <div class="text-xs text-ayah-neutral-600">See your learning journey</div>
+                            </button>
+                            <button class="w-full text-left p-3 bg-white rounded-lg border border-ayah-neutral-200 hover:border-ayah-primary-light hover:bg-ayah-bg-medium transition-colors duration-200">
+                                <div class="font-medium text-ayah-neutral-900 text-sm">🎯 Edit Goal Settings</div>
+                                <div class="text-xs text-ayah-neutral-600">Modify targets and deadlines</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Goal creation functions
+        function createSuggestedGoal(subject, type, target) {
+            const goalData = {
+                subject: subject,
+                goalType: type,
+                targetValue: target,
+                duration: 7, // 1 week
+                createdAt: new Date().toISOString(),
+                status: 'active',
+                source: 'suggested'
+            };
+
+            console.log('Creating suggested goal:', goalData);
+            showGoalCreatedMessage(goalData);
+
+            // Simulate adding to UI
+            setTimeout(() => {
+                addGoalToDisplay(goalData);
+            }, 1500);
+        }
+
+        function openGoalModal() {
+            try {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage('openAddGoalModal', '*');
+                } else {
+                    window.open('add-goal-modal.html', 'goalModal', 'width=600,height=700,scrollbars=yes,resizable=yes');
+                }
+            } catch (e) {
+                console.log('Error opening goal modal:', e);
+                window.open('add-goal-modal.html', 'goalModal', 'width=600,height=700,scrollbars=yes,resizable=yes');
+            }
+        }
+
+        function showGoalCreatedMessage(goalData) {
+            const typeMap = {
+                'problems': 'Problems Solved',
+                'time': 'Study Time',
+                'topics': 'Topics Learned'
+            };
+
+            const unitMap = {
+                'problems': 'problems',
+                'time': 'minutes',
+                'topics': 'topics'
+            };
+
+            const message = `🎉 Goal Created Successfully!\n\n${goalData.subject} - ${typeMap[goalData.goalType]}\nTarget: ${goalData.targetValue} ${unitMap[goalData.goalType]} this week\n\nYour goal has been added to your dashboard!`;
+            alert(message);
+        }
+
+        function addGoalToDisplay(goalData) {
+            console.log('Goal would be added to dashboard:', goalData);
+            // In real app, this would update the goals list
+            updateGoalCounter();
+        }
+
+        function updateGoalCounter() {
+            // Update stats in the overview section
+            const activeGoalsElement = document.querySelector('.grid.grid-cols-2 .text-2xl.text-ayah-primary');
+            if (activeGoalsElement) {
+                const current = parseInt(activeGoalsElement.textContent);
+                if (current < 3) {
+                    activeGoalsElement.textContent = current + 1;
+                }
+            }
+        }
+
+        // Mobile responsive behavior with color-aware adjustments
+        function handleMobileLayout() {
+            const isMobile = window.innerWidth < 640;
+
+            // Adjust grid layouts for mobile
+            const quickActionsGrid = document.querySelector('.grid.grid-cols-1.sm\\:grid-cols-2');
+            if (quickActionsGrid) {
+                if (isMobile) {
+                    quickActionsGrid.classList.remove('sm:grid-cols-2');
+                    quickActionsGrid.classList.add('grid-cols-1');
+                } else {
+                    quickActionsGrid.classList.add('sm:grid-cols-2');
+                }
+            }
+
+            // Adjust color contrast for mobile if needed
+            if (isMobile) {
+                // Ensure sufficient contrast on small screens
+                document.body.classList.add('mobile-optimized');
+            } else {
+                document.body.classList.remove('mobile-optimized');
+            }
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', handleMobileLayout);
+        handleMobileLayout(); // Initial call
+
+        // Simulate progress updates with brand colors only
+        function simulateProgressUpdate() {
+            const progressBars = document.querySelectorAll('.bg-ayah-primary-lighter, .bg-ayah-primary-light, .bg-ayah-primary');
+            progressBars.forEach(bar => {
+                const currentWidth = parseInt(bar.style.width);
+                if (currentWidth < 100) {
+                    const newWidth = Math.min(currentWidth + Math.random() * 3, 100);
+                    bar.style.width = newWidth + '%';
+
+                    // Update brand colors based on progress
+                    if (newWidth >= 75) {
+                        bar.className = bar.className.replace(/bg-ayah-primary-(lighter|light)/, 'bg-ayah-primary');
+                    } else if (newWidth >= 50) {
+                        bar.className = bar.className.replace(/bg-ayah-primary-lighter|bg-ayah-primary(?!-)/, 'bg-ayah-primary-light');
+                    } else {
+                        bar.className = bar.className.replace(/bg-ayah-primary(-light)?(?!-)/, 'bg-ayah-primary-lighter');
+                    }
+                }
+            });
+        }
+
+        // Update progress every 15 seconds for demo
+        setInterval(simulateProgressUpdate, 15000);
+
+        // Goal-driven chat session functionality
+        function initiateContinueGoal(goalType, subject, currentProgress, targetProgress) {
+            // Simulate context retrieval and analysis
+            const contextData = {
+                goalType: goalType,
+                subject: subject,
+                currentProgress: currentProgress,
+                targetProgress: targetProgress,
+                percentage: Math.round((currentProgress / targetProgress) * 100),
+                lastSession: getLastSessionData(goalType),
+                nextSteps: generateNextSteps(goalType, subject, currentProgress, targetProgress)
+            };
+
+            // Show context-aware chat initiation modal
+            showChatInitiationModal(contextData);
+        }
+
+        function getLastSessionData(goalType) {
+            // Simulate last session data based on goal type
+            const sessionData = {
+                'problems_solved': {
+                    activity: '+3 problems',
+                    details: 'Solved algebra equations, worked on word problems',
+                    difficulty: 'medium'
+                },
+                'study_time': {
+                    activity: '+45 min yesterday',
+                    details: 'Studied chemistry basics, explored atomic structure',
+                    difficulty: 'beginner'
+                },
+                'topics_learned': {
+                    activity: '+2 topics last session',
+                    details: 'Learned about World War II causes and effects',
+                    difficulty: 'intermediate'
+                }
+            };
+            return sessionData[goalType] || sessionData['problems_solved'];
+        }
+
+        function generateNextSteps(goalType, subject, current, target) {
+            const remaining = target - current;
+            const percentage = Math.round((current / target) * 100);
+
+            const nextSteps = {
+                'problems_solved': {
+                    low: `Let's continue with your ${subject} goal! You've solved ${current} problems so far. Ready for problem #${current + 1}?`,
+                    medium: `Great progress on ${subject}! You're ${percentage}% complete. Let's tackle ${Math.min(5, remaining)} more problems.`,
+                    high: `Excellent work! Only ${remaining} problems left to reach your goal. Let's finish strong!`
+                },
+                'study_time': {
+                    low: `Ready to continue studying ${subject}? You've completed ${current} hours. Let's aim for another productive session!`,
+                    medium: `You're doing well with your ${subject} studies! ${current} hours down, ${remaining} to go. What topic interests you?`,
+                    high: `Almost there! Just ${remaining} hours left. Let's make this final push count!`
+                },
+                'topics_learned': {
+                    low: `Let's explore more ${subject} topics! You've learned ${current} so far. Ready to discover something new?`,
+                    medium: `Great progress learning ${subject}! You've covered ${current} topics. Let's dive into the next one.`,
+                    high: `Fantastic! You've learned ${current} topics. Only ${remaining} more to complete your goal!`
+                }
+            };
+
+            const progressLevel = percentage < 40 ? 'low' : percentage < 75 ? 'medium' : 'high';
+            return nextSteps[goalType][progressLevel];
+        }
+
+        function showChatInitiationModal(contextData) {
+            // Create modal overlay
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            modalOverlay.style.animation = 'fadeIn 0.3s ease-out';
+
+            // Create modal content
+            const modalContent = document.createElement('div');
+            modalContent.className = 'bg-white rounded-xl shadow-xl max-w-lg w-full p-6 transform transition-all duration-300';
+            modalContent.style.animation = 'slideUp 0.3s ease-out';
+
+            modalContent.innerHTML = `
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-ayah-secondary-1 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                        <span class="text-2xl">${getGoalIcon(contextData.goalType)}</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-ayah-neutral-900 mb-2">Continue Your ${contextData.subject} Goal</h3>
+                    <p class="text-ayah-neutral-600">${contextData.currentProgress}/${contextData.targetProgress} completed (${contextData.percentage}%)</p>
+
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-ayah-neutral-200 rounded-full h-2 mt-3">
+                        <div class="bg-ayah-primary h-2 rounded-full transition-all duration-1000" style="width: ${contextData.percentage}%"></div>
+                    </div>
+                </div>
+
+                <!-- Context Analysis Section -->
+                <div class="bg-gradient-to-r from-ayah-secondary-1 to-ayah-secondary-2 rounded-lg p-4 mb-4">
+                    <h4 class="font-medium text-ayah-neutral-900 mb-2 flex items-center">
+                        <span class="w-2 h-2 bg-ayah-primary rounded-full mr-2 animate-pulse"></span>
+                        AI Context Analysis
+                    </h4>
+                    <div class="text-sm text-ayah-neutral-700 space-y-2">
+                        <div class="flex justify-between">
+                            <span>Goal Type:</span>
+                            <span class="font-medium">${formatGoalType(contextData.goalType)}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Progress Level:</span>
+                            <span class="font-medium text-ayah-primary">${getProgressLevel(contextData.percentage)}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Remaining:</span>
+                            <span class="font-medium">${contextData.targetProgress - contextData.currentProgress} ${getGoalUnit(contextData.goalType)}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Tutor Message -->
+                <div class="bg-white border-l-4 border-ayah-primary rounded-lg p-4 mb-4 shadow-sm">
+                    <h4 class="font-medium text-ayah-neutral-900 mb-2 flex items-center">
+                        <span class="text-lg mr-2">🤖</span>
+                        Ayah says:
+                    </h4>
+                    <p class="text-ayah-neutral-700 text-sm leading-relaxed">${contextData.nextSteps}</p>
+                </div>
+
+                <!-- Last Session Summary -->
+                <div class="bg-ayah-neutral-50 rounded-lg p-3 mb-6">
+                    <p class="text-xs text-ayah-neutral-600 mb-2 font-medium">📊 Last Session Summary:</p>
+                    <div class="text-sm text-ayah-neutral-800 space-y-1">
+                        <div class="flex justify-between">
+                            <span>Activity:</span>
+                            <span class="font-medium">${contextData.lastSession.activity}</span>
+                        </div>
+                        <div class="text-xs text-ayah-neutral-600 mt-2">
+                            ${contextData.lastSession.details}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-3">
+                    <button onclick="closeModal()" class="flex-1 px-4 py-2 border border-ayah-neutral-300 text-ayah-neutral-700 rounded-lg hover:bg-ayah-neutral-50 transition-all duration-200">
+                        Cancel
+                    </button>
+                    <button onclick="startGoalSession('${contextData.goalType}', '${contextData.subject}', ${JSON.stringify(contextData).replace(/"/g, '&quot;')})" class="flex-1 px-4 py-2 bg-ayah-primary text-white rounded-lg hover:bg-ayah-primary-hover transition-all duration-200 transform hover:scale-105">
+                        🚀 Start Session
+                    </button>
+                </div>
+
+                <!-- Feature Explanation -->
+                <div class="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <p class="text-xs text-blue-700">
+                        <strong>💡 How it works:</strong> The AI will start a focused learning session based on your goal progress,
+                        automatically track your activity, and update your goal when you complete problems, study time, or learn new topics.
+                    </p>
+                </div>
+            `;
+
+            modalOverlay.appendChild(modalContent);
+            document.body.appendChild(modalOverlay);
+
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes slideUp {
+                    from { transform: translateY(20px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        function getGoalIcon(goalType) {
+            const icons = {
+                'problems_solved': '📊',
+                'study_time': '🔬',
+                'topics_learned': '📚'
+            };
+            return icons[goalType] || '🎯';
+        }
+
+        function formatGoalType(goalType) {
+            const formatted = {
+                'problems_solved': 'Problems Solved',
+                'study_time': 'Study Time',
+                'topics_learned': 'Topics Learned'
+            };
+            return formatted[goalType] || goalType;
+        }
+
+        function getProgressLevel(percentage) {
+            if (percentage < 25) return 'Getting Started';
+            if (percentage < 50) return 'Making Progress';
+            if (percentage < 75) return 'Doing Great';
+            return 'Almost Done!';
+        }
+
+        function getGoalUnit(goalType) {
+            const units = {
+                'problems_solved': 'problems',
+                'study_time': 'hours',
+                'topics_learned': 'topics'
+            };
+            return units[goalType] || 'items';
+        }
+
+        function startGoalSession(goalType, subject, contextData) {
+            closeModal();
+
+            // Show loading state
+            showLoadingState();
+
+            // Simulate context loading delay
+            setTimeout(() => {
+                hideLoadingState();
+
+                // Send message to parent window to start goal session in main chat
+                const goalSessionData = {
+                    action: 'startGoalSession',
+                    goalType: goalType,
+                    subject: subject,
+                    contextData: contextData,
+                    greeting: getContextualGreeting(goalType, subject)
+                };
+
+                // Send to parent window (main prototype)
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage(goalSessionData, '*');
+                } else {
+                    // Fallback for direct access (not in iframe)
+                    console.log('Goal session data:', goalSessionData);
+                    alert('This feature works when embedded in the main Ayah prototype. Please access via the main ChatGPT-style interface.');
+                }
+            }, 1500);
+        }
+
+        function showLoadingState() {
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.id = 'loading-overlay';
+            loadingOverlay.className = 'fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50';
+            loadingOverlay.innerHTML = `
+                <div class="bg-white rounded-xl p-6 shadow-xl text-center">
+                    <div class="w-12 h-12 border-4 border-ayah-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <p class="text-ayah-neutral-700 font-medium">Loading goal context...</p>
+                    <p class="text-ayah-neutral-500 text-sm mt-1">Analyzing your progress and preparing AI tutor</p>
+                </div>
+            `;
+            document.body.appendChild(loadingOverlay);
+        }
+
+        function hideLoadingState() {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            if (loadingOverlay) {
+                loadingOverlay.remove();
+            }
+        }
+
+        function getContextualGreeting(goalType, subject) {
+            const greetings = {
+                'problems_solved': `Hello! I see you're working on solving math problems. Based on your recent progress, let's continue with some algebra equations.
+
+Just so you know, I'll count each complete problem you solve toward your goal - that includes equations with full solutions, word problems with step-by-step work, and practice exercises where we work through the solution together.
+
+Are you ready to tackle the next problem?`,
+                'study_time': `Hi there! Ready to continue studying ${subject}? I noticed you've been making great progress.
+
+I'll track our active learning time for your goal - this includes our educational conversations, problem-solving sessions, and concept discussions. If you need a break, just let me know! I'll pause the timer after 5 minutes of inactivity and resume when you're back.
+
+What topic would you like to explore?`,
+                'topics_learned': `Welcome back! You've been doing excellent work learning about ${subject}.
+
+For your topics goal, I'll count each new topic we explore in depth together - that means substantial discussions with questions, explanations, and examples. Once we've thoroughly covered a topic, it counts toward your goal!
+
+Let's dive into the next topic on your learning journey.`
+            };
+            return greetings[goalType] || `Let's continue working on your ${subject} goal!`;
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.fixed.inset-0');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // Add click handlers to Continue buttons
+        function initializeContinueButtons() {
+            // Find buttons by text content since :contains is not available in querySelector
+            const allButtons = document.querySelectorAll('button');
+            allButtons.forEach(button => {
+                if (button.textContent.trim() === 'Continue') {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+
+                        // Get goal data from the parent container
+                        const goalContainer = button.closest('.bg-white.rounded-xl');
+                        const goalTitle = goalContainer.querySelector('h3').textContent;
+                        const goalSubject = goalContainer.querySelector('p').textContent.split(' • ')[0];
+                        const progressText = goalContainer.querySelector('.text-lg.font-bold').textContent;
+
+                        // Parse progress data
+                        let goalType, currentProgress, targetProgress;
+
+                        if (goalTitle.includes('Problems')) {
+                            goalType = 'problems_solved';
+                            const [current, target] = progressText.split('/');
+                            currentProgress = parseInt(current);
+                            targetProgress = parseInt(target);
+                        } else if (goalTitle.includes('Hours') || goalTitle.includes('Study')) {
+                            goalType = 'study_time';
+                            const [current, target] = progressText.replace('h', '').split('/');
+                            currentProgress = parseFloat(current);
+                            targetProgress = parseInt(target);
+                        } else {
+                            goalType = 'topics_learned';
+                            const [current, target] = progressText.split('/');
+                            currentProgress = parseInt(current);
+                            targetProgress = parseInt(target);
+                        }
+
+                        // Add visual feedback
+                        button.style.transform = 'scale(0.95)';
+                        button.style.opacity = '0.7';
+                        setTimeout(() => {
+                            button.style.transform = 'scale(1)';
+                            button.style.opacity = '1';
+                        }, 150);
+
+                        // Initiate goal-driven chat session
+                        initiateContinueGoal(goalType, goalSubject, currentProgress, targetProgress);
+                    });
+                }
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            handleMobileLayout();
+            initializeContinueButtons();
+        });
+    </script>
+</body>
+</html>

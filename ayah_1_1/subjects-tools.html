@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjects Tools - ayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* ayah Brand Colors */
+        :root {
+            /* Main Brand Blue Palette - Updated per brand guidelines */
+            --ayah-primary: #6048EB;           /* Main brand blue */
+            --ayah-primary-hover: #4F3BC9;     /* Darker blue for hover */
+            --ayah-primary-light: #F4F1FF;     /* Light blue for accents - brand secondary */
+            --ayah-primary-lighter: #F4FDFF;   /* Very light blue */
+            --ayah-primary-dark: #043178;      /* Dark blue for emphasis - brand tertiary */
+
+            /* Background Blues */
+            --ayah-bg-light: #F4F1FF;          /* Subtle light background - brand secondary */
+            --ayah-bg-medium: #F4FDFF;         /* Medium light background */
+            --ayah-bg-dark: #6048EB;           /* Medium background - brand primary */
+
+            /* Icon Blues - Harmonious variations */
+            --ayah-icon-primary: #6048EB;      /* Primary icons */
+            --ayah-icon-secondary: #5B8CFF;    /* Secondary icons */
+            --ayah-icon-tertiary: #7DA3FF;     /* Tertiary icons */
+            --ayah-icon-light: #A0BAFF;        /* Light icons */
+
+            /* Button Blues - Consistent system */
+            --ayah-btn-primary: #6048EB;       /* Primary buttons */
+            --ayah-btn-primary-hover: #4F3BC9; /* Primary button hover */
+            --ayah-btn-secondary: #5B8CFF;     /* Secondary buttons */
+            --ayah-btn-secondary-hover: #043178; /* Secondary button hover */
+        }
+
+        /* Utility Classes */
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .bg-ayah-primary-lighter { background-color: var(--ayah-primary-lighter); }
+        .bg-ayah-primary-dark { background-color: var(--ayah-primary-dark); }
+        .bg-ayah-bg-light { background-color: var(--ayah-bg-light); }
+        .bg-ayah-bg-medium { background-color: var(--ayah-bg-medium); }
+        .bg-ayah-bg-dark { background-color: var(--ayah-bg-dark); }
+
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .text-ayah-primary-light { color: var(--ayah-primary-light); }
+        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
+        .text-ayah-icon-primary { color: var(--ayah-icon-primary); }
+        .text-ayah-icon-secondary { color: var(--ayah-icon-secondary); }
+        .text-ayah-icon-tertiary { color: var(--ayah-icon-tertiary); }
+        .text-ayah-icon-light { color: var(--ayah-icon-light); }
+
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .border-ayah-primary-light { border-color: var(--ayah-primary-light); }
+        .border-ayah-bg-medium { border-color: var(--ayah-bg-medium); }
+
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+        .hover\:bg-ayah-primary-light:hover { background-color: var(--ayah-primary); }
+    </style>
+</head>
+<body class="bg-white font-sans">
+    <div class="p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-semibold text-gray-800 mb-2">lessons</h1>
+                    <p class="text-gray-600">Track and manage your financial lessons</p>
+                    <p class="text-sm text-gray-500 mt-1">Current Balance: $1,000.00</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                        <span>Refresh</span>
+                    </button>
+                    <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Export CSV</span>
+                    </button>
+                    <button onclick="openlessonModal()" class="flex items-center space-x-2 px-4 py-2 bg-ayah-primary text-white rounded-lg hover:bg-ayah-primary-hover transition-colors">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>Add lesson</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Search and Filter Section -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Search -->
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="search" class="w-4 h-4 text-gray-400"></i>
+                    </div>
+                    <input type="text" placeholder="Search lessons..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent">
+                </div>
+
+                <!-- Type Filter -->
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="filter" class="w-4 h-4 text-gray-400"></i>
+                    </div>
+                    <select class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent appearance-none">
+                        <option value="all" selected>All Types</option>
+                        <option value="grade">grade</option>
+                        <option value="assignment">assignment</option>
+                    </select>
+                </div>
+
+                <!-- Category Filter -->
+                <div>
+                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent">
+                        <option value="all" selected>All Categories</option>
+                        <option value="housing">Housing & Rent</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="insurance">Insurance</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="travel">Travel</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="personal">Personal Care</option>
+                        <option value="subscriptions">Subscriptions</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="groceries">Groceries & Food</option>
+                        <option value="education">Education</option>
+                        <option value="salary">Salary</option>
+                        <option value="business">Business grade</option>
+                        <option value="freelance">Freelance</option>
+                        <option value="sidehustle">Side Hustle</option>
+                        <option value="dividends">Dividends</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="investment">Investment Returns</option>
+                        <option value="rental">Rental grade</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- lesson Table Section -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-gray-200">
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Date</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Description</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Category</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Type</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Amount</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="py-3 px-4">
+                                <div class="text-sm text-gray-900">Sep 1, 2025</div>
+                            </td>
+                            <td class="py-3 px-4">
+                                <div class="text-sm text-gray-900">Initial Salary grade setup during onboarding</div>
+                            </td>
+                            <td class="py-3 px-4">
+                                <div class="text-sm text-gray-900">Salary</div>
+                            </td>
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-ayah-primary-light text-ayah-primary-dark">
+                                    grade
+                                </span>
+                            </td>
+                            <td class="py-3 px-4">
+                                <div class="text-sm font-medium text-ayah-primary">+$1,000.00</div>
+                            </td>
+                            <td class="py-3 px-4">
+                                <div class="flex items-center space-x-2">
+                                    <button class="p-1 text-gray-400 hover:text-gray-600">
+                                        <i data-lucide="edit" class="w-4 h-4"></i>
+                                    </button>
+                                    <button class="p-1 text-gray-400 hover:text-red-600">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        lucide.createIcons();
+
+        // Function to open lesson modal
+        function openlessonModal() {
+            try {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage('openAddlessonModal', '*');
+                } else {
+                    console.log('Opening lesson modal');
+                    alert('lesson modal would open here');
+                }
+            } catch (e) {
+                console.log('Error opening lesson modal:', e);
+                alert('lesson modal would open here');
+            }
+        }
+
+        // Add click handlers for buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('button')) {
+                const buttonText = e.target.textContent.trim();
+                console.log('lesson action clicked:', buttonText);
+
+                // Simple visual feedback
+                e.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 150);
+            }
+        });
+
+        // Add search functionality
+        const searchInput = document.querySelector('input[placeholder="Search lessons..."]');
+        if (searchInput) {
+            searchInput.addEventListener('input', function(e) {
+                console.log('Searching for:', e.target.value);
+                // Here you would implement actual search functionality
+            });
+        }
+
+        // Add filter functionality
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', function(e) {
+                console.log('Filter changed:', e.target.value);
+                // Here you would implement actual filtering functionality
+            });
+        });
+    </script>
+</body>
+</html>

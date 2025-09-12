@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Goal Creation - Ayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Ayah Brand Colors - US-G001 Implementation */
+        :root {
+            --ayah-primary: #6048EB;
+            --ayah-primary-hover: #4F3BC9;
+            --ayah-primary-light: #F4F1FF;
+            --ayah-primary-lighter: #F4FDFF;
+            --ayah-primary-dark: #3A2A9E;
+
+            /* Success and validation colors */
+            --ayah-success: #10B981;
+            --ayah-success-light: #D1FAE5;
+            --ayah-warning: #F59E0B;
+            --ayah-warning-light: #FEF3C7;
+            --ayah-error: #EF4444;
+            --ayah-error-light: #FEE2E2;
+        }
+
+        /* Utility Classes */
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .bg-ayah-primary-lighter { background-color: var(--ayah-primary-lighter); }
+        .bg-ayah-success { background-color: var(--ayah-success); }
+        .bg-ayah-success-light { background-color: var(--ayah-success-light); }
+        .bg-ayah-warning-light { background-color: var(--ayah-warning-light); }
+        .bg-ayah-error-light { background-color: var(--ayah-error-light); }
+
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
+        .text-ayah-success { color: var(--ayah-success); }
+        .text-ayah-warning { color: var(--ayah-warning); }
+        .text-ayah-error { color: var(--ayah-error); }
+
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .border-ayah-success { border-color: var(--ayah-success); }
+        .border-ayah-warning { border-color: var(--ayah-warning); }
+        .border-ayah-error { border-color: var(--ayah-error); }
+
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+        .hover\:bg-ayah-primary-light:hover { background-color: var(--ayah-primary); }
+
+        /* Step indicator animation */
+        .step-indicator {
+            transition: all 0.3s ease;
+        }
+
+        .step-active {
+            background-color: var(--ayah-primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .step-completed {
+            background-color: var(--ayah-success);
+            color: white;
+        }
+
+        /* Selection animations */
+        .selection-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .selection-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .selection-card.selected {
+            border-color: var(--ayah-primary);
+            background-color: var(--ayah-primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(96, 72, 235, 0.2);
+        }
+
+        /* Modal animation */
+        .modal-enter {
+            animation: modalEnter 0.3s ease-out;
+        }
+
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Progress bar animation */
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+
+        /* Age-appropriate styling for different grade levels */
+        .grade-elementary {
+            --card-padding: 1.5rem;
+            --font-size-base: 1.1rem;
+            --icon-size: 2rem;
+        }
+
+        .grade-middle {
+            --card-padding: 1.25rem;
+            --font-size-base: 1rem;
+            --icon-size: 1.75rem;
+        }
+
+        .grade-high {
+            --card-padding: 1rem;
+            --font-size-base: 0.95rem;
+            --icon-size: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans grade-middle" id="modalBody">
+    <!-- Modal Overlay -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <!-- Modal Content -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto modal-enter">
+            <div class="p-6">
+                <!-- Modal Header with Progress -->
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-900">Create Learning Goal</h2>
+                        <button onclick="closeModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                            <i data-lucide="x" class="w-5 h-5 text-gray-500"></i>
+                        </button>
+                    </div>
+
+                    <!-- Progress Indicator - US-G001 3-step process -->
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-2">
+                                <div id="step1-indicator" class="w-8 h-8 rounded-full bg-ayah-primary text-white flex items-center justify-center text-sm font-medium step-indicator step-active">1</div>
+                                <span class="text-sm font-medium text-gray-700">Subject</span>
+                            </div>
+                            <div class="w-8 h-0.5 bg-gray-300"></div>
+                            <div class="flex items-center space-x-2">
+                                <div id="step2-indicator" class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center text-sm font-medium step-indicator">2</div>
+                                <span class="text-sm font-medium text-gray-500">Goal Type</span>
+                            </div>
+                            <div class="w-8 h-0.5 bg-gray-300"></div>
+                            <div class="flex items-center space-x-2">
+                                <div id="step3-indicator" class="w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center text-sm font-medium step-indicator">3</div>
+                                <span class="text-sm font-medium text-gray-500">Target</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progress-bar" class="bg-ayah-primary h-2 rounded-full progress-bar" style="width: 33%"></div>
+                    </div>
+                </div>
+
+                <!-- Goal Creation Form - US-G001 Implementation -->
+                <form id="goalForm" class="space-y-6">
+                    <!-- Step 1: Subject Selection -->
+                    <div id="step1-content" class="step-content">
+                        <div class="text-center mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Choose Your Subject</h3>
+                            <p class="text-sm text-gray-600">What would you like to learn about?</p>
+                        </div>
+
+                        <!-- Default Suggestions for New Users -->
+                        <div id="suggested-goals" class="mb-6 p-4 bg-ayah-primary-lighter rounded-lg border border-ayah-primary/20">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <i data-lucide="lightbulb" class="w-4 h-4 text-ayah-primary"></i>
+                                <span class="text-sm font-medium text-ayah-primary">Suggested for Middle School</span>
+                            </div>
+                            <div class="space-y-2">
+                                <button type="button" onclick="selectSuggestedGoal('Math', 'problems', 15)" class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-ayah-primary hover:bg-ayah-primary-light transition-colors">
+                                    <div class="font-medium text-gray-900">📊 Solve 15 math problems this week</div>
+                                    <div class="text-sm text-gray-600">Perfect for building problem-solving skills</div>
+                                </button>
+                                <button type="button" onclick="selectSuggestedGoal('Science', 'time', 45)" class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-ayah-primary hover:bg-ayah-primary-light transition-colors">
+                                    <div class="font-medium text-gray-900">🔬 Study science for 45 minutes this week</div>
+                                    <div class="text-sm text-gray-600">Great for exploring scientific concepts</div>
+                                </button>
+                                <button type="button" onclick="selectSuggestedGoal('English', 'topics', 3)" class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-ayah-primary hover:bg-ayah-primary-light transition-colors">
+                                    <div class="font-medium text-gray-900">📚 Learn 3 new English topics this week</div>
+                                    <div class="text-sm text-gray-600">Improve your language arts skills</div>
+                                </button>
+                            </div>
+                            <div class="mt-3 text-center">
+                                <button type="button" onclick="showCustomGoalCreation()" class="text-sm text-ayah-primary hover:text-ayah-primary-dark">Or create your own custom goal →</button>
+                            </div>
+                        </div>
+
+                        <!-- Custom Subject Selection -->
+                        <div id="custom-subjects" class="hidden">
+                            <div class="grid grid-cols-2 gap-3">
+                                <button type="button" class="subject-btn selection-card flex items-center space-x-3 p-4 border-2 border-gray-300 rounded-lg transition-all" data-subject="Math">
+                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                        <i data-lucide="calculator" class="w-5 h-5 text-blue-600"></i>
+                                    </div>
+                                    <div class="text-left">
+                                        <div class="font-medium text-gray-900">Math</div>
+                                        <div class="text-xs text-gray-600">Algebra, Geometry, etc.</div>
+                                    </div>
+                                </button>
+                                <button type="button" class="subject-btn selection-card flex items-center space-x-3 p-4 border-2 border-gray-300 rounded-lg transition-all" data-subject="Science">
+                                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                        <i data-lucide="flask-conical" class="w-5 h-5 text-green-600"></i>
+                                    </div>
+                                    <div class="text-left">
+                                        <div class="font-medium text-gray-900">Science</div>
+                                        <div class="text-xs text-gray-600">Biology, Chemistry, etc.</div>
+                                    </div>
+                                </button>
+                                <button type="button" class="subject-btn selection-card flex items-center space-x-3 p-4 border-2 border-gray-300 rounded-lg transition-all" data-subject="English">
+                                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                        <i data-lucide="book-open" class="w-5 h-5 text-purple-600"></i>
+                                    </div>
+                                    <div class="text-left">
+                                        <div class="font-medium text-gray-900">English</div>
+                                        <div class="text-xs text-gray-600">Language Arts</div>
+                                    </div>
+                                </button>
+                                <button type="button" class="subject-btn selection-card flex items-center space-x-3 p-4 border-2 border-gray-300 rounded-lg transition-all" data-subject="History">
+                                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                                        <i data-lucide="scroll" class="w-5 h-5 text-orange-600"></i>
+                                    </div>
+                                    <div class="text-left">
+                                        <div class="font-medium text-gray-900">History</div>
+                                        <div class="text-xs text-gray-600">Social Studies</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                        <input type="hidden" id="selectedSubject" name="subject" required>
+                    </div>
+
+                    <!-- Step 2: Goal Type Selection -->
+                    <div id="step2-content" class="step-content hidden">
+                        <div class="text-center mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Choose Your Goal Type</h3>
+                            <p class="text-sm text-gray-600">How would you like to track your progress?</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <button type="button" class="goal-type-btn selection-card w-full flex items-start space-x-4 p-4 border-2 border-gray-300 rounded-lg transition-all text-left" data-type="problems">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="brain" class="w-6 h-6 text-blue-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-900 mb-1">Problems Solved</div>
+                                    <div class="text-sm text-gray-600 mb-2">Track progress by counting problems you solve</div>
+                                    <div class="text-xs text-ayah-primary font-medium">Example: "I want to solve 15 math problems"</div>
+                                </div>
+                            </button>
+
+                            <button type="button" class="goal-type-btn selection-card w-full flex items-start space-x-4 p-4 border-2 border-gray-300 rounded-lg transition-all text-left" data-type="time">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="clock" class="w-6 h-6 text-green-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-900 mb-1">Study Time</div>
+                                    <div class="text-sm text-gray-600 mb-2">Track progress by time spent studying</div>
+                                    <div class="text-xs text-ayah-primary font-medium">Example: "I want to study for 45 minutes"</div>
+                                </div>
+                            </button>
+
+                            <button type="button" class="goal-type-btn selection-card w-full flex items-start space-x-4 p-4 border-2 border-gray-300 rounded-lg transition-all text-left" data-type="topics">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="book-open" class="w-6 h-6 text-purple-600"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-semibold text-gray-900 mb-1">Topics Learned</div>
+                                    <div class="text-sm text-gray-600 mb-2">Track progress by topics you master</div>
+                                    <div class="text-xs text-ayah-primary font-medium">Example: "I want to learn 5 new topics"</div>
+                                </div>
+                            </button>
+                        </div>
+                        <input type="hidden" id="selectedGoalType" name="goalType" required>
+                    </div>
+
+                    <!-- Step 3: Target Value Setting -->
+                    <div id="step3-content" class="step-content hidden">
+                        <div class="text-center mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Set Your Target</h3>
+                            <p class="text-sm text-gray-600">How much do you want to achieve?</p>
+                        </div>
+
+                        <!-- Dynamic Target Input based on Goal Type -->
+                        <div class="space-y-4">
+                            <!-- Problems Target -->
+                            <div id="problemsTarget" class="target-input hidden">
+                                <div class="bg-ayah-primary-lighter p-4 rounded-lg border border-ayah-primary/20 mb-4">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <i data-lucide="target" class="w-4 h-4 text-ayah-primary"></i>
+                                        <span class="text-sm font-medium text-ayah-primary">Recommended for Middle School</span>
+                                    </div>
+                                    <div class="text-sm text-gray-700">We suggest 10-25 problems per week for steady progress</div>
+                                </div>
+
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Number of problems</label>
+                                        <input type="number" id="problemsCount" name="problemsCount" min="5" max="50" value="15" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-ayah-primary focus:border-ayah-primary form-input text-lg font-medium" placeholder="15">
+                                    </div>
+                                    <div class="text-lg font-medium text-gray-600">problems</div>
+                                </div>
+
+                                <!-- Quick Select Buttons -->
+                                <div class="mt-3 flex space-x-2">
+                                    <button type="button" onclick="setTargetValue(10)" class="px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors">10</button>
+                                    <button type="button" onclick="setTargetValue(15)" class="px-3 py-1 text-sm bg-ayah-primary-light text-ayah-primary rounded-full">15</button>
+                                    <button type="button" onclick="setTargetValue(20)" class="px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors">20</button>
+                                    <button type="button" onclick="setTargetValue(25)" class="px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors">25</button>
+                                </div>
+
+                                <div class="mt-3 text-xs text-gray-500">
+                                    💡 Tip: Start with a smaller number and increase as you build confidence!
+                                </div>
+                            </div>
+
+                            <!-- Time Target -->
+                            <div id="timeTarget" class="target-input hidden">
+                                <div class="bg-ayah-primary-lighter p-4 rounded-lg border border-ayah-primary/20 mb-4">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <i data-lucide="target" class="w-4 h-4 text-ayah-primary"></i>
+                                        <span class="text-sm font-medium text-ayah-primary">Recommended for Middle School</span>
+                                    </div>
+                                    <div class="text-sm text-gray-700">We suggest 30-60 minutes per week for effective learning</div>
+                                </div>
+
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Study time</label>
+                                        <input type="number" id="timeCount" name="timeCount" min="15" max="120" value="45" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-ayah-primary focus:border-ayah-primary form-input text-lg font-medium" placeholder="45">
+                                    </div>
+                                    <div class="text-lg font-medium text-gray-600">minutes</div>
+                                </div>
+
+                                <!-- Quick Select Buttons -->
+                                <div class="mt-3 flex space-x-2">
+                                    <button type="button" onclick="setTargetValue(30)" class="px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors">30</button>
+                                    <button type="button" onclick="setTargetValue(45)" class="px-3 py-1 text-sm bg-ayah-primary-light text-ayah-primary rounded-full">45</button>
+                                    <button type="button" onclick="setTargetValue(60)" class="px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors">60</button>
+                                    <button type="button" onclick="setTargetValue(90)" class="px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors">90</button>
+                                </div>
+
+                                <div class="mt-3 text-xs text-gray-500">
+                                    💡 Tip: Break longer sessions into smaller chunks for better focus!
+                                </div>
+                            </div>
+
+                            <!-- Topics Target -->
+                            <div id="topicsTarget" class="target-input hidden">
+                                <div class="bg-ayah-primary-lighter p-4 rounded-lg border border-ayah-primary/20 mb-4">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <i data-lucide="target" class="w-4 h-4 text-ayah-primary"></i>
+                                        <span class="text-sm font-medium text-ayah-primary">Recommended for Middle School</span>
+                                    </div>
+                                    <div class="text-sm text-gray-700">We suggest 3-7 topics per week for comprehensive learning</div>
+                                </div>
+
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex-1">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Number of topics</label>
+                                        <input type="number" id="topicsCount" name="topicsCount" min="1" max="10" value="5" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-ayah-primary focus:border-ayah-primary form-input text-lg font-medium" placeholder="5">
+                                    </div>
+                                    <div class="text-lg font-medium text-gray-600">topics</div>
+                                </div>
+
+                                <!-- Quick Select Buttons -->
+                                <div class="mt-3 flex space-x-2">
+                                    <button type="button" onclick="setTargetValue(3)" class="px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors">3</button>
+                                    <button type="button" onclick="setTargetValue(5)" class="px-3 py-1 text-sm bg-ayah-primary-light text-ayah-primary rounded-full">5</button>
+                                    <button type="button" onclick="setTargetValue(7)" class="px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors">7</button>
+                                    <button type="button" onclick="setTargetValue(10)" class="px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors">10</button>
+                                </div>
+
+                                <div class="mt-3 text-xs text-gray-500">
+                                    💡 Tip: Focus on understanding each topic thoroughly before moving to the next!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Goal Summary and Confirmation -->
+                    <div id="step4-content" class="step-content hidden">
+                        <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-ayah-success-light rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="check" class="w-8 h-8 text-ayah-success"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Ready to Create Your Goal!</h3>
+                            <p class="text-sm text-gray-600">Review your goal details below</p>
+                        </div>
+
+                        <div class="bg-ayah-primary-lighter p-6 rounded-lg border border-ayah-primary/20 mb-6">
+                            <div class="text-center">
+                                <div id="goalSummaryIcon" class="w-12 h-12 bg-ayah-primary rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i data-lucide="target" class="w-6 h-6 text-white"></i>
+                                </div>
+                                <div id="goalSummaryText" class="text-lg font-semibold text-gray-900 mb-2">
+                                    I want to solve 15 math problems this week
+                                </div>
+                                <div class="text-sm text-gray-600">
+                                    <span id="goalSummarySubject">Math</span> • <span id="goalSummaryType">Problems Solved</span> • <span id="goalSummaryTarget">15 problems</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Motivation Message -->
+                        <div class="text-center mb-6">
+                            <div class="text-sm text-gray-600 mb-2">🎯 You're about to start an amazing learning journey!</div>
+                            <div class="text-xs text-gray-500">Remember: Progress, not perfection. You've got this!</div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between pt-6 border-t border-gray-200">
+                        <button type="button" id="prevBtn" onclick="previousStep()" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors hidden">
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                                <span>Back</span>
+                            </div>
+                        </button>
+
+                        <div class="flex space-x-3 ml-auto">
+                            <button type="button" onclick="closeModal()" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                                Cancel
+                            </button>
+                            <button type="button" id="nextBtn" onclick="nextStep()" class="px-6 py-2 bg-ayah-primary text-white rounded-lg hover:bg-ayah-primary-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                                <div class="flex items-center space-x-2">
+                                    <span>Next</span>
+                                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                                </div>
+                            </button>
+                            <button type="submit" id="createGoalBtn" class="px-6 py-2 bg-ayah-success text-white rounded-lg hover:bg-ayah-success transition-colors hidden">
+                                <div class="flex items-center space-x-2">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                    <span>Create Goal</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // US-G001 Simple Goal Creation - 3-Step Process Implementation
+        let currentStep = 1;
+        let selectedSubject = '';
+        let selectedGoalType = '';
+        let targetValue = 0;
+        let isNewUser = true; // Simulate new user for default suggestions
+
+        // Initialize the modal
+        function initializeModal() {
+            // Set grade level for age-appropriate styling
+            const gradeLevel = 'middle'; // Can be 'elementary', 'middle', 'high'
+            document.getElementById('modalBody').className = `bg-gray-100 font-sans grade-${gradeLevel}`;
+
+            // Show suggested goals for new users
+            if (isNewUser) {
+                document.getElementById('suggested-goals').classList.remove('hidden');
+                document.getElementById('custom-subjects').classList.add('hidden');
+            }
+
+            updateStepIndicators();
+            updateNavigationButtons();
+        }
+
+        // Step navigation functions
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep < 4) {
+                    currentStep++;
+                    showStep(currentStep);
+                    updateStepIndicators();
+                    updateNavigationButtons();
+                    updateProgressBar();
+                }
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+                updateStepIndicators();
+                updateNavigationButtons();
+                updateProgressBar();
+            }
+        }
+
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Show current step
+            document.getElementById(`step${step}-content`).classList.remove('hidden');
+        }
+
+        function updateStepIndicators() {
+            for (let i = 1; i <= 3; i++) {
+                const indicator = document.getElementById(`step${i}-indicator`);
+                const stepText = indicator.nextElementSibling;
+
+                if (i < currentStep) {
+                    // Completed step
+                    indicator.className = 'w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium step-indicator step-completed';
+                    indicator.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
+                    stepText.className = 'text-sm font-medium text-ayah-success';
+                } else if (i === currentStep) {
+                    // Active step
+                    indicator.className = 'w-8 h-8 rounded-full bg-ayah-primary text-white flex items-center justify-center text-sm font-medium step-indicator step-active';
+                    indicator.textContent = i;
+                    stepText.className = 'text-sm font-medium text-ayah-primary';
+                } else {
+                    // Future step
+                    indicator.className = 'w-8 h-8 rounded-full bg-gray-300 text-gray-500 flex items-center justify-center text-sm font-medium step-indicator';
+                    indicator.textContent = i;
+                    stepText.className = 'text-sm font-medium text-gray-500';
+                }
+            }
+
+            // Re-initialize Lucide icons
+            lucide.createIcons();
+        }
+
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progress-bar');
+            const progress = (currentStep / 3) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const createBtn = document.getElementById('createGoalBtn');
+
+            // Show/hide back button
+            if (currentStep > 1) {
+                prevBtn.classList.remove('hidden');
+            } else {
+                prevBtn.classList.add('hidden');
+            }
+
+            // Show/hide next/create buttons
+            if (currentStep < 4) {
+                nextBtn.classList.remove('hidden');
+                createBtn.classList.add('hidden');
+
+                // Enable/disable next button based on validation
+                nextBtn.disabled = !validateCurrentStep();
+            } else {
+                nextBtn.classList.add('hidden');
+                createBtn.classList.remove('hidden');
+            }
+        }
+
+        // Validation functions
+        function validateCurrentStep() {
+            switch (currentStep) {
+                case 1:
+                    return selectedSubject !== '';
+                case 2:
+                    return selectedGoalType !== '';
+                case 3:
+                    return targetValue > 0 && isValidTargetValue();
+                default:
+                    return true;
+            }
+        }
+
+        function isValidTargetValue() {
+            const ranges = {
+                'problems': { min: 5, max: 50 },
+                'time': { min: 15, max: 120 },
+                'topics': { min: 1, max: 10 }
+            };
+
+            const range = ranges[selectedGoalType];
+            return range && targetValue >= range.min && targetValue <= range.max;
+        }
+
+        // Suggested goal selection
+        function selectSuggestedGoal(subject, type, target) {
+            selectedSubject = subject;
+            selectedGoalType = type;
+            targetValue = target;
+
+            // Skip to final step
+            currentStep = 4;
+            showStep(4);
+            updateStepIndicators();
+            updateNavigationButtons();
+            updateProgressBar();
+            updateGoalSummary();
+        }
+
+        // Show custom goal creation
+        function showCustomGoalCreation() {
+            document.getElementById('suggested-goals').classList.add('hidden');
+            document.getElementById('custom-subjects').classList.remove('hidden');
+        }
+
+        // Subject selection handling
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.subject-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active state from all subject buttons
+                    document.querySelectorAll('.subject-btn').forEach(b => {
+                        b.classList.remove('selected');
+                    });
+
+                    // Add active state to clicked button
+                    this.classList.add('selected');
+
+                    selectedSubject = this.dataset.subject;
+                    document.getElementById('selectedSubject').value = selectedSubject;
+
+                    updateNavigationButtons();
+                });
+            });
+
+            // Goal type selection handling
+            document.querySelectorAll('.goal-type-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active state from all goal type buttons
+                    document.querySelectorAll('.goal-type-btn').forEach(b => {
+                        b.classList.remove('selected');
+                    });
+
+                    // Add active state to clicked button
+                    this.classList.add('selected');
+
+                    selectedGoalType = this.dataset.type;
+                    document.getElementById('selectedGoalType').value = selectedGoalType;
+
+                    // Show appropriate target input
+                    showTargetInput();
+                    updateNavigationButtons();
+                });
+            });
+        });
+
+        // Show target input based on goal type
+        function showTargetInput() {
+            // Hide all target inputs
+            document.querySelectorAll('.target-input').forEach(input => {
+                input.classList.add('hidden');
+            });
+
+            // Show appropriate target input
+            const targetInputId = `${selectedGoalType}Target`;
+            const targetInput = document.getElementById(targetInputId);
+            if (targetInput) {
+                targetInput.classList.remove('hidden');
+
+                // Set default value
+                const defaultValues = {
+                    'problems': 15,
+                    'time': 45,
+                    'topics': 5
+                };
+
+                targetValue = defaultValues[selectedGoalType];
+                const inputElement = document.getElementById(`${selectedGoalType}Count`);
+                if (inputElement) {
+                    inputElement.value = targetValue;
+
+                    // Add event listener for value changes
+                    inputElement.addEventListener('input', function() {
+                        targetValue = parseInt(this.value) || 0;
+                        updateNavigationButtons();
+                    });
+                }
+            }
+        }
+
+        // Set target value from quick select buttons
+        function setTargetValue(value) {
+            targetValue = value;
+            const inputElement = document.getElementById(`${selectedGoalType}Count`);
+            if (inputElement) {
+                inputElement.value = value;
+            }
+
+            // Update quick select button states
+            const container = document.getElementById(`${selectedGoalType}Target`);
+            if (container) {
+                container.querySelectorAll('button').forEach(btn => {
+                    if (btn.textContent == value) {
+                        btn.className = 'px-3 py-1 text-sm bg-ayah-primary-light text-ayah-primary rounded-full';
+                    } else {
+                        btn.className = 'px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors';
+                    }
+                });
+            }
+
+            updateNavigationButtons();
+        }
+
+        // Update goal summary for final step
+        function updateGoalSummary() {
+            const typeMap = {
+                'problems': 'Problems Solved',
+                'time': 'Study Time',
+                'topics': 'Topics Learned'
+            };
+
+            const unitMap = {
+                'problems': 'problems',
+                'time': 'minutes',
+                'topics': 'topics'
+            };
+
+            const actionMap = {
+                'problems': 'solve',
+                'time': 'study for',
+                'topics': 'learn'
+            };
+
+            document.getElementById('goalSummaryText').textContent =
+                `I want to ${actionMap[selectedGoalType]} ${targetValue} ${unitMap[selectedGoalType]} in ${selectedSubject} this week`;
+
+            document.getElementById('goalSummarySubject').textContent = selectedSubject;
+            document.getElementById('goalSummaryType').textContent = typeMap[selectedGoalType];
+            document.getElementById('goalSummaryTarget').textContent = `${targetValue} ${unitMap[selectedGoalType]}`;
+        }
+
+        // Form submission - US-G001 Goal Creation
+        document.getElementById('goalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!selectedSubject || !selectedGoalType || !targetValue) {
+                alert('Please complete all steps to create your goal.');
+                return;
+            }
+
+            // Validate target value one more time
+            if (!isValidTargetValue()) {
+                alert('Please enter a valid target value within the recommended range.');
+                return;
+            }
+
+            const goalData = {
+                subject: selectedSubject,
+                goalType: selectedGoalType,
+                targetValue: targetValue,
+                duration: 7, // Default to 1 week as per US-G001
+                createdAt: new Date().toISOString(),
+                status: 'active'
+            };
+
+            console.log('Goal created:', goalData);
+
+            // Show success animation
+            showSuccessMessage();
+
+            // Close modal after delay
+            setTimeout(() => {
+                closeModal();
+            }, 2000);
+        });
+
+        // Show success message
+        function showSuccessMessage() {
+            const successHtml = `
+                <div class="text-center py-8">
+                    <div class="w-20 h-20 bg-ayah-success-light rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="check" class="w-10 h-10 text-ayah-success"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Goal Created Successfully! 🎉</h3>
+                    <p class="text-gray-600 mb-4">Your learning goal has been added to your dashboard.</p>
+                    <div class="text-sm text-gray-500">Redirecting you back...</div>
+                </div>
+            `;
+
+            document.querySelector('.modal-enter').innerHTML = successHtml;
+            lucide.createIcons();
+        }
+
+        // Close modal function
+        function closeModal() {
+            if (window.parent) {
+                window.parent.postMessage('closeModal', '*');
+            } else {
+                // For standalone testing
+                window.close();
+            }
+        }
+
+        // Initialize modal on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeModal();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

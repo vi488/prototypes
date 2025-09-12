@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Management Interface - Ayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Ayah Brand Colors */
+        :root {
+            --ayah-primary: #6048EB;
+            --ayah-primary-hover: #4F3BC9;
+            --ayah-primary-light: #F4F1FF;
+            --ayah-primary-lighter: #F4FDFF;
+            --ayah-primary-dark: #3A2A9E;
+        }
+
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+
+        /* Management animations */
+        .archive-animation {
+            animation: archive-slide 0.5s ease-in-out;
+        }
+
+        @keyframes archive-slide {
+            0% { transform: translateX(0); opacity: 1; }
+            50% { transform: translateX(20px); opacity: 0.5; }
+            100% { transform: translateX(0); opacity: 0.7; }
+        }
+
+        .modification-highlight {
+            animation: modification-glow 2s ease-in-out;
+        }
+
+        @keyframes modification-glow {
+            0%, 100% { box-shadow: 0 0 0 rgba(96, 72, 235, 0); }
+            50% { box-shadow: 0 0 20px rgba(96, 72, 235, 0.3); }
+        }
+
+        .integrity-badge {
+            background: linear-gradient(45deg, #059669, #10b981);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="p-6 max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">Data Management Interface</h1>
+                    <p class="text-gray-600">Goal modification, deletion support, and data integrity management</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="integrity-badge">
+                        <i data-lucide="shield-check" class="w-3 h-3 inline mr-1"></i>
+                        Data Integrity: Active
+                    </div>
+                    <button class="bg-ayah-primary text-white px-4 py-2 rounded-lg hover:bg-ayah-primary font-medium">
+                        View Audit Log
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goal Management Section -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8 shadow-sm">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">Active Goals Management</h2>
+                <div class="text-sm text-gray-600">
+                    <span class="font-medium">Total Active Goals:</span> 3/3 (Limit Reached)
+                </div>
+            </div>
+
+            <!-- Goals List -->
+            <div class="space-y-4">
+                <!-- Goal 1 - Math Problems -->
+                <div class="border border-gray-200 rounded-lg p-4 modification-highlight">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="calculator" class="w-5 h-5 text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Math Problems Goal</h3>
+                                <p class="text-sm text-gray-600">Solve 20 problems this week</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-600">Progress: 15/20 (75%)</span>
+                            <button class="text-blue-600 hover:text-blue-800 p-1" title="Modify Goal">
+                                <i data-lucide="edit-2" class="w-4 h-4"></i>
+                            </button>
+                            <button class="text-red-600 hover:text-red-800 p-1" title="Archive Goal">
+                                <i data-lucide="archive" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Modification Options -->
+                    <div class="bg-blue-50 rounded-lg p-3 mb-3">
+                        <h4 class="font-medium text-blue-900 mb-2">Modification Options</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-blue-800 mb-1">Target Value</label>
+                                <input type="number" value="20" class="w-full px-3 py-1 border border-blue-200 rounded text-sm">
+                                <p class="text-xs text-blue-600 mt-1">Current progress will be preserved</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-blue-800 mb-1">Time Period</label>
+                                <select class="w-full px-3 py-1 border border-blue-200 rounded text-sm">
+                                    <option>This week</option>
+                                    <option>Next 2 weeks</option>
+                                    <option>This month</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                    Update Goal
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Preservation Notice -->
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                        <div class="flex items-start space-x-2">
+                            <i data-lucide="info" class="w-4 h-4 text-green-600 mt-0.5"></i>
+                            <div class="text-sm">
+                                <p class="text-green-800 font-medium">Data Preservation Guaranteed</p>
+                                <p class="text-green-700">Existing progress (15 problems) and session history will be preserved during modification.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Goal 2 - Study Time -->
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="clock" class="w-5 h-5 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-900">Study Time Goal</h3>
+                                <p class="text-sm text-gray-600">Study for 300 minutes this week</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-600">Progress: 245/300 (82%)</span>
+                            <button class="text-blue-600 hover:text-blue-800 p-1" title="Modify Goal">
+                                <i data-lucide="edit-2" class="w-4 h-4"></i>
+                            </button>
+                            <button class="text-red-600 hover:text-red-800 p-1" title="Archive Goal">
+                                <i data-lucide="archive" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg p-3">
+                        <div class="text-sm text-gray-600">
+                            <div class="flex justify-between mb-1">
+                                <span>Session contributions:</span>
+                                <span class="font-medium">12 sessions</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span>Average session time:</span>
+                                <span class="font-medium">20.4 minutes</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Data integrity status:</span>
+                                <span class="text-green-600 font-medium">✓ Validated</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Goal 3 - Topics Learned (Archived) -->
+                <div class="border border-gray-300 rounded-lg p-4 archive-animation opacity-70">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="book-open" class="w-5 h-5 text-gray-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-700">Topics Learned Goal</h3>
+                                <p class="text-sm text-gray-500">Learn 5 new topics this week</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="px-2 py-1 bg-gray-200 text-gray-700 rounded-full text-xs font-medium">Archived</span>
+                            <button class="text-green-600 hover:text-green-800 p-1" title="Restore Goal">
+                                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Archive Information -->
+                    <div class="bg-gray-100 rounded-lg p-3">
+                        <div class="text-sm text-gray-600">
+                            <div class="flex justify-between mb-1">
+                                <span>Archived on:</span>
+                                <span class="font-medium">Jan 12, 2025</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span>Final progress:</span>
+                                <span class="font-medium">5/5 (100% Complete)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Recovery available until:</span>
+                                <span class="font-medium text-orange-600">Feb 11, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Integrity Monitoring -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Referential Integrity -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">Referential Integrity Status</h2>
+                
+                <div class="space-y-4">
+                    <!-- Goal-Session Links -->
+                    <div class="bg-green-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-medium text-green-900">Goal-Session Links</h3>
+                            <span class="text-green-600 font-semibold">✓ Valid</span>
+                        </div>
+                        <div class="text-sm text-green-700 space-y-1">
+                            <div class="flex justify-between">
+                                <span>Active goal references:</span>
+                                <span class="font-medium">247/247 valid</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Session-goal mappings:</span>
+                                <span class="font-medium">89/89 valid</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Orphaned records:</span>
+                                <span class="font-medium">0 found</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User-Goal Associations -->
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-medium text-blue-900">User-Goal Associations</h3>
+                            <span class="text-blue-600 font-semibold">✓ Valid</span>
+                        </div>
+                        <div class="text-sm text-blue-700 space-y-1">
+                            <div class="flex justify-between">
+                                <span>User ID references:</span>
+                                <span class="font-medium">156/156 valid</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Goal ownership:</span>
+                                <span class="font-medium">247/247 valid</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Access permissions:</span>
+                                <span class="font-medium">All verified</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Consistency -->
+                    <div class="bg-purple-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-medium text-purple-900">Data Consistency</h3>
+                            <span class="text-purple-600 font-semibold">✓ Consistent</span>
+                        </div>
+                        <div class="text-sm text-purple-700 space-y-1">
+                            <div class="flex justify-between">
+                                <span>Progress calculations:</span>
+                                <span class="font-medium">All accurate</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Timestamp ordering:</span>
+                                <span class="font-medium">All sequential</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Data checksums:</span>
+                                <span class="font-medium">All valid</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Archive Management -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+                <h2 class="text-xl font-semibold text-gray-800 mb-6">Archive Management</h2>
+                
+                <div class="space-y-4">
+                    <!-- Archived Goals -->
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h3 class="font-medium text-gray-900 mb-3">Archived Goals</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center p-2 bg-white rounded border">
+                                <div>
+                                    <div class="font-medium text-gray-800">Topics Learned Goal</div>
+                                    <div class="text-sm text-gray-600">Archived: Jan 12, 2025</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-orange-600">29 days left</span>
+                                    <button class="text-green-600 hover:text-green-800 p-1" title="Restore">
+                                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-white rounded border">
+                                <div>
+                                    <div class="font-medium text-gray-800">Science Study Goal</div>
+                                    <div class="text-sm text-gray-600">Archived: Jan 8, 2025</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-orange-600">25 days left</span>
+                                    <button class="text-green-600 hover:text-green-800 p-1" title="Restore">
+                                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Retention Policy -->
+                    <div class="bg-orange-50 rounded-lg p-4">
+                        <h3 class="font-medium text-orange-900 mb-2">Retention Policy</h3>
+                        <div class="text-sm text-orange-800 space-y-1">
+                            <div class="flex justify-between">
+                                <span>Archive retention:</span>
+                                <span class="font-medium">30 days</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Session data retention:</span>
+                                <span class="font-medium">90 days</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Progress history:</span>
+                                <span class="font-medium">Goal duration + 30 days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cleanup Schedule -->
+                    <div class="bg-red-50 rounded-lg p-4">
+                        <h3 class="font-medium text-red-900 mb-2">Scheduled Cleanup</h3>
+                        <div class="text-sm text-red-800">
+                            <div class="flex justify-between mb-1">
+                                <span>Next cleanup:</span>
+                                <span class="font-medium">Jan 20, 2025</span>
+                            </div>
+                            <div class="flex justify-between mb-1">
+                                <span>Items to be deleted:</span>
+                                <span class="font-medium">3 archived goals</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Data to be purged:</span>
+                                <span class="font-medium">1.2 MB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modification History -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">Recent Modifications</h2>
+                <button class="text-ayah-primary hover:text-ayah-primary-dark font-medium text-sm">
+                    View Full Audit Log →
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-gray-200">
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Timestamp</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Action</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Goal</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Changes</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Data Integrity</th>
+                            <th class="text-left py-3 px-4 font-medium text-gray-700">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 text-sm text-gray-600">Jan 15, 14:32</td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">Modified</span>
+                            </td>
+                            <td class="py-3 px-4 text-sm text-gray-900">Math Problems Goal</td>
+                            <td class="py-3 px-4 text-sm text-gray-600">Target: 15 → 20 problems</td>
+                            <td class="py-3 px-4">
+                                <span class="integrity-badge">✓ Preserved</span>
+                            </td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Success</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 text-sm text-gray-600">Jan 12, 09:15</td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">Archived</span>
+                            </td>
+                            <td class="py-3 px-4 text-sm text-gray-900">Topics Learned Goal</td>
+                            <td class="py-3 px-4 text-sm text-gray-600">Goal completed (5/5)</td>
+                            <td class="py-3 px-4">
+                                <span class="integrity-badge">✓ Maintained</span>
+                            </td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Success</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 text-sm text-gray-600">Jan 8, 16:45</td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-medium">Archived</span>
+                            </td>
+                            <td class="py-3 px-4 text-sm text-gray-900">Science Study Goal</td>
+                            <td class="py-3 px-4 text-sm text-gray-600">User requested deletion</td>
+                            <td class="py-3 px-4">
+                                <span class="integrity-badge">✓ Maintained</span>
+                            </td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Success</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Simulate goal modification
+        function modifyGoal(goalId) {
+            // This would handle goal modification in actual implementation
+            console.log('Goal modified:', goalId);
+        }
+
+        // Simulate goal archival
+        function archiveGoal(goalId) {
+            // This would handle goal archival in actual implementation
+            console.log('Goal archived:', goalId);
+        }
+
+        // Simulate goal restoration
+        function restoreGoal(goalId) {
+            // This would handle goal restoration in actual implementation
+            console.log('Goal restored:', goalId);
+        }
+    </script>
+</body>
+</html>
