@@ -179,15 +179,15 @@
                                 <span class="text-sm font-medium text-ayah-primary">Suggested for Middle School</span>
                             </div>
                             <div class="space-y-2">
-                                <button type="button" onclick="selectSuggestedGoal('Math', 'problems', 15)" class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-ayah-primary hover:bg-ayah-primary-light transition-colors">
+                                <button type="button" onclick="selectSuggestedGoal('Math', 'problems', 15)" class="selection-card w-full text-left p-3 bg-white rounded-lg border-2 border-gray-300 transition-all">
                                     <div class="font-medium text-gray-900">📊 Solve 15 math problems this week</div>
                                     <div class="text-sm text-gray-600">Perfect for building problem-solving skills</div>
                                 </button>
-                                <button type="button" onclick="selectSuggestedGoal('Science', 'time', 45)" class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-ayah-primary hover:bg-ayah-primary-light transition-colors">
+                                <button type="button" onclick="selectSuggestedGoal('Science', 'time', 45)" class="selection-card w-full text-left p-3 bg-white rounded-lg border-2 border-gray-300 transition-all">
                                     <div class="font-medium text-gray-900">🔬 Study science for 45 minutes this week</div>
                                     <div class="text-sm text-gray-600">Great for exploring scientific concepts</div>
                                 </button>
-                                <button type="button" onclick="selectSuggestedGoal('English', 'topics', 3)" class="w-full text-left p-3 bg-white rounded-lg border border-gray-200 hover:border-ayah-primary hover:bg-ayah-primary-light transition-colors">
+                                <button type="button" onclick="selectSuggestedGoal('English', 'topics', 3)" class="selection-card w-full text-left p-3 bg-white rounded-lg border-2 border-gray-300 transition-all">
                                     <div class="font-medium text-gray-900">📚 Learn 3 new English topics this week</div>
                                     <div class="text-sm text-gray-600">Improve your language arts skills</div>
                                 </button>
@@ -199,41 +199,45 @@
 
                         <!-- Custom Subject Selection -->
                         <div id="custom-subjects" class="hidden">
-                            <div class="grid grid-cols-2 gap-3">
-                                <button type="button" class="subject-btn selection-card flex items-center space-x-3 p-4 border-2 border-gray-300 rounded-lg transition-all" data-subject="Math">
-                                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                        <i data-lucide="calculator" class="w-5 h-5 text-blue-600"></i>
+                            <div class="space-y-3">
+                                <button type="button" class="subject-btn selection-card w-full flex items-start space-x-4 p-4 border-2 border-gray-300 rounded-lg transition-all text-left" data-subject="Math">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="calculator" class="w-6 h-6 text-blue-600"></i>
                                     </div>
-                                    <div class="text-left">
-                                        <div class="font-medium text-gray-900">Math</div>
-                                        <div class="text-xs text-gray-600">Algebra, Geometry, etc.</div>
-                                    </div>
-                                </button>
-                                <button type="button" class="subject-btn selection-card flex items-center space-x-3 p-4 border-2 border-gray-300 rounded-lg transition-all" data-subject="Science">
-                                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                                        <i data-lucide="flask-conical" class="w-5 h-5 text-green-600"></i>
-                                    </div>
-                                    <div class="text-left">
-                                        <div class="font-medium text-gray-900">Science</div>
-                                        <div class="text-xs text-gray-600">Biology, Chemistry, etc.</div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-gray-900 mb-1">Math</div>
+                                        <div class="text-sm text-gray-600 mb-2">Numbers, equations, and problem-solving</div>
+                                        <div class="text-xs text-ayah-primary font-medium">Algebra, Geometry, Statistics, and more</div>
                                     </div>
                                 </button>
-                                <button type="button" class="subject-btn selection-card flex items-center space-x-3 p-4 border-2 border-gray-300 rounded-lg transition-all" data-subject="English">
-                                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                                        <i data-lucide="book-open" class="w-5 h-5 text-purple-600"></i>
+                                <button type="button" class="subject-btn selection-card w-full flex items-start space-x-4 p-4 border-2 border-gray-300 rounded-lg transition-all text-left" data-subject="Science">
+                                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="flask-conical" class="w-6 h-6 text-green-600"></i>
                                     </div>
-                                    <div class="text-left">
-                                        <div class="font-medium text-gray-900">English</div>
-                                        <div class="text-xs text-gray-600">Language Arts</div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-gray-900 mb-1">Science</div>
+                                        <div class="text-sm text-gray-600 mb-2">Explore the natural world and how it works</div>
+                                        <div class="text-xs text-ayah-primary font-medium">Biology, Chemistry, Physics, and more</div>
                                     </div>
                                 </button>
-                                <button type="button" class="subject-btn selection-card flex items-center space-x-3 p-4 border-2 border-gray-300 rounded-lg transition-all" data-subject="History">
-                                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
-                                        <i data-lucide="scroll" class="w-5 h-5 text-orange-600"></i>
+                                <button type="button" class="subject-btn selection-card w-full flex items-start space-x-4 p-4 border-2 border-gray-300 rounded-lg transition-all text-left" data-subject="English">
+                                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="book-open" class="w-6 h-6 text-purple-600"></i>
                                     </div>
-                                    <div class="text-left">
-                                        <div class="font-medium text-gray-900">History</div>
-                                        <div class="text-xs text-gray-600">Social Studies</div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-gray-900 mb-1">English</div>
+                                        <div class="text-sm text-gray-600 mb-2">Reading, writing, and language skills</div>
+                                        <div class="text-xs text-ayah-primary font-medium">Literature, Grammar, Writing, and more</div>
+                                    </div>
+                                </button>
+                                <button type="button" class="subject-btn selection-card w-full flex items-start space-x-4 p-4 border-2 border-gray-300 rounded-lg transition-all text-left" data-subject="History">
+                                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i data-lucide="scroll" class="w-6 h-6 text-orange-600"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-gray-900 mb-1">History</div>
+                                        <div class="text-sm text-gray-600 mb-2">Learn about past events and civilizations</div>
+                                        <div class="text-xs text-ayah-primary font-medium">World History, Social Studies, and more</div>
                                     </div>
                                 </button>
                             </div>
@@ -405,7 +409,7 @@
                                     <i data-lucide="target" class="w-6 h-6 text-white"></i>
                                 </div>
                                 <div id="goalSummaryText" class="text-lg font-semibold text-gray-900 mb-2">
-                                    I want to solve 15 math problems this week
+                                    Your personalized goal will appear here
                                 </div>
                                 <div class="text-sm text-gray-600">
                                     <span id="goalSummarySubject">Math</span> • <span id="goalSummaryType">Problems Solved</span> • <span id="goalSummaryTarget">15 problems</span>
@@ -598,13 +602,32 @@
             selectedGoalType = type;
             targetValue = target;
 
-            // Skip to final step
-            currentStep = 4;
-            showStep(4);
+            // Set the hidden form values
+            document.getElementById('selectedSubject').value = selectedSubject;
+            document.getElementById('selectedGoalType').value = selectedGoalType;
+
+            // Move to step 2 (Goal Type) to maintain consistent flow
+            currentStep = 2;
+            showStep(currentStep);
             updateStepIndicators();
             updateNavigationButtons();
             updateProgressBar();
-            updateGoalSummary();
+
+            // Pre-select the goal type button to show user's selection
+            setTimeout(() => {
+                const goalTypeBtn = document.querySelector(`[data-type="${type}"]`);
+                if (goalTypeBtn) {
+                    // Remove active state from all goal type buttons
+                    document.querySelectorAll('.goal-type-btn').forEach(b => {
+                        b.classList.remove('selected');
+                    });
+                    // Add active state to the matching button
+                    goalTypeBtn.classList.add('selected');
+
+                    // Show appropriate target input
+                    showTargetInput();
+                }
+            }, 100);
         }
 
         // Show custom goal creation
@@ -649,6 +672,13 @@
                     // Show appropriate target input
                     showTargetInput();
                     updateNavigationButtons();
+
+                    // Automatically move to next step after a short delay
+                    setTimeout(() => {
+                        if (validateCurrentStep()) {
+                            nextStep();
+                        }
+                    }, 500);
                 });
             });
         });
@@ -666,24 +696,50 @@
             if (targetInput) {
                 targetInput.classList.remove('hidden');
 
-                // Set default value
+                // Set value - use existing targetValue if set (from suggested goals), otherwise use default
                 const defaultValues = {
                     'problems': 15,
                     'time': 45,
                     'topics': 5
                 };
 
-                targetValue = defaultValues[selectedGoalType];
+                // Only use default if targetValue is not already set
+                if (targetValue === 0) {
+                    targetValue = defaultValues[selectedGoalType];
+                }
+
                 const inputElement = document.getElementById(`${selectedGoalType}Count`);
                 if (inputElement) {
                     inputElement.value = targetValue;
 
-                    // Add event listener for value changes
-                    inputElement.addEventListener('input', function() {
-                        targetValue = parseInt(this.value) || 0;
-                        updateNavigationButtons();
-                    });
+                    // Update quick select button states to reflect current value
+                    updateQuickSelectButtons();
+
+                    // Add event listener for value changes (avoid duplicate listeners)
+                    inputElement.removeEventListener('input', handleTargetValueChange);
+                    inputElement.addEventListener('input', handleTargetValueChange);
                 }
+            }
+        }
+
+        // Handle target value changes
+        function handleTargetValueChange() {
+            targetValue = parseInt(this.value) || 0;
+            updateQuickSelectButtons();
+            updateNavigationButtons();
+        }
+
+        // Update quick select button states
+        function updateQuickSelectButtons() {
+            const container = document.getElementById(`${selectedGoalType}Target`);
+            if (container) {
+                container.querySelectorAll('button').forEach(btn => {
+                    if (btn.textContent == targetValue) {
+                        btn.className = 'px-3 py-1 text-sm bg-ayah-primary-light text-ayah-primary rounded-full';
+                    } else {
+                        btn.className = 'px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors';
+                    }
+                });
             }
         }
 
@@ -695,18 +751,8 @@
                 inputElement.value = value;
             }
 
-            // Update quick select button states
-            const container = document.getElementById(`${selectedGoalType}Target`);
-            if (container) {
-                container.querySelectorAll('button').forEach(btn => {
-                    if (btn.textContent == value) {
-                        btn.className = 'px-3 py-1 text-sm bg-ayah-primary-light text-ayah-primary rounded-full';
-                    } else {
-                        btn.className = 'px-3 py-1 text-sm bg-gray-100 hover:bg-ayah-primary-light rounded-full transition-colors';
-                    }
-                });
-            }
-
+            // Update quick select button states using shared function
+            updateQuickSelectButtons();
             updateNavigationButtons();
         }
 
@@ -724,18 +770,93 @@
                 'topics': 'topics'
             };
 
-            const actionMap = {
-                'problems': 'solve',
-                'time': 'study for',
-                'topics': 'learn'
-            };
+            // Enhanced message generation based on goal type, subject, and target value
+            const goalMessage = generatePersonalizedGoalMessage();
 
-            document.getElementById('goalSummaryText').textContent =
-                `I want to ${actionMap[selectedGoalType]} ${targetValue} ${unitMap[selectedGoalType]} in ${selectedSubject} this week`;
-
+            document.getElementById('goalSummaryText').textContent = goalMessage;
             document.getElementById('goalSummarySubject').textContent = selectedSubject;
             document.getElementById('goalSummaryType').textContent = typeMap[selectedGoalType];
             document.getElementById('goalSummaryTarget').textContent = `${targetValue} ${unitMap[selectedGoalType]}`;
+        }
+
+        // Generate personalized goal message based on selected options
+        function generatePersonalizedGoalMessage() {
+            // Subject-specific action verbs and contexts
+            const subjectContexts = {
+                'Math': {
+                    'problems': ['solve', 'master', 'complete', 'work through'],
+                    'time': ['practice', 'study', 'work on', 'focus on'],
+                    'topics': ['learn', 'explore', 'understand', 'master']
+                },
+                'Science': {
+                    'problems': ['solve', 'investigate', 'explore', 'work through'],
+                    'time': ['study', 'explore', 'investigate', 'discover'],
+                    'topics': ['learn about', 'explore', 'discover', 'understand']
+                },
+                'English': {
+                    'problems': ['complete', 'work through', 'practice', 'solve'],
+                    'time': ['read', 'practice', 'study', 'work on'],
+                    'topics': ['learn about', 'explore', 'study', 'understand']
+                },
+                'History': {
+                    'problems': ['complete', 'work through', 'explore', 'investigate'],
+                    'time': ['study', 'explore', 'learn about', 'research'],
+                    'topics': ['learn about', 'explore', 'study', 'discover']
+                },
+                'Art': {
+                    'problems': ['complete', 'create', 'work on', 'practice'],
+                    'time': ['practice', 'create', 'work on', 'explore'],
+                    'topics': ['learn about', 'explore', 'practice', 'study']
+                }
+            };
+
+            // Get appropriate action verb for the subject and goal type
+            const subjectActions = subjectContexts[selectedSubject] || subjectContexts['Math'];
+            const actionVerbs = subjectActions[selectedGoalType] || ['work on'];
+            const selectedAction = actionVerbs[0]; // Use the first (most appropriate) action
+
+            // Generate different message styles based on target value ranges
+            let messageStyle = '';
+
+            if (selectedGoalType === 'problems') {
+                if (targetValue <= 10) {
+                    messageStyle = `I want to ${selectedAction} ${targetValue} ${selectedSubject} problems this week`;
+                } else if (targetValue <= 20) {
+                    messageStyle = `My goal is to ${selectedAction} ${targetValue} ${selectedSubject} problems this week`;
+                } else {
+                    messageStyle = `I'm challenging myself to ${selectedAction} ${targetValue} ${selectedSubject} problems this week`;
+                }
+            } else if (selectedGoalType === 'time') {
+                const hours = Math.floor(targetValue / 60);
+                const minutes = targetValue % 60;
+                let timeString = '';
+
+                if (hours > 0 && minutes > 0) {
+                    timeString = `${hours} hour${hours > 1 ? 's' : ''} and ${minutes} minutes`;
+                } else if (hours > 0) {
+                    timeString = `${hours} hour${hours > 1 ? 's' : ''}`;
+                } else {
+                    timeString = `${minutes} minutes`;
+                }
+
+                if (targetValue <= 30) {
+                    messageStyle = `I want to ${selectedAction} ${selectedSubject} for ${timeString} this week`;
+                } else if (targetValue <= 60) {
+                    messageStyle = `My goal is to ${selectedAction} ${selectedSubject} for ${timeString} this week`;
+                } else {
+                    messageStyle = `I'm dedicating ${timeString} to ${selectedAction} ${selectedSubject} this week`;
+                }
+            } else if (selectedGoalType === 'topics') {
+                if (targetValue <= 3) {
+                    messageStyle = `I want to ${selectedAction} ${targetValue} new ${selectedSubject} topic${targetValue > 1 ? 's' : ''} this week`;
+                } else if (targetValue <= 7) {
+                    messageStyle = `My goal is to ${selectedAction} ${targetValue} ${selectedSubject} topics this week`;
+                } else {
+                    messageStyle = `I'm excited to ${selectedAction} ${targetValue} different ${selectedSubject} topics this week`;
+                }
+            }
+
+            return messageStyle;
         }
 
         // Form submission - US-G001 Goal Creation

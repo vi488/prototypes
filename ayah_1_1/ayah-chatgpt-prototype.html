@@ -358,14 +358,6 @@
                         <i data-lucide="target" class="w-4 h-4"></i>
                         <span class="text-sm">My Goals</span>
                     </button>
-                    <button id="progress-tool" onclick="loadToolPage('progress')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
-                        <i data-lucide="trending-up" class="w-4 h-4"></i>
-                        <span class="text-sm">Progress Dashboard</span>
-                    </button>
-                    <button id="subjects-tool" onclick="loadToolPage('subjects')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
-                        <i data-lucide="book-open" class="w-4 h-4"></i>
-                        <span class="text-sm">Subjects</span>
-                    </button>
                 </div>
             </div>
 
@@ -492,12 +484,6 @@
                 <div class="p-2 space-y-1">
                     <button onclick="loadToolPage('goals')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="My Goals">
                         <i data-lucide="target" class="w-5 h-5"></i>
-                    </button>
-                    <button onclick="loadToolPage('progress')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Progress Dashboard">
-                        <i data-lucide="trending-up" class="w-5 h-5"></i>
-                    </button>
-                    <button onclick="loadToolPage('subjects')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Subjects">
-                        <i data-lucide="book-open" class="w-5 h-5"></i>
                     </button>
 
                 </div>
@@ -1230,9 +1216,7 @@ What would you like to work on first? I'm here to help you reach your learning g
 
             // Load appropriate tool page
             const toolUrls = {
-                'goals': 'goals-tools.html',
-                'progress': 'progress-tools.html',
-                'subjects': 'subjects-tools.html'
+                'goals': 'goals-tools.html'
             };
 
             if (toolUrls[toolType]) {
@@ -1240,9 +1224,7 @@ What would you like to work on first? I'm here to help you reach your learning g
 
                 // Update mobile title
                 const titles = {
-                    'goals': 'My Goals',
-                    'progress': 'Progress Dashboard',
-                    'subjects': 'Subjects'
+                    'goals': 'My Goals'
                 };
                 mobileTitle.textContent = titles[toolType] || 'Ayah Learning Tools';
 

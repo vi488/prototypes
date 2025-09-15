@@ -512,6 +512,111 @@
             </div>
         </div>
 
+        <!-- Detailed Progress Calculation Criteria - US-G002 Implementation -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-800">Progress Calculation Criteria</h2>
+                    <p class="text-sm text-gray-600">Detailed implementation of US-G002 counting rules and validation</p>
+                </div>
+                <div class="text-xs bg-ayah-primary-light text-ayah-primary px-3 py-1 rounded-full">
+                    US-G002 Compliant
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Problems Solved Criteria -->
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <i data-lucide="calculator" class="w-5 h-5 text-blue-600"></i>
+                        <h3 class="font-medium text-gray-800">Problems Solved Criteria</h3>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="bg-green-50 p-2 rounded border-l-2 border-green-400">
+                            <span class="text-green-800 font-medium">✓ COUNTS:</span>
+                            <div class="text-green-700 mt-1">Multi-part problem = 1 (not per part)</div>
+                        </div>
+                        <div class="bg-green-50 p-2 rounded border-l-2 border-green-400">
+                            <span class="text-green-800 font-medium">✓ COUNTS:</span>
+                            <div class="text-green-700 mt-1">Problem + solution + confirmation</div>
+                        </div>
+                        <div class="bg-red-50 p-2 rounded border-l-2 border-red-400">
+                            <span class="text-red-800 font-medium">✗ EXCLUDES:</span>
+                            <div class="text-red-700 mt-1">Incomplete attempts without solution</div>
+                        </div>
+                        <div class="bg-red-50 p-2 rounded border-l-2 border-red-400">
+                            <span class="text-red-800 font-medium">✗ EXCLUDES:</span>
+                            <div class="text-red-700 mt-1">Concept questions without solving</div>
+                        </div>
+                        <div class="bg-red-50 p-2 rounded border-l-2 border-red-400">
+                            <span class="text-red-800 font-medium">✗ EXCLUDES:</span>
+                            <div class="text-red-700 mt-1">Reviewing previous solutions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Tracking Criteria -->
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <i data-lucide="clock" class="w-5 h-5 text-green-600"></i>
+                        <h3 class="font-medium text-gray-800">Time Tracking Criteria</h3>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="bg-blue-50 p-2 rounded border-l-2 border-blue-400">
+                            <span class="text-blue-800 font-medium">⏸️ PAUSE:</span>
+                            <div class="text-blue-700 mt-1">After 5 minutes of inactivity</div>
+                        </div>
+                        <div class="bg-blue-50 p-2 rounded border-l-2 border-blue-400">
+                            <span class="text-blue-800 font-medium">▶️ RESUME:</span>
+                            <div class="text-blue-700 mt-1">Only on active re-engagement</div>
+                        </div>
+                        <div class="bg-orange-50 p-2 rounded border-l-2 border-orange-400">
+                            <span class="text-orange-800 font-medium">🛑 MAX:</span>
+                            <div class="text-orange-700 mt-1">2-hour session cap with auto-end</div>
+                        </div>
+                        <div class="bg-gray-50 p-2 rounded border-l-2 border-gray-400">
+                            <span class="text-gray-800 font-medium">⏱️ MIN:</span>
+                            <div class="text-gray-700 mt-1">2-minute minimum threshold</div>
+                        </div>
+                        <div class="bg-green-50 p-2 rounded border-l-2 border-green-400">
+                            <span class="text-green-800 font-medium">✓ COUNTS:</span>
+                            <div class="text-green-700 mt-1">Active educational engagement only</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Topics Learned Criteria -->
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <i data-lucide="brain" class="w-5 h-5 text-purple-600"></i>
+                        <h3 class="font-medium text-gray-800">Topics Learned Criteria</h3>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="bg-purple-50 p-2 rounded border-l-2 border-purple-400">
+                            <span class="text-purple-800 font-medium">📊 MINIMUM:</span>
+                            <div class="text-purple-700 mt-1">5 exchanges per topic required</div>
+                        </div>
+                        <div class="bg-purple-50 p-2 rounded border-l-2 border-purple-400">
+                            <span class="text-purple-800 font-medium">🧠 UNDERSTANDING:</span>
+                            <div class="text-purple-700 mt-1">Must show via follow-up questions</div>
+                        </div>
+                        <div class="bg-blue-50 p-2 rounded border-l-2 border-blue-400">
+                            <span class="text-blue-800 font-medium">1️⃣ UNIQUE:</span>
+                            <div class="text-blue-700 mt-1">Each topic counted once per user</div>
+                        </div>
+                        <div class="bg-green-50 p-2 rounded border-l-2 border-green-400">
+                            <span class="text-green-800 font-medium">📚 DICTIONARY:</span>
+                            <div class="text-green-700 mt-1">Subject-specific topic validation</div>
+                        </div>
+                        <div class="bg-red-50 p-2 rounded border-l-2 border-red-400">
+                            <span class="text-red-800 font-medium">✗ EXCLUDES:</span>
+                            <div class="text-red-700 mt-1">Brief mentions without depth</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Real-time Update Demonstration -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm mb-8">
             <div class="flex items-center justify-between mb-4">
@@ -595,21 +700,106 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // Goal data for simulation
+        // Enhanced goal data with detailed tracking criteria - US-G002 Implementation
         let goalData = {
-            math: { current: 16, target: 20, percentage: 80 },
-            science: { current: 7.5, target: 10, percentage: 75 },
-            history: { current: 4, target: 15, percentage: 27 }
+            math: {
+                current: 16,
+                target: 20,
+                percentage: 80,
+                type: 'problems',
+                criteria: {
+                    multiPartCountsAsOne: true,
+                    requiresConfirmation: true,
+                    excludeIncompleteAttempts: true,
+                    excludeConceptQuestions: true,
+                    excludeReviewingSolutions: true
+                }
+            },
+            science: {
+                current: 7.5,
+                target: 10,
+                percentage: 75,
+                type: 'time',
+                criteria: {
+                    pauseAfterInactivity: 5, // minutes
+                    maxSessionDuration: 120, // minutes
+                    minSessionThreshold: 2, // minutes
+                    requiresActiveEngagement: true
+                }
+            },
+            history: {
+                current: 4,
+                target: 15,
+                percentage: 27,
+                type: 'topics',
+                criteria: {
+                    minExchangesPerTopic: 5,
+                    requiresUnderstandingDemo: true,
+                    oneTopicPerUserLifetime: true,
+                    requiresSubjectDictionary: true
+                }
+            }
         };
 
-        // Simulate Math Session
+        // Enhanced Math Session Simulation with US-G002 Criteria
         function simulateMathSession() {
-            showUpdateProcess('Math Session Started', 'Analyzing 3 algebra problems...');
+            showUpdateProcess('Math Session Started', 'Applying US-G002 problem counting criteria...');
 
             setTimeout(() => {
-                updateGoalProgress('math', 3, 'problems');
-                showSessionImpact('math', '+3 problems detected from 25-minute math session', 'Pattern matched: "Solve:", "Calculate:", "Find:"');
+                // Simulate detailed problem analysis
+                const sessionAnalysis = {
+                    totalProblemsDetected: 5,
+                    validProblems: 3,
+                    multiPartProblems: 1, // Counts as 1, not multiple
+                    incompleteAttempts: 1, // Excluded
+                    conceptQuestions: 1, // Excluded
+                    confirmedSolutions: 3
+                };
+
+                updateGoalProgress('math', sessionAnalysis.validProblems, 'problems');
+                showDetailedSessionImpact('math', sessionAnalysis);
                 checkMilestone('math');
+            }, 2000);
+        }
+
+        // Enhanced Science Session Simulation with Time Tracking Criteria
+        function simulateScienceSession() {
+            showUpdateProcess('Science Session Started', 'Applying US-G002 time tracking criteria...');
+
+            setTimeout(() => {
+                // Simulate detailed time analysis
+                const sessionAnalysis = {
+                    totalSessionTime: 45,
+                    activeEngagementTime: 42, // 3 minutes excluded for inactivity
+                    inactivityPauses: 1,
+                    educationalContentTime: 42,
+                    offTopicTime: 3
+                };
+
+                updateGoalProgress('science', sessionAnalysis.educationalContentTime / 60, 'hours');
+                showDetailedTimeImpact('science', sessionAnalysis);
+                checkMilestone('science');
+            }, 2000);
+        }
+
+        // Enhanced History Session Simulation with Topic Learning Criteria
+        function simulateHistorySession() {
+            showUpdateProcess('History Session Started', 'Applying US-G002 topic learning criteria...');
+
+            setTimeout(() => {
+                // Simulate detailed topic analysis
+                const sessionAnalysis = {
+                    topicsDiscussed: 3,
+                    validTopics: 2,
+                    exchangesPerTopic: [8, 6, 2], // Only first 2 meet 5+ exchange requirement
+                    understandingDemonstrated: [true, true, false],
+                    newTopics: 2, // Not previously covered by user
+                    briefMentions: 1 // Excluded
+                };
+
+                updateGoalProgress('history', sessionAnalysis.validTopics, 'topics');
+                showDetailedTopicImpact('history', sessionAnalysis);
+                checkMilestone('history');
             }, 2000);
         }
 
@@ -685,7 +875,66 @@
             }, 1000);
         }
 
-        // Show session impact
+        // Enhanced session impact display functions
+        function showDetailedSessionImpact(goalType, analysis) {
+            const impactHtml = `
+                <div class="bg-blue-50 rounded-lg p-3 mb-3">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i data-lucide="calculator" class="w-4 h-4 text-blue-600"></i>
+                        <span class="text-sm font-medium text-blue-800">Detailed Problem Analysis</span>
+                    </div>
+                    <div class="text-xs text-blue-700 space-y-1">
+                        <div>📊 Total problems detected: ${analysis.totalProblemsDetected}</div>
+                        <div>✅ Valid problems (with confirmation): ${analysis.validProblems}</div>
+                        <div>🔗 Multi-part problems (counted as 1): ${analysis.multiPartProblems}</div>
+                        <div>❌ Incomplete attempts (excluded): ${analysis.incompleteAttempts}</div>
+                        <div>❓ Concept questions (excluded): ${analysis.conceptQuestions}</div>
+                    </div>
+                </div>
+            `;
+            console.log(`Math Session Impact:`, analysis);
+        }
+
+        function showDetailedTimeImpact(goalType, analysis) {
+            const impactHtml = `
+                <div class="bg-green-50 rounded-lg p-3 mb-3">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i data-lucide="clock" class="w-4 h-4 text-green-600"></i>
+                        <span class="text-sm font-medium text-green-800">Detailed Time Analysis</span>
+                    </div>
+                    <div class="text-xs text-green-700 space-y-1">
+                        <div>⏱️ Total session time: ${analysis.totalSessionTime} minutes</div>
+                        <div>✅ Active engagement time: ${analysis.activeEngagementTime} minutes</div>
+                        <div>⏸️ Inactivity pauses: ${analysis.inactivityPauses}</div>
+                        <div>📚 Educational content: ${analysis.educationalContentTime} minutes</div>
+                        <div>❌ Off-topic time (excluded): ${analysis.offTopicTime} minutes</div>
+                    </div>
+                </div>
+            `;
+            console.log(`Science Session Impact:`, analysis);
+        }
+
+        function showDetailedTopicImpact(goalType, analysis) {
+            const impactHtml = `
+                <div class="bg-purple-50 rounded-lg p-3 mb-3">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i data-lucide="brain" class="w-4 h-4 text-purple-600"></i>
+                        <span class="text-sm font-medium text-purple-800">Detailed Topic Analysis</span>
+                    </div>
+                    <div class="text-xs text-purple-700 space-y-1">
+                        <div>💬 Topics discussed: ${analysis.topicsDiscussed}</div>
+                        <div>✅ Valid topics (5+ exchanges): ${analysis.validTopics}</div>
+                        <div>🔢 Exchanges per topic: [${analysis.exchangesPerTopic.join(', ')}]</div>
+                        <div>🧠 Understanding demonstrated: ${analysis.understandingDemonstrated.filter(Boolean).length}/${analysis.understandingDemonstrated.length}</div>
+                        <div>🆕 New topics (not previously covered): ${analysis.newTopics}</div>
+                        <div>❌ Brief mentions (excluded): ${analysis.briefMentions}</div>
+                    </div>
+                </div>
+            `;
+            console.log(`History Session Impact:`, analysis);
+        }
+
+        // Legacy function for compatibility
         function showSessionImpact(goalType, impact, details) {
             console.log(`${goalType}: ${impact} - ${details}`);
         }

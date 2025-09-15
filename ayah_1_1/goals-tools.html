@@ -140,6 +140,75 @@
                 padding-right: 2rem;
             }
         }
+
+        /* Enhanced Goal Management Card Styles */
+        .goal-management-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goal-management-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .goal-management-card:hover::before {
+            left: 100%;
+        }
+
+        /* Focus states for accessibility */
+        .goal-management-card:focus {
+            outline: 2px solid var(--ayah-primary);
+            outline-offset: 2px;
+        }
+
+        /* Enhanced hover animations */
+        .goal-management-card:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(96, 72, 235, 0.15);
+        }
+
+        /* Icon container animations */
+        .goal-management-card .w-10.h-10 {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .goal-management-card:hover .w-10.h-10 {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        /* Arrow animation */
+        .goal-management-card i[data-lucide="arrow-right"] {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Gradient header enhancement */
+        .bg-gradient-to-r {
+            background-image: linear-gradient(to right, var(--ayah-primary), var(--ayah-primary-light));
+        }
+
+        /* Mobile responsive enhancements for goal management */
+        @media (max-width: 640px) {
+            .goal-management-card {
+                padding: 0.75rem !important;
+            }
+
+            .goal-management-card .w-10.h-10 {
+                width: 2rem;
+                height: 2rem;
+            }
+
+            .goal-management-card .w-5.h-5 {
+                width: 1rem;
+                height: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-white font-sans">
@@ -222,10 +291,23 @@
                                 </div>
                             </div>
 
-                            <!-- Recent Activity with Clear Hierarchy -->
+                            <!-- Recent Activity and Goal Actions -->
                             <div class="flex items-center justify-between text-sm">
                                 <span class="text-ayah-neutral-600">+3 problems</span>
-                                <button class="text-ayah-primary hover:text-ayah-primary-hover font-medium transition-colors duration-200">Continue</button>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="continueMathGoal('math-goal-1')" class="p-2 text-ayah-primary hover:text-ayah-primary-hover hover:bg-ayah-secondary-1 rounded-lg transition-colors duration-200" title="Continue">
+                                        <i data-lucide="play" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="viewProgressHistory('math-goal-1')" class="p-2 text-ayah-neutral-600 hover:text-ayah-primary hover:bg-ayah-secondary-1 rounded-lg transition-colors duration-200" title="Progress History">
+                                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="openEditGoalModal('math-goal-1')" class="p-2 text-ayah-neutral-600 hover:text-ayah-primary hover:bg-ayah-secondary-1 rounded-lg transition-colors duration-200" title="Edit Settings">
+                                        <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="deleteGoal('math-goal-1')" class="p-2 text-ayah-neutral-600 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors duration-200" title="Delete Goal">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -254,10 +336,23 @@
                                 </div>
                             </div>
 
-                            <!-- Recent Activity -->
+                            <!-- Recent Activity and Goal Actions -->
                             <div class="flex items-center justify-between text-sm">
                                 <span class="text-ayah-neutral-600">+45 min yesterday</span>
-                                <button class="text-ayah-primary hover:text-ayah-primary-hover font-medium transition-colors duration-200">Continue</button>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="continueScienceGoal('science-goal-2')" class="p-2 text-ayah-primary hover:text-ayah-primary-hover hover:bg-ayah-secondary-1 rounded-lg transition-colors duration-200" title="Continue">
+                                        <i data-lucide="play" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="viewProgressHistory('science-goal-2')" class="p-2 text-ayah-neutral-600 hover:text-ayah-primary hover:bg-ayah-secondary-1 rounded-lg transition-colors duration-200" title="Progress History">
+                                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="openEditGoalModal('science-goal-2')" class="p-2 text-ayah-neutral-600 hover:text-ayah-primary hover:bg-ayah-secondary-1 rounded-lg transition-colors duration-200" title="Edit Settings">
+                                        <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="deleteGoal('science-goal-2')" class="p-2 text-ayah-neutral-600 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors duration-200" title="Delete Goal">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -286,10 +381,23 @@
                                 </div>
                             </div>
 
-                            <!-- Recent Activity -->
+                            <!-- Recent Activity and Goal Actions -->
                             <div class="flex items-center justify-between text-sm">
                                 <span class="text-ayah-neutral-600">+2 topics last session</span>
-                                <button class="text-ayah-primary hover:text-ayah-primary-hover font-medium transition-colors duration-200">Continue</button>
+                                <div class="flex items-center space-x-2">
+                                    <button onclick="continueHistoryGoal('history-goal-3')" class="p-2 text-ayah-primary hover:text-ayah-primary-hover hover:bg-ayah-secondary-1 rounded-lg transition-colors duration-200" title="Continue">
+                                        <i data-lucide="play" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="viewProgressHistory('history-goal-3')" class="p-2 text-ayah-neutral-600 hover:text-ayah-primary hover:bg-ayah-secondary-1 rounded-lg transition-colors duration-200" title="Progress History">
+                                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="openEditGoalModal('history-goal-3')" class="p-2 text-ayah-neutral-600 hover:text-ayah-primary hover:bg-ayah-secondary-1 rounded-lg transition-colors duration-200" title="Edit Settings">
+                                        <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="deleteGoal('history-goal-3')" class="p-2 text-ayah-neutral-600 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors duration-200" title="Delete Goal">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -342,46 +450,148 @@
                 </div>
             </div>
 
-            <!-- Quick Actions - Secondary Priority with Brand Harmony -->
-            <div class="bg-white rounded-xl shadow-sm p-4 sm:p-6 border border-ayah-neutral-200">
-                <h2 class="text-lg font-semibold text-ayah-neutral-900 mb-4">Quick Actions</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <!-- Suggested Goals - Primary Brand Color -->
-                    <div class="p-4 bg-ayah-secondary-1 rounded-lg border border-ayah-secondary-1">
-                        <div class="flex items-center space-x-2 mb-3">
-                            <i data-lucide="lightbulb" class="w-4 h-4 text-ayah-primary"></i>
-                            <span class="text-sm font-medium text-ayah-primary-dark">Suggested Goals</span>
-                        </div>
-                        <div class="space-y-2">
-                            <button onclick="createSuggestedGoal('Math', 'problems', 15)" class="w-full text-left p-3 bg-white rounded-lg border border-ayah-neutral-200 hover:border-ayah-primary hover:bg-ayah-bg-medium transition-colors duration-200">
-                                <div class="font-medium text-ayah-neutral-900 text-sm">📊 Solve 15 math problems</div>
-                                <div class="text-xs text-ayah-neutral-600">Perfect for building skills</div>
-                            </button>
-                            <button onclick="createSuggestedGoal('Science', 'time', 45)" class="w-full text-left p-3 bg-white rounded-lg border border-ayah-neutral-200 hover:border-ayah-primary hover:bg-ayah-bg-medium transition-colors duration-200">
-                                <div class="font-medium text-ayah-neutral-900 text-sm">🔬 Study science for 45 min</div>
-                                <div class="text-xs text-ayah-neutral-600">Great for exploration</div>
-                            </button>
-                        </div>
-                    </div>
 
-                    <!-- Goal Management - Neutral with Subtle Emphasis -->
-                    <div class="p-4 bg-ayah-neutral-100 rounded-lg border border-ayah-neutral-200">
-                        <div class="flex items-center space-x-2 mb-3">
-                            <i data-lucide="settings" class="w-4 h-4 text-ayah-neutral-600"></i>
-                            <span class="text-sm font-medium text-ayah-neutral-700">Goal Management</span>
-                        </div>
-                        <div class="space-y-2">
-                            <button class="w-full text-left p-3 bg-white rounded-lg border border-ayah-neutral-200 hover:border-ayah-primary-light hover:bg-ayah-bg-medium transition-colors duration-200">
-                                <div class="font-medium text-ayah-neutral-900 text-sm">📈 View Progress History</div>
-                                <div class="text-xs text-ayah-neutral-600">See your learning journey</div>
-                            </button>
-                            <button class="w-full text-left p-3 bg-white rounded-lg border border-ayah-neutral-200 hover:border-ayah-primary-light hover:bg-ayah-bg-medium transition-colors duration-200">
-                                <div class="font-medium text-ayah-neutral-900 text-sm">🎯 Edit Goal Settings</div>
-                                <div class="text-xs text-ayah-neutral-600">Modify targets and deadlines</div>
-                            </button>
-                        </div>
+        </div>
+    </div>
+
+    <!-- Delete Goal Confirmation Modal -->
+    <div id="deleteGoalModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl">
+            <div class="flex items-center space-x-3 mb-4">
+                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                    <i data-lucide="alert-triangle" class="w-6 h-6 text-red-600"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-ayah-neutral-900">Delete Goal</h3>
+                    <p class="text-sm text-ayah-neutral-600">This action cannot be undone</p>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <p class="text-ayah-neutral-700 mb-3">Are you sure you want to delete this goal?</p>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+                    <p id="deleteGoalName" class="font-medium text-red-800 mb-1">Goal Name</p>
+                    <p id="deleteGoalProgress" class="text-sm text-red-600">Current progress will be permanently lost</p>
+                </div>
+            </div>
+
+            <div class="flex space-x-3">
+                <button onclick="closeDeleteGoalModal()" class="flex-1 bg-ayah-neutral-200 text-ayah-neutral-700 px-4 py-3 rounded-lg hover:bg-ayah-neutral-300 font-medium transition-colors duration-200">
+                    Cancel
+                </button>
+                <button onclick="confirmDeleteGoal()" id="confirmDeleteButton" class="flex-1 bg-red-600 text-white px-4 py-3 rounded-lg hover:bg-red-700 font-medium transition-colors duration-200">
+                    Delete Goal
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Goal Modal -->
+    <div id="editGoalModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-ayah-primary-lightest rounded-full flex items-center justify-center">
+                        <i data-lucide="edit-3" class="w-5 h-5 text-ayah-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-ayah-neutral-900">Edit Goal Settings</h3>
+                        <p class="text-sm text-ayah-neutral-600">Update your goal target and deadline</p>
                     </div>
                 </div>
+                <button onclick="closeEditGoalModal()" class="text-ayah-neutral-400 hover:text-ayah-neutral-600 p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Goal Info -->
+            <div class="mb-6 p-4 bg-ayah-secondary-1 rounded-lg">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span id="editGoalIcon" class="text-2xl">📊</span>
+                    <div>
+                        <h4 id="editGoalName" class="font-semibold text-ayah-neutral-900">Goal Name</h4>
+                        <p id="editGoalType" class="text-sm text-ayah-neutral-600">Goal Type</p>
+                    </div>
+                </div>
+                <div class="text-sm text-ayah-neutral-700">
+                    <p>Current Progress: <span id="editCurrentProgress" class="font-medium">0/0</span></p>
+                    <p>Progress: <span id="editProgressPercentage" class="font-medium text-ayah-primary">0%</span></p>
+                </div>
+            </div>
+
+            <!-- Edit Form -->
+            <form id="editGoalForm" class="space-y-4">
+                <div>
+                    <label for="editTargetInput" class="block text-sm font-medium text-ayah-neutral-700 mb-2">
+                        New Target <span id="editTargetUnit" class="text-ayah-neutral-500">(problems)</span>
+                    </label>
+                    <input type="number" id="editTargetInput" min="1"
+                           class="w-full px-3 py-2 border border-ayah-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent"
+                           placeholder="Enter new target">
+                    <p class="text-xs text-ayah-neutral-500 mt-1">💡 Tip: You can only edit goals that are less than 50% complete</p>
+                </div>
+
+                <div>
+                    <label for="editDeadlineInput" class="block text-sm font-medium text-ayah-neutral-700 mb-2">
+                        New Deadline
+                    </label>
+                    <input type="date" id="editDeadlineInput"
+                           class="w-full px-3 py-2 border border-ayah-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent">
+                </div>
+
+                <div class="flex space-x-3 pt-4">
+                    <button type="button" onclick="closeEditGoalModal()"
+                            class="flex-1 bg-ayah-neutral-200 text-ayah-neutral-700 px-4 py-3 rounded-lg hover:bg-ayah-neutral-300 font-medium transition-colors duration-200">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                            class="flex-1 bg-ayah-primary text-white px-4 py-3 rounded-lg hover:bg-ayah-primary-hover font-medium transition-colors duration-200">
+                        Update Goal
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Progress History Modal -->
+    <div id="progressHistoryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-6 max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto shadow-2xl">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-ayah-primary-lightest rounded-full flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-5 h-5 text-ayah-primary"></i>
+                    </div>
+                    <div>
+                        <h3 id="historyGoalName" class="text-lg font-semibold text-ayah-neutral-900">Goal Progress History</h3>
+                        <p id="historyGoalType" class="text-sm text-ayah-neutral-600">Track your learning journey</p>
+                    </div>
+                </div>
+                <button onclick="closeProgressHistoryModal()" class="text-ayah-neutral-400 hover:text-ayah-neutral-600 p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Progress Summary -->
+            <div class="bg-ayah-secondary-1 rounded-lg p-4 mb-6">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-sm font-medium text-ayah-primary-dark">Current Progress</span>
+                    <span id="historyProgressPercentage" class="text-lg font-bold text-ayah-primary">24%</span>
+                </div>
+                <div class="w-full bg-ayah-neutral-200 rounded-full h-3 mb-2">
+                    <div id="historyProgressBar" class="bg-ayah-primary h-3 rounded-full transition-all duration-500" style="width: 24%"></div>
+                </div>
+                <p id="historyProgressText" class="text-sm text-ayah-neutral-600">12 of 50 problems completed</p>
+            </div>
+
+            <!-- History Timeline -->
+            <div class="space-y-4" id="historyTimeline">
+                <!-- Timeline items will be populated by JavaScript -->
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-ayah-neutral-200">
+                <button onclick="closeProgressHistoryModal()" class="w-full bg-ayah-primary text-white px-4 py-3 rounded-lg hover:bg-ayah-primary-hover font-medium transition-colors duration-200">
+                    Close
+                </button>
             </div>
         </div>
     </div>
@@ -456,6 +666,335 @@
                     activeGoalsElement.textContent = current + 1;
                 }
             }
+        }
+
+        // Goal Management Functions - Updated for individual goals
+        function viewProgressHistory(goalId) {
+            // Goal data for progress history
+            const goalData = {
+                'math-goal-1': {
+                    subject: 'Math Problems',
+                    type: 'Problems Goal',
+                    currentProgress: '12 of 50 problems completed',
+                    percentage: 24,
+                    progressColor: 'bg-ayah-primary-lighter',
+                    history: [
+                        { date: '2025-09-14', progress: '3 problems solved', session: '15 minutes', icon: 'check-circle', color: 'text-green-600' },
+                        { date: '2025-09-13', progress: '5 problems solved', session: '20 minutes', icon: 'check-circle', color: 'text-green-600' },
+                        { date: '2025-09-12', progress: '4 problems solved', session: '18 minutes', icon: 'check-circle', color: 'text-green-600' },
+                        { date: '2025-09-11', progress: '2 problems solved', session: '12 minutes', icon: 'check-circle', color: 'text-green-600' }
+                    ]
+                },
+                'science-goal-2': {
+                    subject: 'Science Study',
+                    type: 'Time Goal',
+                    currentProgress: '6.5 of 10 hours completed',
+                    percentage: 65,
+                    progressColor: 'bg-ayah-primary-light',
+                    history: [
+                        { date: '2025-09-14', progress: '45 min chemistry', session: '45 minutes', icon: 'clock', color: 'text-blue-600' },
+                        { date: '2025-09-13', progress: '30 min physics', session: '30 minutes', icon: 'clock', color: 'text-blue-600' },
+                        { date: '2025-09-12', progress: '60 min biology', session: '60 minutes', icon: 'clock', color: 'text-blue-600' },
+                        { date: '2025-09-11', progress: '90 min chemistry', session: '90 minutes', icon: 'clock', color: 'text-blue-600' }
+                    ]
+                },
+                'history-goal-3': {
+                    subject: 'History Topics',
+                    type: 'Topics Goal',
+                    currentProgress: '8 of 15 topics completed',
+                    percentage: 53,
+                    progressColor: 'bg-ayah-primary',
+                    history: [
+                        { date: '2025-09-14', progress: '2 topics learned', session: '30 minutes', icon: 'book-open', color: 'text-purple-600' },
+                        { date: '2025-09-12', progress: '1 topic completed', session: '25 minutes', icon: 'book-open', color: 'text-purple-600' },
+                        { date: '2025-09-11', progress: '1 topic reviewed', session: '20 minutes', icon: 'book-open', color: 'text-purple-600' },
+                        { date: '2025-09-10', progress: '2 topics learned', session: '40 minutes', icon: 'book-open', color: 'text-purple-600' }
+                    ]
+                }
+            };
+
+            const goal = goalData[goalId] || goalData['math-goal-1'];
+
+            // Update modal content
+            document.getElementById('historyGoalName').textContent = goal.subject;
+            document.getElementById('historyGoalType').textContent = goal.type;
+            document.getElementById('historyProgressPercentage').textContent = goal.percentage + '%';
+            document.getElementById('historyProgressText').textContent = goal.currentProgress;
+
+            const progressBar = document.getElementById('historyProgressBar');
+            progressBar.style.width = goal.percentage + '%';
+            progressBar.className = `h-3 rounded-full transition-all duration-500 ${goal.progressColor}`;
+
+            // Populate timeline
+            const timeline = document.getElementById('historyTimeline');
+            timeline.innerHTML = '';
+
+            goal.history.forEach((entry, index) => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'flex items-start space-x-3 p-3 bg-ayah-neutral-50 rounded-lg';
+                timelineItem.innerHTML = `
+                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center border-2 border-ayah-neutral-200 flex-shrink-0">
+                        <i data-lucide="${entry.icon}" class="w-4 h-4 ${entry.color}"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between mb-1">
+                            <p class="font-medium text-ayah-neutral-900 text-sm">${entry.progress}</p>
+                            <span class="text-xs text-ayah-neutral-500">${entry.session}</span>
+                        </div>
+                        <p class="text-xs text-ayah-neutral-600">${entry.date}</p>
+                    </div>
+                `;
+                timeline.appendChild(timelineItem);
+            });
+
+            // Show modal
+            document.getElementById('progressHistoryModal').classList.remove('hidden');
+
+            // Reinitialize icons for the new content
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
+        }
+
+        function openEditGoalModal(goalId) {
+            // Goal data for editing
+            const goalData = {
+                'math-goal-1': {
+                    subject: 'Solve 50 Math Problems',
+                    type: 'problems',
+                    target: 50,
+                    current: 12,
+                    deadline: '2025-09-21',
+                    icon: '📊',
+                    unit: 'problems'
+                },
+                'science-goal-2': {
+                    subject: 'Study Science for 10 Hours',
+                    type: 'time',
+                    target: 10,
+                    current: 6.5,
+                    deadline: '2025-09-22',
+                    icon: '🔬',
+                    unit: 'hours'
+                },
+                'history-goal-3': {
+                    subject: 'Learn 15 History Topics',
+                    type: 'topics',
+                    target: 15,
+                    current: 8,
+                    deadline: '2025-09-20',
+                    icon: '📚',
+                    unit: 'topics'
+                }
+            };
+
+            const goal = goalData[goalId];
+            if (!goal) {
+                alert('Goal not found!');
+                return;
+            }
+
+            // Check if goal can be edited (less than 50% complete)
+            const progressPercentage = Math.round((goal.current / goal.target) * 100);
+            if (progressPercentage >= 50) {
+                alert(`❌ Cannot Edit Goal\n\nThis goal is ${progressPercentage}% complete and cannot be edited.\n\nGoals can only be edited when they are less than 50% complete to maintain progress integrity.`);
+                return;
+            }
+
+            // Update modal content
+            document.getElementById('editGoalIcon').textContent = goal.icon;
+            document.getElementById('editGoalName').textContent = goal.subject;
+            document.getElementById('editGoalType').textContent = `${goal.type.charAt(0).toUpperCase() + goal.type.slice(1)} Goal`;
+            document.getElementById('editCurrentProgress').textContent = `${goal.current}/${goal.target}`;
+            document.getElementById('editProgressPercentage').textContent = `${progressPercentage}%`;
+            document.getElementById('editTargetUnit').textContent = `(${goal.unit})`;
+
+            // Set current values in form
+            document.getElementById('editTargetInput').value = goal.target;
+            document.getElementById('editDeadlineInput').value = goal.deadline;
+
+            // Store goal ID for form submission
+            window.currentEditGoalId = goalId;
+
+            // Show modal
+            document.getElementById('editGoalModal').classList.remove('hidden');
+
+            // Reinitialize icons
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
+        }
+
+        function editGoalDetails(goal) {
+            const typeMap = { 'problems': 'problems', 'time': 'minutes', 'topics': 'topics' };
+            const currentTarget = goal.target;
+            const currentDeadline = goal.deadline;
+
+            const newTarget = prompt(
+                `Edit Target for ${goal.subject}:\n\n` +
+                `Current: ${currentTarget} ${typeMap[goal.type]}\n` +
+                `Progress: ${goal.current}/${currentTarget}\n\n` +
+                `Enter new target:`,
+                currentTarget
+            );
+
+            if (newTarget && newTarget !== currentTarget) {
+                const newDeadline = prompt(
+                    `Edit Deadline:\n\n` +
+                    `Current: ${currentDeadline}\n\n` +
+                    `Enter new deadline (YYYY-MM-DD):`,
+                    currentDeadline
+                );
+
+                if (newDeadline) {
+                    alert(
+                        `✅ Goal Updated Successfully!\n\n` +
+                        `${goal.subject} Goal:\n` +
+                        `Target: ${currentTarget} → ${newTarget} ${typeMap[goal.type]}\n` +
+                        `Deadline: ${currentDeadline} → ${newDeadline}\n\n` +
+                        `Your updated goal is now active!`
+                    );
+                }
+            }
+        }
+
+
+
+        function deleteGoal(goalId) {
+            // Goal data for deletion confirmation
+            const goalData = {
+                'math-goal-1': {
+                    subject: 'Math Problems',
+                    type: 'problems',
+                    target: 50,
+                    current: 12,
+                    progressText: '12 of 50 problems completed (24%)'
+                },
+                'science-goal-2': {
+                    subject: 'Science Study',
+                    type: 'time',
+                    target: 10,
+                    current: 6.5,
+                    progressText: '6.5 of 10 hours completed (65%)'
+                },
+                'history-goal-3': {
+                    subject: 'History Topics',
+                    type: 'topics',
+                    target: 15,
+                    current: 8,
+                    progressText: '8 of 15 topics completed (53%)'
+                }
+            };
+
+            const goal = goalData[goalId];
+            if (!goal) {
+                alert('Goal not found!');
+                return;
+            }
+
+            // Update modal content
+            document.getElementById('deleteGoalName').textContent = goal.subject;
+            document.getElementById('deleteGoalProgress').textContent = goal.progressText;
+
+            // Store goal ID for confirmation
+            window.currentDeleteGoalId = goalId;
+
+            // Show modal
+            document.getElementById('deleteGoalModal').classList.remove('hidden');
+        }
+
+
+
+        function updateDeletedGoalCounter() {
+            // Update active goals counter (decrease)
+            const activeGoalsElement = document.querySelector('.grid.grid-cols-2 .text-2xl.text-ayah-primary');
+            if (activeGoalsElement) {
+                const current = parseInt(activeGoalsElement.textContent);
+                if (current > 0) {
+                    activeGoalsElement.textContent = current - 1;
+                }
+            }
+        }
+
+        // Modal control functions
+        function closeDeleteGoalModal() {
+            document.getElementById('deleteGoalModal').classList.add('hidden');
+            window.currentDeleteGoalId = null;
+        }
+
+        function closeProgressHistoryModal() {
+            document.getElementById('progressHistoryModal').classList.add('hidden');
+        }
+
+        function closeEditGoalModal() {
+            document.getElementById('editGoalModal').classList.add('hidden');
+            window.currentEditGoalId = null;
+            // Reset form
+            document.getElementById('editGoalForm').reset();
+        }
+
+        // Handle edit goal form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const editForm = document.getElementById('editGoalForm');
+            if (editForm) {
+                editForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const goalId = window.currentEditGoalId;
+                    if (!goalId) return;
+
+                    const newTarget = document.getElementById('editTargetInput').value;
+                    const newDeadline = document.getElementById('editDeadlineInput').value;
+
+                    if (!newTarget || !newDeadline) {
+                        alert('Please fill in all fields.');
+                        return;
+                    }
+
+                    // Goal data for reference
+                    const goalData = {
+                        'math-goal-1': { subject: 'Math Problems', type: 'problems', target: 50, unit: 'problems' },
+                        'science-goal-2': { subject: 'Science Study', type: 'time', target: 10, unit: 'hours' },
+                        'history-goal-3': { subject: 'History Topics', type: 'topics', target: 15, unit: 'topics' }
+                    };
+
+                    const goal = goalData[goalId];
+                    const oldTarget = goal.target;
+
+                    // Close modal
+                    closeEditGoalModal();
+
+                    // Show success message
+                    setTimeout(() => {
+                        alert(
+                            `✅ Goal Updated Successfully!\n\n` +
+                            `${goal.subject}:\n` +
+                            `Target: ${oldTarget} → ${newTarget} ${goal.unit}\n` +
+                            `Deadline: Updated to ${newDeadline}\n\n` +
+                            `Your updated goal is now active!`
+                        );
+                    }, 300);
+                });
+            }
+        });
+
+        // Confirm delete goal function
+        function confirmDeleteGoal() {
+            const goalId = window.currentDeleteGoalId;
+            if (!goalId) return;
+
+            // Close modal
+            closeDeleteGoalModal();
+
+            // Show success message
+            alert(
+                `🗑️ Goal Deleted\n\n` +
+                `Your goal has been permanently removed.\n\n` +
+                `You can create a new goal anytime using the "New Goal" button.`
+            );
+
+            // Update goal counter
+            updateDeletedGoalCounter();
         }
 
         // Mobile responsive behavior with color-aware adjustments
@@ -795,7 +1334,20 @@ Let's dive into the next topic on your learning journey.`
             }
         }
 
-        // Add click handlers to Continue buttons
+        // Goal-specific continue functions
+        function continueMathGoal(goalId) {
+            alert(`🎯 Continue Math Problems Goal\n\nCurrent Progress: 12/50 problems (24%)\n\nIn the real app, this would:\n• Open the chat interface with math context\n• Begin tracking problems solved\n• Provide AI guidance for math problems\n• Update your progress automatically`);
+        }
+
+        function continueScienceGoal(goalId) {
+            alert(`🎯 Continue Science Study Goal\n\nCurrent Progress: 6.5/10 hours (65%)\n\nIn the real app, this would:\n• Open the chat interface with science context\n• Begin tracking study time\n• Provide AI guidance for science topics\n• Update your progress automatically`);
+        }
+
+        function continueHistoryGoal(goalId) {
+            alert(`🎯 Continue History Topics Goal\n\nCurrent Progress: 8/15 topics (53%)\n\nIn the real app, this would:\n• Open the chat interface with history context\n• Begin tracking topics learned\n• Provide AI guidance for history topics\n• Update your progress automatically`);
+        }
+
+        // Legacy function - no longer needed since Continue buttons now use specific functions
         function initializeContinueButtons() {
             // Find buttons by text content since :contains is not available in querySelector
             const allButtons = document.querySelectorAll('button');
@@ -849,7 +1401,6 @@ Let's dive into the next topic on your learning journey.`
         document.addEventListener('DOMContentLoaded', function() {
             lucide.createIcons();
             handleMobileLayout();
-            initializeContinueButtons();
         });
     </script>
 </body>
