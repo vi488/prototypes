@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayah ChatGPT-like Design Prototypes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        :root {
+            --ayah-primary: #6048EB;
+            --ayah-primary-hover: #4F3BC9;
+            --ayah-secondary-1: #F4F1FF;
+            --ayah-secondary-2: #F4FDFF;
+        }
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+        
+        .prototype-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .prototype-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 flex items-center justify-center">
+                    <img src="ayah_logo.svg" alt="Ayah Logo" class="w-10 h-10">
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">Ayah ChatGPT-like Design Prototypes</h1>
+                    <p class="text-gray-600">Interactive prototypes showcasing the new ChatGPT-inspired interface</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Overview -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Prototype Overview</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="smartphone" class="w-8 h-8 text-blue-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Mobile Responsive</h3>
+                    <p class="text-sm text-gray-600">Optimized for desktop, tablet, and mobile devices</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="zap" class="w-8 h-8 text-green-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Interactive</h3>
+                    <p class="text-sm text-gray-600">Fully functional with real interactions and animations</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i data-lucide="palette" class="w-8 h-8 text-purple-600"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Educational</h3>
+                    <p class="text-sm text-gray-600">Designed for K-12 students with age-appropriate content and interactions</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Prototype -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Main ChatGPT-like Interface</h2>
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                <div class="aspect-video bg-gradient-to-br from-ayah-primary to-purple-600 relative">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <i data-lucide="message-circle" class="w-16 h-16 mx-auto mb-4 opacity-80"></i>
+                            <h3 class="text-2xl font-bold mb-2">Main Chat Interface</h3>
+                            <p class="text-lg opacity-90">ChatGPT-like design with integrated tool pages</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Complete Chat Interface</h3>
+                    <p class="text-gray-600 mb-4">The main prototype with exact ChatGPT-like interface, including centered initial state, profile dropdown menu, and ChatGPT-style input design.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="monitor" class="w-4 h-4"></i>
+                                <span>Desktop</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="tablet" class="w-4 h-4"></i>
+                                <span>Tablet</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="smartphone" class="w-4 h-4"></i>
+                                <span>Mobile</span>
+                            </span>
+                        </div>
+                        <a href="ayah-chatgpt-prototype.html" target="_blank" class="bg-ayah-primary text-white px-6 py-2 rounded-lg hover:bg-ayah-primary transition-colors">
+                            View Prototype
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool Pages & Modals -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Tool Pages & Modals</h2>
+            <p class="text-gray-600 mb-6">Individual prototypes for educational tools (integrated pages) and feature modals (popup overlays).</p>
+
+            <!-- Tool Pages Section -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">📚 Integrated Tool Pages</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Subjects -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
+                        <i data-lucide="book-open" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Subjects</h3>
+                        <p class="text-sm text-gray-600 mb-4">Math, Science, English, History - interactive lessons and homework help across all subjects.</p>
+                        <a href="subjects-tools.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Page →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Learning Goals -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                        <i data-lucide="target" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Learning Goals</h3>
+                        <p class="text-sm text-gray-600 mb-4">Set study goals, track assignments, plan test preparation, and monitor academic progress.</p>
+                        <a href="goals-tools.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Page →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-purple-400 to-violet-500 flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Progress</h3>
+                        <p class="text-sm text-gray-600 mb-4">Academic insights, grade tracking, learning analytics, and performance metrics.</p>
+                        <a href="progress-tools.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Page →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- US-TI001 Goal Storage Database Schema Prototypes -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">🎯 US-TI001: Goal Storage & Session Tracking</h3>
+            <p class="text-gray-600 mb-6">Enhanced prototypes demonstrating the goal storage database schema, session activity tracking, and data integrity features from user story US-TI001.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Session Activity Tracker -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center">
+                        <i data-lucide="activity" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Session Activity Tracker</h3>
+                        <p class="text-sm text-gray-600 mb-4">Real-time session tracking with automatic goal progress updates. Demonstrates session_activities table functionality.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">US-TI001</span>
+                        </div>
+                        <a href="session-activity-tracker.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Tracker →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Data Integrity Dashboard -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+                        <i data-lucide="shield-check" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Data Integrity Dashboard</h3>
+                        <p class="text-sm text-gray-600 mb-4">Database schema validation, performance metrics, and business rules compliance monitoring.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-cyan-100 text-cyan-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">US-TI001</span>
+                        </div>
+                        <a href="data-integrity-dashboard.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Dashboard →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Features Notice -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+                <div class="flex items-start space-x-3">
+                    <i data-lucide="info" class="w-5 h-5 text-blue-600 mt-0.5"></i>
+                    <div>
+                        <h4 class="font-medium text-blue-900 mb-1">Enhanced Goal System</h4>
+                        <p class="text-sm text-blue-800">
+                            The Learning Goals and Progress tools have been enhanced to demonstrate the new database schema features:
+                        </p>
+                        <ul class="text-sm text-blue-700 mt-2 space-y-1">
+                            <li>• Three goal types: Problems Solved, Study Time, Topics Learned</li>
+                            <li>• Automatic progress tracking from session activities</li>
+                            <li>• Data validation and integrity constraints</li>
+                            <li>• Performance optimization with proper indexing</li>
+                            <li>• Business rules enforcement (max 3 active goals)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- US-PT001 Simple Session Analysis Prototypes -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">🧠 US-PT001: Simple Session Analysis</h3>
+            <p class="text-gray-600 mb-6">Prototypes demonstrating automatic session analysis using simple pattern matching for goal progress tracking. Features regex-based problem identification, keyword-based topic detection, and transparent progress updates.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Session Analysis Dashboard -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
+                        <i data-lucide="brain" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Session Analysis Dashboard</h3>
+                        <p class="text-sm text-gray-600 mb-4">Real-time analysis of chat sessions showing pattern matching results, problem identification, and automatic goal progress updates.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">US-PT001</span>
+                        </div>
+                        <a href="session-analysis-dashboard.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Dashboard →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pattern Recognition Viewer -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center">
+                        <i data-lucide="search" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Pattern Recognition Viewer</h3>
+                        <p class="text-sm text-gray-600 mb-4">Visual demonstration of regex patterns and keyword matching used to identify math problems, topics, and educational content.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">US-PT001</span>
+                        </div>
+                        <a href="pattern-recognition-viewer.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Patterns →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session Analysis Features Notice -->
+            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-8">
+                <div class="flex items-start space-x-3">
+                    <i data-lucide="zap" class="w-5 h-5 text-purple-600 mt-0.5"></i>
+                    <div>
+                        <h4 class="font-medium text-purple-900 mb-1">Automatic Session Analysis</h4>
+                        <p class="text-sm text-purple-800">
+                            Simple pattern matching approach for reliable and fast goal progress tracking:
+                        </p>
+                        <ul class="text-sm text-purple-700 mt-2 space-y-1">
+                            <li>• Regex patterns for math problem identification (80%+ accuracy)</li>
+                            <li>• Keyword matching for subject-specific time tracking</li>
+                            <li>• Topic detection using predefined subject dictionaries</li>
+                            <li>• Transparent progress updates within 30 seconds</li>
+                            <li>• Graceful error handling for incomplete sessions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- US-PT002 Basic Progress Storage Prototypes -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">💾 US-PT002: Basic Progress Storage</h3>
+            <p class="text-gray-600 mb-6">Prototypes demonstrating secure storage of goal progress and session activity data. Features data integrity validation, progress history maintenance, and goal modification support.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Progress Storage Dashboard -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+                        <i data-lucide="database" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Progress Storage Dashboard</h3>
+                        <p class="text-sm text-gray-600 mb-4">Real-time view of how goal progress and session data is stored, validated, and maintained with security and integrity checks.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-cyan-100 text-cyan-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">US-PT002</span>
+                        </div>
+                        <a href="progress-storage-dashboard.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Storage →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Data Management Interface -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
+                        <i data-lucide="settings" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Data Management Interface</h3>
+                        <p class="text-sm text-gray-600 mb-4">Goal modification, deletion support, and data integrity management with validation checks and archival processes.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">US-PT002</span>
+                        </div>
+                        <a href="data-management-interface.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Management →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Progress History Viewer -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center">
+                        <i data-lucide="history" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Progress History Viewer</h3>
+                        <p class="text-sm text-gray-600 mb-4">Historical progress tracking with daily snapshots, weekly summaries, and session contribution details over time.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-rose-100 text-rose-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">US-PT002</span>
+                        </div>
+                        <a href="progress-history-viewer.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View History →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Storage Features Notice -->
+            <div class="bg-cyan-50 border border-cyan-200 rounded-lg p-4 mb-8">
+                <div class="flex items-start space-x-3">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-cyan-600 mt-0.5"></i>
+                    <div>
+                        <h4 class="font-medium text-cyan-900 mb-1">Secure Progress Storage</h4>
+                        <p class="text-sm text-cyan-800">
+                            Reliable data storage with validation and integrity checks:
+                        </p>
+                        <ul class="text-sm text-cyan-700 mt-2 space-y-1">
+                            <li>• AES-256 encryption for all goal progress and session data</li>
+                            <li>• Data validation and integrity checks before storage</li>
+                            <li>• Simple progress history with daily and weekly summaries</li>
+                            <li>• Goal modification support with data preservation</li>
+                            <li>• 30-day archival for deleted goals and recovery options</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- US-G002 Goal Progress Tracking Prototypes -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">📊 US-G002: Goal Progress Tracking</h3>
+            <p class="text-gray-600 mb-6">Prototypes demonstrating real-time goal progress tracking with automatic updates, milestone celebrations, and multi-goal handling for student motivation and engagement.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Real-time Progress Dashboard -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Real-time Progress Dashboard</h3>
+                        <p class="text-sm text-gray-600 mb-4">Live progress tracking with automatic updates, real-time progress bars, and color-coded completion indicators for all goal types.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">US-G002</span>
+                        </div>
+                        <a href="goal-progress-tracking.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Dashboard →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Milestone Celebration Interface -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+                        <i data-lucide="award" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Milestone Celebration Interface</h3>
+                        <p class="text-sm text-gray-600 mb-4">Age-appropriate celebration notifications with confetti, badges, and animations for 25%, 50%, 75%, and 100% completion milestones.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">US-G002</span>
+                        </div>
+                        <a href="milestone-celebration-interface.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Celebrations →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Multi-Goal Progress Tracker -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-purple-400 to-indigo-500 flex items-center justify-center">
+                        <i data-lucide="layers" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Multi-Goal Progress Tracker</h3>
+                        <p class="text-sm text-gray-600 mb-4">Demonstration of how single sessions update multiple goals simultaneously with independent progress tracking and conflict resolution.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">US-G002</span>
+                        </div>
+                        <a href="multi-goal-progress-tracker.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Multi-Goal →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goal Progress Tracking Features Notice -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
+                <div class="flex items-start space-x-3">
+                    <i data-lucide="target" class="w-5 h-5 text-green-600 mt-0.5"></i>
+                    <div>
+                        <h4 class="font-medium text-green-900 mb-1">Real-time Goal Progress Tracking</h4>
+                        <p class="text-sm text-green-800">
+                            Automatic progress updates with student motivation features:
+                        </p>
+                        <ul class="text-sm text-green-700 mt-2 space-y-1">
+                            <li>• Automatic progress updates within 30 seconds of session completion</li>
+                            <li>• Simple pattern matching for 80%+ problem identification accuracy</li>
+                            <li>• Real-time progress bars with color coding and milestone tracking</li>
+                            <li>• Age-appropriate celebration notifications for achievement milestones</li>
+                            <li>• Multi-goal handling for sessions covering multiple subjects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- US-G003 Basic Goal Dashboard Prototypes -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">📋 US-G003: Basic Goal Dashboard</h3>
+            <p class="text-gray-600 mb-6">Comprehensive goal dashboard prototype showing all goals and progress in one place with recent activity, statistics, and personalized next steps recommendations for student motivation.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Basic Goal Dashboard -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
+                        <i data-lucide="layout-dashboard" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Basic Goal Dashboard</h3>
+                        <p class="text-sm text-gray-600 mb-4">Complete dashboard view with active goals, progress bars, recent activity, statistics, and personalized next steps recommendations. Features age-appropriate design variations.</p>
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium">New</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">US-G003</span>
+                        </div>
+                        <a href="basic-goal-dashboard.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Dashboard →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goal Dashboard Features Notice -->
+            <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 mb-8">
+                <div class="flex items-start space-x-3">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5 text-indigo-600 mt-0.5"></i>
+                    <div>
+                        <h4 class="font-medium text-indigo-900 mb-1">Comprehensive Goal Dashboard</h4>
+                        <p class="text-sm text-indigo-800">
+                            All-in-one dashboard for goal management and progress tracking:
+                        </p>
+                        <ul class="text-sm text-indigo-700 mt-2 space-y-1">
+                            <li>• Visual progress bars with color-coded status (Red <25%, Yellow 25-75%, Green >75%)</li>
+                            <li>• Recent activity summary with last 3 sessions and achievements</li>
+                            <li>• Simple statistics: study time, problems solved, learning streak, completed goals</li>
+                            <li>• Personalized next steps recommendations based on progress and activity</li>
+                            <li>• Goal management actions: edit, delete, mark complete, create new</li>
+                            <li>• Age-appropriate design variations for K-5 vs 6-12 students</li>
+                            <li>• Mobile responsive layout with touch-friendly interface</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Modals Section -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">📱 Feature Modals (Legacy)</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Budget Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center">
+                        <i data-lucide="calculator" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Budget Planner</h3>
+                        <p class="text-sm text-gray-600 mb-4">Budget creation, expense categories, income tracking, and spending limits.</p>
+                        <a href="budget-modal.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Investment Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-green-400 to-green-500 flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Investment Tracker</h3>
+                        <p class="text-sm text-gray-600 mb-4">Portfolio tracking, performance analysis, asset allocation, and investment goals.</p>
+                        <a href="investment-modal.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Debt Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-red-400 to-red-500 flex items-center justify-center">
+                        <i data-lucide="credit-card" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Debt Payoff</h3>
+                        <p class="text-sm text-gray-600 mb-4">Debt tracking, payoff strategies, payment schedules, and progress monitoring.</p>
+                        <a href="debt-modal.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- $AYAH Tokens Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center">
+                        <i data-lucide="coins" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">$AYAH Tokens</h3>
+                        <p class="text-sm text-gray-600 mb-4">Reward tokens, earning activities, redemption options, and token balance tracking.</p>
+                        <a href="tokens-modal.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Financial Dashboard Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center">
+                        <i data-lucide="bar-chart-3" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Financial Dashboard</h3>
+                        <p class="text-sm text-gray-600 mb-4">Charts, analytics, insights, and comprehensive financial progress tracking.</p>
+                        <a href="dashboard-modal.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Settings Modal -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden prototype-card">
+                    <div class="h-32 bg-gradient-to-br from-gray-400 to-gray-500 flex items-center justify-center">
+                        <i data-lucide="settings" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-2">Settings</h3>
+                        <p class="text-sm text-gray-600 mb-4">Profile management, notifications, preferences, privacy, and support.</p>
+                        <a href="settings-modal.html" target="_blank" class="text-ayah-primary hover:text-ayah-primary font-medium text-sm">
+                            View Modal →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="bg-white rounded-xl shadow-sm p-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">How to Use the Prototypes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Main Prototype Features</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-ayah-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Click hamburger menu (mobile) to open/close sidebar</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-ayah-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Click educational tools in sidebar to open subject pages</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-ayah-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Use tool selector bar to switch between features</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-ayah-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Type in message input and click send button</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="check" class="w-4 h-4 text-ayah-primary mt-0.5 flex-shrink-0"></i>
+                            <span>Click quick suggestions to populate input field</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">Testing Responsive Design</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="monitor" class="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0"></i>
+                            <span><strong>Desktop (1024px+):</strong> Full sidebar always visible</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="tablet" class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0"></i>
+                            <span><strong>Tablet (768-1023px):</strong> Collapsible sidebar</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="smartphone" class="w-4 h-4 text-purple-500 mt-0.5 flex-shrink-0"></i>
+                            <span><strong>Mobile (<768px):</strong> Sidebar as overlay</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i data-lucide="refresh-cw" class="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0"></i>
+                            <span>Resize browser window to test responsive behavior</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="text-center text-sm text-gray-500">
+                <p>Ayah ChatGPT-like Design Prototypes • Created August 27, 2025</p>
+                <p class="mt-1">Interactive prototypes for stakeholder review and development planning</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

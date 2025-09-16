@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Progress Tools - Ayah</title>
+    <title>Progress Tools - ayah</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        /* Ayah Brand Colors */
+        /* ayah Brand Colors */
         :root {
             /* Main Brand Blue Palette - Updated per brand guidelines */
             --ayah-primary: #6048EB;           /* Main brand blue */
@@ -63,82 +63,82 @@
     <div class="p-6">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Progress</h1>
-            <p class="text-gray-600">Here's your financial Progress for this period</p>
+            <h1 class="text-2xl font-semibold text-gray-800 mb-2">Learning Progress</h1>
+            <p class="text-gray-600">Track your academic achievements and goal progress</p>
         </div>
 
-        <!-- Account Balance Section -->
+        <!-- Learning Statistics Overview -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
             <div class="flex items-center justify-between mb-4">
                 <div>
-                    <h2 class="text-xl font-semibold text-gray-800">Account Balance</h2>
-                    <p class="text-gray-600">Your current financial status</p>
+                    <h2 class="text-xl font-semibold text-gray-800">This Week's Progress</h2>
+                    <p class="text-gray-600">Your learning activity summary</p>
                 </div>
                 <div class="flex items-center space-x-2">
                     <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600">
                         <i data-lucide="refresh-cw" class="w-4 h-4"></i>
                     </button>
                     <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600">
-                        <i data-lucide="eye-off" class="w-4 h-4"></i>
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Current Balance -->
+            <!-- Current Learning Streak -->
             <div class="bg-ayah-bg-light rounded-lg p-6 mb-6">
                 <div class="flex items-center space-x-3 mb-2">
-                    <i data-lucide="wallet" class="w-5 h-5 text-ayah-icon-primary"></i>
-                    <span class="text-gray-600">Current Balance</span>
+                    <i data-lucide="zap" class="w-5 h-5 text-ayah-icon-primary"></i>
+                    <span class="text-gray-600">Learning Streak</span>
                 </div>
-                <div class="text-3xl font-bold text-gray-900 mb-1">$1,000.00</div>
-                <p class="text-sm text-gray-500">Last updated: 9/1/2025</p>
+                <div class="text-3xl font-bold text-gray-900 mb-1">5 days</div>
+                <p class="text-sm text-gray-500">Keep it up! Last session: 2 hours ago</p>
             </div>
 
-            <!-- grade/assignments Grid -->
+            <!-- Weekly Stats Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div class="bg-ayah-bg-light rounded-lg p-4">
                     <div class="flex items-center space-x-2 mb-2">
-                        <i data-lucide="trending-up" class="w-4 h-4 text-ayah-primary"></i>
-                        <span class="text-sm text-ayah-primary">grade</span>
+                        <i data-lucide="clock" class="w-4 h-4 text-orange-600"></i>
+                        <span class="text-sm text-orange-600">Study Time</span>
                     </div>
-                    <div class="text-xl font-bold text-ayah-primary">$1,000.00</div>
-                    <p class="text-xs text-gray-500">This month</p>
+                    <div class="text-xl font-bold text-orange-600">3h 45m</div>
+                    <p class="text-xs text-gray-500">This week</p>
                 </div>
                 <div class="bg-ayah-bg-light rounded-lg p-4">
                     <div class="flex items-center space-x-2 mb-2">
-                        <i data-lucide="trending-down" class="w-4 h-4 text-ayah-primary-dark"></i>
-                        <span class="text-sm text-ayah-primary-dark">assignments</span>
+                        <i data-lucide="brain" class="w-4 h-4 text-blue-600"></i>
+                        <span class="text-sm text-blue-600">Problems Solved</span>
                     </div>
-                    <div class="text-xl font-bold text-ayah-primary-dark">$0.00</div>
-                    <p class="text-xs text-gray-500">This month</p>
+                    <div class="text-xl font-bold text-blue-600">28</div>
+                    <p class="text-xs text-gray-500">This week</p>
                 </div>
                 <div class="bg-ayah-bg-light rounded-lg p-4">
                     <div class="flex items-center space-x-2 mb-2">
-                        <i data-lucide="calculator" class="w-4 h-4 text-ayah-primary"></i>
-                        <span class="text-sm text-ayah-primary">Net</span>
+                        <i data-lucide="book-open" class="w-4 h-4 text-purple-600"></i>
+                        <span class="text-sm text-purple-600">Topics Learned</span>
                     </div>
-                    <div class="text-xl font-bold text-ayah-primary">$1,000.00</div>
-                    <p class="text-xs text-gray-500">This month</p>
+                    <div class="text-xl font-bold text-purple-600">7</div>
+                    <p class="text-xs text-gray-500">This week</p>
                 </div>
             </div>
 
             <!-- Additional Stats -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="text-center">
-                    <div class="text-sm text-gray-600">lessons</div>
-                    <div class="text-lg font-semibold text-gray-900">1</div>
+                    <div class="text-sm text-gray-600">Sessions Completed</div>
+                    <div class="text-lg font-semibold text-gray-900">12</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-sm text-gray-600">Token Balance</div>
-                    <div class="text-lg font-semibold text-ayah-primary">50 tokens</div>
+                    <div class="text-sm text-gray-600">Goals Completed</div>
+                    <div class="text-lg font-semibold text-green-600">2</div>
                 </div>
             </div>
         </div>
 
-        <!-- Financial Overview Chart -->
+        <!-- Learning Progress Chart -->
         <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-semibold text-gray-800">Financial Overview</h2>
+                <h2 class="text-xl font-semibold text-gray-800">Learning Activity</h2>
                 <select class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent">
                     <option value="7days" selected>Last 7 Days</option>
                     <option value="4weeks">Last 4 Weeks</option>
@@ -274,20 +274,20 @@
                     <!-- Legend positioned at bottom like existing website -->
                     <g class="recharts-legend-wrapper" transform="translate(5, 295)">
                         <g class="recharts-default-legend">
-                            <!-- assignments legend item -->
-                            <g class="recharts-legend-item legend-item-0" transform="translate(320, 0)">
-                                <svg aria-label="assignments legend icon" class="recharts-surface" width="14" height="14" viewBox="0 0 32 32" x="0" y="0">
+                            <!-- Study Time legend item -->
+                            <g class="recharts-legend-item legend-item-0" transform="translate(280, 0)">
+                                <svg aria-label="Study Time legend icon" class="recharts-surface" width="14" height="14" viewBox="0 0 32 32" x="0" y="0">
                                     <path stroke-width="4" fill="none" stroke="#043178" d="M0,16h10.666666666666666 A5.333333333333333,5.333333333333333,0,1,1,21.333333333333332,16 H32M21.333333333333332,16 A5.333333333333333,5.333333333333333,0,1,1,10.666666666666666,16" class="recharts-legend-icon"></path>
                                 </svg>
-                                <text x="18" y="7" dy="0.355em" text-anchor="start" fill="#043178" font-size="12" font-family="Arial, sans-serif">assignments</text>
+                                <text x="18" y="7" dy="0.355em" text-anchor="start" fill="#043178" font-size="12" font-family="Arial, sans-serif">Study Time</text>
                             </g>
 
-                            <!-- grade legend item -->
-                            <g class="recharts-legend-item legend-item-1" transform="translate(410, 0)">
-                                <svg aria-label="grade legend icon" class="recharts-surface" width="14" height="14" viewBox="0 0 32 32" x="0" y="0">
+                            <!-- Problems Solved legend item -->
+                            <g class="recharts-legend-item legend-item-1" transform="translate(380, 0)">
+                                <svg aria-label="Problems Solved legend icon" class="recharts-surface" width="14" height="14" viewBox="0 0 32 32" x="0" y="0">
                                     <path stroke-width="4" fill="none" stroke="#6048EB" d="M0,16h10.666666666666666 A5.333333333333333,5.333333333333333,0,1,1,21.333333333333332,16 H32M21.333333333333332,16 A5.333333333333333,5.333333333333333,0,1,1,10.666666666666666,16" class="recharts-legend-icon"></path>
                                 </svg>
-                                <text x="18" y="7" dy="0.355em" text-anchor="start" fill="#6048EB" font-size="12" font-family="Arial, sans-serif">grade</text>
+                                <text x="18" y="7" dy="0.355em" text-anchor="start" fill="#6048EB" font-size="12" font-family="Arial, sans-serif">Problems Solved</text>
                             </g>
                         </g>
                     </g>
@@ -302,6 +302,9 @@
                     <h2 class="text-xl font-semibold text-gray-800">Goals Progress</h2>
                     <p class="text-gray-600">Overview of your Learning Goals performance</p>
                 </div>
+                <button class="text-ayah-primary hover:text-ayah-primary-hover text-sm font-medium">
+                    View All Goals →
+                </button>
             </div>
 
             <!-- Goals Statistics Grid -->
@@ -310,44 +313,78 @@
                     <div class="w-8 h-8 bg-ayah-bg-medium rounded-full flex items-center justify-center mx-auto mb-2">
                         <i data-lucide="target" class="w-4 h-4 text-ayah-primary"></i>
                     </div>
-                    <div class="text-sm text-gray-600">Total Goals</div>
-                    <div class="text-lg font-semibold text-ayah-primary">0</div>
+                    <div class="text-sm text-gray-600">Active Goals</div>
+                    <div class="text-lg font-semibold text-ayah-primary">3</div>
                 </div>
                 <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
-                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-lucide="check-circle" class="w-4 h-4 text-ayah-primary"></i>
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
                     </div>
                     <div class="text-sm text-gray-600">Completed</div>
-                    <div class="text-lg font-semibold text-ayah-primary">0</div>
+                    <div class="text-lg font-semibold text-green-600">2</div>
                 </div>
                 <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
                     <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-lucide="trending-up" class="w-4 h-4 text-ayah-primary"></i>
+                        <i data-lucide="trending-up" class="w-4 h-4 text-blue-600"></i>
                     </div>
                     <div class="text-sm text-gray-600">On Track</div>
-                    <div class="text-lg font-semibold text-ayah-primary">0</div>
+                    <div class="text-lg font-semibold text-blue-600">2</div>
                 </div>
                 <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
-                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-lucide="percent" class="w-4 h-4 text-ayah-primary"></i>
+                    <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i data-lucide="percent" class="w-4 h-4 text-purple-600"></i>
                     </div>
                     <div class="text-sm text-gray-600">Avg Progress</div>
-                    <div class="text-lg font-semibold text-ayah-primary">0.0%</div>
+                    <div class="text-lg font-semibold text-purple-600">68%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Steps Recommendations -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Next Steps</h2>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg">
+                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="brain" class="w-4 h-4 text-blue-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-900">Continue working on Math - you're almost there!</p>
+                        <p class="text-sm text-gray-600">12 of 20 problems completed (60%)</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-orange-50 rounded-lg">
+                    <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="clock" class="w-4 h-4 text-orange-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-900">Try a quick Science session to maintain your streak</p>
+                        <p class="text-sm text-gray-600">15 more minutes needed to reach your goal</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-3 p-4 bg-green-50 rounded-lg">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="star" class="w-4 h-4 text-green-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-900">Great progress on History - consider setting a new challenge</p>
+                        <p class="text-sm text-gray-600">2 of 5 topics completed</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Summary Section -->
         <div class="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-6">Summary</h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Weekly Summary</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="text-center">
-                    <div class="text-sm text-gray-600 mb-1">Total assignments</div>
-                    <div class="text-2xl font-bold text-gray-900">$0.00</div>
+                    <div class="text-sm text-gray-600 mb-1">Total Study Sessions</div>
+                    <div class="text-2xl font-bold text-gray-900">12</div>
                 </div>
                 <div class="text-center">
-                    <div class="text-sm text-gray-600 mb-1">Categories</div>
-                    <div class="text-2xl font-bold text-gray-900">0</div>
+                    <div class="text-sm text-gray-600 mb-1">Subjects Studied</div>
+                    <div class="text-2xl font-bold text-gray-900">4</div>
                 </div>
                 <div class="text-center">
                     <div class="text-sm text-gray-600 mb-1">Period</div>

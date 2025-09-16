@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Dashboard - Ayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Ayah Brand Colors - Clean Brand System */
+        :root {
+            /* Core Brand Colors */
+            --ayah-primary: #6048EB;           /* Primary brand purple */
+            --ayah-primary-hover: #4F3BC9;     /* Darker purple for hover */
+            --ayah-primary-light: #8B7EF7;     /* Light purple for accents */
+            --ayah-primary-lighter: #A599F9;   /* Lighter purple for backgrounds */
+            --ayah-primary-lightest: #C4B5FB;  /* Very light purple for subtle backgrounds */
+            --ayah-secondary-1: #F4F1FF;       /* Light purple background */
+            --ayah-secondary-2: #F4FDFF;       /* Very light blue-purple background */
+
+            /* Neutral Colors for Eye Comfort */
+            --ayah-neutral-50: #FAFAFA;        /* Softest background */
+            --ayah-neutral-100: #F5F5F5;       /* Light background */
+            --ayah-neutral-200: #E5E5E5;       /* Border color */
+            --ayah-neutral-300: #D4D4D4;       /* Disabled states */
+            --ayah-neutral-600: #525252;       /* Secondary text */
+            --ayah-neutral-700: #404040;       /* Primary text */
+            --ayah-neutral-800: #262626;       /* High emphasis text */
+            --ayah-neutral-900: #171717;       /* Maximum contrast text */
+        }
+
+        /* Brand Color Utility Classes */
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .bg-ayah-primary-lighter { background-color: var(--ayah-primary-lighter); }
+        .bg-ayah-primary-lightest { background-color: var(--ayah-primary-lightest); }
+        .bg-ayah-secondary-1 { background-color: var(--ayah-secondary-1); }
+        .bg-ayah-secondary-2 { background-color: var(--ayah-secondary-2); }
+        .bg-ayah-neutral-50 { background-color: var(--ayah-neutral-50); }
+        .bg-ayah-neutral-100 { background-color: var(--ayah-neutral-100); }
+
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .text-ayah-primary-light { color: var(--ayah-primary-light); }
+        .text-ayah-primary-lighter { color: var(--ayah-primary-lighter); }
+        .text-ayah-neutral-600 { color: var(--ayah-neutral-600); }
+        .text-ayah-neutral-700 { color: var(--ayah-neutral-700); }
+        .text-ayah-neutral-800 { color: var(--ayah-neutral-800); }
+        .text-ayah-neutral-900 { color: var(--ayah-neutral-900); }
+
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .border-ayah-neutral-200 { border-color: var(--ayah-neutral-200); }
+
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+        .hover\:bg-ayah-secondary-1:hover { background-color: var(--ayah-primary-lighter); }
+
+        /* Progress bar animations */
+        .progress-bar {
+            transition: width 0.8s ease-in-out;
+        }
+
+        /* Milestone celebration animations */
+        .milestone-celebration {
+            animation: milestoneGlow 2s ease-in-out;
+        }
+
+        @keyframes milestoneGlow {
+            0%, 100% { box-shadow: 0 0 0 rgba(96, 72, 235, 0); }
+            50% { box-shadow: 0 0 20px rgba(96, 72, 235, 0.3); }
+        }
+
+        /* Clean card hover effects */
+        .progress-card {
+            transition: all 0.3s ease;
+        }
+
+        .progress-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 72, 235, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-ayah-neutral-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white border-b border-ayah-neutral-200 sticky top-0 z-10 shadow-sm">
+        <div class="px-4 sm:px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-ayah-primary rounded-lg flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-ayah-neutral-900">Progress Dashboard</h1>
+                        <p class="text-sm text-ayah-neutral-600">Track your learning progress and achievements</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="px-4 sm:px-6 py-6 space-y-6">
+        <!-- Progress Overview -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-ayah-neutral-200">
+            <h2 class="text-lg font-semibold text-ayah-neutral-900 mb-4">Learning Progress Overview</h2>
+            
+            <!-- Progress Stats Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                <div class="text-center p-4 bg-ayah-secondary-1 rounded-lg">
+                    <div class="text-2xl font-bold text-ayah-primary">2h 45m</div>
+                    <div class="text-sm text-ayah-neutral-600">Study Time</div>
+                    <div class="text-xs text-ayah-neutral-500 mt-1">This Week</div>
+                </div>
+                <div class="text-center p-4 bg-ayah-secondary-1 rounded-lg">
+                    <div class="text-2xl font-bold text-ayah-primary">47</div>
+                    <div class="text-sm text-ayah-neutral-600">Problems Solved</div>
+                    <div class="text-xs text-ayah-neutral-500 mt-1">This Week</div>
+                </div>
+                <div class="text-center p-4 bg-ayah-secondary-1 rounded-lg">
+                    <div class="text-2xl font-bold text-ayah-primary">7</div>
+                    <div class="text-sm text-ayah-neutral-600">Topics Learned</div>
+                    <div class="text-xs text-ayah-neutral-500 mt-1">This Week</div>
+                </div>
+                <div class="text-center p-4 bg-ayah-secondary-1 rounded-lg">
+                    <div class="text-2xl font-bold text-ayah-primary">5</div>
+                    <div class="text-sm text-ayah-neutral-600">Day Streak</div>
+                    <div class="text-xs text-ayah-neutral-500 mt-1">Current</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goal Progress Tracking -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-ayah-neutral-200">
+            <h2 class="text-lg font-semibold text-ayah-neutral-900 mb-4">Goal Progress Tracking</h2>
+            
+            <div class="space-y-4">
+                <!-- Math Goal Progress -->
+                <div class="progress-card p-4 bg-ayah-secondary-2 rounded-lg border border-ayah-neutral-200">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">📊</span>
+                            <div>
+                                <h3 class="font-medium text-ayah-neutral-900">Math Problems</h3>
+                                <p class="text-sm text-ayah-neutral-600">18 of 20 completed</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-ayah-primary">90%</div>
+                            <div class="text-xs text-ayah-neutral-500">Almost Done!</div>
+                        </div>
+                    </div>
+                    <div class="w-full bg-ayah-neutral-200 rounded-full h-3">
+                        <div class="progress-bar bg-ayah-primary h-3 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+
+                <!-- Reading Goal Progress -->
+                <div class="progress-card p-4 bg-ayah-secondary-2 rounded-lg border border-ayah-neutral-200">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">📚</span>
+                            <div>
+                                <h3 class="font-medium text-ayah-neutral-900">Reading Time</h3>
+                                <p class="text-sm text-ayah-neutral-600">3h 30m of 6h completed</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-ayah-primary">58%</div>
+                            <div class="text-xs text-ayah-neutral-500">On Track</div>
+                        </div>
+                    </div>
+                    <div class="w-full bg-ayah-neutral-200 rounded-full h-3">
+                        <div class="progress-bar bg-ayah-primary h-3 rounded-full" style="width: 58%"></div>
+                    </div>
+                </div>
+
+                <!-- Science Goal Progress -->
+                <div class="progress-card p-4 bg-ayah-secondary-2 rounded-lg border border-ayah-neutral-200">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🔬</span>
+                            <div>
+                                <h3 class="font-medium text-ayah-neutral-900">Science Topics</h3>
+                                <p class="text-sm text-ayah-neutral-600">2 of 10 completed</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-bold text-ayah-primary">20%</div>
+                            <div class="text-xs text-ayah-neutral-500">Getting Started</div>
+                        </div>
+                    </div>
+                    <div class="w-full bg-ayah-neutral-200 rounded-full h-3">
+                        <div class="progress-bar bg-ayah-primary h-3 rounded-full" style="width: 20%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Progress Activity -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border border-ayah-neutral-200">
+            <h2 class="text-lg font-semibold text-ayah-neutral-900 mb-4">Recent Progress Activity</h2>
+            
+            <div class="space-y-3">
+                <div class="flex items-center space-x-3 p-3 bg-ayah-secondary-1 rounded-lg">
+                    <div class="w-8 h-8 bg-ayah-primary-lightest rounded-full flex items-center justify-center">
+                        <i data-lucide="check" class="w-4 h-4 text-ayah-primary"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-ayah-neutral-900">Completed 5 Math Problems</p>
+                        <p class="text-xs text-ayah-neutral-600">Today, 2:30 PM • +25% progress</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3 p-3 bg-ayah-secondary-1 rounded-lg">
+                    <div class="w-8 h-8 bg-ayah-primary-lightest rounded-full flex items-center justify-center">
+                        <i data-lucide="clock" class="w-4 h-4 text-ayah-primary"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-ayah-neutral-900">Reading Session - 45 minutes</p>
+                        <p class="text-xs text-ayah-neutral-600">Yesterday, 4:15 PM • +12.5% progress</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-3 p-3 bg-ayah-secondary-1 rounded-lg">
+                    <div class="w-8 h-8 bg-ayah-primary-lightest rounded-full flex items-center justify-center">
+                        <i data-lucide="award" class="w-4 h-4 text-ayah-primary"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-ayah-neutral-900">Milestone Reached: 75% Math Progress</p>
+                        <p class="text-xs text-ayah-neutral-600">2 days ago • Great achievement!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Add milestone celebration effect for high progress items
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = parseInt(bar.style.width);
+                if (width >= 75) {
+                    bar.parentElement.parentElement.classList.add('milestone-celebration');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
