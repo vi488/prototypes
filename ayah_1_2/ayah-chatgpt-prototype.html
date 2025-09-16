@@ -299,6 +299,49 @@
                 position: relative;
                 z-index: 40;
             }
+
+            /* Mobile analytics optimizations */
+            .mobile-analytics-quick-view {
+                position: fixed;
+                bottom: 80px;
+                right: 1rem;
+                z-index: 30;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                padding: 0.75rem;
+                display: none;
+                max-width: 200px;
+            }
+
+            .mobile-analytics-toggle {
+                position: fixed;
+                bottom: 140px;
+                right: 1rem;
+                z-index: 35;
+                background: var(--ayah-primary);
+                color: white;
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 12px rgba(96, 72, 235, 0.3);
+                transition: all 0.3s ease;
+                border: none;
+                cursor: pointer;
+            }
+
+            .mobile-analytics-toggle:hover {
+                transform: scale(1.1);
+                box-shadow: 0 6px 16px rgba(96, 72, 235, 0.4);
+            }
+
+            .mobile-analytics-toggle.active {
+                background: var(--ayah-primary-hover);
+                transform: rotate(180deg);
+            }
         }
     </style>
 </head>
@@ -354,9 +397,29 @@
             <!-- Learning Tools Group -->
             <div class="px-4 pb-4 border-b border-gray-200">
                 <div class="space-y-1">
+                    <button id="points-tool" onclick="loadToolPage('points')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
+                        <i data-lucide="star" class="w-4 h-4"></i>
+                        <span class="text-sm">My Points</span>
+                    </button>
                     <button id="goals-tool" onclick="loadToolPage('goals')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
                         <i data-lucide="target" class="w-4 h-4"></i>
                         <span class="text-sm">My Goals</span>
+                    </button>
+                    <button id="progress-tool" onclick="loadToolPage('progress')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
+                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+                        <span class="text-sm">Progress Charts</span>
+                    </button>
+                    <button id="subjects-tool" onclick="loadToolPage('subjects')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+                        <span class="text-sm">Subject Analytics</span>
+                    </button>
+                    <button id="achievements-tool" onclick="loadToolPage('achievements')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
+                        <i data-lucide="award" class="w-4 h-4"></i>
+                        <span class="text-sm">Achievements</span>
+                    </button>
+                    <button id="streaks-tool" onclick="loadToolPage('streaks')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
+                        <i data-lucide="flame" class="w-4 h-4"></i>
+                        <span class="text-sm">Daily Streaks</span>
                     </button>
                 </div>
             </div>
@@ -419,9 +482,12 @@
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-2">
                                         <i data-lucide="coins" class="w-4 h-4 text-ayah-primary"></i>
-                                        <span class="text-sm text-gray-700">Token Balance</span>
+                                        <span class="text-sm text-gray-700">Points Balance</span>
                                     </div>
-                                    <span class="text-sm font-medium text-ayah-primary">50</span>
+                                    <span class="text-sm font-medium text-ayah-primary">1,250</span>
+                                </div>
+                                <div class="mt-1 px-2 py-1 bg-ayah-bg-light rounded text-xs text-center">
+                                    <span class="text-ayah-primary font-medium">= 12.5 ASKIA Tokens</span>
                                 </div>
                             </div>
 
@@ -482,8 +548,23 @@
 
                 <!-- Tool icons -->
                 <div class="p-2 space-y-1">
+                    <button onclick="loadToolPage('points')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="My Points">
+                        <i data-lucide="star" class="w-5 h-5"></i>
+                    </button>
                     <button onclick="loadToolPage('goals')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="My Goals">
                         <i data-lucide="target" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('progress')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Progress Charts">
+                        <i data-lucide="trending-up" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('subjects')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Subject Analytics">
+                        <i data-lucide="book-open" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('achievements')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Achievements">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('streaks')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Daily Streaks">
+                        <i data-lucide="flame" class="w-5 h-5"></i>
                     </button>
 
                 </div>
@@ -665,6 +746,37 @@
             </div>
         </div>
     </div>
+
+    <!-- Mobile Analytics Quick View (shown only on mobile) -->
+    <div id="mobileAnalyticsQuickView" class="mobile-analytics-quick-view">
+        <div class="text-xs font-semibold text-gray-800 mb-2">Quick Stats</div>
+        <div class="space-y-2">
+            <div class="flex justify-between items-center">
+                <span class="text-xs text-gray-600">Streak</span>
+                <span class="text-xs font-bold text-orange-600">5 days</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-xs text-gray-600">Today</span>
+                <span class="text-xs font-bold text-blue-600">15 min</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-xs text-gray-600">Points</span>
+                <span class="text-xs font-bold text-purple-600">1,250</span>
+            </div>
+            <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-gray-500">ASKIA Tokens</span>
+                <span class="text-xs font-bold text-ayah-primary">12.5</span>
+            </div>
+        </div>
+        <div class="mt-3 pt-2 border-t border-gray-200">
+            <button onclick="loadToolPage('progress')" class="text-xs text-ayah-primary font-medium">View Full Analytics →</button>
+        </div>
+    </div>
+
+    <!-- Mobile Analytics Toggle Button (shown only on mobile) -->
+    <button id="mobileAnalyticsToggle" class="mobile-analytics-toggle" onclick="toggleMobileAnalytics()">
+        <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+    </button>
 
     <!-- Modal Container for Feature Modals -->
     <div id="modalContainer" class="hidden fixed inset-0 z-50">
@@ -853,7 +965,7 @@
             completedLessons: 45,
             totalLessons: 180,
             currentStreak: 12,
-            tokenBalance: 50,
+            tokenBalance: 1250, // Points that convert to 12.5 ASKIA tokens
             averageScore: 85,
             subjectsProgress: {
                 math: 75,
@@ -1063,7 +1175,8 @@ What would you like to work on first? I'm here to help you reach your learning g
             }
 
             if (message.includes('progress') || message.includes('score') || message.includes('grade')) {
-                return `Great question about your progress! Here's your current status:\n\n**Overall Progress:**\n• Grade Level: ${studentData.currentGrade}th grade\n• Completed Lessons: ${studentData.completedLessons}/${studentData.totalLessons}\n• Current Streak: ${studentData.currentStreak} days\n• Average Score: ${studentData.averageScore}%\n\n**Subject Progress:**\n• Math: ${studentData.subjectsProgress.math}%\n• Science: ${studentData.subjectsProgress.science}%\n• English: ${studentData.subjectsProgress.english}%\n• History: ${studentData.subjectsProgress.history}%\n\nYou have ${studentData.tokenBalance} $AYAH tokens! Keep up the great work!`;
+                const askiaTokens = (studentData.tokenBalance / 100).toFixed(1);
+                return `Great question about your progress! Here's your current status:\n\n**Overall Progress:**\n• Grade Level: ${studentData.currentGrade}th grade\n• Completed Lessons: ${studentData.completedLessons}/${studentData.totalLessons}\n• Current Streak: ${studentData.currentStreak} days\n• Average Score: ${studentData.averageScore}%\n\n**Subject Progress:**\n• Math: ${studentData.subjectsProgress.math}%\n• Science: ${studentData.subjectsProgress.science}%\n• English: ${studentData.subjectsProgress.english}%\n• History: ${studentData.subjectsProgress.history}%\n\n**Token Economics:**\n• Points Balance: ${studentData.tokenBalance} points\n• Future ASKIA Tokens: ${askiaTokens} tokens (ready for v2.1 conversion)\n• Daily Earning Cap: 415 points remaining today\n\nYour learning is building real value for the future! 🚀`;
             }
 
             if (message.includes('goal') || message.includes('target') || message.includes('learn')) {
@@ -1086,8 +1199,9 @@ What would you like to work on first? I'm here to help you reach your learning g
                 return `History helps us understand our world! I can help you learn about:\n\n• **World History** - Ancient civilizations to modern times\n• **American History** - From colonial times to present\n• **Geography** - Countries, cultures, and places\n• **Civics** - Government and citizenship\n\nWhat historical period or topic interests you? I can share stories, explain events, and help you achieve your history learning goals!`;
             }
 
-            if (message.includes('token') || message.includes('reward') || message.includes('$AYAH')) {
-                return `You currently have ${studentData.tokenBalance} $AYAH tokens! These tokens are earned by:\n\n• Completing learning goals\n• Daily study sessions\n• Solving problems correctly\n• Achieving milestones\n\nYou can use tokens for:\n• Premium tutoring features (10 tokens)\n• Advanced progress analytics (5 tokens)\n• Priority support (20 tokens)\n\nWould you like to see your token history or learn about earning more rewards?`;
+            if (message.includes('token') || message.includes('reward') || message.includes('$AYAH') || message.includes('ASKIA')) {
+                const askiaTokens = (studentData.tokenBalance / 100).toFixed(1);
+                return `🚀 **Token Economics Ready!**\n\nYou currently have **${studentData.tokenBalance} points** which equals **${askiaTokens} future ASKIA tokens**!\n\n**How You Earn Points:**\n• **Base Formula:** Session Duration × Subject Difficulty × Engagement Score\n• **Subject Multipliers:** Math(1.2x), Science(1.1x), Languages(1.0x), Arts(0.9x)\n• **Bonuses:** Streak(15%), Achievement(1.2x-3.0x), Accuracy(50%)\n• **Daily Cap:** 500 points maximum per day\n\n**Token Conversion:**\n• **Rate:** 100 Points = 1 ASKIA Token\n• **Timeline:** Expected in Q2 2025 (v2.1 launch)\n• **Eligibility:** ✅ You qualify! (45 days usage, 1,250+ points)\n\n**Your points are being prepared for blockchain conversion with cryptographic integrity!**\n\nWould you like to see your detailed token economics dashboard?`;
             }
 
             return `I'm your AI tutor, ready to help you learn and achieve your goals! I can assist you with:\n\n• **Math** - Algebra, geometry, and problem solving\n• **Science** - Biology, chemistry, physics, and more\n• **English** - Reading, writing, and grammar\n• **History** - World events and social studies\n• **Goal Setting** - Track your learning progress\n• **Study Planning** - Organize your learning journey\n\nWhat subject would you like to explore today?`;
@@ -1216,7 +1330,12 @@ What would you like to work on first? I'm here to help you reach your learning g
 
             // Load appropriate tool page
             const toolUrls = {
-                'goals': 'goals-tools.html'
+                'points': 'points-tools.html',
+                'goals': 'goals-tools.html',
+                'progress': 'progress-tools.html',
+                'subjects': 'subjects-tools.html',
+                'achievements': 'achievements-tools.html',
+                'streaks': 'streaks-tools.html'
             };
 
             if (toolUrls[toolType]) {
@@ -1224,7 +1343,12 @@ What would you like to work on first? I'm here to help you reach your learning g
 
                 // Update mobile title
                 const titles = {
-                    'goals': 'My Goals'
+                    'points': 'My Points',
+                    'goals': 'My Goals',
+                    'progress': 'Progress Charts',
+                    'subjects': 'Subject Analytics',
+                    'achievements': 'Achievements',
+                    'streaks': 'Daily Streaks'
                 };
                 mobileTitle.textContent = titles[toolType] || 'Ayah Learning Tools';
 
@@ -1645,6 +1769,8 @@ What would you like to work on first? I'm here to help you reach your learning g
             if (window.innerWidth < 768 && isInitialState && mobileInitialInput) {
                 mobileInitialInput.classList.remove('hidden');
             }
+            // Initialize mobile analytics
+            initializeMobileAnalytics();
         });
 
         // Modal functionality (only for settings now)
@@ -1731,6 +1857,59 @@ What would you like to work on first? I'm here to help you reach your learning g
         });
 
         // Mobile profile button removed
+
+        // Mobile Analytics Toggle Function
+        function toggleMobileAnalytics() {
+            const quickView = document.getElementById('mobileAnalyticsQuickView');
+            const toggleBtn = document.getElementById('mobileAnalyticsToggle');
+
+            if (quickView && toggleBtn) {
+                const isVisible = quickView.style.display === 'block';
+
+                if (isVisible) {
+                    quickView.style.display = 'none';
+                    toggleBtn.classList.remove('active');
+                } else {
+                    quickView.style.display = 'block';
+                    toggleBtn.classList.add('active');
+
+                    // Auto-hide after 5 seconds
+                    setTimeout(() => {
+                        quickView.style.display = 'none';
+                        toggleBtn.classList.remove('active');
+                    }, 5000);
+                }
+
+                // Haptic feedback on mobile
+                if ('vibrate' in navigator) {
+                    navigator.vibrate(50);
+                }
+            }
+        }
+
+        // Update mobile analytics data periodically
+        function updateMobileAnalytics() {
+            const quickView = document.getElementById('mobileAnalyticsQuickView');
+            if (quickView && window.innerWidth <= 640) {
+                // Update with current student data
+                const streakElement = quickView.querySelector('.text-orange-600');
+                const todayElement = quickView.querySelector('.text-blue-600');
+                const pointsElement = quickView.querySelector('.text-purple-600');
+
+                if (streakElement) streakElement.textContent = `${studentData.currentStreak} days`;
+                if (todayElement) todayElement.textContent = '15 min'; // Could be dynamic
+                if (pointsElement) pointsElement.textContent = `${studentData.tokenBalance}`;
+            }
+        }
+
+        // Initialize mobile analytics
+        function initializeMobileAnalytics() {
+            if (window.innerWidth <= 640) {
+                updateMobileAnalytics();
+                // Update every 30 seconds
+                setInterval(updateMobileAnalytics, 30000);
+            }
+        }
 
         // Close dropdown when clicking outside
         document.addEventListener('click', function(e) {

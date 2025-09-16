@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subjects Tools - ayah</title>
+    <title>Subject Analytics - Ayah</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* ayah Brand Colors */
+        /* Ayah Brand Colors */
         :root {
             /* Main Brand Blue Palette - Updated per brand guidelines */
             --ayah-primary: #6048EB;           /* Main brand blue */
@@ -32,6 +33,13 @@
             --ayah-btn-primary-hover: #4F3BC9; /* Primary button hover */
             --ayah-btn-secondary: #5B8CFF;     /* Secondary buttons */
             --ayah-btn-secondary-hover: #043178; /* Secondary button hover */
+
+            /* Subject-specific colors */
+            --subject-math: #FF6B6B;           /* Red for Math */
+            --subject-science: #4ECDC4;        /* Teal for Science */
+            --subject-english: #45B7D1;        /* Blue for English */
+            --subject-history: #96CEB4;        /* Green for History */
+            --subject-other: #FECA57;          /* Yellow for Other subjects */
         }
 
         /* Utility Classes */
@@ -57,187 +65,918 @@
 
         .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
         .hover\:bg-ayah-primary-light:hover { background-color: var(--ayah-primary); }
+
+        /* Subject-specific utility classes */
+        .bg-subject-math { background-color: var(--subject-math); }
+        .bg-subject-science { background-color: var(--subject-science); }
+        .bg-subject-english { background-color: var(--subject-english); }
+        .bg-subject-history { background-color: var(--subject-history); }
+        .bg-subject-other { background-color: var(--subject-other); }
+
+        .text-subject-math { color: var(--subject-math); }
+        .text-subject-science { color: var(--subject-science); }
+        .text-subject-english { color: var(--subject-english); }
+        .text-subject-history { color: var(--subject-history); }
+        .text-subject-other { color: var(--subject-other); }
+
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .subject-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            transition: width 0.8s ease-in-out;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 640px) {
+            .subject-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            /* Mobile-optimized subject cards */
+            .subject-card {
+                padding: 1rem !important;
+                margin-bottom: 1rem;
+            }
+
+            .subject-card h3 {
+                font-size: 1.125rem !important;
+            }
+
+            /* Touch-friendly buttons */
+            .mobile-touch-btn {
+                min-height: 44px;
+                min-width: 44px;
+                padding: 0.75rem;
+            }
+
+            /* Mobile text sizing */
+            .mobile-text-sm {
+                font-size: 0.875rem;
+            }
+
+            .mobile-text-lg {
+                font-size: 1.125rem;
+            }
+
+            /* Mobile progress bars */
+            .mobile-progress-bar {
+                height: 8px !important;
+            }
+
+            /* Mobile expandable sections */
+            .mobile-expandable {
+                transition: max-height 0.3s ease-in-out;
+                overflow: hidden;
+            }
+
+            .mobile-expandable.collapsed {
+                max-height: 0;
+            }
+
+            .mobile-expandable.expanded {
+                max-height: 500px;
+            }
+        }
+
+        /* Tablet optimization */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .subject-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tablet-grid-2 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        /* Touch feedback */
+        .touch-feedback {
+            transition: all 0.15s ease;
+        }
+
+        .touch-feedback:active {
+            transform: scale(0.98);
+            background-color: rgba(96, 72, 235, 0.05);
+        }
+
+        /* Swipe navigation indicators */
+        .swipe-indicator {
+            display: none;
+            text-align: center;
+            color: #9CA3AF;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .swipe-indicator {
+                display: block;
+            }
+        }
     </style>
 </head>
-<body class="bg-white font-sans">
+<body class="bg-gray-50 font-sans">
     <div class="p-6">
-        <!-- Header -->
-        <div class="mb-8">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h1 class="text-2xl font-semibold text-gray-800 mb-2">lessons</h1>
-                    <p class="text-gray-600">Track and manage your financial lessons</p>
-                    <p class="text-sm text-gray-500 mt-1">Current Balance: $1,000.00</p>
+        <!-- Header - Mobile Optimized -->
+        <div class="mb-6 sm:mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between">
+                <div class="mb-4 sm:mb-0">
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Subject Analytics</h1>
+                    <p class="text-gray-600 text-sm sm:text-base">Track your learning progress across all subjects</p>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-1">Last updated: Today at 2:30 PM</p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                    <button onclick="refreshAnalytics()" class="touch-feedback flex items-center space-x-2 px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors mobile-touch-btn">
                         <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-                        <span>Refresh</span>
+                        <span class="hidden sm:inline">Refresh</span>
                     </button>
-                    <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                    <button onclick="exportData()" class="touch-feedback flex items-center space-x-2 px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors mobile-touch-btn">
                         <i data-lucide="download" class="w-4 h-4"></i>
-                        <span>Export CSV</span>
-                    </button>
-                    <button onclick="openlessonModal()" class="flex items-center space-x-2 px-4 py-2 bg-ayah-primary text-white rounded-lg hover:bg-ayah-primary-hover transition-colors">
-                        <i data-lucide="plus" class="w-4 h-4"></i>
-                        <span>Add lesson</span>
+                        <span class="hidden sm:inline">Export</span>
                     </button>
                 </div>
+            </div>
+            <!-- Mobile navigation hint -->
+            <div class="swipe-indicator mt-4">
+                <i data-lucide="chevrons-left-right" class="w-4 h-4 inline mr-1"></i>
+                Swipe subject cards to explore details
             </div>
         </div>
 
 
-
-        <!-- Search and Filter Section -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Search -->
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i data-lucide="search" class="w-4 h-4 text-gray-400"></i>
+        <!-- Subject Performance Overview -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Subject Performance Overview</h2>
+            <div class="subject-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Math Subject Card -->
+                <div class="subject-card bg-white rounded-xl border border-gray-200 p-6" onclick="showSubjectDetails('math')">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="calculator" class="w-6 h-6 text-subject-math"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Math</h3>
+                                <p class="text-sm text-gray-500">Algebra & Geometry</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-subject-math">78%</div>
+                            <div class="text-xs text-gray-500">Progress</div>
+                        </div>
                     </div>
-                    <input type="text" placeholder="Search lessons..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent">
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Problems Solved</span>
+                            <span class="font-medium">142</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Time Spent</span>
+                            <span class="font-medium">8.5 hrs</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Current Streak</span>
+                            <span class="font-medium text-green-600">5 days</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-4">
+                            <div class="progress-bar bg-subject-math h-2 rounded-full" style="width: 78%"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Type Filter -->
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i data-lucide="filter" class="w-4 h-4 text-gray-400"></i>
+                <!-- Science Subject Card -->
+                <div class="subject-card bg-white rounded-xl border border-gray-200 p-6" onclick="showSubjectDetails('science')">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="flask-conical" class="w-6 h-6 text-subject-science"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Science</h3>
+                                <p class="text-sm text-gray-500">Biology & Chemistry</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-subject-science">85%</div>
+                            <div class="text-xs text-gray-500">Progress</div>
+                        </div>
                     </div>
-                    <select class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent appearance-none">
-                        <option value="all" selected>All Types</option>
-                        <option value="grade">grade</option>
-                        <option value="assignment">assignment</option>
-                    </select>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Topics Learned</span>
+                            <span class="font-medium">23</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Experiments</span>
+                            <span class="font-medium">12</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Time Spent</span>
+                            <span class="font-medium">12.2 hrs</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-4">
+                            <div class="progress-bar bg-subject-science h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Category Filter -->
-                <div>
-                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent">
-                        <option value="all" selected>All Categories</option>
-                        <option value="housing">Housing & Rent</option>
-                        <option value="shopping">Shopping</option>
-                        <option value="insurance">Insurance</option>
-                        <option value="transportation">Transportation</option>
-                        <option value="healthcare">Healthcare</option>
-                        <option value="travel">Travel</option>
-                        <option value="entertainment">Entertainment</option>
-                        <option value="personal">Personal Care</option>
-                        <option value="subscriptions">Subscriptions</option>
-                        <option value="utilities">Utilities</option>
-                        <option value="groceries">Groceries & Food</option>
-                        <option value="education">Education</option>
-                        <option value="salary">Salary</option>
-                        <option value="business">Business grade</option>
-                        <option value="freelance">Freelance</option>
-                        <option value="sidehustle">Side Hustle</option>
-                        <option value="dividends">Dividends</option>
-                        <option value="consulting">Consulting</option>
-                        <option value="investment">Investment Returns</option>
-                        <option value="rental">Rental grade</option>
-                    </select>
+                <!-- English Subject Card -->
+                <div class="subject-card bg-white rounded-xl border border-gray-200 p-6" onclick="showSubjectDetails('english')">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="book-open" class="w-6 h-6 text-subject-english"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">English</h3>
+                                <p class="text-sm text-gray-500">Literature & Writing</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-subject-english">72%</div>
+                            <div class="text-xs text-gray-500">Progress</div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Reading Time</span>
+                            <span class="font-medium">15.3 hrs</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Writing Exercises</span>
+                            <span class="font-medium">28</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Vocabulary</span>
+                            <span class="font-medium">156 words</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-4">
+                            <div class="progress-bar bg-subject-english h-2 rounded-full" style="width: 72%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Subject Card -->
+                <div class="subject-card bg-white rounded-xl border border-gray-200 p-6" onclick="showSubjectDetails('history')">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i data-lucide="scroll" class="w-6 h-6 text-subject-history"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">History</h3>
+                                <p class="text-sm text-gray-500">World & US History</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-subject-history">91%</div>
+                            <div class="text-xs text-gray-500">Progress</div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Topics Covered</span>
+                            <span class="font-medium">18</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Time Spent</span>
+                            <span class="font-medium">9.7 hrs</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Concepts Mastered</span>
+                            <span class="font-medium">34</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-4">
+                            <div class="progress-bar bg-subject-history h-2 rounded-full" style="width: 91%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strongest Subject Highlight -->
+            <div class="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                        <i data-lucide="trophy" class="w-4 h-4 text-green-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-green-800">Your strongest subject this week: History</p>
+                        <p class="text-sm text-green-600">Great consistency and progress! Keep it up!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Needs Attention Alert -->
+            <div class="mt-4 bg-orange-50 border border-orange-200 rounded-lg p-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                        <i data-lucide="alert-circle" class="w-4 h-4 text-orange-600"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-orange-800">English needs more practice</p>
+                        <p class="text-sm text-orange-600">Try spending 10 more minutes daily to reach your weekly goal</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- lesson Table Section -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="border-b border-gray-200">
-                            <th class="text-left py-3 px-4 font-medium text-gray-700">Date</th>
-                            <th class="text-left py-3 px-4 font-medium text-gray-700">Description</th>
-                            <th class="text-left py-3 px-4 font-medium text-gray-700">Category</th>
-                            <th class="text-left py-3 px-4 font-medium text-gray-700">Type</th>
-                            <th class="text-left py-3 px-4 font-medium text-gray-700">Amount</th>
-                            <th class="text-left py-3 px-4 font-medium text-gray-700">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b border-gray-100 hover:bg-gray-50">
-                            <td class="py-3 px-4">
-                                <div class="text-sm text-gray-900">Sep 1, 2025</div>
-                            </td>
-                            <td class="py-3 px-4">
-                                <div class="text-sm text-gray-900">Initial Salary grade setup during onboarding</div>
-                            </td>
-                            <td class="py-3 px-4">
-                                <div class="text-sm text-gray-900">Salary</div>
-                            </td>
-                            <td class="py-3 px-4">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-ayah-primary-light text-ayah-primary-dark">
-                                    grade
-                                </span>
-                            </td>
-                            <td class="py-3 px-4">
-                                <div class="text-sm font-medium text-ayah-primary">+$1,000.00</div>
-                            </td>
-                            <td class="py-3 px-4">
-                                <div class="flex items-center space-x-2">
-                                    <button class="p-1 text-gray-400 hover:text-gray-600">
-                                        <i data-lucide="edit" class="w-4 h-4"></i>
-                                    </button>
-                                    <button class="p-1 text-gray-400 hover:text-red-600">
-                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                    </button>
+        <!-- Subject Comparison Visualization -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Subject Comparison</h2>
+            <div class="comparison-grid grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Time Spent Chart -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <h3 class="font-semibold text-gray-800 mb-4">Time Spent This Week</h3>
+                    <div class="h-64">
+                        <canvas id="timeSpentChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Goal Completion Chart -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <h3 class="font-semibold text-gray-800 mb-4">Goal Completion</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-subject-math rounded"></div>
+                                <span class="text-sm font-medium">Math</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-subject-math h-2 rounded-full" style="width: 78%"></div>
                                 </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                <span class="text-sm font-medium text-gray-600">78%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-subject-science rounded"></div>
+                                <span class="text-sm font-medium">Science</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-subject-science h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">85%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-subject-english rounded"></div>
+                                <span class="text-sm font-medium">English</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-subject-english h-2 rounded-full" style="width: 72%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">72%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-4 h-4 bg-subject-history rounded"></div>
+                                <span class="text-sm font-medium">History</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-subject-history h-2 rounded-full" style="width: 91%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-600">91%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Indicators -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <h3 class="font-semibold text-gray-800 mb-4">Weekly Activity</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium">Math</span>
+                            <div class="flex space-x-1">
+                                <div class="w-6 h-6 bg-subject-math rounded text-white text-xs flex items-center justify-center">5</div>
+                                <span class="text-xs text-gray-500 ml-2">days active</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium">Science</span>
+                            <div class="flex space-x-1">
+                                <div class="w-6 h-6 bg-subject-science rounded text-white text-xs flex items-center justify-center">7</div>
+                                <span class="text-xs text-gray-500 ml-2">days active</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium">English</span>
+                            <div class="flex space-x-1">
+                                <div class="w-6 h-6 bg-subject-english rounded text-white text-xs flex items-center justify-center">4</div>
+                                <span class="text-xs text-gray-500 ml-2">days active</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium">History</span>
+                            <div class="flex space-x-1">
+                                <div class="w-6 h-6 bg-subject-history rounded text-white text-xs flex items-center justify-center">6</div>
+                                <span class="text-xs text-gray-500 ml-2">days active</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Trends -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <h3 class="font-semibold text-gray-800 mb-4">Performance Trends</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium">Math</span>
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="trending-up" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-sm text-green-600">+12%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium">Science</span>
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="trending-up" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-sm text-green-600">+8%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium">English</span>
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="trending-down" class="w-4 h-4 text-red-500"></i>
+                                <span class="text-sm text-red-600">-3%</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium">History</span>
+                            <div class="flex items-center space-x-2">
+                                <i data-lucide="trending-up" class="w-4 h-4 text-green-500"></i>
+                                <span class="text-sm text-green-600">+15%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subject-Specific Insights -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-6">Insights & Recommendations</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Consistency Insight -->
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="calendar" class="w-4 h-4 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-blue-800">Consistency Insight</p>
+                            <p class="text-sm text-blue-600 mt-1">You study Math most consistently on weekdays. Great routine!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Insight -->
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="trending-up" class="w-4 h-4 text-green-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-green-800">Performance Insight</p>
+                            <p class="text-sm text-green-600 mt-1">Your Science problem-solving speed has improved 25% this week!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Goal Insight -->
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="target" class="w-4 h-4 text-purple-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-purple-800">Goal Insight</p>
+                            <p class="text-sm text-purple-600 mt-1">You're 80% complete with your History goal - great progress!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation -->
+                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="lightbulb" class="w-4 h-4 text-orange-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-orange-800">Recommendation</p>
+                            <p class="text-sm text-orange-600 mt-1">Try spending 10 more minutes on English to reach your weekly goal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Subject View Modal (Hidden by default) -->
+        <div id="subjectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white rounded-xl max-w-4xl w-full max-h-screen overflow-y-auto">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div id="modalSubjectIcon" class="w-12 h-12 rounded-lg flex items-center justify-center">
+                                    <!-- Icon will be inserted here -->
+                                </div>
+                                <div>
+                                    <h2 id="modalSubjectTitle" class="text-2xl font-bold text-gray-800"></h2>
+                                    <p id="modalSubjectSubtitle" class="text-gray-600"></p>
+                                </div>
+                            </div>
+                            <button onclick="closeSubjectModal()" class="p-2 text-gray-400 hover:text-gray-600">
+                                <i data-lucide="x" class="w-6 h-6"></i>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Weekly Activity Chart -->
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-800 mb-4">Weekly Activity</h3>
+                                <div class="h-48">
+                                    <canvas id="weeklyActivityChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Goal Progress -->
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-800 mb-4">Goal Progress</h3>
+                                <div id="goalProgressContent" class="space-y-3">
+                                    <!-- Goal progress content will be inserted here -->
+                                </div>
+                            </div>
+
+                            <!-- Achievement History -->
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-800 mb-4">Recent Achievements</h3>
+                                <div id="achievementContent" class="space-y-3">
+                                    <!-- Achievement content will be inserted here -->
+                                </div>
+                            </div>
+
+                            <!-- Time Patterns -->
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h3 class="font-semibold text-gray-800 mb-4">Study Patterns</h3>
+                                <div id="timePatternContent" class="space-y-3">
+                                    <!-- Time pattern content will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <script>
         lucide.createIcons();
 
-        // Function to open lesson modal
-        function openlessonModal() {
-            try {
-                if (window.parent && window.parent !== window) {
-                    window.parent.postMessage('openAddlessonModal', '*');
-                } else {
-                    console.log('Opening lesson modal');
-                    alert('lesson modal would open here');
+        // Subject data
+        const subjectData = {
+            math: {
+                name: 'Math',
+                subtitle: 'Algebra & Geometry',
+                icon: 'calculator',
+                color: 'var(--subject-math)',
+                bgColor: 'bg-red-100',
+                progress: 78,
+                stats: {
+                    problemsSolved: 142,
+                    timeSpent: '8.5 hrs',
+                    currentStreak: '5 days'
+                },
+                goals: [
+                    { name: 'Complete Algebra Unit', progress: 85, target: 'End of month' },
+                    { name: 'Master Quadratic Equations', progress: 60, target: 'Next week' }
+                ],
+                achievements: [
+                    { name: 'Problem Solver', description: 'Solved 100+ problems', date: '2 days ago' },
+                    { name: 'Streak Master', description: '5-day study streak', date: '1 day ago' }
+                ],
+                patterns: [
+                    'Best study time: 3-5 PM',
+                    'Average session: 25 minutes',
+                    'Most productive on: Weekdays'
+                ]
+            },
+            science: {
+                name: 'Science',
+                subtitle: 'Biology & Chemistry',
+                icon: 'flask-conical',
+                color: 'var(--subject-science)',
+                bgColor: 'bg-teal-100',
+                progress: 85,
+                stats: {
+                    topicsLearned: 23,
+                    experiments: 12,
+                    timeSpent: '12.2 hrs'
+                },
+                goals: [
+                    { name: 'Complete Chemistry Basics', progress: 90, target: 'This week' },
+                    { name: 'Biology Lab Reports', progress: 75, target: 'Next month' }
+                ],
+                achievements: [
+                    { name: 'Lab Expert', description: 'Completed 10+ experiments', date: '3 days ago' },
+                    { name: 'Theory Master', description: 'Aced all quizzes', date: '1 week ago' }
+                ],
+                patterns: [
+                    'Best study time: 10 AM - 12 PM',
+                    'Average session: 35 minutes',
+                    'Most productive on: Weekends'
+                ]
+            },
+            english: {
+                name: 'English',
+                subtitle: 'Literature & Writing',
+                icon: 'book-open',
+                color: 'var(--subject-english)',
+                bgColor: 'bg-blue-100',
+                progress: 72,
+                stats: {
+                    readingTime: '15.3 hrs',
+                    writingExercises: 28,
+                    vocabulary: '156 words'
+                },
+                goals: [
+                    { name: 'Read 3 Classic Novels', progress: 67, target: 'End of semester' },
+                    { name: 'Improve Essay Writing', progress: 80, target: 'Next month' }
+                ],
+                achievements: [
+                    { name: 'Bookworm', description: 'Read for 15+ hours', date: '1 week ago' },
+                    { name: 'Vocabulary Builder', description: 'Learned 150+ words', date: '3 days ago' }
+                ],
+                patterns: [
+                    'Best study time: 7-9 PM',
+                    'Average session: 45 minutes',
+                    'Most productive on: Evenings'
+                ]
+            },
+            history: {
+                name: 'History',
+                subtitle: 'World & US History',
+                icon: 'scroll',
+                color: 'var(--subject-history)',
+                bgColor: 'bg-green-100',
+                progress: 91,
+                stats: {
+                    topicsCovered: 18,
+                    timeSpent: '9.7 hrs',
+                    conceptsMastered: 34
+                },
+                goals: [
+                    { name: 'World War II Unit', progress: 95, target: 'This week' },
+                    { name: 'American Revolution Essay', progress: 85, target: 'Next week' }
+                ],
+                achievements: [
+                    { name: 'History Buff', description: 'Mastered 30+ concepts', date: '2 days ago' },
+                    { name: 'Timeline Master', description: 'Perfect chronology quiz', date: '4 days ago' }
+                ],
+                patterns: [
+                    'Best study time: 2-4 PM',
+                    'Average session: 30 minutes',
+                    'Most productive on: Weekdays'
+                ]
+            }
+        };
+
+        // Initialize charts
+        let timeSpentChart = null;
+        let weeklyActivityChart = null;
+
+        function initializeCharts() {
+            // Time Spent Chart
+            const timeCtx = document.getElementById('timeSpentChart').getContext('2d');
+            timeSpentChart = new Chart(timeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Math', 'Science', 'English', 'History'],
+                    datasets: [{
+                        label: 'Hours This Week',
+                        data: [8.5, 12.2, 15.3, 9.7],
+                        backgroundColor: [
+                            'var(--subject-math)',
+                            'var(--subject-science)',
+                            'var(--subject-english)',
+                            'var(--subject-history)'
+                        ],
+                        borderRadius: 8,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Hours'
+                            }
+                        }
+                    }
                 }
-            } catch (e) {
-                console.log('Error opening lesson modal:', e);
-                alert('lesson modal would open here');
-            }
-        }
-
-        // Add click handlers for buttons
-        document.addEventListener('click', function(e) {
-            if (e.target.matches('button')) {
-                const buttonText = e.target.textContent.trim();
-                console.log('lesson action clicked:', buttonText);
-
-                // Simple visual feedback
-                e.target.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    e.target.style.transform = 'scale(1)';
-                }, 150);
-            }
-        });
-
-        // Add search functionality
-        const searchInput = document.querySelector('input[placeholder="Search lessons..."]');
-        if (searchInput) {
-            searchInput.addEventListener('input', function(e) {
-                console.log('Searching for:', e.target.value);
-                // Here you would implement actual search functionality
             });
         }
 
-        // Add filter functionality
-        document.querySelectorAll('select').forEach(select => {
-            select.addEventListener('change', function(e) {
-                console.log('Filter changed:', e.target.value);
-                // Here you would implement actual filtering functionality
+        // Show subject details modal
+        function showSubjectDetails(subject) {
+            const data = subjectData[subject];
+            if (!data) return;
+
+            const modal = document.getElementById('subjectModal');
+            const icon = document.getElementById('modalSubjectIcon');
+            const title = document.getElementById('modalSubjectTitle');
+            const subtitle = document.getElementById('modalSubjectSubtitle');
+
+            // Update modal content
+            icon.className = `w-12 h-12 ${data.bgColor} rounded-lg flex items-center justify-center`;
+            icon.innerHTML = `<i data-lucide="${data.icon}" class="w-6 h-6" style="color: ${data.color}"></i>`;
+            title.textContent = data.name;
+            subtitle.textContent = data.subtitle;
+
+            // Update goal progress
+            const goalContent = document.getElementById('goalProgressContent');
+            goalContent.innerHTML = data.goals.map(goal => `
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="font-medium text-sm">${goal.name}</p>
+                        <p class="text-xs text-gray-500">${goal.target}</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-sm font-medium">${goal.progress}%</span>
+                        <div class="w-20 bg-gray-200 rounded-full h-2 mt-1">
+                            <div class="h-2 rounded-full" style="width: ${goal.progress}%; background-color: ${data.color}"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update achievements
+            const achievementContent = document.getElementById('achievementContent');
+            achievementContent.innerHTML = data.achievements.map(achievement => `
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: ${data.color}20;">
+                        <i data-lucide="award" class="w-4 h-4" style="color: ${data.color}"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium text-sm">${achievement.name}</p>
+                        <p class="text-xs text-gray-600">${achievement.description}</p>
+                        <p class="text-xs text-gray-500">${achievement.date}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Update time patterns
+            const timePatternContent = document.getElementById('timePatternContent');
+            timePatternContent.innerHTML = data.patterns.map(pattern => `
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="clock" class="w-4 h-4 text-gray-400"></i>
+                    <span class="text-sm text-gray-600">${pattern}</span>
+                </div>
+            `).join('');
+
+            // Initialize weekly activity chart for this subject
+            setTimeout(() => {
+                const weeklyCtx = document.getElementById('weeklyActivityChart').getContext('2d');
+                if (weeklyActivityChart) {
+                    weeklyActivityChart.destroy();
+                }
+                weeklyActivityChart = new Chart(weeklyCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: 'Daily Activity (minutes)',
+                            data: [45, 30, 60, 25, 40, 35, 20],
+                            borderColor: data.color,
+                            backgroundColor: data.color + '20',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Minutes'
+                                }
+                            }
+                        }
+                    }
+                });
+                lucide.createIcons();
+            }, 100);
+
+            modal.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        // Close subject details modal
+        function closeSubjectModal() {
+            document.getElementById('subjectModal').classList.add('hidden');
+        }
+
+        // Refresh analytics
+        function refreshAnalytics() {
+            // Simulate refresh with loading state
+            const button = event.target.closest('button');
+            const icon = button.querySelector('i');
+            icon.style.animation = 'spin 1s linear infinite';
+
+            setTimeout(() => {
+                icon.style.animation = '';
+                // Here you would fetch fresh data from the server
+                console.log('Analytics refreshed');
+            }, 1000);
+        }
+
+        // Export data
+        function exportData() {
+            // Simulate data export
+            console.log('Exporting subject analytics data...');
+            alert('Subject analytics data exported successfully!');
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initializeCharts, 100);
+
+            // Add click handlers for buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.matches('button') || e.target.closest('button')) {
+                    const button = e.target.closest('button') || e.target;
+
+                    // Simple visual feedback
+                    button.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        button.style.transform = 'scale(1)';
+                    }, 150);
+                }
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('subjectModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeSubjectModal();
+                }
             });
         });
+
+        // Add CSS animation for spinning
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

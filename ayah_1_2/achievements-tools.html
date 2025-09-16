@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievement Badges - Ayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Ayah Brand Colors */
+        :root {
+            --ayah-primary: #6048EB;
+            --ayah-primary-hover: #4F3BC9;
+            --ayah-primary-light: #F4F1FF;
+            --ayah-primary-lighter: #F4FDFF;
+            --ayah-primary-dark: #3A2A9E;
+            --ayah-bg-light: #F4F1FF;
+            --ayah-bg-medium: #F4FDFF;
+            --ayah-neutral-50: #FAFAFA;
+            --ayah-neutral-100: #F5F5F5;
+            --ayah-neutral-200: #E5E5E5;
+            --ayah-neutral-600: #525252;
+            --ayah-neutral-700: #404040;
+        }
+
+        /* Badge animations */
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
+        }
+
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes badgeEarn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .badge-earned {
+            animation: badgeEarn 0.6s ease-out;
+        }
+
+        .sparkle-effect {
+            animation: sparkle 2s infinite;
+        }
+
+        .confetti-particle {
+            animation: confetti 3s ease-out forwards;
+        }
+
+        /* Progress bar animations */
+        .progress-bar {
+            transition: width 0.8s ease-out;
+        }
+
+        /* Badge hover effects */
+        .badge-card:hover {
+            transform: translateY(-2px);
+            transition: transform 0.2s ease;
+        }
+
+        /* Notification styles */
+        .notification-popup {
+            animation: slideInFromTop 0.5s ease-out;
+        }
+
+        @keyframes slideInFromTop {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Badge categories styling */
+        .category-header {
+            background: linear-gradient(135deg, var(--ayah-primary) 0%, var(--ayah-primary-hover) 100%);
+        }
+
+        /* Earned vs unearned badge styling */
+        .badge-earned-state {
+            filter: none;
+            opacity: 1;
+        }
+
+        .badge-unearned-state {
+            filter: grayscale(100%);
+            opacity: 0.5;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 640px) {
+            /* Mobile badge grid */
+            .mobile-badge-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 1rem !important;
+            }
+
+            /* Touch-friendly badge cards */
+            .badge-card {
+                min-height: 44px;
+                padding: 1rem !important;
+                transition: all 0.2s ease;
+            }
+
+            .badge-card:active {
+                transform: scale(0.98);
+                background-color: rgba(96, 72, 235, 0.05);
+            }
+
+            /* Mobile text sizing */
+            .mobile-text-sm {
+                font-size: 0.875rem !important;
+            }
+
+            .mobile-text-lg {
+                font-size: 1.125rem !important;
+            }
+
+            /* Mobile progress bars */
+            .mobile-progress-bar {
+                height: 6px !important;
+            }
+
+            /* Mobile badge icons */
+            .mobile-badge-icon {
+                width: 2rem !important;
+                height: 2rem !important;
+            }
+
+            /* Mobile expandable sections */
+            .mobile-expandable {
+                transition: max-height 0.3s ease-in-out;
+                overflow: hidden;
+            }
+
+            .mobile-expandable.collapsed {
+                max-height: 0;
+            }
+
+            .mobile-expandable.expanded {
+                max-height: 300px;
+            }
+
+            /* Mobile celebration animations - reduced for performance */
+            .mobile-celebration {
+                animation-duration: 0.4s !important;
+            }
+        }
+
+        /* Tablet optimization */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .tablet-badge-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+
+        /* Touch feedback */
+        .touch-feedback {
+            transition: all 0.15s ease;
+        }
+
+        .touch-feedback:active {
+            transform: scale(0.98);
+            background-color: rgba(96, 72, 235, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Achievement Notification Popup (Hidden by default) -->
+    <div id="achievementNotification" class="fixed top-4 right-4 z-50 hidden">
+        <div class="notification-popup bg-white border-2 border-green-400 rounded-lg shadow-lg p-4 max-w-sm">
+            <div class="flex items-center space-x-3">
+                <div class="sparkle-effect">
+                    <i data-lucide="trophy" class="w-8 h-8 text-yellow-500"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-800">🏆 Achievement Unlocked!</h3>
+                    <p id="achievementText" class="text-sm text-gray-600">You earned a new badge!</p>
+                </div>
+                <button onclick="dismissNotification()" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-6">
+        <!-- Header -->
+        <div class="max-w-6xl mx-auto mb-8">
+            <div class="text-center mb-6">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">🏆 Achievement Badges</h1>
+                <p class="text-gray-600">Celebrate your learning milestones and track your progress!</p>
+            </div>
+
+            <!-- Overall Progress Summary -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-purple-600" id="totalBadges">8</div>
+                        <div class="text-sm text-gray-600">Total Badges</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-green-600" id="earnedBadges">5</div>
+                        <div class="text-sm text-gray-600">Earned</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-orange-600" id="inProgressBadges">2</div>
+                        <div class="text-sm text-gray-600">In Progress</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600" id="streakDays">7</div>
+                        <div class="text-sm text-gray-600">Day Streak</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Badge Categories -->
+        <div class="max-w-6xl mx-auto space-y-8">
+            <!-- Subject Mastery Badges -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="category-header text-white p-4">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i data-lucide="graduation-cap" class="w-6 h-6 mr-2"></i>
+                        Subject Mastery Badges
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="subjectBadges">
+                        <!-- Subject badges will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consistency Badges -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="category-header text-white p-4">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i data-lucide="calendar-check" class="w-6 h-6 mr-2"></i>
+                        Consistency Badges
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="consistencyBadges">
+                        <!-- Consistency badges will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Problem-Solving Badges -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="category-header text-white p-4">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i data-lucide="puzzle" class="w-6 h-6 mr-2"></i>
+                        Problem-Solving Badges
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="problemSolvingBadges">
+                        <!-- Problem-solving badges will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goal Achievement Badges -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div class="category-header text-white p-4">
+                    <h2 class="text-xl font-bold flex items-center">
+                        <i data-lucide="target" class="w-6 h-6 mr-2"></i>
+                        Goal Achievement Badges
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="goalBadges">
+                        <!-- Goal badges will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Badge Detail Modal -->
+    <div id="badgeModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6">
+            <div class="text-center">
+                <div id="modalBadgeIcon" class="text-6xl mb-4">🏆</div>
+                <h3 id="modalBadgeTitle" class="text-xl font-bold mb-2">Badge Title</h3>
+                <p id="modalBadgeDescription" class="text-gray-600 mb-4">Badge description</p>
+                <div id="modalBadgeProgress" class="mb-4">
+                    <!-- Progress info will be inserted here -->
+                </div>
+                <button onclick="closeBadgeModal()" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Badge data structure
+        const badgeData = {
+            subject: [
+                { id: 'math-wizard', name: 'Math Wizard', icon: '🧮', earned: true, progress: 50, total: 50, description: 'Solve 50 math problems correctly', earnedDate: '2024-01-15' },
+                { id: 'science-explorer', name: 'Science Explorer', icon: '🔬', earned: true, progress: 10, total: 10, description: 'Complete 10 science topics', earnedDate: '2024-01-10' },
+                { id: 'language-master', name: 'Language Master', icon: '📚', earned: false, progress: 15, total: 25, description: 'Master 25 language concepts', earnedDate: null },
+                { id: 'history-scholar', name: 'History Scholar', icon: '🏛️', earned: false, progress: 3, total: 15, description: 'Study 15 historical periods', earnedDate: null }
+            ],
+            consistency: [
+                { id: '7-day-learner', name: '7-Day Learner', icon: '📅', earned: true, progress: 7, total: 7, description: 'Study for 7 consecutive days', earnedDate: '2024-01-12' },
+                { id: '30-day-scholar', name: '30-Day Scholar', icon: '📆', earned: false, progress: 12, total: 30, description: 'Study for 30 consecutive days', earnedDate: null },
+                { id: 'streak-champion', name: 'Study Streak Champion', icon: '🔥', earned: false, progress: 7, total: 100, description: 'Maintain a 100-day study streak', earnedDate: null }
+            ],
+            problemSolving: [
+                { id: 'problem-solver', name: 'Problem Solver', icon: '🧩', earned: true, progress: 3, total: 3, description: 'Solve 3 challenging problems in one session', earnedDate: '2024-01-08' },
+                { id: 'quick-thinker', name: 'Quick Thinker', icon: '⚡', earned: false, progress: 8, total: 15, description: 'Solve 15 problems under time pressure', earnedDate: null },
+                { id: 'challenge-accepted', name: 'Challenge Accepted', icon: '🎯', earned: true, progress: 5, total: 5, description: 'Complete 5 extra challenging problems', earnedDate: '2024-01-14' }
+            ],
+            goals: [
+                { id: 'goal-getter', name: 'Goal Getter', icon: '🎯', earned: true, progress: 1, total: 1, description: 'Complete your first learning goal', earnedDate: '2024-01-05' },
+                { id: 'target-achiever', name: 'Target Achiever', icon: '🏹', earned: false, progress: 2, total: 5, description: 'Complete 5 learning goals', earnedDate: null },
+                { id: 'milestone-master', name: 'Milestone Master', icon: '🏔️', earned: false, progress: 0, total: 10, description: 'Reach 10 major learning milestones', earnedDate: null }
+            ]
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            renderBadges();
+            updateStats();
+        });
+
+        function renderBadges() {
+            renderBadgeCategory('subject', 'subjectBadges');
+            renderBadgeCategory('consistency', 'consistencyBadges');
+            renderBadgeCategory('problemSolving', 'problemSolvingBadges');
+            renderBadgeCategory('goals', 'goalBadges');
+        }
+
+        function renderBadgeCategory(category, containerId) {
+            const container = document.getElementById(containerId);
+            const badges = badgeData[category];
+            
+            container.innerHTML = badges.map(badge => createBadgeCard(badge)).join('');
+        }
+
+        function createBadgeCard(badge) {
+            const earnedClass = badge.earned ? 'badge-earned-state' : 'badge-unearned-state';
+            const progressPercent = (badge.progress / badge.total) * 100;
+            
+            return `
+                <div class="badge-card ${earnedClass} bg-gray-50 rounded-lg p-4 cursor-pointer hover:shadow-md transition-all duration-200" onclick="showBadgeDetail('${badge.id}')">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">${badge.icon}</div>
+                        <h3 class="font-semibold text-sm mb-2">${badge.name}</h3>
+                        ${badge.earned ? 
+                            `<div class="text-xs text-green-600 font-medium">✓ Earned</div>
+                             <div class="text-xs text-gray-500">${badge.earnedDate}</div>` :
+                            `<div class="bg-gray-200 rounded-full h-2 mb-2">
+                                <div class="progress-bar bg-purple-600 h-2 rounded-full" style="width: ${progressPercent}%"></div>
+                             </div>
+                             <div class="text-xs text-gray-600">${badge.progress}/${badge.total}</div>`
+                        }
+                    </div>
+                </div>
+            `;
+        }
+
+        function showBadgeDetail(badgeId) {
+            // Find badge in all categories
+            let badge = null;
+            for (const category in badgeData) {
+                badge = badgeData[category].find(b => b.id === badgeId);
+                if (badge) break;
+            }
+            
+            if (!badge) return;
+            
+            document.getElementById('modalBadgeIcon').textContent = badge.icon;
+            document.getElementById('modalBadgeTitle').textContent = badge.name;
+            document.getElementById('modalBadgeDescription').textContent = badge.description;
+            
+            const progressDiv = document.getElementById('modalBadgeProgress');
+            if (badge.earned) {
+                progressDiv.innerHTML = `
+                    <div class="text-green-600 font-semibold">✓ Badge Earned!</div>
+                    <div class="text-sm text-gray-500">Earned on ${badge.earnedDate}</div>
+                `;
+            } else {
+                const progressPercent = (badge.progress / badge.total) * 100;
+                progressDiv.innerHTML = `
+                    <div class="bg-gray-200 rounded-full h-3 mb-2">
+                        <div class="bg-purple-600 h-3 rounded-full transition-all duration-500" style="width: ${progressPercent}%"></div>
+                    </div>
+                    <div class="text-sm text-gray-600">${badge.progress} of ${badge.total} completed (${Math.round(progressPercent)}%)</div>
+                    <div class="text-sm text-purple-600 mt-2">Keep going! You're ${badge.total - badge.progress} away from earning this badge!</div>
+                `;
+            }
+            
+            document.getElementById('badgeModal').classList.remove('hidden');
+        }
+
+        function closeBadgeModal() {
+            document.getElementById('badgeModal').classList.add('hidden');
+        }
+
+        function updateStats() {
+            const allBadges = Object.values(badgeData).flat();
+            const earnedCount = allBadges.filter(b => b.earned).length;
+            const inProgressCount = allBadges.filter(b => !b.earned && b.progress > 0).length;
+            
+            document.getElementById('totalBadges').textContent = allBadges.length;
+            document.getElementById('earnedBadges').textContent = earnedCount;
+            document.getElementById('inProgressBadges').textContent = inProgressCount;
+        }
+
+        function showAchievementNotification(badgeName) {
+            document.getElementById('achievementText').textContent = `You earned the ${badgeName} badge!`;
+            document.getElementById('achievementNotification').classList.remove('hidden');
+            
+            // Auto-dismiss after 5 seconds
+            setTimeout(() => {
+                dismissNotification();
+            }, 5000);
+        }
+
+        function dismissNotification() {
+            document.getElementById('achievementNotification').classList.add('hidden');
+        }
+
+        // Simulate badge earning (for demonstration)
+        function simulateBadgeEarning() {
+            // This would be called when actual learning activities trigger badge earning
+            showAchievementNotification('Quick Thinker');
+        }
+
+        // Make functions globally available
+        window.showBadgeDetail = showBadgeDetail;
+        window.closeBadgeModal = closeBadgeModal;
+        window.dismissNotification = dismissNotification;
+        window.simulateBadgeEarning = simulateBadgeEarning;
+    </script>
+</body>
+</html>

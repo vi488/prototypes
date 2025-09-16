@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Points - Ayah Learning Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Custom Ayah Brand Colors */
+        :root {
+            --ayah-primary: #6048EB;
+            --ayah-primary-hover: #4F3BC9;
+            --ayah-primary-light: #F4F1FF;
+            --ayah-primary-lighter: #F4FDFF;
+            --ayah-primary-dark: #3A2A9E;
+            --ayah-bg-light: #F4F1FF;
+            --ayah-bg-medium: #F4FDFF;
+            --ayah-bg-dark: #6048EB;
+        }
+
+        body {
+            font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .bg-ayah-primary-lighter { background-color: var(--ayah-primary-lighter); }
+        .bg-ayah-primary-dark { background-color: var(--ayah-primary-dark); }
+        .bg-ayah-bg-light { background-color: var(--ayah-bg-light); }
+        .bg-ayah-bg-medium { background-color: var(--ayah-bg-medium); }
+
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
+
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .border-ayah-primary-light { border-color: var(--ayah-primary-light); }
+
+        /* Point level progress bar animation */
+        .progress-bar {
+            transition: width 0.8s ease-in-out;
+        }
+
+        /* Point earning animation */
+        @keyframes pointEarn {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .point-earn-animation {
+            animation: pointEarn 0.6s ease-in-out;
+        }
+
+        /* Level badge glow effect */
+        .level-badge {
+            box-shadow: 0 0 20px rgba(96, 72, 235, 0.3);
+        }
+
+        /* Custom scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: var(--ayah-primary-light);
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--ayah-primary);
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: var(--ayah-primary-hover);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="min-h-screen bg-gradient-to-br from-white to-ayah-bg-light">
+        <!-- Header Section -->
+        <div class="bg-white border-b border-gray-200 sticky top-0 z-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-ayah-primary rounded-full flex items-center justify-center level-badge">
+                            <i data-lucide="star" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-ayah-primary-dark">My Points</h1>
+                            <p class="text-gray-600">Track your learning achievements and progress</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl font-bold text-ayah-primary">⭐ 1,250</div>
+                        <div class="text-sm text-gray-500">Total Points</div>
+                        <div class="mt-2 p-2 bg-ayah-bg-light rounded-lg">
+                            <div class="text-lg font-semibold text-ayah-primary">= 12.5 ASKIA Tokens</div>
+                            <div class="text-xs text-gray-600">Ready for v2.1 conversion</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Point Summary Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Total Points Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total Points</p>
+                            <p class="text-2xl font-bold text-ayah-primary">1,250</p>
+                            <div class="mt-2 p-2 bg-gradient-to-r from-ayah-bg-light to-ayah-bg-medium rounded-lg">
+                                <p class="text-sm font-semibold text-ayah-primary">= 12.5 ASKIA Tokens</p>
+                                <p class="text-xs text-gray-600">Conversion ready in v2.1</p>
+                            </div>
+                        </div>
+                        <div class="w-12 h-12 bg-ayah-bg-light rounded-lg flex items-center justify-center">
+                            <i data-lucide="star" class="w-6 h-6 text-ayah-primary"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Points Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Today's Points</p>
+                            <p class="text-2xl font-bold text-green-600">+85</p>
+                            <p class="text-sm text-green-600 mt-1">+0.85 ASKIA Tokens</p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-6 h-6 text-green-600"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">🌟 Great progress today!</p>
+                    <div class="mt-2 text-xs text-gray-600">
+                        Daily cap: 415 points remaining
+                    </div>
+                </div>
+
+                <!-- Current Level Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Current Level</p>
+                            <p class="text-lg font-bold text-ayah-primary">Level 3</p>
+                            <p class="text-sm text-gray-500">Dedicated Learner</p>
+                        </div>
+                        <div class="w-12 h-12 bg-ayah-bg-light rounded-lg flex items-center justify-center level-badge">
+                            <span class="text-lg font-bold text-ayah-primary">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Level Progress Card -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Next Level</p>
+                            <p class="text-lg font-bold text-orange-600">Level 4</p>
+                        </div>
+                        <div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center">
+                            <i data-lucide="target" class="w-6 h-6 text-orange-600"></i>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                        <div class="bg-orange-600 h-2 rounded-full progress-bar" style="width: 42%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500">1,750 points needed</p>
+                </div>
+            </div>
+
+            <!-- Token Economics Preparation Section -->
+            <div class="bg-gradient-to-r from-ayah-bg-light to-ayah-bg-medium rounded-xl shadow-sm border border-ayah-primary p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-ayah-primary-dark">🚀 ASKIA Token Economics</h2>
+                        <p class="text-gray-600">Your points are being prepared for blockchain conversion</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                            <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                            Conversion Ready
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Conversion Preview -->
+                    <div class="bg-white rounded-lg p-4 shadow-sm">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="coins" class="w-5 h-5 text-ayah-primary"></i>
+                            <h3 class="font-semibold text-gray-800">Token Preview</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Current Points:</span>
+                                <span class="text-sm font-medium">1,250</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Conversion Rate:</span>
+                                <span class="text-sm font-medium">100:1</span>
+                            </div>
+                            <div class="border-t pt-2">
+                                <div class="flex justify-between">
+                                    <span class="text-sm font-semibold text-ayah-primary">Future ASKIA Tokens:</span>
+                                    <span class="text-sm font-bold text-ayah-primary">12.5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Eligibility Status -->
+                    <div class="bg-white rounded-lg p-4 shadow-sm">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-green-600"></i>
+                            <h3 class="font-semibold text-gray-800">Eligibility</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Platform Usage:</span>
+                                <div class="flex items-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-green-600 mr-1"></i>
+                                    <span class="text-sm text-green-600">45 days</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-600">Minimum Points:</span>
+                                <div class="flex items-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-green-600 mr-1"></i>
+                                    <span class="text-sm text-green-600">1,250/1,000</span>
+                                </div>
+                            </div>
+                            <div class="border-t pt-2">
+                                <div class="inline-flex items-center px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-medium">
+                                    ✅ Conversion Eligible
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="bg-white rounded-lg p-4 shadow-sm">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="calendar" class="w-5 h-5 text-blue-600"></i>
+                            <h3 class="font-semibold text-gray-800">Timeline</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-sm text-gray-600">Expected Launch:</div>
+                            <div class="text-sm font-semibold text-blue-600">Q2 2025 (v2.1)</div>
+                            <div class="text-sm text-gray-600 mt-2">Conversion Window:</div>
+                            <div class="text-sm font-medium">3 weeks after launch</div>
+                            <div class="border-t pt-2">
+                                <div class="text-xs text-gray-500">
+                                    Automatic conversion with your consent
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level Progress Section -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+                <h2 class="text-xl font-bold text-ayah-primary-dark mb-6">Learning Level Progress</h2>
+                <div class="space-y-4">
+                    <!-- Level 1 -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                            <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-medium text-gray-700">Level 1 - New Learner</span>
+                                <span class="text-sm text-gray-500">0-499 points</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-400 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level 2 -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                            <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-medium text-gray-700">Level 2 - Active Learner</span>
+                                <span class="text-sm text-gray-500">500-1,499 points</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-400 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level 3 (Current) -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-ayah-primary rounded-full flex items-center justify-center level-badge">
+                            <span class="text-sm font-bold text-white">3</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-medium text-ayah-primary">Level 3 - Dedicated Learner (Current)</span>
+                                <span class="text-sm text-ayah-primary">1,500-2,999 points</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-ayah-primary h-2 rounded-full progress-bar" style="width: 42%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">You're 1,750 points away from Level 4!</p>
+                        </div>
+                    </div>
+
+                    <!-- Level 4 -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                            <span class="text-sm font-bold text-gray-400">4</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-medium text-gray-500">Level 4 - Advanced Learner</span>
+                                <span class="text-sm text-gray-400">3,000-4,999 points</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-300 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level 5 -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                            <span class="text-sm font-bold text-gray-400">5</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-medium text-gray-500">Level 5 - Learning Champion</span>
+                                <span class="text-sm text-gray-400">5,000+ points</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-300 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout for Point History and Activity Breakdown -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Recent Point Activity -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h2 class="text-xl font-bold text-ayah-primary-dark mb-6">Recent Point Activity</h2>
+                    <div class="space-y-4 custom-scrollbar max-h-96 overflow-y-auto">
+                        <!-- Recent activity items -->
+                        <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Math Problem Solved</p>
+                                    <p class="text-sm text-gray-500">2 minutes ago</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-green-600">+10</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-4 h-4 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Study Session Completed</p>
+                                    <p class="text-sm text-gray-500">15 minutes focused study</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-blue-600">+75</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="target" class="w-4 h-4 text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Goal Milestone Reached</p>
+                                    <p class="text-sm text-gray-500">Weekly math goal completed</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-purple-600">+50</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="flame" class="w-4 h-4 text-orange-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Daily Streak Bonus</p>
+                                    <p class="text-sm text-gray-500">7-day learning streak</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-orange-600">+25</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="award" class="w-4 h-4 text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Achievement Badge Earned</p>
+                                    <p class="text-sm text-gray-500">"Problem Solver" badge</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-yellow-600">+100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Point Earning Breakdown -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-ayah-primary-dark">Point Earning Breakdown</h2>
+                        <div class="inline-flex items-center px-3 py-1 bg-ayah-bg-light text-ayah-primary rounded-full text-sm font-medium">
+                            <i data-lucide="zap" class="w-4 h-4 mr-1"></i>
+                            ASKIA Formula
+                        </div>
+                    </div>
+
+                    <!-- Formula Explanation -->
+                    <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-2">📊 Token Economics Formula</h3>
+                        <div class="text-sm text-gray-600 space-y-1">
+                            <p><strong>Base Points</strong> = Session Duration × Subject Difficulty × Engagement Score</p>
+                            <p><strong>Subject Multipliers:</strong> Math(1.2), Science(1.1), Languages(1.0), Arts(0.9)</p>
+                            <p><strong>Bonuses:</strong> Streak(15%), Achievement(1.2x-3.0x), Accuracy(50%)</p>
+                            <p><strong>Daily Cap:</strong> 500 points maximum per day</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <!-- Problem Solving -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Math Problem Solving</p>
+                                    <p class="text-sm text-gray-500">Base × 1.2 (Math) × Accuracy Bonus</p>
+                                    <p class="text-xs text-ayah-primary">= 4.2 ASKIA Tokens</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-green-600">420 pts</p>
+                                <p class="text-xs text-gray-500">42 problems</p>
+                            </div>
+                        </div>
+
+                        <!-- Study Time -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-5 h-5 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Focused Study Sessions</p>
+                                    <p class="text-sm text-gray-500">Duration × Subject × Engagement</p>
+                                    <p class="text-xs text-ayah-primary">= 3.75 ASKIA Tokens</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-blue-600">375 pts</p>
+                                <p class="text-xs text-gray-500">75 minutes</p>
+                            </div>
+                        </div>
+
+                        <!-- Goal Progress -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="target" class="w-5 h-5 text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Goal Milestones</p>
+                                    <p class="text-sm text-gray-500">50 points per milestone</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-purple-600">300 pts</p>
+                                <p class="text-xs text-gray-500">6 milestones</p>
+                            </div>
+                        </div>
+
+                        <!-- Daily Streaks -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="flame" class="w-5 h-5 text-orange-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Streak Bonus</p>
+                                    <p class="text-sm text-gray-500">Base × (Days/7) × 0.15</p>
+                                    <p class="text-xs text-ayah-primary">= 1.75 ASKIA Tokens</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-orange-600">175 pts</p>
+                                <p class="text-xs text-gray-500">7 days</p>
+                            </div>
+                        </div>
+
+                        <!-- Badge Earning -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="award" class="w-5 h-5 text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Achievement Bonus</p>
+                                    <p class="text-sm text-gray-500">Base × Rarity (1.2x-3.0x)</p>
+                                    <p class="text-xs text-ayah-primary">= 2.0 ASKIA Tokens</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-yellow-600">200 pts</p>
+                                <p class="text-xs text-gray-500">2 badges</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Economic Balance & Stability Section -->
+            <div class="mt-8 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h2 class="text-xl font-bold text-ayah-primary-dark mb-6">🏦 Economic Health & Balance</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Daily Earning Status -->
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i data-lucide="trending-up" class="w-5 h-5 text-green-600"></i>
+                            <h3 class="font-semibold text-green-800">Daily Earnings</h3>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-green-700">Today:</span>
+                                <span class="font-medium text-green-800">85/500</span>
+                            </div>
+                            <div class="w-full bg-green-200 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 17%"></div>
+                            </div>
+                            <p class="text-xs text-green-600">415 points remaining</p>
+                        </div>
+                    </div>
+
+                    <!-- Economic Multiplier -->
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i data-lucide="zap" class="w-5 h-5 text-blue-600"></i>
+                            <h3 class="font-semibold text-blue-800">Point Multiplier</h3>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-2xl font-bold text-blue-800">1.15x</div>
+                            <p class="text-xs text-blue-600">Adjusted for balance</p>
+                            <div class="inline-flex items-center px-2 py-1 bg-blue-200 text-blue-800 rounded text-xs">
+                                Stable
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Health -->
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i data-lucide="activity" class="w-5 h-5 text-purple-600"></i>
+                            <h3 class="font-semibold text-purple-800">System Health</h3>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-sm text-purple-700">Optimal</span>
+                            </div>
+                            <p class="text-xs text-purple-600">Point distribution balanced</p>
+                            <p class="text-xs text-purple-600">Inflation: 0.2%</p>
+                        </div>
+                    </div>
+
+                    <!-- Blockchain Readiness -->
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i data-lucide="link" class="w-5 h-5 text-orange-600"></i>
+                            <h3 class="font-semibold text-orange-800">Blockchain Ready</h3>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-sm text-orange-700">Connected</span>
+                            </div>
+                            <p class="text-xs text-orange-600">All transactions logged</p>
+                            <p class="text-xs text-orange-600">Crypto integrity ready</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Motivation Section -->
+            <div class="mt-8 bg-gradient-to-r from-ayah-primary to-ayah-primary-dark rounded-xl p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold mb-2">🚀 Token Economics Ready!</h2>
+                        <p class="text-ayah-primary-lighter mb-4">Your learning is building real value for the future.</p>
+                        <div class="space-y-2">
+                            <p class="text-sm">💰 <strong>Token Value:</strong> Your 1,250 points = 12.5 future ASKIA tokens</p>
+                            <p class="text-sm">⏰ <strong>Timeline:</strong> Tokens expected within 3 weeks of v2.1 launch</p>
+                            <p class="text-sm">🔥 <strong>Streak:</strong> Keep your 7-day streak for bonus multipliers!</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="coins" class="w-10 h-10 text-white"></i>
+                        </div>
+                        <p class="text-sm text-ayah-primary-lighter">This week: +450 points</p>
+                        <p class="text-xs text-ayah-primary-lighter">= +4.5 ASKIA tokens</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Simulate point earning animation
+        function simulatePointEarn() {
+            const pointCards = document.querySelectorAll('.point-earn-animation');
+            pointCards.forEach(card => {
+                card.classList.add('point-earn-animation');
+                setTimeout(() => {
+                    card.classList.remove('point-earn-animation');
+                }, 600);
+            });
+        }
+
+        // Simulate real-time point updates (for demo purposes)
+        setInterval(() => {
+            // This would be connected to real learning activity data in production
+            console.log('Checking for new point activities...');
+        }, 30000);
+
+        // Add click handlers for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any interactive functionality here
+            console.log('Points dashboard loaded successfully');
+        });
+    </script>
+</body>
+</html>
