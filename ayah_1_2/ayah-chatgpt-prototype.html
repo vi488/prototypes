@@ -233,6 +233,16 @@
             transition: opacity 0.3s ease-in-out;
         }
 
+        /* Mobile Analytics Quick View - Hidden by default on all screen sizes */
+        .mobile-analytics-quick-view {
+            display: none !important;
+        }
+
+        /* Hide mobile analytics toggle button on desktop by default */
+        .mobile-analytics-toggle {
+            display: none !important;
+        }
+
         /* Mobile input positioning - ChatGPT style */
         @media (max-width: 767px) {
             /* Make initial state input stick to bottom on mobile */
@@ -310,7 +320,7 @@
                 border-radius: 12px;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
                 padding: 0.75rem;
-                display: none;
+                display: none !important; /* Force hide by default on all screen sizes */
                 max-width: 200px;
             }
 
@@ -324,7 +334,7 @@
                 border-radius: 50%;
                 width: 48px;
                 height: 48px;
-                display: flex;
+                display: flex !important; /* Override desktop hidden state */
                 align-items: center;
                 justify-content: center;
                 box-shadow: 0 4px 12px rgba(96, 72, 235, 0.3);
@@ -1867,15 +1877,15 @@ What would you like to work on first? I'm here to help you reach your learning g
                 const isVisible = quickView.style.display === 'block';
 
                 if (isVisible) {
-                    quickView.style.display = 'none';
+                    quickView.style.setProperty('display', 'none', 'important');
                     toggleBtn.classList.remove('active');
                 } else {
-                    quickView.style.display = 'block';
+                    quickView.style.setProperty('display', 'block', 'important');
                     toggleBtn.classList.add('active');
 
                     // Auto-hide after 5 seconds
                     setTimeout(() => {
-                        quickView.style.display = 'none';
+                        quickView.style.setProperty('display', 'none', 'important');
                         toggleBtn.classList.remove('active');
                     }, 5000);
                 }

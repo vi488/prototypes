@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subject Analytics - Ayah</title>
+    <title>My Subject Progress - Ayah</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -204,12 +204,12 @@
         <div class="mb-6 sm:mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between">
                 <div class="mb-4 sm:mb-0">
-                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Subject Analytics</h1>
-                    <p class="text-gray-600 text-sm sm:text-base">Track your learning progress across all subjects</p>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">My Subject Progress</h1>
+                    <p class="text-gray-600 text-sm sm:text-base">See how you're doing in all your subjects</p>
                     <p class="text-xs sm:text-sm text-gray-500 mt-1">Last updated: Today at 2:30 PM</p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <button onclick="refreshAnalytics()" class="touch-feedback flex items-center space-x-2 px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors mobile-touch-btn">
+                    <button onclick="refreshProgress()" class="touch-feedback flex items-center space-x-2 px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors mobile-touch-btn">
                         <i data-lucide="refresh-cw" class="w-4 h-4"></i>
                         <span class="hidden sm:inline">Refresh</span>
                     </button>
@@ -922,8 +922,8 @@
             document.getElementById('subjectModal').classList.add('hidden');
         }
 
-        // Refresh analytics
-        function refreshAnalytics() {
+        // Refresh progress
+        function refreshProgress() {
             // Simulate refresh with loading state
             const button = event.target.closest('button');
             const icon = button.querySelector('i');
@@ -932,15 +932,15 @@
             setTimeout(() => {
                 icon.style.animation = '';
                 // Here you would fetch fresh data from the server
-                console.log('Analytics refreshed');
+                console.log('Progress refreshed');
             }, 1000);
         }
 
         // Export data
         function exportData() {
             // Simulate data export
-            console.log('Exporting subject analytics data...');
-            alert('Subject analytics data exported successfully!');
+            console.log('Exporting subject progress data...');
+            alert('Subject progress data exported successfully!');
         }
 
         // Initialize everything when page loads
