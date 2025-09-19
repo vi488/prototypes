@@ -9,12 +9,19 @@
     <style>
         /* Ayah Brand Colors - Updated to match main app */
         :root {
-            --ayah-primary: #6048EB;           /* Main brand blue */
-            --ayah-primary-hover: #4F3BC9;     /* Darker blue for hover */
-            --ayah-primary-light: #F4F1FF;     /* Light blue for accents */
-            --ayah-primary-lighter: #F4FDFF;   /* Very light blue */
-            --ayah-primary-dark: #043178;      /* Dark blue for emphasis */
+            --ayah-primary: #6048EB;           /* Main brand purple */
+            --ayah-primary-hover: #4F3BC9;     /* Darker purple for hover */
+            --ayah-primary-light: #F4F1FF;     /* Light purple for accents */
+            --ayah-primary-lighter: #F4FDFF;   /* Very light blue-purple */
+            --ayah-primary-dark: #3A2A9E;      /* Dark purple for emphasis */
         }
+
+        /* ChatGPT-like font family */
+        body {
+            font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* Enhanced Brand Color Classes */
         .bg-ayah-primary { background-color: var(--ayah-primary); }
         .text-ayah-primary { color: var(--ayah-primary); }
         .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
@@ -22,6 +29,78 @@
         .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
         .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
         .hover\:bg-ayah-primary-light:hover { background-color: var(--ayah-primary-lighter); }
+
+        /* ChatGPT-style Form Input Styling */
+        .chatgpt-input {
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 20px;
+            transition: all 0.2s ease;
+            background-color: white;
+        }
+
+        .chatgpt-input:focus {
+            outline: none;
+            border-color: var(--ayah-primary);
+            box-shadow: 0 0 0 3px rgba(96, 72, 235, 0.1);
+        }
+
+        .chatgpt-input:disabled {
+            background-color: #f9fafb;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+
+        /* ChatGPT-style Textarea */
+        .chatgpt-textarea {
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 14px;
+            line-height: 20px;
+            transition: all 0.2s ease;
+            background-color: white;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .chatgpt-textarea:focus {
+            outline: none;
+            border-color: var(--ayah-primary);
+            box-shadow: 0 0 0 3px rgba(96, 72, 235, 0.1);
+        }
+
+        /* ChatGPT-style Button */
+        .chatgpt-button {
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .chatgpt-button-primary {
+            background-color: var(--ayah-primary);
+            color: white;
+        }
+
+        .chatgpt-button-primary:hover {
+            background-color: var(--ayah-primary-hover);
+        }
+
+        .chatgpt-button-secondary {
+            background-color: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .chatgpt-button-secondary:hover {
+            background-color: #e5e7eb;
+        }
         
         .modal-enter {
             animation: modalEnter 0.3s ease-out;
@@ -138,7 +217,7 @@
                                     DG
                                 </div>
                                 <div>
-                                    <button class="bg-ayah-primary text-white px-4 py-2 rounded-lg hover:bg-ayah-primary-hover transition-colors text-sm">
+                                    <button class="chatgpt-button chatgpt-button-primary text-sm">
                                         📷 Change Profile Picture
                                     </button>
                                 </div>
@@ -149,20 +228,20 @@
                             </div>
                         </div>
 
-                        <!-- Basic Info Form -->
+                        <!-- Basic Info Form - ChatGPT Style -->
                         <div class="space-y-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                                <input type="text" value="Dangvi Dalat" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent">
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Full Name</label>
+                                <input type="text" value="Dangvi Dalat" class="w-full chatgpt-input">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                                <input type="email" value="vi@emergefy.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50" readonly disabled>
-                                <p class="text-xs text-gray-500 mt-1">Email cannot be changed</p>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Email</label>
+                                <input type="email" value="vi@emergefy.com" class="w-full chatgpt-input" readonly disabled>
+                                <p class="text-xs text-gray-500 mt-2">Email cannot be changed</p>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Bio</label>
-                                <textarea placeholder="Tell us about yourself..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-transparent" rows="3"></textarea>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Bio</label>
+                                <textarea placeholder="Tell us about yourself..." class="w-full chatgpt-textarea" rows="3"></textarea>
                             </div>
                         </div>
 
@@ -288,13 +367,13 @@
                 </div>
             </div>
 
-            <!-- Modal Footer -->
-            <div class="flex flex-col sm:flex-row items-center justify-between p-4 md:p-6 border-t border-gray-200 bg-gray-50 space-y-3 sm:space-y-0">
-                <div class="flex items-center space-x-3 order-1 sm:order-2 w-full sm:w-auto">
-                    <button onclick="closeModal()" class="flex-1 sm:flex-none px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors text-center">
+            <!-- Modal Footer - ChatGPT Style -->
+            <div class="flex flex-col sm:flex-row items-center justify-end p-4 md:p-6 border-t border-gray-200 bg-white space-y-3 sm:space-y-0">
+                <div class="flex items-center space-x-3 w-full sm:w-auto">
+                    <button onclick="closeModal()" class="flex-1 sm:flex-none chatgpt-button chatgpt-button-secondary">
                         Cancel
                     </button>
-                    <button class="flex-1 sm:flex-none bg-ayah-primary text-white px-6 py-2 rounded-lg hover:bg-ayah-primary-hover transition-colors text-center">
+                    <button class="flex-1 sm:flex-none chatgpt-button chatgpt-button-primary">
                         Save Changes
                     </button>
                 </div>

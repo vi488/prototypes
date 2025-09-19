@@ -34,9 +34,33 @@
             --ayah-btn-secondary-hover: #3A2A9E; /* Secondary button hover */
         }
 
-        /* ChatGPT-like font family */
-        body {
+        /* ChatGPT-like font family - Override Tailwind defaults */
+        body, .font-sans {
+            font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+        }
+
+        /* Ensure all text elements use the ChatGPT font */
+        * {
             font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* ChatGPT Typography Standards */
+        .chatgpt-text-sm {
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+
+        .chatgpt-text-base {
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 400;
+        }
+
+        .chatgpt-text-lg {
+            font-size: 18px;
+            line-height: 28px;
+            font-weight: 600;
         }
 
         /* Comprehensive Purple Palette Utility Classes */
@@ -87,7 +111,7 @@
         .btn-ayah-secondary:hover {
             background-color: var(--ayah-btn-secondary-hover);
         }
-        
+
         /* Sidebar animations */
         .sidebar-transition {
             transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
@@ -145,7 +169,7 @@
         .main-content-transition {
             transition: margin-left 0.3s ease-in-out;
         }
-        
+
         /* Message animations */
         @keyframes fadeInUp {
             from {
@@ -157,29 +181,29 @@
                 transform: translateY(0);
             }
         }
-        
+
         .message-animate {
             animation: fadeInUp 0.3s ease-out;
         }
-        
+
         /* Typing indicator */
         @keyframes bounce {
             0%, 60%, 100% { transform: translateY(0); }
             30% { transform: translateY(-10px); }
         }
-        
+
         .typing-dot {
             animation: bounce 1.4s infinite;
         }
-        
+
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        
+
         /* Custom scrollbar */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
-        
+
         .custom-scrollbar::-webkit-scrollbar-track {
             background: var(--ayah-primary-light);
             border-radius: 3px;
@@ -193,13 +217,13 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: var(--ayah-primary-hover);
         }
-        
+
         /* Mobile bottom sheet */
         .bottom-sheet {
             transform: translateY(100%);
             transition: transform 0.3s ease-in-out;
         }
-        
+
         .bottom-sheet.open {
             transform: translateY(0);
         }
@@ -353,6 +377,7 @@
 
 
 
+
             <!-- Chats Group -->
             <div class="px-4 pb-4">
                 <h3 class="text-sm font-medium text-gray-700 mb-3">Chats</h3>
@@ -375,7 +400,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Sidebar Footer -->
             <div class="absolute bottom-0 left-0 right-0 p-4">
                 <div class="relative">
@@ -406,32 +431,20 @@
                                 </div>
                             </div>
 
-                            <!-- Token Balance -->
-                            <div class="px-3 py-2 border-b border-gray-100">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center space-x-2">
-                                        <i data-lucide="coins" class="w-4 h-4 text-ayah-primary"></i>
-                                        <span class="text-sm text-gray-700">Token Balance</span>
-                                    </div>
-                                    <span class="text-sm font-medium text-ayah-primary">50</span>
-                                </div>
-                            </div>
+
 
                             <!-- Menu Items -->
                             <div class="py-1">
                                 <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700">
                                     <i data-lucide="settings" class="w-4 h-4"></i>
-                                    <span class="text-sm">Profile Settings</span>
+                                    <span class="text-sm">Settings</span>
                                 </button>
-                                <button onclick="openModal('wallet-tokens')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700">
-                                    <i data-lucide="wallet" class="w-4 h-4"></i>
-                                    <span class="text-sm">Wallet & Tokens</span>
-                                </button>
+
                             </div>
 
                             <button onclick="openModal('subscription')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700">
                                 <i data-lucide="credit-card" class="w-4 h-4"></i>
-                                <span class="text-sm">Manage Subscription</span>
+                                <span class="text-sm">Subscription</span>
                             </button>
 
                             <div class="border-t border-gray-100"></div>
@@ -475,7 +488,7 @@
 
             </div>
         </div>
-        
+
         <!-- Sidebar Overlay for Mobile -->
         <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
 
@@ -506,7 +519,7 @@
                                 <div class="w-12 h-12 flex items-center justify-center mx-auto mb-4">
                                     <img src="ayah_logo.svg" alt="Ayah Logo" class="w-9 h-12">
                                 </div>
-                                <h1 class="text-3xl font-semibold text-ayah-primary-dark mb-8">What can I help with?</h1>
+                                <h1 class="text-3xl font-semibold text-ayah-primary-dark mb-8">How can I help you learn?</h1>
                             </div>
 
 
@@ -516,7 +529,7 @@
                                 <div class="relative">
                                     <textarea
                                         id="initialMessageInput"
-                                        placeholder="Message Ayah"
+                                        placeholder="Ask me anything about your studies..."
                                         class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                                         rows="1"
                                         style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -535,7 +548,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3 text-xs text-gray-500 text-center">
-                                    Ayah can make mistakes. Check important info.
+                                    Ayah can make mistakes. Always verify educational content.
                                 </div>
                             </div>
 
@@ -561,7 +574,7 @@
                     <div class="relative">
                         <textarea
                             id="messageInput"
-                            placeholder="Message Ayah"
+                            placeholder="Ask me anything about your studies..."
                             class="w-full px-4 py-4 pr-16 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                             rows="1"
                             style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -580,7 +593,7 @@
                         </div>
                     </div>
                     <div class="mt-3 text-xs text-gray-500 text-center hidden md:block">
-                        Ayah can make mistakes. Check important info.
+                        Ayah can make mistakes. Always verify educational content.
                     </div>
                 </div>
             </div>
@@ -594,7 +607,7 @@
             <div class="relative">
                 <textarea
                     id="mobileInitialMessageInput"
-                    placeholder="Message Ayah"
+                    placeholder="Ask me anything about your studies..."
                     class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                     rows="1"
                     style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -613,7 +626,7 @@
                 </div>
             </div>
             <div class="mt-3 text-xs text-gray-500 text-center">
-                Ayah can make mistakes. Check important info.
+                Ayah can make mistakes. Always verify educational content.
             </div>
         </div>
     </div>
@@ -624,7 +637,7 @@
             <div class="relative">
                 <textarea
                     id="mobileMessageInput"
-                    placeholder="Message Ayah"
+                    placeholder="Ask me anything about your studies..."
                     class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                     rows="1"
                     style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -643,7 +656,7 @@
                 </div>
             </div>
             <div class="mt-3 text-xs text-gray-500 text-center">
-                Ayah can make mistakes. Check important info.
+                Ayah can make mistakes. Always verify educational content.
             </div>
         </div>
     </div>
@@ -1522,6 +1535,27 @@
             modalContainer.classList.add('hidden');
             modalFrame.src = '';
             document.body.classList.remove('overflow-hidden');
+        }
+        // Educational Tools functionality
+        function openEducationalTool(toolType) {
+            let toolUrl = '';
+            switch(toolType) {
+                case 'subjects':
+                    toolUrl = 'subjects-tools.html';
+                    break;
+                case 'goals':
+                    toolUrl = 'goals-tools.html';
+                    break;
+                case 'progress':
+                    toolUrl = 'progress-tools.html';
+                    break;
+                default:
+                    console.error('Unknown educational tool type:', toolType);
+                    return;
+            }
+
+            // Open in new tab/window for better user experience
+            window.open(toolUrl, '_blank');
         }
 
         // Listen for messages from iframes
