@@ -23,17 +23,23 @@
             --ayah-bg-medium: #F4FDFF;         /* Medium light background */
             --ayah-bg-dark: #6048EB;           /* Medium background - brand primary */
 
-            /* Icon Blues - Harmonious variations */
-            --ayah-icon-primary: #6048EB;      /* Primary icons */
-            --ayah-icon-secondary: #5B8CFF;    /* Secondary icons */
-            --ayah-icon-tertiary: #7DA3FF;     /* Tertiary icons */
-            --ayah-icon-light: #A0BAFF;        /* Light icons */
+            /* Icon Colors - Harmonious variations using brand palette */
+            --ayah-icon-primary: #6048EB;      /* Primary icons - main brand */
+            --ayah-icon-secondary: #7B5EF0;    /* Secondary icons - lighter brand */
+            --ayah-icon-tertiary: #9B8AF5;     /* Tertiary icons - even lighter brand */
+            --ayah-icon-light: #B8ACFA;        /* Light icons - very light brand */
 
-            /* Button Blues - Consistent system */
+            /* Button Colors - Consistent system using brand palette */
             --ayah-btn-primary: #6048EB;       /* Primary buttons */
             --ayah-btn-primary-hover: #4F3BC9; /* Primary button hover */
-            --ayah-btn-secondary: #5B8CFF;     /* Secondary buttons */
+            --ayah-btn-secondary: #7B5EF0;     /* Secondary buttons */
             --ayah-btn-secondary-hover: #043178; /* Secondary button hover */
+        }
+
+        body {
+            font-family: "Söhne", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+            font-variation-settings: normal;
         }
 
         /* Utility Classes */
@@ -163,6 +169,8 @@
             background-color: rgba(96, 72, 235, 0.1);
         }
 
+        /* Background illustration blur effect - now applied directly to images */
+
         /* Loading states optimized for mobile */
         .mobile-loading {
             min-height: 200px;
@@ -185,110 +193,133 @@
     </style>
 </head>
 <body class="bg-white font-sans">
-    <div class="p-6">
+    <div class="px-6 py-8">
         <!-- Header - Mobile Optimized -->
-        <div class="mb-6 sm:mb-8">
+        <div class="mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between">
                 <div class="mb-4 sm:mb-0">
-                    <h1 class="text-2xl sm:text-3xl font-semibold text-gray-800 mb-2">Learning Progress</h1>
-                    <p class="text-gray-600 text-sm sm:text-base">Track your academic achievements and goal progress</p>
+                    <h1 class="text-2xl font-semibold text-gray-900 mb-2">Learning Progress</h1>
+                    <p class="text-gray-600 text-sm">Track your academic achievements and goal progress</p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <button class="touch-feedback p-2 rounded-lg hover:bg-gray-100 text-gray-600 min-h-[44px] min-w-[44px] flex items-center justify-center" title="Refresh data">
+                    <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors duration-200" title="Refresh data">
                         <i data-lucide="refresh-cw" class="w-4 h-4"></i>
                     </button>
-                    <button class="touch-feedback p-2 rounded-lg hover:bg-gray-100 text-gray-600 min-h-[44px] min-w-[44px] flex items-center justify-center" title="Settings">
+                    <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors duration-200" title="Settings">
                         <i data-lucide="settings" class="w-4 h-4"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Learning Statistics Overview - Mobile Optimized -->
-        <div class="bg-white rounded-xl border border-gray-200 p-4 sm:p-6 mb-6 sm:mb-8">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6">
-                <div class="mb-3 sm:mb-0">
-                    <h2 class="text-lg sm:text-xl font-semibold text-gray-800">This Week's Progress</h2>
-                    <p class="text-gray-600 text-sm sm:text-base">Your learning activity summary</p>
+        <!-- Learning Statistics Overview - Redesigned for Better UX -->
+        <div class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mb-8">
+            <!-- Header with Context -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                <div class="mb-2 sm:mb-0">
+                    <h2 class="text-lg font-semibold text-gray-900">This Week's Progress</h2>
+                    <p class="text-gray-600 text-sm">Sept 16-22, 2024 • 7 days tracked</p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <button class="touch-feedback p-2 rounded-lg hover:bg-gray-100 text-gray-600 min-h-[44px] min-w-[44px] flex items-center justify-center">
+                    <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors duration-200">
                         <i data-lucide="refresh-cw" class="w-4 h-4"></i>
                     </button>
-                    <button class="touch-feedback p-2 rounded-lg hover:bg-gray-100 text-gray-600 min-h-[44px] min-w-[44px] flex items-center justify-center">
+                    <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors duration-200">
                         <i data-lucide="calendar" class="w-4 h-4"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Current Learning Streak - Mobile Optimized -->
-            <div class="bg-ayah-bg-light rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 touch-feedback">
-                <div class="flex items-center space-x-3 mb-3">
-                    <i data-lucide="zap" class="w-5 h-5 sm:w-6 sm:h-6 text-ayah-icon-primary"></i>
-                    <span class="text-gray-600 text-sm sm:text-base font-medium">Learning Streak</span>
-                </div>
-                <div class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">5 days</div>
-                <p class="text-xs sm:text-sm text-gray-500">Keep it up! Last session: 2 hours ago</p>
-                <div class="mt-3 sm:hidden">
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-ayah-primary h-2 rounded-full" style="width: 83%"></div>
+            <!-- All Metrics in Single Row - Ordered by Importance -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                <!-- 1. Study Time - Most Important -->
+                <div class="bg-ayah-bg-light rounded-lg p-6 border border-ayah-bg-medium min-h-[160px] relative overflow-hidden">
+                    <!-- Background Illustration - Centered -->
+                    <div class="absolute bottom-4 right-2">
+                        <img src="undraw-relaxed-reading-wfkr.svg" alt="Study Time" class="w-32 h-32">
                     </div>
-                    <p class="text-xs text-gray-500 mt-1">5 of 6 days this week</p>
+                    <div class="relative z-10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="clock" class="w-5 h-5 text-ayah-primary"></i>
+                            <span class="text-base font-medium text-ayah-primary">Study Time</span>
+                        </div>
+                        <div class="text-4xl font-bold text-ayah-primary">3h 45m</div>
+                        <div class="w-full bg-ayah-bg-medium rounded-full h-2 mt-12">
+                            <div class="bg-ayah-primary h-2 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Weekly Stats Grid - Mobile Optimized -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
-                <div class="bg-ayah-bg-light rounded-lg p-4 touch-feedback">
-                    <div class="flex items-center space-x-2 mb-3">
-                        <i data-lucide="clock" class="w-5 h-5 text-orange-600"></i>
-                        <span class="text-sm font-medium text-orange-600">Study Time</span>
+                <!-- 2. Problems Solved - High Engagement -->
+                <div class="bg-ayah-bg-light rounded-lg p-6 border border-ayah-bg-medium min-h-[160px] relative overflow-hidden">
+                    <!-- Background Illustration - Centered -->
+                    <div class="absolute bottom-4 right-2">
+                        <img src="undraw-problem-solving-8lg7.svg" alt="Problems Solved" class="w-32 h-32">
                     </div>
-                    <div class="text-xl sm:text-2xl font-bold text-orange-600 mb-1">3h 45m</div>
-                    <p class="text-xs text-gray-500">This week</p>
-                    <div class="mt-2 sm:hidden">
-                        <div class="w-full bg-orange-100 rounded-full h-1.5">
-                            <div class="bg-orange-600 h-1.5 rounded-full" style="width: 75%"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="brain" class="w-5 h-5 text-ayah-primary"></i>
+                            <span class="text-base font-medium text-ayah-primary">Problems</span>
+                        </div>
+                        <div class="text-4xl font-bold text-ayah-primary">28</div>
+                        <div class="w-full bg-ayah-bg-medium rounded-full h-2 mt-12">
+                            <div class="bg-ayah-primary h-2 rounded-full" style="width: 93%"></div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-ayah-bg-light rounded-lg p-4 touch-feedback">
-                    <div class="flex items-center space-x-2 mb-3">
-                        <i data-lucide="brain" class="w-5 h-5 text-blue-600"></i>
-                        <span class="text-sm font-medium text-blue-600">Problems Solved</span>
-                    </div>
-                    <div class="text-xl sm:text-2xl font-bold text-blue-600 mb-1">28</div>
-                    <p class="text-xs text-gray-500">This week</p>
-                    <div class="mt-2 sm:hidden">
-                        <div class="w-full bg-blue-100 rounded-full h-1.5">
-                            <div class="bg-blue-600 h-1.5 rounded-full" style="width: 93%"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-ayah-bg-light rounded-lg p-4 touch-feedback sm:col-span-2 lg:col-span-1">
-                    <div class="flex items-center space-x-2 mb-3">
-                        <i data-lucide="book-open" class="w-5 h-5 text-purple-600"></i>
-                        <span class="text-sm font-medium text-purple-600">Topics Learned</span>
-                    </div>
-                    <div class="text-xl sm:text-2xl font-bold text-purple-600 mb-1">7</div>
-                    <p class="text-xs text-gray-500">This week</p>
-                    <div class="mt-2 sm:hidden">
-                        <div class="w-full bg-purple-100 rounded-full h-1.5">
-                            <div class="bg-purple-600 h-1.5 rounded-full" style="width: 70%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Additional Stats -->
-            <div class="grid grid-cols-2 gap-4">
-                <div class="text-center">
-                    <div class="text-sm text-gray-600">Sessions Completed</div>
-                    <div class="text-lg font-semibold text-gray-900">12</div>
+                <!-- 3. Learning Streak - Motivational -->
+                <div class="bg-ayah-bg-light rounded-lg p-6 border border-ayah-bg-medium min-h-[160px] relative overflow-hidden">
+                    <!-- Background Illustration - Centered -->
+                    <div class="absolute bottom-8 right-2">
+                        <img src="undraw-certification-i2m0.svg" alt="Learning Streak" class="w-28 h-28">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="zap" class="w-5 h-5 text-ayah-primary"></i>
+                            <span class="text-base font-medium text-ayah-primary">Streak</span>
+                        </div>
+                        <div class="text-4xl font-bold text-ayah-primary">5 days</div>
+                        <div class="w-full bg-ayah-bg-medium rounded-full h-2 mt-12">
+                            <div class="bg-ayah-primary h-2 rounded-full" style="width: 83%"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <div class="text-sm text-gray-600">Goals Completed</div>
-                    <div class="text-lg font-semibold text-green-600">2</div>
+
+                <!-- 4. Topics Learned - Progress Indicator -->
+                <div class="bg-ayah-bg-light rounded-lg p-6 border border-ayah-bg-medium min-h-[160px] relative overflow-hidden">
+                    <!-- Background Illustration - Centered -->
+                    <div class="absolute bottom-8 right-2">
+                        <img src="undraw-knowledge-0ty5.svg" alt="Topics Learned" class="w-28 h-28">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="book-open" class="w-5 h-5 text-ayah-primary"></i>
+                            <span class="text-base font-medium text-ayah-primary">Topics</span>
+                        </div>
+                        <div class="text-4xl font-bold text-ayah-primary">7</div>
+                        <div class="w-full bg-ayah-bg-medium rounded-full h-2 mt-12">
+                            <div class="bg-ayah-primary h-2 rounded-full" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Sessions Completed - Activity Metric -->
+                <div class="bg-ayah-bg-light rounded-lg p-6 border border-ayah-bg-medium min-h-[160px] relative overflow-hidden">
+                    <!-- Background Illustration - Centered -->
+                    <div class="absolute bottom-4 right-2">
+                        <img src="undraw-online-learning-tgmv.svg" alt="Sessions Completed" class="w-32 h-32">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="play-circle" class="w-5 h-5 text-ayah-primary"></i>
+                            <span class="text-base font-medium text-ayah-primary">Sessions</span>
+                        </div>
+                        <div class="text-4xl font-bold text-ayah-primary">12</div>
+                        <div class="w-full bg-ayah-bg-medium rounded-full h-2 mt-12">
+                            <div class="bg-ayah-primary h-2 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -367,7 +398,7 @@
                     <span id="lastUpdated">Last updated: 2 min ago</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <div class="w-2 h-2 bg-ayah-primary rounded-full"></div>
                     <span>Real-time updates</span>
                 </div>
             </div>
@@ -397,25 +428,25 @@
                     <div class="text-lg font-semibold text-ayah-primary">3</div>
                 </div>
                 <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
-                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
+                    <div class="w-8 h-8 bg-ayah-bg-medium rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i data-lucide="check-circle" class="w-4 h-4 text-ayah-icon-secondary"></i>
                     </div>
                     <div class="text-sm text-gray-600">Completed</div>
-                    <div class="text-lg font-semibold text-green-600">2</div>
+                    <div class="text-lg font-semibold text-ayah-icon-secondary">2</div>
                 </div>
                 <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
-                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-lucide="trending-up" class="w-4 h-4 text-blue-600"></i>
+                    <div class="w-8 h-8 bg-ayah-bg-medium rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i data-lucide="trending-up" class="w-4 h-4 text-ayah-icon-tertiary"></i>
                     </div>
                     <div class="text-sm text-gray-600">On Track</div>
-                    <div class="text-lg font-semibold text-blue-600">2</div>
+                    <div class="text-lg font-semibold text-ayah-icon-tertiary">2</div>
                 </div>
                 <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
-                    <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-lucide="percent" class="w-4 h-4 text-purple-600"></i>
+                    <div class="w-8 h-8 bg-ayah-bg-medium rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i data-lucide="percent" class="w-4 h-4 text-ayah-primary-dark"></i>
                     </div>
                     <div class="text-sm text-gray-600">Avg Progress</div>
-                    <div class="text-lg font-semibold text-purple-600">68%</div>
+                    <div class="text-lg font-semibold text-ayah-primary-dark">68%</div>
                 </div>
             </div>
         </div>
@@ -424,27 +455,27 @@
         <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
             <h2 class="text-xl font-semibold text-gray-800 mb-6">Next Steps</h2>
             <div class="space-y-4">
-                <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg">
-                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i data-lucide="brain" class="w-4 h-4 text-blue-600"></i>
+                <div class="flex items-start space-x-3 p-4 bg-ayah-bg-light rounded-lg">
+                    <div class="w-8 h-8 bg-ayah-bg-medium rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="brain" class="w-4 h-4 text-ayah-primary"></i>
                     </div>
                     <div>
                         <p class="font-medium text-gray-900">Continue working on Math - you're almost there!</p>
                         <p class="text-sm text-gray-600">12 of 20 problems completed (60%)</p>
                     </div>
                 </div>
-                <div class="flex items-start space-x-3 p-4 bg-orange-50 rounded-lg">
-                    <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i data-lucide="clock" class="w-4 h-4 text-orange-600"></i>
+                <div class="flex items-start space-x-3 p-4 bg-ayah-bg-light rounded-lg">
+                    <div class="w-8 h-8 bg-ayah-bg-medium rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="clock" class="w-4 h-4 text-ayah-icon-secondary"></i>
                     </div>
                     <div>
                         <p class="font-medium text-gray-900">Try a quick Science session to maintain your streak</p>
                         <p class="text-sm text-gray-600">15 more minutes needed to reach your goal</p>
                     </div>
                 </div>
-                <div class="flex items-start space-x-3 p-4 bg-green-50 rounded-lg">
-                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <i data-lucide="star" class="w-4 h-4 text-green-600"></i>
+                <div class="flex items-start space-x-3 p-4 bg-ayah-bg-light rounded-lg">
+                    <div class="w-8 h-8 bg-ayah-bg-medium rounded-full flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="star" class="w-4 h-4 text-ayah-icon-tertiary"></i>
                     </div>
                     <div>
                         <p class="font-medium text-gray-900">Great progress on History - consider setting a new challenge</p>
@@ -454,24 +485,7 @@
             </div>
         </div>
 
-        <!-- Summary Section -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-6">Weekly Summary</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="text-center">
-                    <div class="text-sm text-gray-600 mb-1">Total Study Sessions</div>
-                    <div class="text-2xl font-bold text-gray-900">12</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-sm text-gray-600 mb-1">Subjects Studied</div>
-                    <div class="text-2xl font-bold text-gray-900">4</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-sm text-gray-600 mb-1">Period</div>
-                    <div class="text-2xl font-bold text-gray-900">Last 7 days</div>
-                </div>
-            </div>
-        </div>
+
 
     </div>
 

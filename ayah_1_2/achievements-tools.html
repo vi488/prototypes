@@ -23,6 +23,12 @@
             --ayah-neutral-700: #404040;
         }
 
+        body {
+            font-family: "Söhne", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+            font-variation-settings: normal;
+        }
+
         /* Badge animations */
         @keyframes sparkle {
             0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
@@ -187,98 +193,97 @@
     </div>
 
     <!-- Main Content -->
-    <div class="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-6">
+    <div class="min-h-screen bg-white">
         <!-- Header -->
-        <div class="max-w-6xl mx-auto mb-8">
-            <div class="text-center mb-6">
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">🏆 Achievement Badges</h1>
-                <p class="text-gray-600">Celebrate your learning milestones and track your progress!</p>
+        <div class="px-6 py-8">
+            <div class="mb-8">
+                <h1 class="text-2xl font-semibold text-gray-900 mb-2">🏆 Achievement Badges</h1>
+                <p class="text-gray-600 text-sm">Celebrate your learning milestones and track your progress!</p>
             </div>
 
             <!-- Overall Progress Summary -->
-            <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+            <div class="bg-white rounded-lg border border-gray-200 p-6 mb-8">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-purple-600" id="totalBadges">8</div>
+                        <div class="text-xl font-semibold text-gray-900" id="totalBadges">13</div>
                         <div class="text-sm text-gray-600">Total Badges</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-green-600" id="earnedBadges">5</div>
+                        <div class="text-xl font-semibold text-green-600" id="earnedBadges">6</div>
                         <div class="text-sm text-gray-600">Earned</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-orange-600" id="inProgressBadges">2</div>
+                        <div class="text-xl font-semibold text-orange-600" id="inProgressBadges">6</div>
                         <div class="text-sm text-gray-600">In Progress</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-blue-600" id="streakDays">7</div>
+                        <div class="text-xl font-semibold text-blue-600" id="streakDays">7</div>
                         <div class="text-sm text-gray-600">Day Streak</div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Badge Categories -->
-        <div class="max-w-6xl mx-auto space-y-8">
-            <!-- Subject Mastery Badges -->
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div class="category-header text-white p-4">
-                    <h2 class="text-xl font-bold flex items-center">
-                        <i data-lucide="graduation-cap" class="w-6 h-6 mr-2"></i>
-                        Subject Mastery Badges
-                    </h2>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="subjectBadges">
-                        <!-- Subject badges will be populated by JavaScript -->
+            <!-- Badge Categories -->
+            <div class="space-y-8">
+                <!-- Subject Mastery Badges -->
+                <div class="bg-white rounded-lg border border-gray-200">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                            <i data-lucide="graduation-cap" class="w-5 h-5 mr-2 text-gray-600"></i>
+                            Subject Mastery Badges
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="subjectBadges">
+                            <!-- Subject badges will be populated by JavaScript -->
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Consistency Badges -->
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div class="category-header text-white p-4">
-                    <h2 class="text-xl font-bold flex items-center">
-                        <i data-lucide="calendar-check" class="w-6 h-6 mr-2"></i>
-                        Consistency Badges
-                    </h2>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="consistencyBadges">
-                        <!-- Consistency badges will be populated by JavaScript -->
+                <!-- Consistency Badges -->
+                <div class="bg-white rounded-lg border border-gray-200">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                            <i data-lucide="calendar-check" class="w-5 h-5 mr-2 text-gray-600"></i>
+                            Consistency Badges
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="consistencyBadges">
+                            <!-- Consistency badges will be populated by JavaScript -->
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Problem-Solving Badges -->
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div class="category-header text-white p-4">
-                    <h2 class="text-xl font-bold flex items-center">
-                        <i data-lucide="puzzle" class="w-6 h-6 mr-2"></i>
-                        Problem-Solving Badges
-                    </h2>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="problemSolvingBadges">
-                        <!-- Problem-solving badges will be populated by JavaScript -->
+                <!-- Problem-Solving Badges -->
+                <div class="bg-white rounded-lg border border-gray-200">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                            <i data-lucide="puzzle" class="w-5 h-5 mr-2 text-gray-600"></i>
+                            Problem-Solving Badges
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="problemSolvingBadges">
+                            <!-- Problem-solving badges will be populated by JavaScript -->
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Goal Achievement Badges -->
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div class="category-header text-white p-4">
-                    <h2 class="text-xl font-bold flex items-center">
-                        <i data-lucide="target" class="w-6 h-6 mr-2"></i>
-                        Goal Achievement Badges
-                    </h2>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="goalBadges">
-                        <!-- Goal badges will be populated by JavaScript -->
+                <!-- Goal Achievement Badges -->
+                <div class="bg-white rounded-lg border border-gray-200">
+                    <div class="border-b border-gray-200 p-4">
+                        <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                            <i data-lucide="target" class="w-5 h-5 mr-2 text-gray-600"></i>
+                            Goal Achievement Badges
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="goalBadges">
+                            <!-- Goal badges will be populated by JavaScript -->
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 

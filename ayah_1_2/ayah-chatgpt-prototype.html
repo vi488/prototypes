@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayah - AI Tutoring Platform v1.1 MVP</title>
+    <title>Ayah - AI Tutoring Platform v1.2 MVP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
@@ -34,9 +34,11 @@
             --ayah-btn-secondary-hover: #3A2A9E; /* Secondary button hover */
         }
 
-        /* ChatGPT-like font family */
+        /* ChatGPT-like font family - Exact match */
         body {
-            font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: "Söhne", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+            font-variation-settings: normal;
         }
 
         /* Comprehensive Purple Palette Utility Classes */
@@ -391,68 +393,76 @@
             <!-- Top Group: New Chat & Search -->
             <div class="p-4 border-b border-gray-200">
                 <div class="space-y-1">
-                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left nav-button">
+                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left nav-button transition-colors duration-200">
                         <i data-lucide="plus" class="w-4 h-4"></i>
-                        <span class="text-sm">New Chat</span>
+                        <span class="text-sm font-medium">New chat</span>
                     </button>
-                    <button onclick="openSearchDialog()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left">
+                    <button onclick="openSearchDialog()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left transition-colors duration-200">
                         <i data-lucide="search" class="w-4 h-4"></i>
-                        <span class="text-sm">Search chats</span>
+                        <span class="text-sm font-medium">Search</span>
                     </button>
                 </div>
             </div>
 
 
 
-            <!-- Learning Tools Group -->
-            <div class="px-4 pb-4 border-b border-gray-200">
+            <!-- Learning Management Group -->
+            <div class="px-4 pb-2">
+                <h3 class="text-xs font-medium text-gray-500 mb-2 px-2">Learning Management</h3>
                 <div class="space-y-1">
-                    <button id="points-tool" onclick="loadToolPage('points')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
-                        <i data-lucide="star" class="w-4 h-4"></i>
-                        <span class="text-sm">My Points</span>
-                    </button>
-                    <button id="goals-tool" onclick="loadToolPage('goals')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
+                    <button id="goals-tool" onclick="loadToolPage('goals')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
                         <i data-lucide="target" class="w-4 h-4"></i>
-                        <span class="text-sm">My Goals</span>
+                        <span class="text-sm font-medium">Goals</span>
                     </button>
-                    <button id="progress-tool" onclick="loadToolPage('progress')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
+                    <button id="progress-tool" onclick="loadToolPage('progress')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
                         <i data-lucide="trending-up" class="w-4 h-4"></i>
-                        <span class="text-sm">Progress Charts</span>
+                        <span class="text-sm font-medium">Progress</span>
                     </button>
-                    <button id="subjects-tool" onclick="loadToolPage('subjects')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
+                    <button id="subjects-tool" onclick="loadToolPage('subjects')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
                         <i data-lucide="book-open" class="w-4 h-4"></i>
-                        <span class="text-sm">Subject Analytics</span>
+                        <span class="text-sm font-medium">Subjects</span>
                     </button>
-                    <button id="achievements-tool" onclick="loadToolPage('achievements')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
+                </div>
+            </div>
+
+            <!-- Motivation & Rewards Group -->
+            <div class="px-4 pb-4 border-b border-gray-200">
+                <h3 class="text-xs font-medium text-gray-500 mb-2 px-2">Motivation & Rewards</h3>
+                <div class="space-y-1">
+                    <button id="points-tool" onclick="loadToolPage('points')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
+                        <i data-lucide="star" class="w-4 h-4"></i>
+                        <span class="text-sm font-medium">Points</span>
+                    </button>
+                    <button id="achievements-tool" onclick="loadToolPage('achievements')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
                         <i data-lucide="award" class="w-4 h-4"></i>
-                        <span class="text-sm">Achievements</span>
+                        <span class="text-sm font-medium">Achievements</span>
                     </button>
-                    <button id="streaks-tool" onclick="loadToolPage('streaks')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left tool-button">
+                    <button id="streaks-tool" onclick="loadToolPage('streaks')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
                         <i data-lucide="flame" class="w-4 h-4"></i>
-                        <span class="text-sm">Daily Streaks</span>
+                        <span class="text-sm font-medium">Streaks</span>
                     </button>
                 </div>
             </div>
 
             <!-- Chats Group -->
             <div class="px-4 pb-4">
-                <h3 class="text-sm font-medium text-gray-700 mb-3">Chats</h3>
+                <h3 class="text-xs font-medium text-gray-500 mb-2 px-2">Recent</h3>
                 <div class="space-y-1">
-                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-600 cursor-pointer transition-colors duration-200">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate">Math homework help</span>
+                        <span class="text-sm font-medium truncate">Math homework help</span>
                     </div>
-                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-600 cursor-pointer transition-colors duration-200">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate">Science project ideas</span>
+                        <span class="text-sm font-medium truncate">Science project ideas</span>
                     </div>
-                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-600 cursor-pointer transition-colors duration-200">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate">Reading comprehension</span>
+                        <span class="text-sm font-medium truncate">Reading comprehension</span>
                     </div>
-                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-600 cursor-pointer">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-600 cursor-pointer transition-colors duration-200">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate">Expense tracking tips</span>
+                        <span class="text-sm font-medium truncate">Study planning tips</span>
                     </div>
                 </div>
             </div>
@@ -460,13 +470,13 @@
             <!-- Sidebar Footer -->
             <div class="absolute bottom-0 left-0 right-0 p-4">
                 <div class="relative">
-                    <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left">
+                    <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left transition-colors duration-200">
                         <div id="userAvatar" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium bg-ayah-primary">
                             JD
                         </div>
                         <div class="flex-1">
                             <div class="text-sm font-medium">John Doe</div>
-                            <div class="text-xs text-gray-500">Free</div>
+                            <div class="text-xs text-gray-500">Free plan</div>
                         </div>
                         <i data-lucide="more-horizontal" class="w-4 h-4"></i>
                     </button>
@@ -503,26 +513,33 @@
 
                             <!-- Menu Items -->
                             <div class="py-1">
-                                <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700">
+                                <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
                                     <i data-lucide="settings" class="w-4 h-4"></i>
-                                    <span class="text-sm">Profile Settings</span>
+                                    <span class="text-sm font-medium">Settings</span>
                                 </button>
-                                <button onclick="openModal('wallet-tokens')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700">
+                                <button onclick="openModal('wallet-tokens')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
                                     <i data-lucide="wallet" class="w-4 h-4"></i>
-                                    <span class="text-sm">Wallet & Tokens</span>
+                                    <span class="text-sm font-medium">Wallet</span>
+                                </button>
+                                <button onclick="openModal('subscription')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
+                                    <i data-lucide="credit-card" class="w-4 h-4"></i>
+                                    <span class="text-sm font-medium">Subscription</span>
+                                </button>
+                                <div class="border-t border-gray-100 my-1"></div>
+                                <button onclick="showHelpCenter()" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
+                                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                                    <span class="text-sm font-medium">Help & FAQ</span>
+                                </button>
+                                <button onclick="showKeyboardShortcuts()" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
+                                    <i data-lucide="keyboard" class="w-4 h-4"></i>
+                                    <span class="text-sm font-medium">Shortcuts</span>
+                                </button>
+                                <div class="border-t border-gray-100 my-1"></div>
+                                <button onclick="signOut()" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
+                                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                                    <span class="text-sm font-medium">Sign out</span>
                                 </button>
                             </div>
-
-                            <button onclick="openModal('subscription')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700">
-                                <i data-lucide="credit-card" class="w-4 h-4"></i>
-                                <span class="text-sm">Manage Subscription</span>
-                            </button>
-
-                            <div class="border-t border-gray-100"></div>
-                            <button class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700">
-                                <i data-lucide="log-out" class="w-4 h-4"></i>
-                                <span class="text-sm">Sign Out</span>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -546,37 +563,38 @@
 
                 <!-- Icon buttons -->
                 <div class="p-2 border-b border-gray-200 space-y-1">
-                    <button onclick="loadChatPage()" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="New Chat">
+                    <button onclick="loadChatPage()" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="New chat">
                         <i data-lucide="plus" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="openSearchDialog()" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Search chats">
+                    <button onclick="openSearchDialog()" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Search">
                         <i data-lucide="search" class="w-5 h-5"></i>
                     </button>
                 </div>
 
-
-
-                <!-- Tool icons -->
-                <div class="p-2 space-y-1">
-                    <button onclick="loadToolPage('points')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="My Points">
-                        <i data-lucide="star" class="w-5 h-5"></i>
-                    </button>
-                    <button onclick="loadToolPage('goals')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="My Goals">
+                <!-- Learning Management Tool icons -->
+                <div class="p-2 border-b border-gray-200 space-y-1">
+                    <button onclick="loadToolPage('goals')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Goals">
                         <i data-lucide="target" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="loadToolPage('progress')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Progress Charts">
+                    <button onclick="loadToolPage('progress')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Progress">
                         <i data-lucide="trending-up" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="loadToolPage('subjects')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Subject Analytics">
+                    <button onclick="loadToolPage('subjects')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Subjects">
                         <i data-lucide="book-open" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="loadToolPage('achievements')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Achievements">
+                </div>
+
+                <!-- Motivation & Rewards Tool icons -->
+                <div class="p-2 space-y-1">
+                    <button onclick="loadToolPage('points')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Points">
+                        <i data-lucide="star" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('achievements')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Achievements">
                         <i data-lucide="award" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="loadToolPage('streaks')" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Daily Streaks">
+                    <button onclick="loadToolPage('streaks')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Streaks">
                         <i data-lucide="flame" class="w-5 h-5"></i>
                     </button>
-
                 </div>
             </div>
         </div>
@@ -2185,6 +2203,28 @@ What would you like to work on first? I'm here to help you reach your learning g
             }
         });
 
+        // New profile menu functions
+        function showHelpCenter() {
+            // Open help center in a new tab or modal
+            window.open('https://help.ayah.ai', '_blank');
+        }
+
+        function showKeyboardShortcuts() {
+            // Show keyboard shortcuts modal or overlay
+            alert('Keyboard Shortcuts:\n\n⌘/Ctrl + K - Search chats\nEsc - Close dialogs\n⌘/Ctrl + N - New chat\n⌘/Ctrl + / - Toggle sidebar');
+        }
+
+        function signOut() {
+            // Handle sign out
+            if (confirm('Are you sure you want to sign out?')) {
+                // Clear any stored data
+                localStorage.clear();
+                sessionStorage.clear();
+                // Redirect to login page
+                window.location.href = '/login';
+            }
+        }
+
         // Make functions globally available
         window.openModal = openModal;
         window.closeModal = closeModal;
@@ -2193,6 +2233,9 @@ What would you like to work on first? I'm here to help you reach your learning g
         window.initializeUserAvatar = initializeUserAvatar;
         window.openSearchDialog = openSearchDialog;
         window.closeSearchDialog = closeSearchDialog;
+        window.showHelpCenter = showHelpCenter;
+        window.showKeyboardShortcuts = showKeyboardShortcuts;
+        window.signOut = signOut;
     </script>
 </body>
 </html>
