@@ -82,6 +82,36 @@
         input:checked + .toggle-slider:before {
             transform: translateX(20px);
         }
+
+        /* ChatGPT-style Button */
+        .chatgpt-button {
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-weight: 500;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chatgpt-button-primary {
+            background-color: var(--ayah-primary);
+            color: white;
+        }
+
+        .chatgpt-button-primary:hover {
+            background-color: var(--ayah-primary-hover);
+        }
+
+        .chatgpt-button-secondary {
+            background-color: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .chatgpt-button-secondary:hover {
+            background-color: #e5e7eb;
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -121,6 +151,10 @@
                         <button onclick="showSection('billing')" class="w-full md:w-full flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg border-2 border-transparent hover:bg-ayah-primary-light text-gray-700 nav-item whitespace-nowrap">
                             <i data-lucide="credit-card" class="w-4 h-4 flex-shrink-0"></i>
                             <span class="text-xs md:text-sm font-medium">Billing</span>
+                        </button>
+                        <button onclick="showSection('data-controls')" class="w-full md:w-full flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg border-2 border-transparent hover:bg-ayah-primary-light text-gray-700 nav-item whitespace-nowrap">
+                            <i data-lucide="database" class="w-4 h-4 flex-shrink-0"></i>
+                            <span class="text-xs md:text-sm font-medium">Data Controls</span>
                         </button>
                     </nav>
                 </div>
@@ -282,8 +316,62 @@
                         </div>
                     </div>
 
+                    <!-- Data Controls Section -->
+                    <div id="data-controls-section" class="settings-section hidden">
+                        <h3 class="text-lg font-semibold text-ayah-primary-dark mb-6">Data Controls</h3>
 
+                        <!-- Archived Chats Management -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="text-base font-semibold text-gray-900 mb-1">Archived chats</h4>
+                                    <p class="text-sm text-gray-600">Manage your archived conversations</p>
+                                </div>
+                                <button onclick="openArchivedChatsModal()" class="chatgpt-button chatgpt-button-secondary">
+                                    Manage
+                                </button>
+                            </div>
+                        </div>
 
+                        <!-- Archive All Chats -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="text-base font-semibold text-gray-900 mb-1">Archive all chats</h4>
+                                    <p class="text-sm text-gray-600">Move all current conversations to archived</p>
+                                </div>
+                                <button onclick="archiveAllChats()" class="chatgpt-button chatgpt-button-secondary">
+                                    Archive all
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Delete All Chats -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="text-base font-semibold text-gray-900 mb-1">Delete all chats</h4>
+                                    <p class="text-sm text-gray-600">Permanently remove all conversations</p>
+                                </div>
+                                <button onclick="deleteAllChats()" class="chatgpt-button bg-red-600 text-white hover:bg-red-700">
+                                    Delete all
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Export Data -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="text-base font-semibold text-gray-900 mb-1">Export data</h4>
+                                    <p class="text-sm text-gray-600">Download your conversation history</p>
+                                </div>
+                                <button onclick="exportData()" class="chatgpt-button chatgpt-button-secondary">
+                                    Export
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -297,6 +385,49 @@
                     <button class="flex-1 sm:flex-none bg-ayah-primary text-white px-6 py-2 rounded-lg hover:bg-ayah-primary-hover transition-colors text-center">
                         Save Changes
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Archived Chats Modal -->
+    <div id="archivedChatsModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[60]">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden modal-enter">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-900">Archived Chats</h2>
+                <button onclick="closeArchivedChatsModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i data-lucide="x" class="w-5 h-5 text-gray-500"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+                <!-- Empty State -->
+                <div id="archivedChatsEmpty" class="text-center py-12">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="archive" class="w-8 h-8 text-gray-400"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">No archived chats</h3>
+                    <p class="text-gray-600">When you archive conversations, they'll appear here.</p>
+                </div>
+
+                <!-- Archived Chats Table -->
+                <div id="archivedChatsTable" class="hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-gray-200">
+                                    <th class="text-left py-3 px-4 font-medium text-gray-700">Name</th>
+                                    <th class="text-left py-3 px-4 font-medium text-gray-700">Date created</th>
+                                    <th class="text-right py-3 px-4 font-medium text-gray-700">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="archivedChatsTableBody">
+                                <!-- Archived chats will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -337,6 +468,226 @@
                 console.log('Form input changed:', e.target.name, e.target.checked || e.target.value);
             }
         });
+
+        // Archived chats data (simulated)
+        let archivedChats = [];
+
+        // Open archived chats modal
+        function openArchivedChatsModal() {
+            document.getElementById('archivedChatsModal').classList.remove('hidden');
+            loadArchivedChats();
+            lucide.createIcons();
+        }
+
+        // Close archived chats modal
+        function closeArchivedChatsModal() {
+            document.getElementById('archivedChatsModal').classList.add('hidden');
+        }
+
+        // Load archived chats
+        function loadArchivedChats() {
+            // Load from localStorage
+            archivedChats = JSON.parse(localStorage.getItem('ayah-archived-chats') || '[]');
+
+            const emptyState = document.getElementById('archivedChatsEmpty');
+            const table = document.getElementById('archivedChatsTable');
+            const tableBody = document.getElementById('archivedChatsTableBody');
+
+            if (archivedChats.length === 0) {
+                emptyState.classList.remove('hidden');
+                table.classList.add('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                table.classList.remove('hidden');
+
+                // Populate table
+                tableBody.innerHTML = '';
+                archivedChats.forEach((chat, index) => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-gray-100 hover:bg-gray-50';
+                    row.innerHTML = `
+                        <td class="py-3 px-4">
+                            <div class="flex items-center space-x-3">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-gray-400"></i>
+                                <span class="text-gray-900">${chat.title}</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-4 text-gray-600">${chat.dateCreated}</td>
+                        <td class="py-3 px-4">
+                            <div class="flex items-center justify-end space-x-2">
+                                <button onclick="unarchiveChat(${index})" class="p-2 hover:bg-gray-100 rounded-lg transition-colors" title="Unarchive conversation">
+                                    <i data-lucide="archive-restore" class="w-4 h-4 text-gray-600"></i>
+                                </button>
+                                <button onclick="deleteArchivedChat(${index})" class="p-2 hover:bg-red-50 rounded-lg transition-colors" title="Delete conversation">
+                                    <i data-lucide="trash-2" class="w-4 h-4 text-red-600"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                lucide.createIcons();
+            }
+        }
+
+        // Unarchive chat
+        function unarchiveChat(index) {
+            const chat = archivedChats[index];
+            archivedChats.splice(index, 1);
+
+            // Update localStorage
+            localStorage.setItem('ayah-archived-chats', JSON.stringify(archivedChats));
+
+            // In a real app, this would restore the chat to the main list
+            // For demo purposes, we'll just show a message
+            showToast(`"${chat.title}" unarchived successfully`);
+            loadArchivedChats();
+        }
+
+        // Delete archived chat
+        function deleteArchivedChat(index) {
+            const chat = archivedChats[index];
+            if (confirm(`Are you sure you want to permanently delete "${chat.title}"? This action cannot be undone.`)) {
+                archivedChats.splice(index, 1);
+
+                // Update localStorage
+                localStorage.setItem('ayah-archived-chats', JSON.stringify(archivedChats));
+
+                showToast(`"${chat.title}" deleted successfully`);
+                loadArchivedChats();
+            }
+        }
+
+        // Archive all chats
+        function archiveAllChats() {
+            if (confirm('Are you sure you want to archive all current conversations?')) {
+                // Get current chats from the main window
+                try {
+                    const mainWindow = window.parent;
+                    const chatItems = mainWindow.document.querySelectorAll('.chat-item');
+                    const currentChats = [];
+
+                    chatItems.forEach(chatItem => {
+                        const title = chatItem.querySelector('.chat-title').textContent;
+                        const chatId = chatItem.dataset.chatId;
+                        currentChats.push({
+                            id: chatId,
+                            title: title,
+                            dateCreated: new Date().toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })
+                        });
+
+                        // Remove from main list
+                        chatItem.remove();
+                    });
+
+                    // Add to archived chats
+                    archivedChats = [...archivedChats, ...currentChats];
+                    localStorage.setItem('ayah-archived-chats', JSON.stringify(archivedChats));
+
+                    showToast(`${currentChats.length} chats archived successfully`);
+                    loadArchivedChats();
+                } catch (error) {
+                    // Fallback for demo
+                    const currentChats = [
+                        { title: 'Math homework help', dateCreated: 'January 23, 2025' },
+                        { title: 'Science project ideas', dateCreated: 'January 22, 2025' },
+                        { title: 'Reading comprehension', dateCreated: 'January 21, 2025' },
+                        { title: 'Study planning tips', dateCreated: 'January 20, 2025' }
+                    ];
+
+                    archivedChats = [...archivedChats, ...currentChats];
+                    localStorage.setItem('ayah-archived-chats', JSON.stringify(archivedChats));
+                    showToast('All chats archived successfully');
+                    loadArchivedChats();
+                }
+            }
+        }
+
+        // Delete all chats
+        function deleteAllChats() {
+            if (confirm('Are you sure you want to permanently delete ALL conversations? This action cannot be undone.')) {
+                if (confirm('This will delete both active and archived conversations. Are you absolutely sure?')) {
+                    // Clear archived chats
+                    archivedChats = [];
+                    localStorage.setItem('ayah-archived-chats', JSON.stringify(archivedChats));
+
+                    // Clear active chats from main window
+                    try {
+                        const mainWindow = window.parent;
+                        const chatItems = mainWindow.document.querySelectorAll('.chat-item');
+                        chatItems.forEach(chatItem => chatItem.remove());
+                    } catch (error) {
+                        console.log('Could not access main window chats');
+                    }
+
+                    showToast('All chats deleted successfully');
+                    loadArchivedChats();
+                }
+            }
+        }
+
+        // Export data
+        function exportData() {
+            // Simulate data export
+            const data = {
+                exportDate: new Date().toISOString(),
+                totalChats: archivedChats.length + 4, // 4 active chats
+                archivedChats: archivedChats,
+                activeChats: [
+                    { title: 'Math homework help', dateCreated: 'January 23, 2025' },
+                    { title: 'Science project ideas', dateCreated: 'January 22, 2025' },
+                    { title: 'Reading comprehension', dateCreated: 'January 21, 2025' },
+                    { title: 'Study planning tips', dateCreated: 'January 20, 2025' }
+                ]
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ayah-chat-export-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast('Data export started - download will begin shortly');
+        }
+
+        // Toast notification function
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-4 right-4 text-white px-4 py-2 rounded-lg shadow-lg z-[70] transition-all duration-300 transform translate-x-full';
+            toast.style.backgroundColor = 'var(--ayah-primary-dark)';
+            toast.textContent = message;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full');
+            }, 100);
+
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize with sample data if localStorage is empty
+        if (!localStorage.getItem('ayah-archived-chats')) {
+            archivedChats = [
+                { title: 'Chemistry equations help', dateCreated: 'January 15, 2025' },
+                { title: 'World War II timeline', dateCreated: 'January 10, 2025' }
+            ];
+            localStorage.setItem('ayah-archived-chats', JSON.stringify(archivedChats));
+        }
     </script>
 </body>
 </html>
