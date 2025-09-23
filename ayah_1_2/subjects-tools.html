@@ -34,12 +34,18 @@
             --ayah-btn-secondary: #5B8CFF;     /* Secondary buttons */
             --ayah-btn-secondary-hover: #043178; /* Secondary button hover */
 
-            /* Subject-specific colors */
-            --subject-math: #FF6B6B;           /* Red for Math */
-            --subject-science: #4ECDC4;        /* Teal for Science */
-            --subject-english: #45B7D1;        /* Blue for English */
-            --subject-history: #96CEB4;        /* Green for History */
-            --subject-other: #FECA57;          /* Yellow for Other subjects */
+            /* Subject-specific colors - Brand-derived with better contrast differentiation */
+            --subject-math: #6048EB;           /* Primary brand purple for Math */
+            --subject-science: #4B7EF5;        /* Brand-tinted blue for Science */
+            --subject-english: #8B5EF0;        /* Brand-tinted light purple for English */
+            --subject-history: #9B48EB;        /* Brand-tinted magenta-purple for History (more distinct) */
+            --subject-other: #7B5EF0;          /* Secondary brand purple for Other subjects */
+
+            /* Light background variants for icons */
+            --subject-math-light: #F4F1FF;     /* Existing brand light */
+            --subject-science-light: #F1F6FF;  /* Blue-tinted light */
+            --subject-english-light: #F6F1FF;  /* Purple-tinted light */
+            --subject-history-light: #F6F1FF;  /* Magenta-purple-tinted light */
         }
 
         /* Utility Classes */
@@ -78,6 +84,12 @@
         .text-subject-english { color: var(--subject-english); }
         .text-subject-history { color: var(--subject-history); }
         .text-subject-other { color: var(--subject-other); }
+
+        /* Light background utility classes for icons */
+        .bg-subject-math-light { background-color: var(--subject-math-light); }
+        .bg-subject-science-light { background-color: var(--subject-science-light); }
+        .bg-subject-english-light { background-color: var(--subject-english-light); }
+        .bg-subject-history-light { background-color: var(--subject-history-light); }
 
         /* Animation classes */
         .fade-in {
@@ -235,7 +247,7 @@
                 <div class="subject-card bg-white rounded-xl border border-gray-200 p-6" onclick="showSubjectDetails('math')">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                            <div class="w-12 h-12 bg-subject-math-light rounded-lg flex items-center justify-center">
                                 <i data-lucide="calculator" class="w-6 h-6 text-subject-math"></i>
                             </div>
                             <div>
@@ -271,7 +283,7 @@
                 <div class="subject-card bg-white rounded-xl border border-gray-200 p-6" onclick="showSubjectDetails('science')">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center">
+                            <div class="w-12 h-12 bg-subject-science-light rounded-lg flex items-center justify-center">
                                 <i data-lucide="flask-conical" class="w-6 h-6 text-subject-science"></i>
                             </div>
                             <div>
@@ -307,7 +319,7 @@
                 <div class="subject-card bg-white rounded-xl border border-gray-200 p-6" onclick="showSubjectDetails('english')">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <div class="w-12 h-12 bg-subject-english-light rounded-lg flex items-center justify-center">
                                 <i data-lucide="book-open" class="w-6 h-6 text-subject-english"></i>
                             </div>
                             <div>
@@ -343,7 +355,7 @@
                 <div class="subject-card bg-white rounded-xl border border-gray-200 p-6" onclick="showSubjectDetails('history')">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                            <div class="w-12 h-12 bg-subject-history-light rounded-lg flex items-center justify-center">
                                 <i data-lucide="scroll" class="w-6 h-6 text-subject-history"></i>
                             </div>
                             <div>
@@ -377,27 +389,27 @@
             </div>
 
             <!-- Strongest Subject Highlight -->
-            <div class="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
+            <div class="mt-6 bg-subject-history-light border border-purple-200 rounded-lg p-4">
                 <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                        <i data-lucide="trophy" class="w-4 h-4 text-green-600"></i>
+                    <div class="w-8 h-8 bg-subject-history-light rounded-full flex items-center justify-center">
+                        <i data-lucide="trophy" class="w-4 h-4 text-subject-history"></i>
                     </div>
                     <div>
-                        <p class="font-medium text-green-800">Your strongest subject this week: History</p>
-                        <p class="text-sm text-green-600">Great consistency and progress! Keep it up!</p>
+                        <p class="font-medium text-subject-history">Your strongest subject this week: History</p>
+                        <p class="text-sm text-subject-history">Great consistency and progress! Keep it up!</p>
                     </div>
                 </div>
             </div>
 
             <!-- Needs Attention Alert -->
-            <div class="mt-4 bg-orange-50 border border-orange-200 rounded-lg p-4">
+            <div class="mt-4 bg-subject-english-light border border-purple-200 rounded-lg p-4">
                 <div class="flex items-center space-x-3">
-                    <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                        <i data-lucide="alert-circle" class="w-4 h-4 text-orange-600"></i>
+                    <div class="w-8 h-8 bg-subject-english-light rounded-full flex items-center justify-center">
+                        <i data-lucide="alert-circle" class="w-4 h-4 text-subject-english"></i>
                     </div>
                     <div>
-                        <p class="font-medium text-orange-800">English needs more practice</p>
-                        <p class="text-sm text-orange-600">Try spending 10 more minutes daily to reach your weekly goal</p>
+                        <p class="font-medium text-subject-english">English needs more practice</p>
+                        <p class="text-sm text-subject-english">Try spending 10 more minutes daily to reach your weekly goal</p>
                     </div>
                 </div>
             </div>
@@ -547,53 +559,53 @@
             <h2 class="text-xl font-semibold text-gray-800 mb-6">Insights & Recommendations</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Consistency Insight -->
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="bg-subject-math-light border border-purple-200 rounded-lg p-4">
                     <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="calendar" class="w-4 h-4 text-blue-600"></i>
+                        <div class="w-8 h-8 bg-subject-math-light rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="calendar" class="w-4 h-4 text-subject-math"></i>
                         </div>
                         <div>
-                            <p class="font-medium text-blue-800">Consistency Insight</p>
-                            <p class="text-sm text-blue-600 mt-1">You study Math most consistently on weekdays. Great routine!</p>
+                            <p class="font-medium text-subject-math">Consistency Insight</p>
+                            <p class="text-sm text-subject-math mt-1">You study Math most consistently on weekdays. Great routine!</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Performance Insight -->
-                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div class="bg-subject-science-light border border-blue-200 rounded-lg p-4">
                     <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="trending-up" class="w-4 h-4 text-green-600"></i>
+                        <div class="w-8 h-8 bg-subject-science-light rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="trending-up" class="w-4 h-4 text-subject-science"></i>
                         </div>
                         <div>
-                            <p class="font-medium text-green-800">Performance Insight</p>
-                            <p class="text-sm text-green-600 mt-1">Your Science problem-solving speed has improved 25% this week!</p>
+                            <p class="font-medium text-subject-science">Performance Insight</p>
+                            <p class="text-sm text-subject-science mt-1">Your Science problem-solving speed has improved 25% this week!</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Goal Insight -->
-                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                <div class="bg-subject-history-light border border-purple-200 rounded-lg p-4">
                     <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="target" class="w-4 h-4 text-purple-600"></i>
+                        <div class="w-8 h-8 bg-subject-history-light rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="target" class="w-4 h-4 text-subject-history"></i>
                         </div>
                         <div>
-                            <p class="font-medium text-purple-800">Goal Insight</p>
-                            <p class="text-sm text-purple-600 mt-1">You're 80% complete with your History goal - great progress!</p>
+                            <p class="font-medium text-subject-history">Goal Insight</p>
+                            <p class="text-sm text-subject-history mt-1">You're 80% complete with your History goal - great progress!</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Recommendation -->
-                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                <div class="bg-subject-english-light border border-purple-200 rounded-lg p-4">
                     <div class="flex items-start space-x-3">
-                        <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="lightbulb" class="w-4 h-4 text-orange-600"></i>
+                        <div class="w-8 h-8 bg-subject-english-light rounded-full flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="lightbulb" class="w-4 h-4 text-subject-english"></i>
                         </div>
                         <div>
-                            <p class="font-medium text-orange-800">Recommendation</p>
-                            <p class="text-sm text-orange-600 mt-1">Try spending 10 more minutes on English to reach your weekly goal</p>
+                            <p class="font-medium text-subject-english">Recommendation</p>
+                            <p class="text-sm text-subject-english mt-1">Try spending 10 more minutes on English to reach your weekly goal</p>
                         </div>
                     </div>
                 </div>
@@ -669,7 +681,7 @@
                 subtitle: 'Algebra & Geometry',
                 icon: 'calculator',
                 color: 'var(--subject-math)',
-                bgColor: 'bg-red-100',
+                bgColor: 'bg-subject-math-light',
                 progress: 78,
                 stats: {
                     problemsSolved: 142,
@@ -695,7 +707,7 @@
                 subtitle: 'Biology & Chemistry',
                 icon: 'flask-conical',
                 color: 'var(--subject-science)',
-                bgColor: 'bg-teal-100',
+                bgColor: 'bg-subject-science-light',
                 progress: 85,
                 stats: {
                     topicsLearned: 23,
@@ -721,7 +733,7 @@
                 subtitle: 'Literature & Writing',
                 icon: 'book-open',
                 color: 'var(--subject-english)',
-                bgColor: 'bg-blue-100',
+                bgColor: 'bg-subject-english-light',
                 progress: 72,
                 stats: {
                     readingTime: '15.3 hrs',
@@ -747,7 +759,7 @@
                 subtitle: 'World & US History',
                 icon: 'scroll',
                 color: 'var(--subject-history)',
-                bgColor: 'bg-green-100',
+                bgColor: 'bg-subject-history-light',
                 progress: 91,
                 stats: {
                     topicsCovered: 18,

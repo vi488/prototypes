@@ -78,9 +78,6 @@
                     <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600">
                         <i data-lucide="refresh-cw" class="w-4 h-4"></i>
                     </button>
-                    <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600">
-                        <i data-lucide="calendar" class="w-4 h-4"></i>
-                    </button>
                 </div>
             </div>
 
@@ -295,47 +292,96 @@
             </div>
         </div>
 
-        <!-- Learning Goals Progress -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
-            <div class="flex items-center justify-between mb-6">
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800">Goals Progress</h2>
-                    <p class="text-gray-600">Overview of your Learning Goals performance</p>
+        <!-- Learning Goals Progress - Enhanced Design -->
+        <div class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 mb-8">
+            <!-- Header with Context -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                <div class="mb-2 sm:mb-0">
+                    <h2 class="text-lg font-semibold text-gray-900">Goals Progress</h2>
+                    <p class="text-gray-600 text-sm">Current learning goals performance • 3 active</p>
                 </div>
-                <button class="text-ayah-primary hover:text-ayah-primary-hover text-sm font-medium">
-                    View All Goals →
-                </button>
+                <div class="flex items-center space-x-2">
+                    <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-600 transition-colors duration-200">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                    </button>
+                    <button class="text-ayah-primary hover:text-ayah-primary-hover text-sm font-medium">
+                        View All Goals →
+                    </button>
+                </div>
             </div>
 
-            <!-- Goals Statistics Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
-                    <div class="w-8 h-8 bg-ayah-bg-medium rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-lucide="target" class="w-4 h-4 text-ayah-primary"></i>
+            <!-- All Metrics in Single Row - Ordered by Importance -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <!-- 1. Active Goals - Most Important -->
+                <div class="bg-ayah-bg-light rounded-lg p-6 border border-ayah-bg-medium min-h-[160px] relative overflow-hidden">
+                    <!-- Background Illustration - Centered -->
+                    <div class="absolute bottom-8 right-2">
+                        <img src="undraw-target-d6hf.svg" alt="Active Goals" class="w-28 h-28">
                     </div>
-                    <div class="text-sm text-gray-600">Active Goals</div>
-                    <div class="text-lg font-semibold text-ayah-primary">3</div>
+                    <div class="relative z-10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="target" class="w-5 h-5 text-ayah-primary"></i>
+                            <span class="text-base font-medium text-ayah-primary">Active</span>
+                        </div>
+                        <div class="text-4xl font-bold text-ayah-primary">3</div>
+                        <div class="w-full bg-ayah-bg-medium rounded-full h-2 mt-12">
+                            <div class="bg-ayah-primary h-2 rounded-full" style="width: 60%"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
-                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
+
+                <!-- 2. Completed Goals - Achievement -->
+                <div class="bg-ayah-bg-light rounded-lg p-6 border border-ayah-bg-medium min-h-[160px] relative overflow-hidden">
+                    <!-- Background Illustration - Centered -->
+                    <div class="absolute bottom-8 right-2">
+                        <img src="undraw-completed-0sqh.svg" alt="Completed Goals" class="w-28 h-28">
                     </div>
-                    <div class="text-sm text-gray-600">Completed</div>
-                    <div class="text-lg font-semibold text-green-600">2</div>
+                    <div class="relative z-10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-ayah-primary"></i>
+                            <span class="text-base font-medium text-ayah-primary">Completed</span>
+                        </div>
+                        <div class="text-4xl font-bold text-ayah-primary">2</div>
+                        <div class="w-full bg-ayah-bg-medium rounded-full h-2 mt-12">
+                            <div class="bg-ayah-primary h-2 rounded-full" style="width: 40%"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
-                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-lucide="trending-up" class="w-4 h-4 text-blue-600"></i>
+
+                <!-- 3. On Track Goals - Progress Indicator -->
+                <div class="bg-ayah-bg-light rounded-lg p-6 border border-ayah-bg-medium min-h-[160px] relative overflow-hidden">
+                    <!-- Background Illustration - Centered -->
+                    <div class="absolute bottom-8 right-2">
+                        <img src="undraw-progress-tracking-9m3o.svg" alt="On Track Goals" class="w-28 h-28">
                     </div>
-                    <div class="text-sm text-gray-600">On Track</div>
-                    <div class="text-lg font-semibold text-blue-600">2</div>
+                    <div class="relative z-10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="trending-up" class="w-5 h-5 text-ayah-primary"></i>
+                            <span class="text-base font-medium text-ayah-primary">On Track</span>
+                        </div>
+                        <div class="text-4xl font-bold text-ayah-primary">2</div>
+                        <div class="w-full bg-ayah-bg-medium rounded-full h-2 mt-12">
+                            <div class="bg-ayah-primary h-2 rounded-full" style="width: 67%"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="bg-ayah-bg-light rounded-lg p-4 text-center">
-                    <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                        <i data-lucide="percent" class="w-4 h-4 text-purple-600"></i>
+
+                <!-- 4. Average Progress - Analytics -->
+                <div class="bg-ayah-bg-light rounded-lg p-6 border border-ayah-bg-medium min-h-[160px] relative overflow-hidden">
+                    <!-- Background Illustration - Centered -->
+                    <div class="absolute bottom-8 right-2">
+                        <img src="undraw-data-analysis-b7cp.svg" alt="Average Progress" class="w-28 h-28">
                     </div>
-                    <div class="text-sm text-gray-600">Avg Progress</div>
-                    <div class="text-lg font-semibold text-purple-600">68%</div>
+                    <div class="relative z-10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i data-lucide="percent" class="w-5 h-5 text-ayah-primary"></i>
+                            <span class="text-base font-medium text-ayah-primary">Avg Progress</span>
+                        </div>
+                        <div class="text-4xl font-bold text-ayah-primary">68%</div>
+                        <div class="w-full bg-ayah-bg-medium rounded-full h-2 mt-12">
+                            <div class="bg-ayah-primary h-2 rounded-full" style="width: 68%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
