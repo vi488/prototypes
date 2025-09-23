@@ -3,123 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayah - ChatGPT-like Design Prototype</title>
+    <title>Ayah - AI Tutoring Platform v1.2 MVP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
-        /* Custom Ayah Brand Colors - Updated Brand Palette */
+        /* Ayah Educational AI Platform - Comprehensive Design System */
         :root {
-            /* Main Brand Purple Palette - Updated per requirements */
-            --ayah-primary: #6048EB;           /* Main brand purple */
-            --ayah-primary-hover: #4F3BC9;     /* Darker purple for hover */
-            --ayah-primary-light: #F4F1FF;     /* Light purple for accents */
-            --ayah-primary-lighter: #F4FDFF;   /* Very light blue-purple */
-            --ayah-primary-dark: #3A2A9E;      /* Dark purple for emphasis */
+            /* Brand Color Hierarchy - Wisdom Purple System */
+            --ayah-primary: #6048EB;           /* Main brand - AI responses, primary actions */
+            --ayah-primary-hover: #4F3BC9;     /* Interactive states - button hover, link hover */
+            --ayah-primary-light: #F4F1FF;     /* AI message backgrounds, subtle highlights */
+            --ayah-primary-lighter: #F4FDFF;   /* Page backgrounds, card backgrounds */
+            --ayah-primary-dark: #3A2A9E;      /* High emphasis text, important icons */
 
-            /* Background Colors */
-            --ayah-bg-light: #F4F1FF;          /* Subtle light background */
-            --ayah-bg-medium: #F4FDFF;         /* Medium light background */
-            --ayah-bg-dark: #6048EB;           /* Medium background */
+            /* Educational Context Applications */
+            --ayah-lesson-active: #6048EB;     /* Active lesson indicator */
+            --ayah-progress-fill: #6048EB;     /* Progress bar fill color */
+            --ayah-achievement-glow: #6048EB;  /* Achievement badge glow effect */
+            --ayah-ai-accent: #F4F1FF;         /* AI tutor message background */
 
-            /* Icon Colors - Harmonious variations */
-            --ayah-icon-primary: #6048EB;      /* Primary icons */
-            --ayah-icon-secondary: #7B5EF0;    /* Secondary icons */
-            --ayah-icon-tertiary: #9674F5;     /* Tertiary icons */
-            --ayah-icon-light: #B18AFA;        /* Light icons */
+            /* Subject-Specific Color Coding */
+            --ayah-math: #6048EB;              /* Primary purple - logical thinking */
+            --ayah-science: #4B7EF5;           /* Blue-purple - scientific inquiry */
+            --ayah-technology: #5B8CFF;        /* Bright blue - innovation */
+            --ayah-english: #8B5EF0;           /* Light purple - creativity */
+            --ayah-reading: #9674F5;           /* Soft purple - comprehension */
+            --ayah-writing: #B18AFA;           /* Lighter purple - expression */
+            --ayah-history: #9B48EB;           /* Magenta-purple - storytelling */
+            --ayah-geography: #7B5EF0;         /* Secondary purple - exploration */
+            --ayah-civics: #6048EB;            /* Primary purple - authority */
+            --ayah-art: #A855F7;               /* Bright purple - creativity */
+            --ayah-music: #9333EA;             /* Rich purple - harmony */
+            --ayah-other: #7B5EF0;             /* Secondary purple - general subjects */
 
-            /* Button Colors - Consistent system */
-            --ayah-btn-primary: #6048EB;       /* Primary buttons */
-            --ayah-btn-primary-hover: #4F3BC9; /* Primary button hover */
-            --ayah-btn-secondary: #7B5EF0;     /* Secondary buttons */
-            --ayah-btn-secondary-hover: #3A2A9E; /* Secondary button hover */
+            /* Educational Interaction Colors - Learning Feedback System */
+            --ayah-correct: #22C55E;           /* Bright, encouraging green */
+            --ayah-correct-bg: #DCFCE7;        /* Light green background */
+            --ayah-correct-border: #16A34A;    /* Darker green border */
+            --ayah-learning: #F59E0B;          /* Warm, non-threatening orange */
+            --ayah-learning-bg: #FEF3C7;       /* Light orange background */
+            --ayah-learning-border: #D97706;   /* Darker orange border */
+            --ayah-hint: #3B82F6;              /* Friendly, helpful blue */
+            --ayah-hint-bg: #DBEAFE;           /* Light blue background */
+            --ayah-hint-border: #2563EB;       /* Darker blue border */
+            --ayah-achievement: #F59E0B;       /* Warm gold for achievements */
+            --ayah-achievement-glow: #FCD34D;  /* Golden glow effect */
+            --ayah-achievement-bg: #FFFBEB;    /* Light gold background */
+
+            /* ChatGPT-Inspired Interface Colors */
+            --ayah-user-message-bg: #F7F7F8;      /* Light gray user messages */
+            --ayah-user-message-text: #374151;     /* Dark gray text */
+            --ayah-user-message-border: #E5E7EB;   /* Subtle border */
+            --ayah-ai-message-bg: #F4F1FF;         /* Brand light purple */
+            --ayah-ai-message-text: #3A2A9E;       /* Brand dark purple */
+            --ayah-ai-message-accent: #6048EB;     /* Brand primary for highlights */
+            --ayah-system-message-bg: #DBEAFE;     /* Light blue for system */
+            --ayah-system-message-text: #1E40AF;   /* Dark blue text */
+
+            /* Interactive Elements */
+            --ayah-input-bg: #FFFFFF;              /* White background */
+            --ayah-input-border: #D1D5DB;          /* Gray border */
+            --ayah-input-focus: #6048EB;           /* Brand purple focus */
+            --ayah-input-placeholder: #9CA3AF;     /* Gray placeholder */
+            --ayah-send-disabled: #D1D5DB;         /* Gray when disabled */
+            --ayah-send-enabled: #6048EB;          /* Brand purple when enabled */
+            --ayah-send-hover: #4F3BC9;            /* Darker purple on hover */
+
+            /* Semantic Color System - Universal Meanings */
+            --semantic-success: #10B981;       /* Emerald 500 */
+            --semantic-success-light: #D1FAE5; /* Emerald 100 */
+            --semantic-success-dark: #047857;  /* Emerald 700 */
+            --semantic-error: #EF4444;         /* Red 500 */
+            --semantic-error-light: #FEE2E2;   /* Red 100 */
+            --semantic-error-dark: #DC2626;    /* Red 600 */
+            --semantic-info: #3B82F6;          /* Blue 500 */
+            --semantic-info-light: #DBEAFE;    /* Blue 100 */
+            --semantic-info-dark: #1D4ED8;     /* Blue 700 */
+            --semantic-warning: #F59E0B;       /* Amber 500 */
+            --semantic-warning-light: #FEF3C7; /* Amber 100 */
+            --semantic-warning-dark: #D97706;  /* Amber 600 */
+
+            /* Neutral Color System - 9-11 variations */
+            --neutral-50: #FAFAFA;   /* Lightest background */
+            --neutral-100: #F5F5F5;  /* Light background */
+            --neutral-200: #E5E5E5;  /* Border light */
+            --neutral-300: #D4D4D4;  /* Border medium */
+            --neutral-400: #A3A3A3;  /* Placeholder text */
+            --neutral-500: #737373;  /* Secondary text */
+            --neutral-600: #525252;  /* Primary text light */
+            --neutral-700: #404040;  /* Primary text */
+            --neutral-800: #262626;  /* Headings */
+            --neutral-900: #171717;  /* High emphasis text */
+
+            /* Spacing System - 8px Base Grid */
+            --space-1: 4px;   /* 0.25rem - Micro spacing */
+            --space-2: 8px;   /* 0.5rem - Base unit */
+            --space-3: 12px;  /* 0.75rem - Small spacing */
+            --space-4: 16px;  /* 1rem - Medium spacing */
+            --space-5: 20px;  /* 1.25rem - Large spacing */
+            --space-6: 24px;  /* 1.5rem - XL spacing */
+            --space-8: 32px;  /* 2rem - XXL spacing */
+            --space-10: 40px; /* 2.5rem - Section spacing */
+            --space-12: 48px; /* 3rem - Page spacing */
+            --space-16: 64px; /* 4rem - Major section spacing */
+            --space-20: 80px; /* 5rem - Page margins */
+
+            /* Typography Scale - Modular Scale: 1.250 (Major Third) */
+            --text-display-large: 57px;   /* Hero headlines */
+            --text-display-medium: 45px;  /* Page titles */
+            --text-display-small: 36px;   /* Section headers */
+            --text-headline-large: 32px;  /* Card titles */
+            --text-headline-medium: 28px; /* Subsection headers */
+            --text-headline-small: 24px;  /* Component titles */
+            --text-title-large: 22px;     /* List headers */
+            --text-title-medium: 16px;    /* Button text, labels */
+            --text-title-small: 14px;     /* Captions, metadata */
+            --text-body-large: 16px;      /* Primary body text */
+            --text-body-medium: 14px;     /* Secondary body text */
+            --text-body-small: 12px;      /* Fine print, disclaimers */
+
+            /* Component Design Standards */
+            --border-radius-small: 8px;   /* Modern feel */
+            --border-radius-medium: 12px; /* Cards and containers */
+            --border-radius-large: 16px;  /* Modals and major components */
+            --border-radius-pill: 24px;   /* Pill-shaped CTAs */
+
+            /* Shadow System */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);     /* Subtle elevation */
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);   /* Medium elevation */
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);    /* High elevation */
+            --shadow-xl: 0 12px 32px rgba(0,0,0,0.25);  /* Maximum elevation */
         }
 
-        /* ChatGPT-like font family - Override Tailwind defaults */
-        body, .font-sans {
-            font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+        /* Educational AI Platform Typography - ChatGPT-inspired with educational enhancements */
+        body {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+            font-variation-settings: normal;
+            background-color: var(--neutral-50);
+            color: var(--neutral-700);
+            line-height: 1.5;
         }
 
-        /* Ensure all text elements use the ChatGPT font */
-        * {
-            font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-
-        /* ChatGPT Typography Standards */
-        .chatgpt-text-sm {
-            font-size: 14px;
-            line-height: 20px;
-            font-weight: 400;
-        }
-
-        .chatgpt-text-base {
-            font-size: 16px;
-            line-height: 24px;
-            font-weight: 400;
-        }
-
-        .chatgpt-text-lg {
-            font-size: 18px;
-            line-height: 28px;
-            font-weight: 600;
-        }
-
-        /* Comprehensive Purple Palette Utility Classes */
-
-        /* Background Colors */
+        /* CSS Custom Properties for Dynamic Theming */
         .bg-ayah-primary { background-color: var(--ayah-primary); }
-        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
-        .bg-ayah-primary-lighter { background-color: var(--ayah-primary-lighter); }
-        .bg-ayah-primary-dark { background-color: var(--ayah-primary-dark); }
-        .bg-ayah-bg-light { background-color: var(--ayah-bg-light); }
-        .bg-ayah-bg-medium { background-color: var(--ayah-bg-medium); }
-        .bg-ayah-bg-dark { background-color: var(--ayah-bg-dark); }
-
-        /* Text Colors */
         .text-ayah-primary { color: var(--ayah-primary); }
-        .text-ayah-primary-light { color: var(--ayah-primary-light); }
-        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
-        .text-ayah-icon-primary { color: var(--ayah-icon-primary); }
-        .text-ayah-icon-secondary { color: var(--ayah-icon-secondary); }
-        .text-ayah-icon-tertiary { color: var(--ayah-icon-tertiary); }
-        .text-ayah-icon-light { color: var(--ayah-icon-light); }
-
-        /* Border Colors */
         .border-ayah-primary { border-color: var(--ayah-primary); }
-        .border-ayah-primary-light { border-color: var(--ayah-primary-light); }
-        .border-ayah-bg-medium { border-color: var(--ayah-bg-medium); }
-
-        /* Hover States */
         .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
-        .hover\:bg-ayah-primary-light:hover { background-color: var(--ayah-primary); }
-        .hover\:text-ayah-primary:hover { color: var(--ayah-primary); }
-        .hover\:text-ayah-primary-dark:hover { color: var(--ayah-primary-dark); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
 
-        /* Button System - Consistent across app */
-        .btn-ayah-primary {
-            background-color: var(--ayah-btn-primary);
-            color: white;
-            transition: background-color 0.2s ease;
+        /* Subject-Specific Color Classes */
+        .subject-math { color: var(--ayah-math); }
+        .subject-science { color: var(--ayah-science); }
+        .subject-english { color: var(--ayah-english); }
+        .subject-history { color: var(--ayah-history); }
+        .bg-subject-math { background-color: var(--ayah-math); }
+        .bg-subject-science { background-color: var(--ayah-science); }
+        .bg-subject-english { background-color: var(--ayah-english); }
+        .bg-subject-history { background-color: var(--ayah-history); }
+
+        /* Educational Feedback Classes */
+        .feedback-correct {
+            background-color: var(--ayah-correct-bg);
+            color: var(--ayah-correct-border);
+            border: 1px solid var(--ayah-correct-border);
+            border-radius: var(--border-radius-small);
+            padding: var(--space-2) var(--space-3);
         }
-        .btn-ayah-primary:hover {
-            background-color: var(--ayah-btn-primary-hover);
+        .feedback-learning {
+            background-color: var(--ayah-learning-bg);
+            color: var(--ayah-learning-border);
+            border: 1px solid var(--ayah-learning-border);
+            border-radius: var(--border-radius-small);
+            padding: var(--space-2) var(--space-3);
         }
-        .btn-ayah-secondary {
-            background-color: var(--ayah-btn-secondary);
-            color: white;
-            transition: background-color 0.2s ease;
-        }
-        .btn-ayah-secondary:hover {
-            background-color: var(--ayah-btn-secondary-hover);
+        .feedback-hint {
+            background-color: var(--ayah-hint-bg);
+            color: var(--ayah-hint-border);
+            border: 1px solid var(--ayah-hint-border);
+            border-radius: var(--border-radius-small);
+            padding: var(--space-2) var(--space-3);
         }
 
-        /* Sidebar animations */
+        /* ChatGPT-Inspired Message Styling */
+        .ai-message {
+            background-color: var(--ayah-ai-message-bg);
+            color: var(--ayah-ai-message-text);
+            border-radius: var(--border-radius-large);
+            padding: var(--space-3) var(--space-4);
+            margin: var(--space-2) 0;
+            border: 1px solid var(--ayah-primary-light);
+        }
+
+        .user-message {
+            background-color: var(--ayah-user-message-bg);
+            color: var(--ayah-user-message-text);
+            border-radius: var(--border-radius-large);
+            padding: var(--space-3) var(--space-4);
+            margin: var(--space-2) 0;
+            margin-left: auto;
+            max-width: 80%;
+            border: 1px solid var(--ayah-user-message-border);
+        }
+
+        /* Input Field Styling */
+        .chat-input {
+            background-color: var(--ayah-input-bg);
+            border: 1px solid var(--ayah-input-border);
+            border-radius: var(--border-radius-small);
+            padding: var(--space-3) var(--space-4);
+            font-size: var(--text-body-large);
+            color: var(--neutral-700);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .chat-input:focus {
+            border-color: var(--ayah-input-focus);
+            box-shadow: 0 0 0 3px rgba(96, 72, 235, 0.1);
+            outline: none;
+        }
+
+        .chat-input::placeholder {
+            color: var(--ayah-input-placeholder);
+        }
+
+        /* Button Design Standards */
+        .btn-primary {
+            background-color: var(--ayah-primary);
+            color: white;
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--border-radius-small);
+            font-size: var(--text-title-medium);
+            font-weight: 500;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px; /* Touch target minimum */
+        }
+
+        .btn-primary:hover {
+            background-color: var(--ayah-primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary:disabled {
+            background-color: var(--ayah-send-disabled);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Typography Classes */
+        .text-display-large { font-size: var(--text-display-large); line-height: 1.1; }
+        .text-display-medium { font-size: var(--text-display-medium); line-height: 1.15; }
+        .text-headline-large { font-size: var(--text-headline-large); line-height: 1.25; }
+        .text-headline-medium { font-size: var(--text-headline-medium); line-height: 1.3; }
+        .text-title-large { font-size: var(--text-title-large); line-height: 1.3; }
+        .text-body-large { font-size: var(--text-body-large); line-height: 1.5; }
+        .text-body-medium { font-size: var(--text-body-medium); line-height: 1.4; }
+
+        /* Sidebar animations with enhanced transitions */
         .sidebar-transition {
-            transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, opacity 0.2s ease;
         }
 
         /* Collapsed sidebar styles */
         .sidebar-collapsed {
-            width: 64px !important;
+            width: var(--space-16) !important; /* 64px using design system */
         }
 
         .sidebar-collapsed .sidebar-content {
@@ -158,10 +315,104 @@
             transition: margin-left 0.3s ease-in-out;
         }
 
+        /* Responsive Design - Mobile-First Approach */
+        @media (max-width: 767px) {
+            :root {
+                /* Mobile typography adjustments */
+                --text-display-large: 36px;
+                --text-display-medium: 32px;
+                --text-headline-large: 28px;
+                --text-headline-medium: 24px;
+            }
+
+            .user-message {
+                max-width: 90%;
+            }
+
+            .ai-message, .user-message {
+                padding: var(--space-3);
+                font-size: var(--text-body-medium);
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            /* Tablet-specific adjustments */
+            .user-message {
+                max-width: 85%;
+            }
+        }
+
         /* Desktop collapsed state adjustments */
         @media (min-width: 1024px) {
             .sidebar-collapsed + .main-content-transition {
-                margin-left: 64px;
+                margin-left: var(--space-16); /* 64px using design system */
+            }
+        }
+
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Adjusted brand colors for dark mode */
+                --ayah-primary: #8B5CF6;              /* Lighter purple for dark backgrounds */
+                --ayah-primary-light: #1E1B4B;        /* Dark purple background */
+                --ayah-primary-lighter: #0F0F23;      /* Very dark background */
+
+                /* Educational feedback in dark mode */
+                --ayah-correct: #34D399;              /* Brighter green for visibility */
+                --ayah-learning: #FBBF24;             /* Brighter orange for contrast */
+                --ayah-hint: #60A5FA;                 /* Brighter blue for readability */
+
+                /* Chat interface dark mode */
+                --ayah-ai-message-bg: #1E1B4B;        /* Dark purple for AI messages */
+                --ayah-user-message-bg: #374151;      /* Dark gray for user messages */
+                --ayah-user-message-text: #F3F4F6;    /* Light text for dark backgrounds */
+                --ayah-ai-message-text: #E5E7EB;      /* Light text for AI messages */
+
+                /* Neutral colors for dark mode */
+                --neutral-50: #0F0F23;
+                --neutral-100: #1E1B4B;
+                --neutral-200: #262626;
+                --neutral-300: #404040;
+                --neutral-400: #525252;
+                --neutral-500: #737373;
+                --neutral-600: #A3A3A3;
+                --neutral-700: #D4D4D4;
+                --neutral-800: #E5E5E5;
+                --neutral-900: #F5F5F5;
+            }
+        }
+
+        /* Accessibility Enhancements */
+        .focus-visible {
+            outline: 2px solid var(--ayah-primary);
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --ayah-primary: #4F3BC9;
+                --ayah-primary-light: #E5E7EB;
+                --ayah-ai-message-bg: #F3F4F6;
+                --ayah-user-message-bg: #E5E7EB;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .sidebar-transition,
+            .main-content-transition,
+            .btn-primary,
+            .chat-input {
+                transition: none;
+            }
+
+            .btn-primary:hover {
+                transform: none;
+            }
+
+            .message-animate {
+                animation: none;
             }
         }
 
@@ -169,7 +420,7 @@
         .main-content-transition {
             transition: margin-left 0.3s ease-in-out;
         }
-
+        
         /* Message animations */
         @keyframes fadeInUp {
             from {
@@ -181,29 +432,29 @@
                 transform: translateY(0);
             }
         }
-
+        
         .message-animate {
             animation: fadeInUp 0.3s ease-out;
         }
-
+        
         /* Typing indicator */
         @keyframes bounce {
             0%, 60%, 100% { transform: translateY(0); }
             30% { transform: translateY(-10px); }
         }
-
+        
         .typing-dot {
             animation: bounce 1.4s infinite;
         }
-
+        
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
+        
         /* Custom scrollbar */
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
-
+        
         .custom-scrollbar::-webkit-scrollbar-track {
             background: var(--ayah-primary-light);
             border-radius: 3px;
@@ -217,13 +468,13 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: var(--ayah-primary-hover);
         }
-
+        
         /* Mobile bottom sheet */
         .bottom-sheet {
             transform: translateY(100%);
             transition: transform 0.3s ease-in-out;
         }
-
+        
         .bottom-sheet.open {
             transform: translateY(0);
         }
@@ -255,6 +506,16 @@
 
         #conversationState {
             transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Mobile Analytics Quick View - Hidden by default on all screen sizes */
+        .mobile-analytics-quick-view {
+            display: none !important;
+        }
+
+        /* Hide mobile analytics toggle button on desktop by default */
+        .mobile-analytics-toggle {
+            display: none !important;
         }
 
         /* Mobile input positioning - ChatGPT style */
@@ -323,6 +584,49 @@
                 position: relative;
                 z-index: 40;
             }
+
+            /* Mobile analytics optimizations */
+            .mobile-analytics-quick-view {
+                position: fixed;
+                bottom: 80px;
+                right: 1rem;
+                z-index: 30;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                padding: 0.75rem;
+                display: none !important; /* Force hide by default on all screen sizes */
+                max-width: 200px;
+            }
+
+            .mobile-analytics-toggle {
+                position: fixed;
+                bottom: 140px;
+                right: 1rem;
+                z-index: 35;
+                background: var(--ayah-primary);
+                color: white;
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                display: flex !important; /* Override desktop hidden state */
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 12px rgba(96, 72, 235, 0.3);
+                transition: all 0.3s ease;
+                border: none;
+                cursor: pointer;
+            }
+
+            .mobile-analytics-toggle:hover {
+                transform: scale(1.1);
+                box-shadow: 0 6px 16px rgba(96, 72, 235, 0.4);
+            }
+
+            .mobile-analytics-toggle.active {
+                background: var(--ayah-primary-hover);
+                transform: rotate(180deg);
+            }
         }
     </style>
 </head>
@@ -362,69 +666,90 @@
             <!-- Top Group: New Chat & Search -->
             <div class="p-4 border-b border-gray-200">
                 <div class="space-y-1">
-                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left nav-button">
+                    <button id="new-chat" onclick="loadChatPage()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left nav-button transition-colors duration-200">
                         <i data-lucide="plus" class="w-4 h-4"></i>
-                        <span class="text-sm">New Chat</span>
+                        <span class="text-sm font-medium">New chat</span>
                     </button>
-                    <button onclick="openSearchDialog()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left">
+                    <button onclick="openSearchDialog()" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left transition-colors duration-200">
                         <i data-lucide="search" class="w-4 h-4"></i>
-                        <span class="text-sm">Search chats</span>
+                        <span class="text-sm font-medium">Search</span>
                     </button>
                 </div>
             </div>
 
 
 
+            <!-- Learning Management Group -->
+            <div class="px-4 pb-2">
+                <h3 class="text-xs font-medium text-gray-500 mb-2 px-2">Learning Management</h3>
+                <div class="space-y-1">
+                    <button id="goals-tool" onclick="loadToolPage('goals')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
+                        <i data-lucide="target" class="w-4 h-4"></i>
+                        <span class="text-sm font-medium">Goals</span>
+                    </button>
+                    <button id="progress-tool" onclick="loadToolPage('progress')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
+                        <i data-lucide="trending-up" class="w-4 h-4"></i>
+                        <span class="text-sm font-medium">Progress</span>
+                    </button>
+                    <button id="subjects-tool" onclick="loadToolPage('subjects')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
+                        <i data-lucide="book-open" class="w-4 h-4"></i>
+                        <span class="text-sm font-medium">Subjects</span>
+                    </button>
+                </div>
+            </div>
 
-
+            <!-- Motivation & Rewards Group -->
+            <div class="px-4 pb-4 border-b border-gray-200">
+                <h3 class="text-xs font-medium text-gray-500 mb-2 px-2">Motivation & Rewards</h3>
+                <div class="space-y-1">
+                    <button id="points-tool" onclick="loadToolPage('points')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
+                        <i data-lucide="star" class="w-4 h-4"></i>
+                        <span class="text-sm font-medium">Points</span>
+                    </button>
+                    <button id="achievements-tool" onclick="loadToolPage('achievements')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
+                        <i data-lucide="award" class="w-4 h-4"></i>
+                        <span class="text-sm font-medium">Achievements</span>
+                    </button>
+                    <button id="streaks-tool" onclick="loadToolPage('streaks')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
+                        <i data-lucide="flame" class="w-4 h-4"></i>
+                        <span class="text-sm font-medium">Streaks</span>
+                    </button>
+                </div>
+            </div>
 
             <!-- Chats Group -->
             <div class="px-4 pb-4">
-                <h3 class="text-sm font-medium text-gray-700 mb-3">Chats</h3>
-                <div class="space-y-1" id="chatsList">
-                    <div onclick="selectChat(this)" oncontextmenu="showChatContextMenu(event, this)" class="chat-item relative flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-600 cursor-pointer group" data-chat-id="1">
+                <h3 class="text-xs font-medium text-gray-500 mb-2 px-2">Recent</h3>
+                <div class="space-y-1">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-600 cursor-pointer transition-colors duration-200">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate flex-1 chat-title">Math homework help</span>
-                        <button onclick="showChatContextMenu(event, this.parentElement)" class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-gray-200 transition-opacity" title="More options">
-                            <i data-lucide="more-horizontal" class="w-3 h-3"></i>
-                        </button>
+                        <span class="text-sm font-medium truncate">Math homework help</span>
                     </div>
-                    <div onclick="selectChat(this)" oncontextmenu="showChatContextMenu(event, this)" class="chat-item relative flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-600 cursor-pointer group" data-chat-id="2">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-600 cursor-pointer transition-colors duration-200">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate flex-1 chat-title">Science project ideas</span>
-                        <button onclick="showChatContextMenu(event, this.parentElement)" class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-gray-200 transition-opacity" title="More options">
-                            <i data-lucide="more-horizontal" class="w-3 h-3"></i>
-                        </button>
+                        <span class="text-sm font-medium truncate">Science project ideas</span>
                     </div>
-                    <div onclick="selectChat(this)" oncontextmenu="showChatContextMenu(event, this)" class="chat-item relative flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-600 cursor-pointer group" data-chat-id="3">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-600 cursor-pointer transition-colors duration-200">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate flex-1 chat-title">Reading comprehension</span>
-                        <button onclick="showChatContextMenu(event, this.parentElement)" class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-gray-200 transition-opacity" title="More options">
-                            <i data-lucide="more-horizontal" class="w-3 h-3"></i>
-                        </button>
+                        <span class="text-sm font-medium truncate">Reading comprehension</span>
                     </div>
-                    <div onclick="selectChat(this)" oncontextmenu="showChatContextMenu(event, this)" class="chat-item relative flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-600 cursor-pointer group" data-chat-id="4">
+                    <div onclick="selectChat(this)" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-600 cursor-pointer transition-colors duration-200">
                         <i data-lucide="message-circle" class="w-4 h-4"></i>
-                        <span class="text-sm truncate flex-1 chat-title">History essay help</span>
-                        <button onclick="showChatContextMenu(event, this.parentElement)" class="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-gray-200 transition-opacity" title="More options">
-                            <i data-lucide="more-horizontal" class="w-3 h-3"></i>
-                        </button>
+                        <span class="text-sm font-medium truncate">Study planning tips</span>
                     </div>
                 </div>
             </div>
-
-
-
+            
             <!-- Sidebar Footer -->
             <div class="absolute bottom-0 left-0 right-0 p-4">
                 <div class="relative">
-                    <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 text-left">
+                    <button id="profileMenuButton" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left transition-colors duration-200">
                         <div id="userAvatar" class="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-medium bg-ayah-primary">
                             JD
                         </div>
                         <div class="flex-1">
                             <div class="text-sm font-medium">John Doe</div>
-                            <div class="text-xs text-gray-500">Free</div>
+                            <div class="text-xs text-gray-500">Free plan</div>
                         </div>
                         <i data-lucide="more-horizontal" class="w-4 h-4"></i>
                     </button>
@@ -445,27 +770,49 @@
                                 </div>
                             </div>
 
-
+                            <!-- Token Balance -->
+                            <div class="px-3 py-2 border-b border-gray-100">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-2">
+                                        <i data-lucide="coins" class="w-4 h-4 text-ayah-primary"></i>
+                                        <span class="text-sm text-gray-700">Points Balance</span>
+                                    </div>
+                                    <span class="text-sm font-medium text-ayah-primary">1,250</span>
+                                </div>
+                                <div class="mt-1 px-2 py-1 bg-ayah-bg-light rounded text-xs text-center">
+                                    <span class="text-ayah-primary font-medium">= 12.5 ASKIA Tokens</span>
+                                </div>
+                            </div>
 
                             <!-- Menu Items -->
                             <div class="py-1">
-                                <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700">
+                                <button onclick="openModal('settings')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
                                     <i data-lucide="settings" class="w-4 h-4"></i>
-                                    <span class="text-sm">Settings</span>
+                                    <span class="text-sm font-medium">Settings</span>
                                 </button>
-
+                                <button onclick="openModal('wallet-tokens')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
+                                    <i data-lucide="wallet" class="w-4 h-4"></i>
+                                    <span class="text-sm font-medium">Wallet</span>
+                                </button>
+                                <button onclick="openModal('subscription')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
+                                    <i data-lucide="credit-card" class="w-4 h-4"></i>
+                                    <span class="text-sm font-medium">Subscription</span>
+                                </button>
+                                <div class="border-t border-gray-100 my-1"></div>
+                                <button onclick="showHelpCenter()" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
+                                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                                    <span class="text-sm font-medium">Help & FAQ</span>
+                                </button>
+                                <button onclick="showKeyboardShortcuts()" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
+                                    <i data-lucide="keyboard" class="w-4 h-4"></i>
+                                    <span class="text-sm font-medium">Shortcuts</span>
+                                </button>
+                                <div class="border-t border-gray-100 my-1"></div>
+                                <button onclick="signOut()" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-100 hover:text-gray-900 text-gray-700 transition-colors duration-200">
+                                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                                    <span class="text-sm font-medium">Sign out</span>
+                                </button>
                             </div>
-
-                            <button onclick="openModal('subscription')" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700">
-                                <i data-lucide="credit-card" class="w-4 h-4"></i>
-                                <span class="text-sm">Subscription</span>
-                            </button>
-
-                            <div class="border-t border-gray-100"></div>
-                            <button class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700">
-                                <i data-lucide="log-out" class="w-4 h-4"></i>
-                                <span class="text-sm">Sign Out</span>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -489,20 +836,42 @@
 
                 <!-- Icon buttons -->
                 <div class="p-2 border-b border-gray-200 space-y-1">
-                    <button onclick="loadChatPage()" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="New Chat">
+                    <button onclick="loadChatPage()" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="New chat">
                         <i data-lucide="plus" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="openSearchDialog()" class="w-full p-2 rounded-lg hover:bg-ayah-bg-medium hover:text-ayah-primary-dark text-gray-700 flex justify-center" title="Search chats">
+                    <button onclick="openSearchDialog()" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Search">
                         <i data-lucide="search" class="w-5 h-5"></i>
                     </button>
                 </div>
 
+                <!-- Learning Management Tool icons -->
+                <div class="p-2 border-b border-gray-200 space-y-1">
+                    <button onclick="loadToolPage('goals')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Goals">
+                        <i data-lucide="target" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('progress')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Progress">
+                        <i data-lucide="trending-up" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('subjects')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Subjects">
+                        <i data-lucide="book-open" class="w-5 h-5"></i>
+                    </button>
+                </div>
 
-
-
+                <!-- Motivation & Rewards Tool icons -->
+                <div class="p-2 space-y-1">
+                    <button onclick="loadToolPage('points')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Points">
+                        <i data-lucide="star" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('achievements')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Achievements">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="loadToolPage('streaks')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Streaks">
+                        <i data-lucide="flame" class="w-5 h-5"></i>
+                    </button>
+                </div>
             </div>
         </div>
-
+        
         <!-- Sidebar Overlay for Mobile -->
         <div id="sidebarOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden"></div>
 
@@ -533,7 +902,8 @@
                                 <div class="w-12 h-12 flex items-center justify-center mx-auto mb-4">
                                     <img src="ayah_logo.svg" alt="Ayah Logo" class="w-9 h-12">
                                 </div>
-                                <h1 class="text-3xl font-semibold text-ayah-primary-dark mb-8">How can I help you learn?</h1>
+                                <h1 class="text-3xl font-semibold text-ayah-primary-dark mb-8">Ready to learn together?</h1>
+                                <p class="text-lg text-gray-600 mb-8">Set learning goals, track your progress, and achieve academic success with AI-powered tutoring.</p>
                             </div>
 
 
@@ -543,7 +913,7 @@
                                 <div class="relative">
                                     <textarea
                                         id="initialMessageInput"
-                                        placeholder="Ask me anything about your studies..."
+                                        placeholder="Message Ayah"
                                         class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                                         rows="1"
                                         style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -562,7 +932,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3 text-xs text-gray-500 text-center">
-                                    Ayah can make mistakes. Always verify educational content.
+                                    Ayah can make mistakes. Check important info.
                                 </div>
                             </div>
 
@@ -579,7 +949,10 @@
                     </div>
                 </div>
 
-
+                <!-- Tool Pages (will be loaded dynamically) -->
+                <div id="toolPage" class="hidden h-full">
+                    <iframe id="toolFrame" class="w-full h-full border-0"></iframe>
+                </div>
             </div>
 
             <!-- Conversation Input Area (hidden initially) -->
@@ -588,7 +961,7 @@
                     <div class="relative">
                         <textarea
                             id="messageInput"
-                            placeholder="Ask me anything about your studies..."
+                            placeholder="Message Ayah"
                             class="w-full px-4 py-4 pr-16 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                             rows="1"
                             style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -607,7 +980,7 @@
                         </div>
                     </div>
                     <div class="mt-3 text-xs text-gray-500 text-center hidden md:block">
-                        Ayah can make mistakes. Always verify educational content.
+                        Ayah can make mistakes. Check important info.
                     </div>
                 </div>
             </div>
@@ -621,7 +994,7 @@
             <div class="relative">
                 <textarea
                     id="mobileInitialMessageInput"
-                    placeholder="Ask me anything about your studies..."
+                    placeholder="Message Ayah"
                     class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                     rows="1"
                     style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -640,7 +1013,7 @@
                 </div>
             </div>
             <div class="mt-3 text-xs text-gray-500 text-center">
-                Ayah can make mistakes. Always verify educational content.
+                Ayah can make mistakes. Check important info.
             </div>
         </div>
     </div>
@@ -651,7 +1024,7 @@
             <div class="relative">
                 <textarea
                     id="mobileMessageInput"
-                    placeholder="Ask me anything about your studies..."
+                    placeholder="Message Ayah"
                     class="w-full px-4 py-4 pr-12 border border-gray-300 rounded-3xl focus:outline-none focus:ring-0 focus:border-gray-300 resize-none bg-white text-gray-900 shadow-sm text-base"
                     rows="1"
                     style="max-height: 200px; min-height: 56px; font-size: 16px; line-height: 24px;"
@@ -670,10 +1043,41 @@
                 </div>
             </div>
             <div class="mt-3 text-xs text-gray-500 text-center">
-                Ayah can make mistakes. Always verify educational content.
+                Ayah can make mistakes. Check important info.
             </div>
         </div>
     </div>
+
+    <!-- Mobile Analytics Quick View (shown only on mobile) -->
+    <div id="mobileAnalyticsQuickView" class="mobile-analytics-quick-view">
+        <div class="text-xs font-semibold text-gray-800 mb-2">Quick Stats</div>
+        <div class="space-y-2">
+            <div class="flex justify-between items-center">
+                <span class="text-xs text-gray-600">Streak</span>
+                <span class="text-xs font-bold text-orange-600">5 days</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-xs text-gray-600">Today</span>
+                <span class="text-xs font-bold text-blue-600">15 min</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-xs text-gray-600">Points</span>
+                <span class="text-xs font-bold text-purple-600">1,250</span>
+            </div>
+            <div class="flex justify-between items-center mt-1">
+                <span class="text-xs text-gray-500">ASKIA Tokens</span>
+                <span class="text-xs font-bold text-ayah-primary">12.5</span>
+            </div>
+        </div>
+        <div class="mt-3 pt-2 border-t border-gray-200">
+            <button onclick="loadToolPage('progress')" class="text-xs text-ayah-primary font-medium">View Full Analytics →</button>
+        </div>
+    </div>
+
+    <!-- Mobile Analytics Toggle Button (shown only on mobile) -->
+    <button id="mobileAnalyticsToggle" class="mobile-analytics-toggle" onclick="toggleMobileAnalytics()">
+        <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+    </button>
 
     <!-- Modal Container for Feature Modals -->
     <div id="modalContainer" class="hidden fixed inset-0 z-50">
@@ -757,6 +1161,8 @@
 
         // Page elements
         const chatPage = document.getElementById('chatPage');
+        const toolPage = document.getElementById('toolPage');
+        const toolFrame = document.getElementById('toolFrame');
 
         // Initial state elements
         const initialState = document.getElementById('initialState');
@@ -860,7 +1266,7 @@
             completedLessons: 45,
             totalLessons: 180,
             currentStreak: 12,
-            tokenBalance: 50,
+            tokenBalance: 1250, // Points that convert to 12.5 ASKIA tokens
             averageScore: 85,
             subjectsProgress: {
                 math: 75,
@@ -876,8 +1282,9 @@
         function loadChatPage() {
             currentPage = 'chat';
 
-            // Show chat page
+            // Show chat page, hide tool page
             chatPage.classList.remove('hidden');
+            toolPage.classList.add('hidden');
 
             // Reset to initial state
             isInitialState = true;
@@ -959,35 +1366,146 @@
             }, 1000);
         }
 
+        // Update send button states based on input content
+        function updateSendButtonStates() {
+            // Update initial state buttons
+            if (initialMessageInput && initialSendButton) {
+                const hasInitialText = initialMessageInput.value.trim().length > 0;
+                initialSendButton.disabled = !hasInitialText;
+                if (hasInitialText) {
+                    initialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                    initialSendButton.classList.add('bg-ayah-primary', 'text-white');
+                } else {
+                    initialSendButton.classList.remove('bg-ayah-primary', 'text-white');
+                    initialSendButton.classList.add('bg-gray-200', 'text-gray-400');
+                }
+            }
+
+            // Update mobile initial state buttons
+            if (mobileInitialMessageInput && mobileInitialSendButton) {
+                const hasMobileInitialText = mobileInitialMessageInput.value.trim().length > 0;
+                mobileInitialSendButton.disabled = !hasMobileInitialText;
+                if (hasMobileInitialText) {
+                    mobileInitialSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                    mobileInitialSendButton.classList.add('bg-ayah-primary', 'text-white');
+                } else {
+                    mobileInitialSendButton.classList.remove('bg-ayah-primary', 'text-white');
+                    mobileInitialSendButton.classList.add('bg-gray-200', 'text-gray-400');
+                }
+            }
+
+            // Update conversation state buttons
+            if (messageInput && sendButton) {
+                const hasText = messageInput.value.trim().length > 0;
+                sendButton.disabled = !hasText;
+                if (hasText) {
+                    sendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                    sendButton.classList.add('bg-ayah-primary', 'text-white');
+                } else {
+                    sendButton.classList.remove('bg-ayah-primary', 'text-white');
+                    sendButton.classList.add('bg-gray-200', 'text-gray-400');
+                }
+            }
+
+            // Update mobile conversation state buttons
+            if (mobileMessageInput && mobileSendButton) {
+                const hasMobileText = mobileMessageInput.value.trim().length > 0;
+                mobileSendButton.disabled = !hasMobileText;
+                if (hasMobileText) {
+                    mobileSendButton.classList.remove('bg-gray-200', 'text-gray-400');
+                    mobileSendButton.classList.add('bg-ayah-primary', 'text-white');
+                } else {
+                    mobileSendButton.classList.remove('bg-ayah-primary', 'text-white');
+                    mobileSendButton.classList.add('bg-gray-200', 'text-gray-400');
+                }
+            }
+        }
+
+        // Start goal-focused chat session
+        function startGoalFocusedChat(goalData) {
+            // Switch to chat page
+            loadChatPage();
+
+            // Clear navigation highlights and select chat
+            updateNavigationHighlight('none');
+
+            // Create goal context message
+            const goalContextMessage = `🎯 Goal Session Started
+
+${goalData.subject} Goal - ${formatGoalType(goalData.goalType)}
+Progress: ${goalData.contextData.currentProgress}/${goalData.contextData.targetProgress} (${goalData.contextData.percentage}%)
+
+Ready to continue with your ${goalData.subject.toLowerCase()} learning goal!`;
+
+            // Start the conversation with goal context
+            handleSendMessage(goalContextMessage);
+        }
+
+        // Helper function to format goal types
+        function formatGoalType(goalType) {
+            const types = {
+                'problems_solved': 'Problems Solved',
+                'study_time': 'Study Time',
+                'topics_learned': 'Topics Learned'
+            };
+            return types[goalType] || goalType;
+        }
+
         // Generate AI response with educational context
         function generateEducationalResponse(userMessage) {
             const message = userMessage.toLowerCase();
 
-            if (message.includes('progress') || message.includes('score') || message.includes('grade')) {
-                return `Great question about your progress! Here's your current status:\n\n**Overall Progress:**\n• Grade Level: ${studentData.currentGrade}th grade\n• Completed Lessons: ${studentData.completedLessons}/${studentData.totalLessons}\n• Current Streak: ${studentData.currentStreak} days\n• Average Score: ${studentData.averageScore}%\n\n**Subject Progress:**\n• Math: ${studentData.subjectsProgress.math}%\n• Science: ${studentData.subjectsProgress.science}%\n• English: ${studentData.subjectsProgress.english}%\n• History: ${studentData.subjectsProgress.history}%\n\nYou have ${studentData.tokenBalance} $AYAH tokens! Keep up the great work!`;
-            }
+            // Check if this is a goal session initiation
+            if (message.includes('🎯') && message.includes('goal session started')) {
+                // Extract goal information from the message
+                const goalMatch = message.match(/(\w+) goal.*progress: (\d+)\/(\d+) \((\d+)%\)/);
+                if (goalMatch) {
+                    const [, subject, current, target, percentage] = goalMatch;
+                    return `Hello! I see you're continuing your ${subject} learning goal. You've made great progress - ${current} out of ${target} completed (${percentage}%)!
 
-            if (message.includes('spend') || message.includes('expense') || message.includes('budget')) {
-                if (studentData.monthlyExpenses === 0) {
-                    return `You haven't recorded any expenses this month yet. This is a great opportunity to start tracking your spending! I can help you:\n\n• Set up expense categories\n• Create a monthly budget\n• Track your spending patterns\n• Set savings goals\n\nWould you like to add your first transaction or create a budget plan?`;
-                } else {
-                    return `Based on your spending data, you've spent $${studentData.monthlyExpenses.toFixed(2)} this month. Here are some insights:\n\n• Your largest expense category needs review\n• Consider the 50/30/20 budgeting rule\n• You could save an additional $${(studentData.monthlyIncome * 0.1).toFixed(2)} monthly\n\nWould you like me to help you create a detailed budget or analyze your spending patterns?`;
+Let me help you continue where you left off. Based on your goal type, I'll:
+
+• **Track your progress** as we work together
+• **Provide appropriate challenges** for your current level
+• **Give you feedback** on your solutions
+• **Update your goal** automatically
+
+What would you like to work on first? I'm here to help you reach your learning goals! 🎯`;
                 }
+                return `Great! I see you've started a goal-focused learning session. I'm here to help you make progress on your learning goals. What would you like to work on?`;
             }
 
-            if (message.includes('goal') || message.includes('save') || message.includes('target')) {
-                return `Great question about financial goals! With your current net income of $${studentData.netIncome.toFixed(2)} per month, here's what I recommend:\n\n**Emergency Fund**: Aim for 3-6 months of expenses\n**Savings Goal**: Start with 20% of income ($${(studentData.monthlyIncome * 0.2).toFixed(2)}/month)\n**Investment**: Consider index funds after emergency fund\n\nYour current goals progress is at ${studentData.goalsProgress}%. Would you like me to help you set up specific financial goals?`;
+            if (message.includes('progress') || message.includes('score') || message.includes('grade')) {
+                const askiaTokens = (studentData.tokenBalance / 100).toFixed(1);
+                return `Great question about your progress! Here's your current status:\n\n**Overall Progress:**\n• Grade Level: ${studentData.currentGrade}th grade\n• Completed Lessons: ${studentData.completedLessons}/${studentData.totalLessons}\n• Current Streak: ${studentData.currentStreak} days\n• Average Score: ${studentData.averageScore}%\n\n**Subject Progress:**\n• Math: ${studentData.subjectsProgress.math}%\n• Science: ${studentData.subjectsProgress.science}%\n• English: ${studentData.subjectsProgress.english}%\n• History: ${studentData.subjectsProgress.history}%\n\n**Token Economics:**\n• Points Balance: ${studentData.tokenBalance} points\n• Future ASKIA Tokens: ${askiaTokens} tokens (ready for v2.1 conversion)\n• Daily Earning Cap: 415 points remaining today\n\nYour learning is building real value for the future! 🚀`;
             }
 
-            if (message.includes('token') || message.includes('reward') || message.includes('$AYAH')) {
-                return `You currently have ${studentData.tokenBalance} $AYAH tokens! These tokens are earned by:\n\n• Completing financial goals\n• Daily app usage\n• Adding transactions\n• Achieving milestones\n\nYou can use tokens for:\n• Premium AI analysis (10 tokens)\n• Advanced export features (5 tokens)\n• Priority support (20 tokens)\n\nWould you like to see your token history or learn about earning more rewards?`;
+            if (message.includes('goal') || message.includes('target') || message.includes('learn')) {
+                return `Great question about learning goals! I can help you set and track learning goals. Here are the types of goals you can create:\n\n**Problems Solved Goals**: "I want to solve 20 math problems this week"\n**Study Time Goals**: "I want to study science for 60 minutes this week"\n**Topics Learned Goals**: "I want to learn 5 new algebra concepts this month"\n\nYour current goals progress shows you're making great progress! Would you like me to help you create a new learning goal or check your current progress?`;
             }
 
-            if (message.includes('analyz') || message.includes('insight') || message.includes('pattern')) {
-                return `I've analyzed your financial data:\n\n**Current Status:**\n• Balance: $${studentData.totalBalance.toFixed(2)}\n• Monthly Income: $${studentData.monthlyIncome.toFixed(2)}\n• Monthly Expenses: $${studentData.monthlyExpenses.toFixed(2)}\n• Savings Rate: ${((studentData.netIncome / studentData.monthlyIncome) * 100).toFixed(1)}%\n\n**Recommendations:**\n• Your savings rate is excellent - keep it up!\n• Consider automating your savings\n• Track expenses to identify optimization opportunities\n\nWould you like a detailed breakdown of any specific area?`;
+            if (message.includes('math') || message.includes('algebra') || message.includes('geometry')) {
+                return `I'd love to help you with math! I can assist with:\n\n• **Algebra** - Equations, variables, and problem solving\n• **Geometry** - Shapes, angles, and spatial reasoning\n• **Arithmetic** - Basic operations and number sense\n• **Word Problems** - Breaking down complex scenarios\n\nWhat specific math topic would you like to work on today? I can help you understand concepts and track your progress toward your math goals!`;
             }
 
-            return `I'm here to help with your finances! I can assist you with:\n\n• **Budget Planning** - Create and manage budgets\n• **Expense Tracking** - Monitor your spending\n• **Goal Setting** - Plan for major purchases\n• **Investment Advice** - Build wealth over time\n• **Debt Management** - Pay off debts efficiently\n• **Token Rewards** - Earn $AYAH tokens for achievements\n\nWhat would you like to focus on today?`;
+            if (message.includes('science') || message.includes('biology') || message.includes('chemistry') || message.includes('physics')) {
+                return `Science is fascinating! I can help you explore:\n\n• **Biology** - Living organisms and life processes\n• **Chemistry** - Matter, atoms, and chemical reactions\n• **Physics** - Motion, energy, and forces\n• **Earth Science** - Our planet and the universe\n\nWhat science topic interests you most? I can explain concepts, help with experiments, and track your learning progress!`;
+            }
+
+            if (message.includes('english') || message.includes('writing') || message.includes('reading') || message.includes('grammar')) {
+                return `I'm here to help with English and language arts! I can assist with:\n\n• **Reading Comprehension** - Understanding texts and themes\n• **Writing Skills** - Essays, stories, and reports\n• **Grammar** - Sentence structure and language rules\n• **Literature** - Analyzing poems, novels, and plays\n\nWhat aspect of English would you like to work on? I can help you improve your skills and track your learning goals!`;
+            }
+
+            if (message.includes('history') || message.includes('social studies')) {
+                return `History helps us understand our world! I can help you learn about:\n\n• **World History** - Ancient civilizations to modern times\n• **American History** - From colonial times to present\n• **Geography** - Countries, cultures, and places\n• **Civics** - Government and citizenship\n\nWhat historical period or topic interests you? I can share stories, explain events, and help you achieve your history learning goals!`;
+            }
+
+            if (message.includes('token') || message.includes('reward') || message.includes('$AYAH') || message.includes('ASKIA')) {
+                const askiaTokens = (studentData.tokenBalance / 100).toFixed(1);
+                return `🚀 **Token Economics Ready!**\n\nYou currently have **${studentData.tokenBalance} points** which equals **${askiaTokens} future ASKIA tokens**!\n\n**How You Earn Points:**\n• **Base Formula:** Session Duration × Subject Difficulty × Engagement Score\n• **Subject Multipliers:** Math(1.2x), Science(1.1x), Languages(1.0x), Arts(0.9x)\n• **Bonuses:** Streak(15%), Achievement(1.2x-3.0x), Accuracy(50%)\n• **Daily Cap:** 500 points maximum per day\n\n**Token Conversion:**\n• **Rate:** 100 Points = 1 ASKIA Token\n• **Timeline:** Expected in Q2 2025 (v2.1 launch)\n• **Eligibility:** ✅ You qualify! (45 days usage, 1,250+ points)\n\n**Your points are being prepared for blockchain conversion with cryptographic integrity!**\n\nWould you like to see your detailed token economics dashboard?`;
+            }
+
+            return `I'm your AI tutor, ready to help you learn and achieve your goals! I can assist you with:\n\n• **Math** - Algebra, geometry, and problem solving\n• **Science** - Biology, chemistry, physics, and more\n• **English** - Reading, writing, and grammar\n• **History** - World events and social studies\n• **Goal Setting** - Track your learning progress\n• **Study Planning** - Organize your learning journey\n\nWhat subject would you like to explore today?`;
         }
 
         // Sample conversation data
@@ -1035,9 +1553,10 @@
         }
 
         function loadConversationHistory(chatTitle) {
-            // First, ensure we're on the chat page
+            // First, ensure we're on the chat page (not tool page)
             currentPage = 'chat';
             chatPage.classList.remove('hidden');
+            toolPage.classList.add('hidden');
 
             // Switch to conversation state
             isInitialState = false;
@@ -1072,6 +1591,13 @@
         }
 
         function updateNavigationHighlight(activeType) {
+            // Clear all tool button highlights
+            const toolButtons = document.querySelectorAll('.tool-button');
+            toolButtons.forEach(btn => {
+                btn.classList.remove('bg-ayah-bg-medium', 'text-ayah-primary-dark');
+                btn.classList.add('text-gray-700');
+            });
+
             // Clear all chat highlights
             const chatItems = document.querySelectorAll('.px-4.pb-4 .space-y-1 > div');
             chatItems.forEach(item => {
@@ -1085,9 +1611,57 @@
                 newChatBtn.classList.remove('bg-ayah-bg-medium', 'text-ayah-primary-dark');
                 newChatBtn.classList.add('text-gray-700');
             }
+
+            // Highlight active item (only tools, never New Chat)
+            if (activeType !== 'chat') {
+                const activeBtn = document.getElementById(activeType + '-tool');
+                if (activeBtn) {
+                    activeBtn.classList.add('bg-ayah-bg-medium', 'text-ayah-primary-dark');
+                    activeBtn.classList.remove('text-gray-700');
+                }
+            }
         }
 
+        function loadToolPage(toolType) {
+            currentPage = toolType;
 
+            // Hide chat page, show tool page
+            chatPage.classList.add('hidden');
+            toolPage.classList.remove('hidden');
+
+            // Load appropriate tool page
+            const toolUrls = {
+                'points': 'points-tools.html',
+                'goals': 'goals-tools.html',
+                'progress': 'progress-tools.html',
+                'subjects': 'subjects-tools.html',
+                'achievements': 'achievements-tools.html',
+                'streaks': 'streaks-tools.html'
+            };
+
+            if (toolUrls[toolType]) {
+                toolFrame.src = toolUrls[toolType];
+
+                // Update mobile title
+                const titles = {
+                    'points': 'My Points',
+                    'goals': 'My Goals',
+                    'progress': 'Progress Charts',
+                    'subjects': 'Subject Analytics',
+                    'achievements': 'Achievements',
+                    'streaks': 'Daily Streaks'
+                };
+                mobileTitle.textContent = titles[toolType] || 'Ayah Learning Tools';
+
+                // Update navigation highlighting
+                updateNavigationHighlight(toolType);
+
+                // Close sidebar on mobile when item is selected
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            }
+        }
 
         // State management
         let isInitialState = true;
@@ -1496,6 +2070,8 @@
             if (window.innerWidth < 768 && isInitialState && mobileInitialInput) {
                 mobileInitialInput.classList.remove('hidden');
             }
+            // Initialize mobile analytics
+            initializeMobileAnalytics();
         });
 
         // Modal functionality (only for settings now)
@@ -1550,27 +2126,6 @@
             modalFrame.src = '';
             document.body.classList.remove('overflow-hidden');
         }
-        // Educational Tools functionality
-        function openEducationalTool(toolType) {
-            let toolUrl = '';
-            switch(toolType) {
-                case 'subjects':
-                    toolUrl = 'subjects-tools.html';
-                    break;
-                case 'goals':
-                    toolUrl = 'goals-tools.html';
-                    break;
-                case 'progress':
-                    toolUrl = 'progress-tools.html';
-                    break;
-                default:
-                    console.error('Unknown educational tool type:', toolType);
-                    return;
-            }
-
-            // Open in new tab/window for better user experience
-            window.open(toolUrl, '_blank');
-        }
 
         // Listen for messages from iframes
         window.addEventListener('message', function(event) {
@@ -1580,6 +2135,9 @@
                 openModal('add-goal');
             } else if (event.data === 'openAddTransactionModal') {
                 openModal('add-transaction');
+            } else if (event.data && event.data.action === 'startGoalSession') {
+                // Handle goal session initiation from goals tool
+                startGoalFocusedChat(event.data);
             }
         });
 
@@ -1601,6 +2159,59 @@
 
         // Mobile profile button removed
 
+        // Mobile Analytics Toggle Function
+        function toggleMobileAnalytics() {
+            const quickView = document.getElementById('mobileAnalyticsQuickView');
+            const toggleBtn = document.getElementById('mobileAnalyticsToggle');
+
+            if (quickView && toggleBtn) {
+                const isVisible = quickView.style.display === 'block';
+
+                if (isVisible) {
+                    quickView.style.setProperty('display', 'none', 'important');
+                    toggleBtn.classList.remove('active');
+                } else {
+                    quickView.style.setProperty('display', 'block', 'important');
+                    toggleBtn.classList.add('active');
+
+                    // Auto-hide after 5 seconds
+                    setTimeout(() => {
+                        quickView.style.setProperty('display', 'none', 'important');
+                        toggleBtn.classList.remove('active');
+                    }, 5000);
+                }
+
+                // Haptic feedback on mobile
+                if ('vibrate' in navigator) {
+                    navigator.vibrate(50);
+                }
+            }
+        }
+
+        // Update mobile analytics data periodically
+        function updateMobileAnalytics() {
+            const quickView = document.getElementById('mobileAnalyticsQuickView');
+            if (quickView && window.innerWidth <= 640) {
+                // Update with current student data
+                const streakElement = quickView.querySelector('.text-orange-600');
+                const todayElement = quickView.querySelector('.text-blue-600');
+                const pointsElement = quickView.querySelector('.text-purple-600');
+
+                if (streakElement) streakElement.textContent = `${studentData.currentStreak} days`;
+                if (todayElement) todayElement.textContent = '15 min'; // Could be dynamic
+                if (pointsElement) pointsElement.textContent = `${studentData.tokenBalance}`;
+            }
+        }
+
+        // Initialize mobile analytics
+        function initializeMobileAnalytics() {
+            if (window.innerWidth <= 640) {
+                updateMobileAnalytics();
+                // Update every 30 seconds
+                setInterval(updateMobileAnalytics, 30000);
+            }
+        }
+
         // Close dropdown when clicking outside
         document.addEventListener('click', function(e) {
             if (!profileMenuButton?.contains(e.target) && !profileDropdown?.contains(e.target)) {
@@ -1618,16 +2229,16 @@
         // User avatar color generation
         function generateAvatarColor(name) {
             const colors = [
-                '#6048EB', // Ayah primary blue
-                '#043178', // Ayah dark blue
-                '#4F3BC9', // Ayah hover blue
-                '#5B8CFF', // Ayah secondary blue
-                '#7DA3FF', // Ayah tertiary blue
-                '#A0BAFF', // Ayah light blue
-                '#6B8FFF', // Ayah accent blue
-                '#8FA8FF', // Ayah lighter blue
-                '#B3C1FF', // Ayah lightest blue
-                '#2E4FCC'  // Ayah primary dark
+                '#6048EB', // ayah primary blue
+                '#043178', // ayah dark blue
+                '#4F3BC9', // ayah hover blue
+                '#5B8CFF', // ayah secondary blue
+                '#7DA3FF', // ayah tertiary blue
+                '#A0BAFF', // ayah light blue
+                '#6B8FFF', // ayah accent blue
+                '#8FA8FF', // ayah lighter blue
+                '#B3C1FF', // ayah lightest blue
+                '#2E4FCC'  // ayah primary dark
             ];
 
             let hash = 0;
@@ -1749,11 +2360,11 @@
                     <div class="space-y-1">
                         <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
                             <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
-                            <span class="text-sm text-gray-900">Nutrition planning help</span>
+                            <span class="text-sm text-gray-900">Algebra equations help</span>
                         </div>
                         <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
                             <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
-                            <span class="text-sm text-gray-900">Mood tracking insights</span>
+                            <span class="text-sm text-gray-900">Science project planning</span>
                         </div>
                     </div>
                 </div>
@@ -1763,11 +2374,11 @@
                     <div class="space-y-1">
                         <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
                             <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
-                            <span class="text-sm text-gray-900">Fasting schedule setup</span>
+                            <span class="text-sm text-gray-900">Essay writing tips</span>
                         </div>
                         <div class="flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg cursor-pointer">
                             <i data-lucide="message-circle" class="w-4 h-4 text-gray-500"></i>
-                            <span class="text-sm text-gray-900">Exercise routine planning</span>
+                            <span class="text-sm text-gray-900">History timeline review</span>
                         </div>
                     </div>
                 </div>
@@ -1786,12 +2397,12 @@
 
             // Filter chats based on search query
             const chats = [
-                { title: 'Nutrition planning help', date: 'Today' },
-                { title: 'Mood tracking insights', date: 'Today' },
-                { title: 'Fasting schedule setup', date: 'Yesterday' },
-                { title: 'Exercise routine planning', date: 'Yesterday' },
-                { title: 'Weight loss goals discussion', date: 'Last week' },
-                { title: 'Healthy meal prep ideas', date: 'Last week' }
+                { title: 'Algebra equations help', date: 'Today' },
+                { title: 'Science project planning', date: 'Today' },
+                { title: 'Essay writing tips', date: 'Yesterday' },
+                { title: 'History timeline review', date: 'Yesterday' },
+                { title: 'Learning goals discussion', date: 'Last week' },
+                { title: 'Study schedule planning', date: 'Last week' }
             ];
 
             const filteredChats = chats.filter(chat =>
@@ -1865,243 +2476,39 @@
             }
         });
 
+        // New profile menu functions
+        function showHelpCenter() {
+            // Open help center in a new tab or modal
+            window.open('https://help.ayah.ai', '_blank');
+        }
+
+        function showKeyboardShortcuts() {
+            // Show keyboard shortcuts modal or overlay
+            alert('Keyboard Shortcuts:\n\n⌘/Ctrl + K - Search chats\nEsc - Close dialogs\n⌘/Ctrl + N - New chat\n⌘/Ctrl + / - Toggle sidebar');
+        }
+
+        function signOut() {
+            // Handle sign out
+            if (confirm('Are you sure you want to sign out?')) {
+                // Clear any stored data
+                localStorage.clear();
+                sessionStorage.clear();
+                // Redirect to login page
+                window.location.href = '/login';
+            }
+        }
+
         // Make functions globally available
         window.openModal = openModal;
         window.closeModal = closeModal;
         window.loadChatPage = loadChatPage;
+        window.loadToolPage = loadToolPage;
         window.initializeUserAvatar = initializeUserAvatar;
         window.openSearchDialog = openSearchDialog;
         window.closeSearchDialog = closeSearchDialog;
-    </script>
-
-    <!-- Chat Context Menu -->
-    <div id="chatContextMenu" class="hidden fixed z-50 bg-white border border-gray-200 rounded-lg shadow-lg py-1 min-w-[160px]">
-        <button onclick="renameChatAction()" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-50 text-gray-700">
-            <i data-lucide="edit-3" class="w-4 h-4"></i>
-            <span class="text-sm">Rename</span>
-        </button>
-        <button onclick="archiveChatAction()" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-50 text-gray-700">
-            <i data-lucide="archive" class="w-4 h-4"></i>
-            <span class="text-sm">Archive</span>
-        </button>
-        <div class="border-t border-gray-100 my-1"></div>
-        <button onclick="deleteChatAction()" class="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-red-50 text-red-600">
-            <i data-lucide="trash-2" class="w-4 h-4"></i>
-            <span class="text-sm">Delete</span>
-        </button>
-    </div>
-
-    <!-- Rename Chat Modal -->
-    <div id="renameChatModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md">
-            <div class="p-6">
-                <h2 class="text-xl font-semibold text-gray-900 mb-4">Rename Chat</h2>
-                <input type="text" id="renameChatInput" placeholder="Enter new chat name..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ayah-primary focus:border-ayah-primary">
-                <div class="flex items-center space-x-3 mt-6">
-                    <button onclick="cancelRenameChat()" class="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors">
-                        Cancel
-                    </button>
-                    <button onclick="confirmRenameChat()" class="flex-1 bg-ayah-primary text-white py-2 px-4 rounded-lg hover:bg-ayah-primary-hover transition-colors">
-                        Rename
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div id="deleteChatModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md">
-            <div class="p-6">
-                <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-                        <i data-lucide="trash-2" class="w-5 h-5 text-red-600"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-900">Delete Chat</h2>
-                        <p class="text-sm text-gray-600">This action cannot be undone</p>
-                    </div>
-                </div>
-                <p class="text-gray-700 mb-6">Are you sure you want to delete "<span id="deleteChatName" class="font-medium"></span>"? This will permanently remove the conversation and all its messages.</p>
-                <div class="flex items-center space-x-3">
-                    <button onclick="cancelDeleteChat()" class="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors">
-                        Cancel
-                    </button>
-                    <button onclick="confirmDeleteChat()" class="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors">
-                        Delete
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Chat management variables
-        let currentChatElement = null;
-        let currentChatId = null;
-
-        // Show chat context menu
-        function showChatContextMenu(event, chatElement) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            currentChatElement = chatElement;
-            currentChatId = chatElement.dataset.chatId;
-
-            const contextMenu = document.getElementById('chatContextMenu');
-
-            // Position the context menu
-            contextMenu.style.left = `${event.clientX}px`;
-            contextMenu.style.top = `${event.clientY}px`;
-
-            // Show the menu
-            contextMenu.classList.remove('hidden');
-
-            // Adjust position if menu goes off screen
-            setTimeout(() => {
-                const menuRect = contextMenu.getBoundingClientRect();
-                if (menuRect.right > window.innerWidth) {
-                    contextMenu.style.left = `${window.innerWidth - menuRect.width - 10}px`;
-                }
-                if (menuRect.bottom > window.innerHeight) {
-                    contextMenu.style.top = `${window.innerHeight - menuRect.height - 10}px`;
-                }
-            }, 0);
-        }
-
-        // Hide context menu
-        function hideContextMenu() {
-            document.getElementById('chatContextMenu').classList.add('hidden');
-        }
-
-        // Rename chat action
-        function renameChatAction() {
-            hideContextMenu();
-            const currentTitle = currentChatElement.querySelector('.chat-title').textContent;
-            document.getElementById('renameChatInput').value = currentTitle;
-            document.getElementById('renameChatModal').classList.remove('hidden');
-            document.getElementById('renameChatInput').focus();
-            document.getElementById('renameChatInput').select();
-        }
-
-        // Archive chat action
-        function archiveChatAction() {
-            hideContextMenu();
-
-            // Get chat information
-            const chatTitle = currentChatElement.querySelector('.chat-title').textContent;
-            const chatId = currentChatId;
-
-            // Add to archived chats data (this would normally be sent to server)
-            const archivedChat = {
-                id: chatId,
-                title: chatTitle,
-                dateCreated: new Date().toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                })
-            };
-
-            // Store in localStorage for demo purposes
-            let archivedChats = JSON.parse(localStorage.getItem('ayah-archived-chats') || '[]');
-            archivedChats.push(archivedChat);
-            localStorage.setItem('ayah-archived-chats', JSON.stringify(archivedChats));
-
-            // Remove from current list
-            currentChatElement.remove();
-
-            // Show success message
-            showToast('Chat archived successfully. Manage archived chats in Settings > Data Controls.');
-        }
-
-        // Delete chat action
-        function deleteChatAction() {
-            hideContextMenu();
-            const chatTitle = currentChatElement.querySelector('.chat-title').textContent;
-            document.getElementById('deleteChatName').textContent = chatTitle;
-            document.getElementById('deleteChatModal').classList.remove('hidden');
-        }
-
-
-
-        // Rename chat modal functions
-        function cancelRenameChat() {
-            document.getElementById('renameChatModal').classList.add('hidden');
-        }
-
-        function confirmRenameChat() {
-            const newName = document.getElementById('renameChatInput').value.trim();
-            if (newName && currentChatElement) {
-                currentChatElement.querySelector('.chat-title').textContent = newName;
-                showToast('Chat renamed successfully');
-            }
-            document.getElementById('renameChatModal').classList.add('hidden');
-        }
-
-        // Delete chat modal functions
-        function cancelDeleteChat() {
-            document.getElementById('deleteChatModal').classList.add('hidden');
-        }
-
-        function confirmDeleteChat() {
-            if (currentChatElement) {
-                const chatTitle = currentChatElement.querySelector('.chat-title').textContent;
-                currentChatElement.remove();
-
-                showToast(`"${chatTitle}" deleted successfully`);
-            }
-            document.getElementById('deleteChatModal').classList.add('hidden');
-        }
-
-        // Toast notification function
-        function showToast(message) {
-            // Create toast element
-            const toast = document.createElement('div');
-            toast.className = 'fixed top-4 right-4 bg-ayah-primary-dark text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all duration-300 transform translate-x-full';
-            toast.textContent = message;
-
-            document.body.appendChild(toast);
-
-            // Animate in
-            setTimeout(() => {
-                toast.classList.remove('translate-x-full');
-            }, 100);
-
-            // Animate out and remove
-            setTimeout(() => {
-                toast.classList.add('translate-x-full');
-                setTimeout(() => {
-                    document.body.removeChild(toast);
-                }, 300);
-            }, 3000);
-        }
-
-        // Close context menus when clicking elsewhere
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('#chatContextMenu')) {
-                hideContextMenu();
-            }
-        });
-
-        // Handle Enter key in rename input
-        document.getElementById('renameChatInput')?.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                confirmRenameChat();
-            } else if (event.key === 'Escape') {
-                cancelRenameChat();
-            }
-        });
-
-        // Make chat management functions globally available
-        window.showChatContextMenu = showChatContextMenu;
-        window.renameChatAction = renameChatAction;
-        window.archiveChatAction = archiveChatAction;
-        window.deleteChatAction = deleteChatAction;
-        window.cancelRenameChat = cancelRenameChat;
-        window.confirmRenameChat = confirmRenameChat;
-        window.cancelDeleteChat = cancelDeleteChat;
-        window.confirmDeleteChat = confirmDeleteChat;
+        window.showHelpCenter = showHelpCenter;
+        window.showKeyboardShortcuts = showKeyboardShortcuts;
+        window.signOut = signOut;
     </script>
 </body>
 </html>

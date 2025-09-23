@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Goals Dashboard - Ayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Ayah Brand Colors */
+        :root {
+            --ayah-primary: #6048EB;
+            --ayah-primary-hover: #4F3BC9;
+            --ayah-primary-light: #F4F1FF;
+            --ayah-primary-lighter: #F4FDFF;
+            --ayah-primary-dark: #3A2A9E;
+        }
+
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .bg-ayah-primary-lighter { background-color: var(--ayah-primary-lighter); }
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+
+        /* Progress bar animations */
+        .progress-bar {
+            transition: width 0.8s ease-in-out;
+        }
+
+        /* Goal card hover effects */
+        .goal-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .goal-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Age-appropriate animations for elementary */
+        .celebration-bounce {
+            animation: bounce 0.6s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Enhanced Milestone Celebrations - US-G002 Requirements */
+        .milestone-25 {
+            animation: starPulse 1s ease-in-out;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+        }
+
+        .milestone-50 {
+            animation: targetSpin 1s ease-in-out;
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+        }
+
+        .milestone-75 {
+            animation: rocketLaunch 1s ease-in-out;
+            background: linear-gradient(45deg, #10b981, #059669);
+        }
+
+        .milestone-100 {
+            animation: trophyBounce 1s ease-in-out;
+            background: linear-gradient(45deg, #8b5cf6, #7c3aed);
+        }
+
+        @keyframes starPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+        }
+
+        @keyframes targetSpin {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+
+        @keyframes rocketLaunch {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        @keyframes trophyBounce {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2) rotate(-5deg); }
+            50% { transform: scale(1.3) rotate(5deg); }
+            75% { transform: scale(1.1) rotate(-2deg); }
+        }
+
+        /* Confetti animation for 100% completion */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Context Analysis Modal Animations */
+        .context-modal-enter {
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Loading spinner animation */
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Progress bar animation */
+        .progress-bar-animate {
+            transition: width 0.8s ease-in-out;
+        }
+
+        /* Continue button hover effect */
+        .continue-btn {
+            transition: all 0.2s ease;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(96, 72, 235, 0.3);
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .mobile-stack { flex-direction: column; }
+            .mobile-full { width: 100%; }
+
+            /* Context modal mobile adjustments */
+            #contextAnalysisModal .max-w-lg {
+                max-width: 95vw;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <img src="ayah_logo.svg" alt="Ayah Logo" class="w-8 h-8">
+                    <h1 class="text-xl font-semibold text-gray-900">My Goals Dashboard</h1>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <!-- Milestone Test Buttons -->
+                    <div class="flex items-center space-x-1">
+                        <button onclick="testMilestone(25)" class="px-2 py-1 text-xs bg-yellow-100 text-yellow-800 rounded hover:bg-yellow-200" title="Test 25% Milestone">25%</button>
+                        <button onclick="testMilestone(50)" class="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded hover:bg-blue-200" title="Test 50% Milestone">50%</button>
+                        <button onclick="testMilestone(75)" class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded hover:bg-green-200" title="Test 75% Milestone">75%</button>
+                        <button onclick="testMilestone(100)" class="px-2 py-1 text-xs bg-purple-100 text-purple-800 rounded hover:bg-purple-200" title="Test 100% Milestone">100%</button>
+                    </div>
+                    <button class="p-2 text-gray-500 hover:text-ayah-primary rounded-lg hover:bg-ayah-primary-light">
+                        <i data-lucide="settings" class="w-5 h-5"></i>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:text-ayah-primary rounded-lg hover:bg-ayah-primary-light">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Quick Stats Overview -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-xl p-4 shadow-sm">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                        <i data-lucide="clock" class="w-5 h-5 text-green-600"></i>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold text-gray-900">2h 45m</p>
+                        <p class="text-sm text-gray-600">This Week</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-4 shadow-sm">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                        <i data-lucide="target" class="w-5 h-5 text-blue-600"></i>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold text-gray-900">47</p>
+                        <p class="text-sm text-gray-600">Problems Solved</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-4 shadow-sm">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                        <i data-lucide="flame" class="w-5 h-5 text-orange-600"></i>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold text-gray-900">5</p>
+                        <p class="text-sm text-gray-600">Day Streak</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-4 shadow-sm">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                        <i data-lucide="trophy" class="w-5 h-5 text-purple-600"></i>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold text-gray-900">3</p>
+                        <p class="text-sm text-gray-600">Goals Completed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Goals Section -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-gray-900">Active Goals</h2>
+                <button onclick="openCreateGoalModal()" class="bg-ayah-primary text-white px-4 py-2 rounded-lg hover:bg-ayah-primary-hover flex items-center space-x-2">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    <span>New Goal</span>
+                </button>
+            </div>
+
+            <!-- Goals Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Goal Card 1 - High Progress -->
+                <div class="goal-card bg-white rounded-xl p-6 shadow-sm border border-gray-100" data-goal-id="math-problems" data-goal-type="problems" data-subject="Math">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">📊</span>
+                            <span class="font-semibold text-gray-900">Math Problems</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <button class="p-1 text-gray-400 hover:text-gray-600">
+                                <i data-lucide="edit-2" class="w-4 h-4"></i>
+                            </button>
+                            <button class="p-1 text-gray-400 hover:text-red-500">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
+                            <span>Progress: 18 of 20</span>
+                            <span class="text-green-600 font-medium">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="progress-bar bg-green-500 h-3 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-sm mb-4">
+                        <span class="text-gray-600">Due in 2 days</span>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Almost Done!</span>
+                    </div>
+
+                    <!-- Continue Button -->
+                    <button onclick="openContextAnalysisModal('math-problems')" class="continue-btn w-full bg-ayah-primary text-white px-4 py-3 rounded-lg hover:bg-ayah-primary-hover flex items-center justify-center space-x-2 font-medium">
+                        <i data-lucide="play" class="w-4 h-4"></i>
+                        <span>Continue</span>
+                    </button>
+                </div>
+
+                <!-- Goal Card 2 - Medium Progress -->
+                <div class="goal-card bg-white rounded-xl p-6 shadow-sm border border-gray-100" data-goal-id="reading-time" data-goal-type="time" data-subject="Reading">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">📚</span>
+                            <span class="font-semibold text-gray-900">Reading Time</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <button class="p-1 text-gray-400 hover:text-gray-600">
+                                <i data-lucide="edit-2" class="w-4 h-4"></i>
+                            </button>
+                            <button class="p-1 text-gray-400 hover:text-red-500">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
+                            <span>Progress: 3h 30m of 6h</span>
+                            <span class="text-yellow-600 font-medium">58%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="progress-bar bg-yellow-500 h-3 rounded-full" style="width: 58%"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-sm mb-4">
+                        <span class="text-gray-600">Due in 5 days</span>
+                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">On Track</span>
+                    </div>
+
+                    <!-- Continue Button -->
+                    <button onclick="openContextAnalysisModal('reading-time')" class="continue-btn w-full bg-ayah-primary text-white px-4 py-3 rounded-lg hover:bg-ayah-primary-hover flex items-center justify-center space-x-2 font-medium">
+                        <i data-lucide="play" class="w-4 h-4"></i>
+                        <span>Continue</span>
+                    </button>
+                </div>
+
+                <!-- Goal Card 3 - Low Progress -->
+                <div class="goal-card bg-white rounded-xl p-6 shadow-sm border border-gray-100" data-goal-id="science-topics" data-goal-type="topics" data-subject="Science">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-2xl">🔬</span>
+                            <span class="font-semibold text-gray-900">Science Topics</span>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <button class="p-1 text-gray-400 hover:text-gray-600">
+                                <i data-lucide="edit-2" class="w-4 h-4"></i>
+                            </button>
+                            <button class="p-1 text-gray-400 hover:text-red-500">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
+                            <span>Progress: 2 of 10</span>
+                            <span class="text-red-600 font-medium">20%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="progress-bar bg-red-500 h-3 rounded-full" style="width: 20%"></div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-sm mb-4">
+                        <span class="text-gray-600">Due in 1 day</span>
+                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium">Needs Focus</span>
+                    </div>
+
+                    <!-- Continue Button -->
+                    <button onclick="openContextAnalysisModal('science-topics')" class="continue-btn w-full bg-ayah-primary text-white px-4 py-3 rounded-lg hover:bg-ayah-primary-hover flex items-center justify-center space-x-2 font-medium">
+                        <i data-lucide="play" class="w-4 h-4"></i>
+                        <span>Continue</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6">Recent Activity</h2>
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="space-y-4">
+                    <!-- Activity Item 1 -->
+                    <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">Completed 5 Math Problems</p>
+                            <p class="text-sm text-gray-600">Today, 2:30 PM • Progress on "Math Problems" goal</p>
+                        </div>
+                        <div class="text-sm text-green-600 font-medium">+25% progress</div>
+                    </div>
+
+                    <!-- Activity Item 2 -->
+                    <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="book-open" class="w-5 h-5 text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">Reading Session - 45 minutes</p>
+                            <p class="text-sm text-gray-600">Yesterday, 4:15 PM • Progress on "Reading Time" goal</p>
+                        </div>
+                        <div class="text-sm text-blue-600 font-medium">+12.5% progress</div>
+                    </div>
+
+                    <!-- Activity Item 3 -->
+                    <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="award" class="w-5 h-5 text-purple-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">Achievement Unlocked: "Math Master"</p>
+                            <p class="text-sm text-gray-600">2 days ago • Completed 50 math problems this month</p>
+                        </div>
+                        <div class="text-sm text-purple-600 font-medium">🏆 Milestone</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Next Steps Recommendations -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6">Recommended Next Steps</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Recommendation 1 -->
+                <div class="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-4 h-4 text-white"></i>
+                        </div>
+                        <h3 class="font-semibold text-green-900">Almost There!</h3>
+                    </div>
+                    <p class="text-green-800 mb-4">Continue working on Math Problems - you're almost there! Just 2 more problems to complete your goal.</p>
+                    <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 text-sm font-medium">
+                        Continue Math Practice
+                    </button>
+                </div>
+
+                <!-- Recommendation 2 -->
+                <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-6 border border-orange-200">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                            <i data-lucide="zap" class="w-4 h-4 text-white"></i>
+                        </div>
+                        <h3 class="font-semibold text-orange-900">Keep Your Streak!</h3>
+                    </div>
+                    <p class="text-orange-800 mb-4">Try a quick Science session to maintain your 5-day learning streak. Even 15 minutes counts!</p>
+                    <button class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 text-sm font-medium">
+                        Quick Science Session
+                    </button>
+                </div>
+
+                <!-- Recommendation 3 -->
+                <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                            <i data-lucide="target" class="w-4 h-4 text-white"></i>
+                        </div>
+                        <h3 class="font-semibold text-blue-900">Great Progress!</h3>
+                    </div>
+                    <p class="text-blue-800 mb-4">Great progress on Reading Time - consider setting a new challenge to keep building your skills.</p>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:blue-700 text-sm font-medium">
+                        Set New Reading Goal
+                    </button>
+                </div>
+
+                <!-- Recommendation 4 -->
+                <div class="bg-gradient-to-r from-red-50 to-red-100 rounded-xl p-6 border border-red-200">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                            <i data-lucide="alert-circle" class="w-4 h-4 text-white"></i>
+                        </div>
+                        <h3 class="font-semibold text-red-900">Needs Attention</h3>
+                    </div>
+                    <p class="text-red-800 mb-4">Focus on Science Quiz to catch up with your other goals. The deadline is tomorrow!</p>
+                    <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 text-sm font-medium">
+                        Start Science Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed Goals Section -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold text-gray-900 mb-6">Recently Completed Goals</h2>
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="space-y-4">
+                    <!-- Completed Goal 1 -->
+                    <div class="flex items-center space-x-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                            <i data-lucide="check" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">History Essay - 5 pages</p>
+                            <p class="text-sm text-gray-600">Completed 3 days ago • Finished 2 days early</p>
+                        </div>
+                        <div class="text-sm text-green-600 font-medium">✅ Completed</div>
+                    </div>
+
+                    <!-- Completed Goal 2 -->
+                    <div class="flex items-center space-x-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                            <i data-lucide="check" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">Spanish Vocabulary - 50 words</p>
+                            <p class="text-sm text-gray-600">Completed 1 week ago • Perfect score on quiz</p>
+                        </div>
+                        <div class="text-sm text-green-600 font-medium">✅ Completed</div>
+                    </div>
+
+                    <!-- Completed Goal 3 -->
+                    <div class="flex items-center space-x-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                            <i data-lucide="check" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-900">Chemistry Lab Report</p>
+                            <p class="text-sm text-gray-600">Completed 2 weeks ago • Excellent grade received</p>
+                        </div>
+                        <div class="text-sm text-green-600 font-medium">✅ Completed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enhanced Age-Appropriate Elementary Version (K-5) - US-G003 Implementation -->
+        <div id="elementaryView" class="hidden">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-ayah-primary mb-4">🌟 My Learning Adventure! 🌟</h1>
+                <p class="text-xl text-gray-600 mb-4">Look how awesome you're doing!</p>
+                <!-- Fun animated character -->
+                <div class="text-6xl animate-bounce">🦸‍♂️</div>
+            </div>
+
+            <!-- Enhanced Elementary Stats with Large, Colorful Progress Bars -->
+            <div class="grid grid-cols-2 gap-6 mb-8">
+                <div class="bg-gradient-to-br from-yellow-200 via-yellow-300 to-yellow-400 rounded-3xl p-8 text-center shadow-lg transform hover:scale-105 transition-transform">
+                    <div class="text-6xl mb-4 animate-pulse">⏰</div>
+                    <p class="text-3xl font-bold text-yellow-900 mb-2">2h 45m</p>
+                    <p class="text-xl text-yellow-800 font-semibold">Learning Time!</p>
+                    <div class="mt-4 bg-yellow-100 rounded-full h-4">
+                        <div class="bg-yellow-600 h-4 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-200 via-blue-300 to-blue-400 rounded-3xl p-8 text-center shadow-lg transform hover:scale-105 transition-transform">
+                    <div class="text-6xl mb-4 animate-pulse">🎯</div>
+                    <p class="text-3xl font-bold text-blue-900 mb-2">47</p>
+                    <p class="text-xl text-blue-800 font-semibold">Problems Solved!</p>
+                    <div class="mt-4 bg-blue-100 rounded-full h-4">
+                        <div class="bg-blue-600 h-4 rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-orange-200 via-orange-300 to-orange-400 rounded-3xl p-8 text-center shadow-lg transform hover:scale-105 transition-transform">
+                    <div class="text-6xl mb-4 animate-pulse">🔥</div>
+                    <p class="text-3xl font-bold text-orange-900 mb-2">5 Days</p>
+                    <p class="text-xl text-orange-800 font-semibold">Super Streak!</p>
+                    <div class="mt-4 bg-orange-100 rounded-full h-4">
+                        <div class="bg-orange-600 h-4 rounded-full" style="width: 100%"></div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-200 via-purple-300 to-purple-400 rounded-3xl p-8 text-center shadow-lg transform hover:scale-105 transition-transform">
+                    <div class="text-6xl mb-4 animate-pulse">🏆</div>
+                    <p class="text-3xl font-bold text-purple-900 mb-2">3</p>
+                    <p class="text-xl text-purple-800 font-semibold">Goals Done!</p>
+                    <div class="mt-4 bg-purple-100 rounded-full h-4">
+                        <div class="bg-purple-600 h-4 rounded-full" style="width: 60%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Elementary Goal Cards with Visual Rewards -->
+            <div class="space-y-8">
+                <div class="bg-gradient-to-r from-green-100 to-green-200 rounded-3xl p-8 shadow-xl border-4 border-green-300">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-6xl animate-bounce">📊</span>
+                            <h3 class="text-2xl font-bold text-gray-900">Math Fun Time!</h3>
+                        </div>
+                        <div class="text-4xl">⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-green-800">18 out of 20 done!</span>
+                            <span class="text-4xl animate-bounce">😊</span>
+                        </div>
+                        <!-- Large, colorful progress bar with fun animation -->
+                        <div class="w-full bg-green-200 rounded-full h-8 shadow-inner">
+                            <div class="bg-gradient-to-r from-green-400 to-green-600 h-8 rounded-full celebration-bounce flex items-center justify-center text-white font-bold" style="width: 90%">
+                                90% Done!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-300 text-green-900 px-6 py-4 rounded-full text-xl font-bold mb-4 shadow-lg">
+                            Almost Done! 🎉 Just 2 more!
+                        </div>
+                        <button class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg transform hover:scale-105 transition-transform">
+                            🚀 Keep Going!
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Additional Elementary Goal Card -->
+                <div class="bg-gradient-to-r from-blue-100 to-blue-200 rounded-3xl p-8 shadow-xl border-4 border-blue-300">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center space-x-4">
+                            <span class="text-6xl animate-bounce">📚</span>
+                            <h3 class="text-2xl font-bold text-gray-900">Reading Adventure!</h3>
+                        </div>
+                        <div class="text-4xl">⭐⭐⭐</div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl font-bold text-blue-800">3h 30m of 6h done!</span>
+                            <span class="text-4xl animate-bounce">📖</span>
+                        </div>
+                        <!-- Large, colorful progress bar -->
+                        <div class="w-full bg-blue-200 rounded-full h-8 shadow-inner">
+                            <div class="bg-gradient-to-r from-blue-400 to-blue-600 h-8 rounded-full flex items-center justify-center text-white font-bold" style="width: 58%">
+                                58% Done!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-blue-300 text-blue-900 px-6 py-4 rounded-full text-xl font-bold mb-4 shadow-lg">
+                            Great Job! 📚 Keep Reading!
+                        </div>
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-full text-xl font-bold shadow-lg transform hover:scale-105 transition-transform">
+                            📖 Read More!
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fun Encouragement Section -->
+            <div class="mt-8 text-center bg-gradient-to-r from-pink-100 to-purple-100 rounded-3xl p-8 shadow-lg">
+                <div class="text-6xl mb-4">🎊</div>
+                <h2 class="text-3xl font-bold text-purple-800 mb-4">You're Amazing!</h2>
+                <p class="text-xl text-purple-700 mb-6">Keep learning and having fun! You're doing such a great job!</p>
+                <div class="flex justify-center space-x-4">
+                    <span class="text-4xl animate-bounce">🌟</span>
+                    <span class="text-4xl animate-bounce" style="animation-delay: 0.1s">🎉</span>
+                    <span class="text-4xl animate-bounce" style="animation-delay: 0.2s">🏆</span>
+                    <span class="text-4xl animate-bounce" style="animation-delay: 0.3s">⭐</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Enhanced Milestone Celebration Modal - US-G002 Requirements -->
+    <div id="milestoneModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center relative overflow-hidden">
+            <!-- Confetti Container -->
+            <div id="confettiContainer" class="confetti hidden"></div>
+
+            <!-- Milestone Icon -->
+            <div id="milestoneIcon" class="text-6xl mb-4">🌟</div>
+
+            <!-- Milestone Title -->
+            <h2 id="milestoneTitle" class="text-2xl font-bold text-gray-800 mb-2">Great Start!</h2>
+
+            <!-- Milestone Message -->
+            <p id="milestoneMessage" class="text-gray-600 mb-4">25% Complete - You're building momentum!</p>
+
+            <!-- Progress Indicator -->
+            <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-6 py-3 rounded-full text-lg font-semibold mb-4" id="milestoneProgress">
+                25% Complete!
+            </div>
+
+            <!-- Encouragement Text -->
+            <p id="milestoneEncouragement" class="text-sm text-gray-500 mb-6">Keep up the amazing work! You're making great progress!</p>
+
+            <!-- Action Buttons -->
+            <div class="flex space-x-3">
+                <button onclick="closeMilestoneModal()" class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 font-medium">
+                    Continue Later
+                </button>
+                <button onclick="continueLearning()" class="flex-1 bg-ayah-primary text-white px-4 py-2 rounded-lg hover:bg-ayah-primary-hover font-medium">
+                    Keep Learning!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Goal Modal (Placeholder) -->
+    <div id="createGoalModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Create New Goal</h3>
+                <button onclick="closeCreateGoalModal()" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <p class="text-gray-600 mb-4">This is a prototype. In the real app, you would be able to create new goals here.</p>
+            <div class="flex space-x-3">
+                <button onclick="closeCreateGoalModal()" class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">
+                    Cancel
+                </button>
+                <button onclick="closeCreateGoalModal()" class="flex-1 bg-ayah-primary text-white px-4 py-2 rounded-lg hover:bg-ayah-primary-hover">
+                    Create Goal
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Analysis Modal -->
+    <div id="contextAnalysisModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-6 max-w-lg w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <!-- Loading State -->
+            <div id="contextLoading" class="text-center py-8">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-ayah-primary mx-auto mb-4"></div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Analyzing Your Goal Context...</h3>
+                <p class="text-gray-600">Preparing your personalized learning session</p>
+            </div>
+
+            <!-- Context Analysis Content -->
+            <div id="contextContent" class="hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 id="contextTitle" class="text-xl font-semibold text-gray-900">Continue Your Math Goal</h3>
+                        <p id="contextSubtitle" class="text-gray-600">18/20 completed (90%)</p>
+                    </div>
+                    <button onclick="closeContextAnalysisModal()" class="text-gray-400 hover:text-gray-600">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mb-6">
+                    <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div id="contextProgressBar" class="bg-green-500 h-4 rounded-full transition-all duration-500" style="width: 90%"></div>
+                    </div>
+                </div>
+
+                <!-- AI Context Analysis Section -->
+                <div class="bg-ayah-primary-light rounded-lg p-4 mb-6">
+                    <h4 class="font-semibold text-ayah-primary mb-3 flex items-center">
+                        <i data-lucide="brain" class="w-4 h-4 mr-2"></i>
+                        AI Context Analysis
+                    </h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-700">Goal Type:</span>
+                            <span id="contextGoalType" class="font-medium text-ayah-primary">Problems Solved</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-700">Progress Level:</span>
+                            <span id="contextProgressLevel" class="font-medium text-green-600">Almost Done!</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-700">Remaining:</span>
+                            <span id="contextRemaining" class="font-medium text-gray-900">2 problems left</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Tutor Message -->
+                <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                    <h4 class="font-semibold text-blue-800 mb-2 flex items-center">
+                        <i data-lucide="message-circle" class="w-4 h-4 mr-2"></i>
+                        AI Tutor Message
+                    </h4>
+                    <p id="contextAIMessage" class="text-blue-700 text-sm">
+                        Excellent work! Only 2 problems left to reach your goal. Based on your recent sessions, you've really mastered algebra fundamentals. Let's finish strong with these final problems. I'll make sure each one counts toward your goal completion. Ready for the next challenge?
+                    </p>
+                </div>
+
+                <!-- Last Session Summary -->
+                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                    <h4 class="font-semibold text-gray-800 mb-2 flex items-center">
+                        <i data-lucide="clock" class="w-4 h-4 mr-2"></i>
+                        Last Session Summary
+                    </h4>
+                    <div id="contextLastSession" class="text-sm text-gray-700">
+                        <p class="mb-1"><strong>Yesterday, 3:30 PM</strong> - 25 minutes</p>
+                        <p class="mb-1">✓ Solved 3 algebra problems</p>
+                        <p class="mb-1">✓ Covered: Linear equations, word problems</p>
+                        <p>✓ Average time: 8 minutes per problem</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-3">
+                    <button onclick="closeContextAnalysisModal()" class="flex-1 bg-gray-200 text-gray-800 px-4 py-3 rounded-lg hover:bg-gray-300 font-medium">
+                        Cancel
+                    </button>
+                    <button onclick="startGoalSession()" class="flex-1 bg-ayah-primary text-white px-4 py-3 rounded-lg hover:bg-ayah-primary-hover font-medium flex items-center justify-center space-x-2">
+                        <i data-lucide="play" class="w-4 h-4"></i>
+                        <span>Start Session</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Middle/High School View (6-12) - US-G003 Implementation -->
+    <div id="middleHighView" class="hidden">
+        <!-- Advanced Analytics Header -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-semibold text-gray-900 mb-2">Goal Analytics Dashboard</h1>
+            <p class="text-gray-600">Advanced progress tracking and performance insights</p>
+        </div>
+
+        <!-- Detailed Metrics Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-600">Weekly Average</span>
+                    <i data-lucide="trending-up" class="w-4 h-4 text-green-600"></i>
+                </div>
+                <div class="text-2xl font-bold text-gray-900">2.3h</div>
+                <div class="text-xs text-green-600">+15% from last week</div>
+            </div>
+
+            <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-600">Completion Rate</span>
+                    <i data-lucide="target" class="w-4 h-4 text-blue-600"></i>
+                </div>
+                <div class="text-2xl font-bold text-gray-900">87%</div>
+                <div class="text-xs text-blue-600">Above average</div>
+            </div>
+
+            <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-600">Streak Record</span>
+                    <i data-lucide="flame" class="w-4 h-4 text-orange-600"></i>
+                </div>
+                <div class="text-2xl font-bold text-gray-900">12 days</div>
+                <div class="text-xs text-orange-600">Personal best</div>
+            </div>
+
+            <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-gray-600">Goal Efficiency</span>
+                    <i data-lucide="zap" class="w-4 h-4 text-purple-600"></i>
+                </div>
+                <div class="text-2xl font-bold text-gray-900">94%</div>
+                <div class="text-xs text-purple-600">Excellent</div>
+            </div>
+        </div>
+
+        <!-- Goal Completion Trends -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-8">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Goal Completion Trends</h2>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <span class="font-medium">Math Goals</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-600">5/6 completed</span>
+                        <div class="w-24 bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: 83%"></div>
+                        </div>
+                        <span class="text-sm font-medium text-green-600">83%</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                        <span class="font-medium">Science Goals</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-600">3/4 completed</span>
+                        <div class="w-24 bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 75%"></div>
+                        </div>
+                        <span class="text-sm font-medium text-blue-600">75%</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+                        <span class="font-medium">History Goals</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-600">2/5 completed</span>
+                        <div class="w-24 bg-gray-200 rounded-full h-2">
+                            <div class="bg-purple-500 h-2 rounded-full" style="width: 40%"></div>
+                        </div>
+                        <span class="text-sm font-medium text-purple-600">40%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievement History -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-8">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Achievement History & Milestones</h2>
+            <div class="space-y-4">
+                <div class="flex items-center space-x-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                    <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                        <i data-lucide="trophy" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-gray-900">Math Master Achievement</p>
+                        <p class="text-sm text-gray-600">Completed 50 algebra problems • Earned 3 days ago</p>
+                    </div>
+                    <div class="text-sm text-green-600 font-medium">+100 XP</div>
+                </div>
+
+                <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                        <i data-lucide="star" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-gray-900">Study Streak Champion</p>
+                        <p class="text-sm text-gray-600">Maintained 7-day learning streak • Earned 1 week ago</p>
+                    </div>
+                    <div class="text-sm text-blue-600 font-medium">+75 XP</div>
+                </div>
+
+                <div class="flex items-center space-x-4 p-4 bg-purple-50 rounded-lg border border-purple-200">
+                    <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                        <i data-lucide="book" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-medium text-gray-900">Knowledge Explorer</p>
+                        <p class="text-sm text-gray-600">Learned 10 new science topics • Earned 2 weeks ago</p>
+                    </div>
+                    <div class="text-sm text-purple-600 font-medium">+50 XP</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parent/Teacher Sharing Options -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Share Progress</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button class="flex items-center justify-center space-x-2 p-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                    <i data-lucide="mail" class="w-5 h-5 text-gray-600"></i>
+                    <span>Email Progress to Parents</span>
+                </button>
+                <button class="flex items-center justify-center space-x-2 p-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                    <i data-lucide="share" class="w-5 h-5 text-gray-600"></i>
+                    <span>Share with Teacher</span>
+                </button>
+                <button class="flex items-center justify-center space-x-2 p-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                    <i data-lucide="download" class="w-5 h-5 text-gray-600"></i>
+                    <span>Download Report</span>
+                </button>
+                <button class="flex items-center justify-center space-x-2 p-4 border border-gray-300 rounded-lg hover:bg-gray-50">
+                    <i data-lucide="calendar" class="w-5 h-5 text-gray-600"></i>
+                    <span>Schedule Review</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Age Toggle (For Demo Purposes) -->
+    <div class="fixed bottom-4 right-4 z-40">
+        <div class="flex flex-col space-y-2">
+            <button id="ageToggle" onclick="toggleAgeView()" class="bg-ayah-primary text-white px-4 py-2 rounded-lg shadow-lg hover:bg-ayah-primary-hover text-sm">
+                Switch View
+            </button>
+            <div id="currentView" class="text-xs text-center text-gray-600 bg-white px-2 py-1 rounded shadow">
+                Regular View
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Enhanced age view toggle functionality - US-G003 Implementation
+        let currentView = 'regular'; // 'regular', 'elementary', 'middleHigh'
+
+        function toggleAgeView() {
+            const mainView = document.querySelector('main');
+            const elementaryView = document.getElementById('elementaryView');
+            const middleHighView = document.getElementById('middleHighView');
+            const toggleButton = document.getElementById('ageToggle');
+            const currentViewLabel = document.getElementById('currentView');
+
+            // Hide all views first
+            Array.from(mainView.children).forEach(child => {
+                if (child.id === 'elementaryView' || child.id === 'middleHighView') {
+                    child.classList.add('hidden');
+                } else if (!child.classList.contains('fixed')) {
+                    child.classList.add('hidden');
+                }
+            });
+
+            // Cycle through views
+            switch (currentView) {
+                case 'regular':
+                    // Switch to elementary view
+                    elementaryView.classList.remove('hidden');
+                    currentView = 'elementary';
+                    currentViewLabel.textContent = 'Elementary (K-5)';
+                    break;
+                case 'elementary':
+                    // Switch to middle/high school view
+                    middleHighView.classList.remove('hidden');
+                    currentView = 'middleHigh';
+                    currentViewLabel.textContent = 'Middle/High (6-12)';
+                    break;
+                case 'middleHigh':
+                    // Switch back to regular view
+                    Array.from(mainView.children).forEach(child => {
+                        if (child.id !== 'elementaryView' && child.id !== 'middleHighView' && !child.classList.contains('fixed')) {
+                            child.classList.remove('hidden');
+                        }
+                    });
+                    currentView = 'regular';
+                    currentViewLabel.textContent = 'Regular View';
+                    break;
+            }
+        }
+
+        // Modal functionality
+        function openCreateGoalModal() {
+            document.getElementById('createGoalModal').classList.remove('hidden');
+        }
+
+        function closeCreateGoalModal() {
+            document.getElementById('createGoalModal').classList.add('hidden');
+        }
+
+        // Goal data for context analysis
+        const goalContextData = {
+            'math-problems': {
+                title: 'Continue Your Math Goal',
+                subtitle: '18/20 completed (90%)',
+                progress: 90,
+                goalType: 'Problems Solved',
+                progressLevel: 'Almost Done!',
+                remaining: '2 problems left',
+                aiMessage: 'Excellent work! Only 2 problems left to reach your goal. Based on your recent sessions, you\'ve really mastered algebra fundamentals. Let\'s finish strong with these final problems. I\'ll make sure each one counts toward your goal completion. Ready for the next challenge?',
+                lastSession: {
+                    time: 'Yesterday, 3:30 PM - 25 minutes',
+                    activities: [
+                        '✓ Solved 3 algebra problems',
+                        '✓ Covered: Linear equations, word problems',
+                        '✓ Average time: 8 minutes per problem'
+                    ]
+                },
+                progressColor: 'bg-green-500'
+            },
+            'reading-time': {
+                title: 'Continue Your Reading Goal',
+                subtitle: '3h 30m/6h completed (58%)',
+                progress: 58,
+                goalType: 'Study Time',
+                progressLevel: 'Making Progress',
+                remaining: '2h 30m left',
+                aiMessage: 'Welcome back to your reading studies! You\'re making great progress with 3.5 hours completed. I\'ve noticed you\'re particularly engaged with fiction and adventure stories. I\'ll continue tracking our study time, and remember, I\'ll pause the timer if we take breaks. What would you like to explore next?',
+                lastSession: {
+                    time: 'Yesterday, 4:15 PM - 45 minutes',
+                    activities: [
+                        '✓ Read 2 chapters of "The Adventure Book"',
+                        '✓ Discussed character development',
+                        '✓ Vocabulary: 8 new words learned'
+                    ]
+                },
+                progressColor: 'bg-yellow-500'
+            },
+            'science-topics': {
+                title: 'Continue Your Science Goal',
+                subtitle: '2/10 topics completed (20%)',
+                progress: 20,
+                goalType: 'Topics Learned',
+                progressLevel: 'Getting Started',
+                remaining: '8 topics left',
+                aiMessage: 'Let\'s explore more science topics! You\'ve learned about "Photosynthesis" and "States of Matter" so far. For your topics goal, I\'ll count each new topic we explore in depth together - that means substantial discussions with questions, explanations, and examples. What new area would you like to discover?',
+                lastSession: {
+                    time: '2 days ago, 2:00 PM - 30 minutes',
+                    activities: [
+                        '✓ Learned about "States of Matter"',
+                        '✓ Discussed solid, liquid, gas examples',
+                        '✓ Conducted virtual experiments'
+                    ]
+                },
+                progressColor: 'bg-red-500'
+            }
+        };
+
+        // Context Analysis Modal Functions
+        function openContextAnalysisModal(goalId) {
+            const modal = document.getElementById('contextAnalysisModal');
+            const loading = document.getElementById('contextLoading');
+            const content = document.getElementById('contextContent');
+
+            // Show modal and loading state
+            modal.classList.remove('hidden');
+            loading.classList.remove('hidden');
+            content.classList.add('hidden');
+
+            // Simulate context analysis loading (3 seconds as per requirements)
+            setTimeout(() => {
+                loadContextAnalysis(goalId);
+                loading.classList.add('hidden');
+                content.classList.remove('hidden');
+            }, 2000);
+        }
+
+        function loadContextAnalysis(goalId) {
+            const data = goalContextData[goalId];
+            if (!data) return;
+
+            // Update modal content
+            document.getElementById('contextTitle').textContent = data.title;
+            document.getElementById('contextSubtitle').textContent = data.subtitle;
+            document.getElementById('contextProgressBar').style.width = data.progress + '%';
+            document.getElementById('contextProgressBar').className = `h-4 rounded-full transition-all duration-500 ${data.progressColor}`;
+            document.getElementById('contextGoalType').textContent = data.goalType;
+            document.getElementById('contextProgressLevel').textContent = data.progressLevel;
+            document.getElementById('contextRemaining').textContent = data.remaining;
+            document.getElementById('contextAIMessage').textContent = data.aiMessage;
+
+            // Update last session
+            const lastSessionDiv = document.getElementById('contextLastSession');
+            lastSessionDiv.innerHTML = `
+                <p class="mb-1"><strong>${data.lastSession.time}</strong></p>
+                ${data.lastSession.activities.map(activity => `<p class="mb-1">${activity}</p>`).join('')}
+            `;
+
+            // Store current goal for session start
+            window.currentGoalId = goalId;
+        }
+
+        function closeContextAnalysisModal() {
+            document.getElementById('contextAnalysisModal').classList.add('hidden');
+        }
+
+        function startGoalSession() {
+            const goalId = window.currentGoalId;
+            const goalData = goalContextData[goalId];
+
+            // Close modal
+            closeContextAnalysisModal();
+
+            // Show session start confirmation
+            alert(`Starting goal-focused session for: ${goalData.title}\n\nIn the real app, this would:\n• Open the chat interface with goal context\n• Begin tracking progress toward your specific goal\n• Provide AI guidance tailored to your goal type\n• Update your progress automatically during the session`);
+
+            // In real implementation, this would redirect to chat interface with goal context
+            // window.location.href = `ayah-chatgpt-prototype.html?goalId=${goalId}&goalContext=true`;
+        }
+
+        // Simulate real-time progress updates
+        function updateProgress() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const currentWidth = parseInt(bar.style.width);
+                if (currentWidth < 100) {
+                    // Simulate small progress increments
+                    const newWidth = Math.min(currentWidth + Math.random() * 2, 100);
+                    bar.style.width = newWidth + '%';
+                }
+            });
+        }
+
+        // Update progress every 10 seconds for demo
+        setInterval(updateProgress, 10000);
+
+        // Goal management actions (placeholder functions)
+        function editGoal(goalId) {
+            alert('Edit goal functionality - This is a prototype');
+        }
+
+        function deleteGoal(goalId) {
+            if (confirm('Are you sure you want to delete this goal?')) {
+                alert('Goal deleted - This is a prototype');
+            }
+        }
+
+        function markGoalComplete(goalId) {
+            alert('Goal marked as complete - This is a prototype');
+        }
+
+        // Enhanced Milestone Celebrations - US-G002 Implementation
+        const milestoneData = {
+            25: {
+                icon: '🌟',
+                title: 'Great Start!',
+                message: '25% Complete - You\'re building momentum!',
+                encouragement: 'Keep it up! You\'re off to an amazing start!',
+                gradient: 'from-yellow-400 to-yellow-500',
+                animation: 'milestone-25'
+            },
+            50: {
+                icon: '🎯',
+                title: 'Halfway There!',
+                message: '50% Complete - You\'re doing amazing!',
+                encouragement: 'Fantastic progress! You\'re halfway to your goal!',
+                gradient: 'from-blue-400 to-blue-500',
+                animation: 'milestone-50'
+            },
+            75: {
+                icon: '🚀',
+                title: 'Almost Done!',
+                message: '75% Complete - You\'re so close!',
+                encouragement: 'Outstanding work! You\'re almost at the finish line!',
+                gradient: 'from-green-400 to-green-500',
+                animation: 'milestone-75'
+            },
+            100: {
+                icon: '🏆',
+                title: 'Goal Achieved!',
+                message: '100% Complete - Congratulations!',
+                encouragement: 'Incredible! You\'ve reached your goal! Time to celebrate!',
+                gradient: 'from-purple-400 to-purple-500',
+                animation: 'milestone-100'
+            }
+        };
+
+        function triggerMilestoneCelebration(percentage) {
+            const milestone = milestoneData[percentage];
+            if (!milestone) return;
+
+            const modal = document.getElementById('milestoneModal');
+            const icon = document.getElementById('milestoneIcon');
+            const title = document.getElementById('milestoneTitle');
+            const message = document.getElementById('milestoneMessage');
+            const progress = document.getElementById('milestoneProgress');
+            const encouragement = document.getElementById('milestoneEncouragement');
+
+            // Update modal content
+            icon.textContent = milestone.icon;
+            title.textContent = milestone.title;
+            message.textContent = milestone.message;
+            progress.textContent = `${percentage}% Complete!`;
+            encouragement.textContent = milestone.encouragement;
+
+            // Update styling
+            progress.className = `bg-gradient-to-r ${milestone.gradient} text-white px-6 py-3 rounded-full text-lg font-semibold mb-4`;
+            icon.className = `text-6xl mb-4 ${milestone.animation}`;
+
+            // Show confetti for 100% completion
+            if (percentage === 100) {
+                showConfetti();
+            }
+
+            // Show modal
+            modal.classList.remove('hidden');
+
+            // Auto-close after 5 seconds if not 100%
+            if (percentage !== 100) {
+                setTimeout(() => {
+                    closeMilestoneModal();
+                }, 5000);
+            }
+        }
+
+        function showConfetti() {
+            const confetti = document.getElementById('confettiContainer');
+            confetti.classList.remove('hidden');
+
+            // Create confetti pieces
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
+
+            for (let i = 0; i < 50; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animationDelay = Math.random() * 3 + 's';
+                piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.appendChild(piece);
+            }
+
+            // Remove confetti after animation
+            setTimeout(() => {
+                confetti.classList.add('hidden');
+                confetti.innerHTML = '';
+            }, 5000);
+        }
+
+        function closeMilestoneModal() {
+            document.getElementById('milestoneModal').classList.add('hidden');
+            document.getElementById('confettiContainer').classList.add('hidden');
+            document.getElementById('confettiContainer').innerHTML = '';
+        }
+
+        function continueLearning() {
+            closeMilestoneModal();
+            // In real implementation, this would start a new goal-focused session
+            alert('Starting new learning session! In the real app, this would open the chat interface with goal context.');
+        }
+
+        // Add click handlers for goal management buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners for edit and delete buttons
+            document.querySelectorAll('[data-lucide="edit-2"]').forEach(button => {
+                button.parentElement.addEventListener('click', () => editGoal('sample-id'));
+            });
+
+            document.querySelectorAll('[data-lucide="trash-2"]').forEach(button => {
+                button.parentElement.addEventListener('click', () => deleteGoal('sample-id'));
+            });
+
+            // Initialize icons after DOM is loaded
+            lucide.createIcons();
+        });
+
+        // Mobile responsive behavior
+        function handleMobileLayout() {
+            const isMobile = window.innerWidth < 768;
+            const statsGrid = document.querySelector('.grid.grid-cols-2.md\\:grid-cols-4');
+
+            if (isMobile) {
+                statsGrid.classList.add('mobile-stack');
+            } else {
+                statsGrid.classList.remove('mobile-stack');
+            }
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', handleMobileLayout);
+        handleMobileLayout(); // Initial call
+
+        // Enhanced progress celebration with milestone detection
+        function celebrateProgress() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = parseInt(bar.style.width);
+
+                // Check for milestone achievements
+                if (width >= 25 && width < 30) {
+                    setTimeout(() => triggerMilestoneCelebration(25), 1000);
+                } else if (width >= 50 && width < 55) {
+                    setTimeout(() => triggerMilestoneCelebration(50), 1000);
+                } else if (width >= 75 && width < 80) {
+                    setTimeout(() => triggerMilestoneCelebration(75), 1000);
+                } else if (width >= 100) {
+                    setTimeout(() => triggerMilestoneCelebration(100), 1000);
+                }
+
+                // Add bounce animation for high progress
+                if (width >= 90) {
+                    bar.parentElement.parentElement.classList.add('celebration-bounce');
+                    setTimeout(() => {
+                        bar.parentElement.parentElement.classList.remove('celebration-bounce');
+                    }, 600);
+                }
+            });
+        }
+
+        // Add manual milestone trigger for testing
+        function testMilestone(percentage) {
+            triggerMilestoneCelebration(percentage);
+        }
+
+        // Trigger celebration on load
+        setTimeout(celebrateProgress, 1000);
+    </script>
+</body>
+</html>

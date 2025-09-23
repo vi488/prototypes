@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ayah - Wallet & Tokens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* ayah Brand Colors - Updated to match main app */
+        :root {
+            --ayah-primary: #6048EB;           /* Main brand blue */
+            --ayah-primary-hover: #4F3BC9;     /* Darker blue for hover */
+            --ayah-primary-light: #F4F1FF;     /* Light blue for accents */
+            --ayah-primary-lighter: #F4FDFF;   /* Very light blue */
+            --ayah-primary-dark: #043178;      /* Dark blue for emphasis */
+        }
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .hover\:bg-ayah-primary-light:hover { background-color: var(--ayah-primary-lighter); }
+        
+        .modal-enter {
+            animation: modalEnter 0.3s ease-out;
+        }
+        
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Modal Overlay -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <!-- Modal Content -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden modal-enter">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-ayah-primary rounded-full flex items-center justify-center">
+                        <i data-lucide="wallet" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-ayah-primary-dark">Wallet</h2>
+                        <p class="text-sm text-gray-600">Manage your points and ayah tokens</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i data-lucide="x" class="w-5 h-5 text-gray-500"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+                <!-- Balance Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Points Card -->
+                    <div class="bg-ayah-primary-light rounded-xl p-6">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <i data-lucide="star" class="w-6 h-6 text-ayah-primary"></i>
+                            <h3 class="text-lg font-semibold text-ayah-primary-dark">Points</h3>
+                        </div>
+                        <div class="text-3xl font-bold text-ayah-primary-dark mb-2">50</div>
+                        <p class="text-sm text-gray-600">Available to convert</p>
+                    </div>
+
+                    <!-- ayah Tokens Card -->
+                    <div class="bg-ayah-primary-light rounded-xl p-6">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <i data-lucide="coins" class="w-6 h-6 text-ayah-primary"></i>
+                            <h3 class="text-lg font-semibold text-ayah-primary-dark">ayah Tokens</h3>
+                        </div>
+                        <div class="text-3xl font-bold text-ayah-primary-dark mb-2">0</div>
+                        <p class="text-sm text-gray-600">Your digital rewards</p>
+                    </div>
+
+                    <!-- Wallet Card -->
+                    <div class="bg-ayah-primary-light rounded-xl p-6">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <i data-lucide="wallet" class="w-6 h-6 text-ayah-primary"></i>
+                            <h3 class="text-lg font-semibold text-ayah-primary-dark">Wallet</h3>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm font-mono text-ayah-primary-dark">0x572a...8513</span>
+                                <button class="p-1 hover:bg-ayah-primary-lighter rounded">
+                                    <i data-lucide="eye" class="w-4 h-4 text-ayah-primary"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-600">Ethereum • Non-Custodial</p>
+                            <p class="text-xs text-gray-600">0.0000 ETH</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Convert Points Section -->
+                <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i data-lucide="repeat" class="w-6 h-6 text-ayah-primary"></i>
+                        <h3 class="text-lg font-semibold text-ayah-primary-dark">Convert Points</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-ayah-primary-dark">50</div>
+                            <div class="text-sm text-gray-600">Available Points</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-ayah-primary-dark">5</div>
+                            <div class="text-sm text-gray-600">Convertible ayah</div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-gray-600 mb-4 text-center">Conversion Rate: 100 Points = 10 ayah Tokens</p>
+                    
+                    <button disabled class="w-full bg-gray-300 text-gray-500 px-6 py-3 rounded-lg font-medium cursor-not-allowed">
+                        Convert Points to ayah
+                    </button>
+                </div>
+
+                <!-- Two Column Layout for Earning and Activity -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Earning Opportunities -->
+                    <div>
+                        <div class="flex items-center space-x-3 mb-6">
+                            <i data-lucide="trophy" class="w-6 h-6 text-ayah-primary"></i>
+                            <h3 class="text-lg font-semibold text-ayah-primary-dark">Earning Opportunities</h3>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-ayah-primary"></i>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Complete Onboarding</p>
+                                        <p class="text-sm text-gray-600">Finish onboarding to instantly earn +50 points.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-1 text-ayah-primary">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                    <span class="font-bold">50</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="credit-card" class="w-5 h-5 text-gray-400"></i>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Add 10 Transactions</p>
+                                        <p class="text-sm text-gray-600">Reach 10 total transactions to earn +50 points (one-time milestone).</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-1 text-gray-400">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                    <span class="font-bold">50</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="target" class="w-5 h-5 text-gray-400"></i>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Complete a Goal</p>
+                                        <p class="text-sm text-gray-600">Mark a budget goal as completed to earn +50 points (revoked if goal becomes incomplete).</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-1 text-gray-400">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                    <span class="font-bold">50</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div>
+                        <div class="flex items-center space-x-3 mb-6">
+                            <i data-lucide="activity" class="w-6 h-6 text-ayah-primary"></i>
+                            <h3 class="text-lg font-semibold text-ayah-primary-dark">Recent Activity</h3>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-ayah-primary"></i>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Completed onboarding setup</p>
+                                        <p class="text-sm text-gray-600">9/1/2025 at 10:15 AM</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-1 text-ayah-primary">
+                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                    <span class="font-bold">50</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex items-center justify-end p-6 border-t border-gray-200 bg-gray-50">
+                <button onclick="closeModal()" class="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function closeModal() {
+            window.parent.postMessage('closeModal', '*');
+        }
+    </script>
+</body>
+</html>

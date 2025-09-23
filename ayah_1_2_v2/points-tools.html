@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Points - Ayah Learning Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Ayah Educational AI Platform - Comprehensive Design System */
+        :root {
+            /* Brand Color Hierarchy - Wisdom Purple System */
+            --ayah-primary: #6048EB;           /* Main brand - AI responses, primary actions */
+            --ayah-primary-hover: #4F3BC9;     /* Interactive states - button hover, link hover */
+            --ayah-primary-light: #F4F1FF;     /* AI message backgrounds, subtle highlights */
+            --ayah-primary-lighter: #F4FDFF;   /* Page backgrounds, card backgrounds */
+            --ayah-primary-dark: #3A2A9E;      /* High emphasis text, important icons */
+
+            /* Points and Rewards System */
+            --points-bronze: #CD7C2F;          /* Bronze level achievements */
+            --points-silver: #9CA3AF;          /* Silver level achievements */
+            --points-gold: #F59E0B;            /* Gold level achievements */
+            --points-platinum: #8B5CF6;        /* Platinum level achievements */
+            --points-diamond: #EC4899;         /* Diamond level achievements */
+            --points-legendary: #10B981;       /* Legendary level achievements */
+
+            /* Points Background Colors */
+            --points-bronze-bg: #FEF3C7;       /* Bronze background */
+            --points-silver-bg: #F3F4F6;       /* Silver background */
+            --points-gold-bg: #FFFBEB;         /* Gold background */
+            --points-platinum-bg: #F5F3FF;     /* Platinum background */
+            --points-diamond-bg: #FDF2F8;      /* Diamond background */
+            --points-legendary-bg: #ECFDF5;    /* Legendary background */
+
+            /* Difficulty Levels */
+            --difficulty-easy: #22C55E;        /* Green for easy difficulty */
+            --difficulty-medium: #F59E0B;      /* Orange for medium difficulty */
+            --difficulty-hard: #EF4444;        /* Red for hard difficulty */
+            --difficulty-expert: #8B5CF6;      /* Purple for expert difficulty */
+            --difficulty-master: #EC4899;      /* Pink for master difficulty */
+
+            /* Difficulty Background Colors */
+            --difficulty-easy-bg: #DCFCE7;     /* Easy background */
+            --difficulty-medium-bg: #FEF3C7;   /* Medium background */
+            --difficulty-hard-bg: #FEE2E2;     /* Hard background */
+            --difficulty-expert-bg: #F5F3FF;   /* Expert background */
+            --difficulty-master-bg: #FDF2F8;   /* Master background */
+
+            /* Engagement Elements */
+            --engagement-streak: #F59E0B;       /* Streak indicators */
+            --engagement-bonus: #10B981;       /* Bonus points */
+            --engagement-multiplier: #8B5CF6;  /* Point multipliers */
+            --engagement-combo: #EC4899;       /* Combo bonuses */
+
+            /* Point Activity Types */
+            --activity-lesson: #6048EB;        /* Lesson completion */
+            --activity-quiz: #3B82F6;          /* Quiz participation */
+            --activity-practice: #10B981;      /* Practice sessions */
+            --activity-challenge: #F59E0B;     /* Challenge completion */
+            --activity-bonus: #EC4899;         /* Bonus activities */
+
+            /* Level Progress Colors */
+            --level-progress-empty: #E5E7EB;   /* Empty progress bar */
+            --level-progress-partial: #A855F7; /* Partial progress */
+            --level-progress-complete: #22C55E; /* Complete progress */
+            --level-progress-overflow: #F59E0B; /* Overflow progress */
+
+            /* Reward Tier Colors */
+            --tier-novice: #6B7280;            /* Novice tier */
+            --tier-apprentice: #CD7C2F;        /* Apprentice tier */
+            --tier-scholar: #9CA3AF;           /* Scholar tier */
+            --tier-expert: #F59E0B;            /* Expert tier */
+            --tier-master: #8B5CF6;            /* Master tier */
+            --tier-legend: #10B981;            /* Legend tier */
+
+            /* Educational Interaction Colors - Learning Feedback System */
+            --ayah-correct: #22C55E;           /* Bright, encouraging green */
+            --ayah-correct-bg: #DCFCE7;        /* Light green background */
+            --ayah-correct-border: #16A34A;    /* Darker green border */
+            --ayah-learning: #F59E0B;          /* Warm, non-threatening orange */
+            --ayah-learning-bg: #FEF3C7;       /* Light orange background */
+            --ayah-learning-border: #D97706;   /* Darker orange border */
+            --ayah-hint: #3B82F6;              /* Friendly, helpful blue */
+            --ayah-hint-bg: #DBEAFE;           /* Light blue background */
+            --ayah-hint-border: #2563EB;       /* Darker blue border */
+
+            /* Semantic Color System - Universal Meanings */
+            --semantic-success: #10B981;       /* Emerald 500 */
+            --semantic-success-light: #D1FAE5; /* Emerald 100 */
+            --semantic-success-dark: #047857;  /* Emerald 700 */
+            --semantic-error: #EF4444;         /* Red 500 */
+            --semantic-error-light: #FEE2E2;   /* Red 100 */
+            --semantic-error-dark: #DC2626;    /* Red 600 */
+            --semantic-info: #3B82F6;          /* Blue 500 */
+            --semantic-info-light: #DBEAFE;    /* Blue 100 */
+            --semantic-info-dark: #1D4ED8;     /* Blue 700 */
+            --semantic-warning: #F59E0B;       /* Amber 500 */
+            --semantic-warning-light: #FEF3C7; /* Amber 100 */
+            --semantic-warning-dark: #D97706;  /* Amber 600 */
+
+            /* Neutral Color System - 9-11 variations */
+            --neutral-50: #FAFAFA;   /* Lightest background */
+            --neutral-100: #F5F5F5;  /* Light background */
+            --neutral-200: #E5E5E5;  /* Border light */
+            --neutral-300: #D4D4D4;  /* Border medium */
+            --neutral-400: #A3A3A3;  /* Placeholder text */
+            --neutral-500: #737373;  /* Secondary text */
+            --neutral-600: #525252;  /* Primary text light */
+            --neutral-700: #404040;  /* Primary text */
+            --neutral-800: #262626;  /* Headings */
+            --neutral-900: #171717;  /* High emphasis text */
+
+            /* Spacing System - 8px Base Grid */
+            --space-1: 4px;   /* 0.25rem - Micro spacing */
+            --space-2: 8px;   /* 0.5rem - Base unit */
+            --space-3: 12px;  /* 0.75rem - Small spacing */
+            --space-4: 16px;  /* 1rem - Medium spacing */
+            --space-5: 20px;  /* 1.25rem - Large spacing */
+            --space-6: 24px;  /* 1.5rem - XL spacing */
+            --space-8: 32px;  /* 2rem - XXL spacing */
+            --space-10: 40px; /* 2.5rem - Section spacing */
+            --space-12: 48px; /* 3rem - Page spacing */
+            --space-16: 64px; /* 4rem - Major section spacing */
+            --space-20: 80px; /* 5rem - Page margins */
+
+            /* Typography Scale - Modular Scale: 1.250 (Major Third) */
+            --text-display-large: 57px;   /* Hero headlines */
+            --text-display-medium: 45px;  /* Page titles */
+            --text-display-small: 36px;   /* Section headers */
+            --text-headline-large: 32px;  /* Card titles */
+            --text-headline-medium: 28px; /* Subsection headers */
+            --text-headline-small: 24px;  /* Component titles */
+            --text-title-large: 22px;     /* List headers */
+            --text-title-medium: 16px;    /* Button text, labels */
+            --text-title-small: 14px;     /* Captions, metadata */
+            --text-body-large: 16px;      /* Primary body text */
+            --text-body-medium: 14px;     /* Secondary body text */
+            --text-body-small: 12px;      /* Fine print, disclaimers */
+
+            /* Component Design Standards */
+            --border-radius-small: 8px;   /* Modern feel */
+            --border-radius-medium: 12px; /* Cards and containers */
+            --border-radius-large: 16px;  /* Modals and major components */
+            --border-radius-pill: 24px;   /* Pill-shaped CTAs */
+
+            /* Shadow System */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);     /* Subtle elevation */
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);   /* Medium elevation */
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);    /* High elevation */
+            --shadow-xl: 0 12px 32px rgba(0,0,0,0.25);  /* Maximum elevation */
+        }
+
+        /* Educational AI Platform Typography */
+        body {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--neutral-50);
+            color: var(--neutral-700);
+            line-height: 1.5;
+        }
+
+        /* CSS Custom Properties for Dynamic Theming */
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .hover\:bg-ayah-primary:hover { background-color: var(--ayah-primary-hover); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .text-ayah-primary-dark { color: var(--ayah-primary-dark); }
+
+        /* Points and Rewards Color Classes */
+        .points-bronze { color: var(--points-bronze); }
+        .points-silver { color: var(--points-silver); }
+        .points-gold { color: var(--points-gold); }
+        .points-platinum { color: var(--points-platinum); }
+        .points-diamond { color: var(--points-diamond); }
+        .points-legendary { color: var(--points-legendary); }
+
+        .bg-points-bronze { background-color: var(--points-bronze-bg); }
+        .bg-points-silver { background-color: var(--points-silver-bg); }
+        .bg-points-gold { background-color: var(--points-gold-bg); }
+        .bg-points-platinum { background-color: var(--points-platinum-bg); }
+        .bg-points-diamond { background-color: var(--points-diamond-bg); }
+        .bg-points-legendary { background-color: var(--points-legendary-bg); }
+
+        /* Difficulty Level Classes */
+        .difficulty-easy { color: var(--difficulty-easy); }
+        .difficulty-medium { color: var(--difficulty-medium); }
+        .difficulty-hard { color: var(--difficulty-hard); }
+        .difficulty-expert { color: var(--difficulty-expert); }
+        .difficulty-master { color: var(--difficulty-master); }
+
+        .bg-difficulty-easy { background-color: var(--difficulty-easy-bg); }
+        .bg-difficulty-medium { background-color: var(--difficulty-medium-bg); }
+        .bg-difficulty-hard { background-color: var(--difficulty-hard-bg); }
+        .bg-difficulty-expert { background-color: var(--difficulty-expert-bg); }
+        .bg-difficulty-master { background-color: var(--difficulty-master-bg); }
+
+        /* Engagement Element Classes */
+        .engagement-streak { color: var(--engagement-streak); }
+        .engagement-bonus { color: var(--engagement-bonus); }
+        .engagement-multiplier { color: var(--engagement-multiplier); }
+        .engagement-combo { color: var(--engagement-combo); }
+
+        /* Activity Type Classes */
+        .activity-lesson { color: var(--activity-lesson); }
+        .activity-quiz { color: var(--activity-quiz); }
+        .activity-practice { color: var(--activity-practice); }
+        .activity-challenge { color: var(--activity-challenge); }
+        .activity-bonus { color: var(--activity-bonus); }
+
+        /* Tier Color Classes */
+        .tier-novice { color: var(--tier-novice); }
+        .tier-apprentice { color: var(--tier-apprentice); }
+        .tier-scholar { color: var(--tier-scholar); }
+        .tier-expert { color: var(--tier-expert); }
+        .tier-master { color: var(--tier-master); }
+        .tier-legend { color: var(--tier-legend); }
+
+        /* Component Design Standards */
+        .points-card {
+            border-radius: var(--border-radius-medium);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background-color: white;
+            overflow: hidden;
+            border: 1px solid var(--neutral-200);
+        }
+
+        .points-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Level Badge with Enhanced Glow */
+        .level-badge {
+            background: linear-gradient(135deg, var(--points-gold), var(--points-platinum));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+            animation: levelGlow 3s ease-in-out infinite;
+        }
+
+        /* Enhanced Point Earning Animations */
+        @keyframes pointEarn {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            25% {
+                transform: scale(1.1) rotate(5deg);
+                opacity: 0.9;
+            }
+            50% {
+                transform: scale(1.3) rotate(-5deg);
+                opacity: 0.8;
+            }
+            75% {
+                transform: scale(1.1) rotate(3deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes levelGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(245, 158, 11, 0.6), 0 0 40px rgba(139, 92, 246, 0.3);
+            }
+        }
+
+        @keyframes pointsCountUp {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes streakPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes bonusSparkle {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+            25% {
+                transform: scale(1.1) rotate(90deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2) rotate(180deg);
+                opacity: 0.9;
+            }
+            75% {
+                transform: scale(1.1) rotate(270deg);
+                opacity: 1;
+            }
+        }
+
+        /* Animation Classes */
+        .point-earn-animation {
+            animation: pointEarn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .points-count-up {
+            animation: pointsCountUp 0.8s ease-out;
+        }
+
+        .streak-pulse {
+            animation: streakPulse 2s ease-in-out infinite;
+        }
+
+        .bonus-sparkle {
+            animation: bonusSparkle 3s ease-in-out infinite;
+        }
+
+        /* Progress Bar Styling */
+        .progress-bar {
+            background-color: var(--level-progress-empty);
+            border-radius: var(--border-radius-pill);
+            overflow: hidden;
+            height: var(--space-3);
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: var(--border-radius-pill);
+            transition: width 0.8s ease-out;
+        }
+
+        .progress-partial { background: linear-gradient(90deg, var(--level-progress-partial), var(--level-progress-complete)); }
+        .progress-complete { background-color: var(--level-progress-complete); }
+        .progress-overflow { background: linear-gradient(90deg, var(--level-progress-complete), var(--level-progress-overflow)); }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: var(--ayah-primary-light);
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--ayah-primary);
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: var(--ayah-primary-hover);
+        }
+
+        /* Button Design Standards */
+        .btn-primary {
+            background-color: var(--ayah-primary);
+            color: white;
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--border-radius-small);
+            font-size: var(--text-title-medium);
+            font-weight: 500;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px; /* Touch target minimum */
+        }
+
+        .btn-primary:hover {
+            background-color: var(--ayah-primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* Typography Classes */
+        .text-display-large { font-size: var(--text-display-large); line-height: 1.1; }
+        .text-display-medium { font-size: var(--text-display-medium); line-height: 1.15; }
+        .text-headline-large { font-size: var(--text-headline-large); line-height: 1.25; }
+        .text-headline-medium { font-size: var(--text-headline-medium); line-height: 1.3; }
+        .text-title-large { font-size: var(--text-title-large); line-height: 1.3; }
+        .text-body-large { font-size: var(--text-body-large); line-height: 1.5; }
+        .text-body-medium { font-size: var(--text-body-medium); line-height: 1.4; }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="min-h-screen bg-gradient-to-br from-white to-ayah-bg-light">
+        <!-- Header Section -->
+        <div class="bg-white border-b border-gray-200 sticky top-0 z-10">
+            <div class="px-6 py-8">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-ayah-primary rounded-lg flex items-center justify-center">
+                            <i data-lucide="star" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-semibold text-gray-900">Points</h1>
+                            <p class="text-gray-600 text-sm">Track your learning achievements and progress</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-semibold text-gray-900">1,250</div>
+                        <div class="text-sm text-gray-500">Total Points</div>
+                        <div class="mt-2 px-3 py-1.5 bg-gray-50 rounded-lg">
+                            <div class="text-sm font-medium text-ayah-primary">12.5 Future Rewards</div>
+                            <div class="text-xs text-gray-500">Coming soon</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="px-6 py-8">
+            <!-- Point Summary Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <!-- Total Points Card -->
+                <div class="bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Total Points</p>
+                            <p class="text-xl font-semibold text-gray-900">1,250</p>
+                            <div class="mt-2 px-2 py-1 bg-gray-50 rounded text-xs">
+                                <p class="text-ayah-primary font-medium">= 12.5 Future Rewards</p>
+                                <p class="text-gray-500">Coming soon</p>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center">
+                            <i data-lucide="star" class="w-5 h-5 text-ayah-primary"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Points Card -->
+                <div class="bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Today's Points</p>
+                            <p class="text-xl font-semibold text-green-600">+85</p>
+                            <p class="text-xs text-green-600 mt-1">+0.85 Future Rewards</p>
+                        </div>
+                        <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-5 h-5 text-green-600"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2">🌟 Great progress today!</p>
+                    <div class="mt-1 text-xs text-gray-500">
+                        Daily cap: 415 points remaining
+                    </div>
+                </div>
+
+                <!-- Current Level Card -->
+                <div class="bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Current Level</p>
+                            <p class="text-lg font-semibold text-gray-900">Level 3</p>
+                            <p class="text-xs text-gray-500">Dedicated Learner</p>
+                        </div>
+                        <div class="w-10 h-10 bg-gray-50 rounded-lg flex items-center justify-center">
+                            <span class="text-lg font-semibold text-ayah-primary">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Level Progress Card -->
+                <div class="bg-white rounded-lg border border-gray-200 p-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <div>
+                            <p class="text-sm text-gray-600">Next Level</p>
+                            <p class="text-lg font-semibold text-orange-600">Level 4</p>
+                        </div>
+                        <div class="w-10 h-10 bg-orange-50 rounded-lg flex items-center justify-center">
+                            <i data-lucide="target" class="w-5 h-5 text-orange-600"></i>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                        <div class="bg-orange-600 h-1.5 rounded-full progress-bar" style="width: 42%"></div>
+                    </div>
+                    <p class="text-xs text-gray-500">1,750 points needed</p>
+                </div>
+            </div>
+
+            <!-- Future Rewards Section -->
+            <div class="bg-white rounded-lg border border-gray-200 p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-900">🎁 Future Rewards</h2>
+                        <p class="text-gray-600 text-sm">Your points will become special rewards soon!</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="inline-flex items-center px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-sm font-medium">
+                            <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                            Ready to Go!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simple Summary -->
+                <div class="text-center mb-6">
+                    <div class="inline-flex items-center space-x-4 bg-gray-50 rounded-lg p-6">
+                        <div class="text-center">
+                            <div class="text-2xl font-semibold text-gray-900">1,250</div>
+                            <div class="text-sm text-gray-600">Your Points</div>
+                        </div>
+                        <div class="text-xl text-gray-400">→</div>
+                        <div class="text-center">
+                            <div class="text-2xl font-semibold text-green-600">12.5</div>
+                            <div class="text-sm text-gray-600">Future Rewards</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mt-4">Great job learning! Your points are ready to become special rewards.</p>
+                </div>
+
+                <!-- Collapsible Details Section -->
+                <div class="bg-gray-50 rounded-lg border border-gray-200">
+                    <button onclick="toggleDetails()" class="w-full p-4 text-left flex items-center justify-between hover:bg-gray-100 rounded-lg transition-colors duration-200">
+                        <span class="text-sm font-medium text-gray-700">Show Details</span>
+                        <i data-lucide="chevron-down" id="details-chevron" class="w-4 h-4 text-gray-400 transition-transform duration-200"></i>
+                    </button>
+                    <div id="details-content" class="hidden border-t border-gray-200">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+                            <!-- Conversion Preview -->
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center space-x-2 mb-3">
+                                    <i data-lucide="coins" class="w-5 h-5 text-ayah-primary"></i>
+                                    <h3 class="font-semibold text-gray-800">Reward Preview</h3>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">Current Points:</span>
+                                        <span class="text-sm font-medium">1,250</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-sm text-gray-600">Exchange Rate:</span>
+                                        <span class="text-sm font-medium">100 points = 1 reward</span>
+                                    </div>
+                                    <div class="border-t pt-2">
+                                        <div class="flex justify-between">
+                                            <span class="text-sm font-semibold text-ayah-primary">Future Rewards:</span>
+                                            <span class="text-sm font-bold text-ayah-primary">12.5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Eligibility Status -->
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center space-x-2 mb-3">
+                                    <i data-lucide="shield-check" class="w-5 h-5 text-green-600"></i>
+                                    <h3 class="font-semibold text-gray-800">You're Ready!</h3>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm text-gray-600">Learning Days:</span>
+                                        <div class="flex items-center">
+                                            <i data-lucide="check" class="w-4 h-4 text-green-600 mr-1"></i>
+                                            <span class="text-sm text-green-600">45 days</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm text-gray-600">Points Needed:</span>
+                                        <div class="flex items-center">
+                                            <i data-lucide="check" class="w-4 h-4 text-green-600 mr-1"></i>
+                                            <span class="text-sm text-green-600">1,250/1,000 ✨</span>
+                                        </div>
+                                    </div>
+                                    <div class="border-t pt-2">
+                                        <div class="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                                            🎉 All Set!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Timeline -->
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="flex items-center space-x-2 mb-3">
+                                    <i data-lucide="calendar" class="w-5 h-5 text-blue-600"></i>
+                                    <h3 class="font-semibold text-gray-800">When?</h3>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="text-sm text-gray-600">Coming Soon:</div>
+                                    <div class="text-sm font-semibold text-blue-600">Spring 2025</div>
+                                    <div class="text-sm text-gray-600 mt-2">How Long:</div>
+                                    <div class="text-sm font-medium">3 weeks to decide</div>
+                                    <div class="border-t pt-2">
+                                        <div class="text-xs text-gray-500">
+                                            We'll ask you first! 😊
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Level Progress Section -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+                <h2 class="text-xl font-bold text-ayah-primary-dark mb-6">Learning Level Progress</h2>
+                <div class="space-y-4">
+                    <!-- Level 1 -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                            <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-medium text-gray-700">Level 1 - New Learner</span>
+                                <span class="text-sm text-gray-500">0-499 points</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-400 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level 2 -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                            <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-medium text-gray-700">Level 2 - Active Learner</span>
+                                <span class="text-sm text-gray-500">500-1,499 points</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-400 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level 3 (Current) -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-ayah-primary rounded-full flex items-center justify-center level-badge">
+                            <span class="text-sm font-bold text-white">3</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-medium text-ayah-primary">Level 3 - Dedicated Learner (Current)</span>
+                                <span class="text-sm text-ayah-primary">1,500-2,999 points</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-ayah-primary h-2 rounded-full progress-bar" style="width: 42%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">You're 1,750 points away from Level 4!</p>
+                        </div>
+                    </div>
+
+                    <!-- Level 4 -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                            <span class="text-sm font-bold text-gray-400">4</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-medium text-gray-500">Level 4 - Advanced Learner</span>
+                                <span class="text-sm text-gray-400">3,000-4,999 points</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-300 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level 5 -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                            <span class="text-sm font-bold text-gray-400">5</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-medium text-gray-500">Level 5 - Learning Champion</span>
+                                <span class="text-sm text-gray-400">5,000+ points</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gray-300 h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout for Point History and Activity Breakdown -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Recent Point Activity -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h2 class="text-xl font-bold text-ayah-primary-dark mb-6">Recent Point Activity</h2>
+                    <div class="space-y-4 custom-scrollbar max-h-96 overflow-y-auto">
+                        <!-- Recent activity items -->
+                        <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-green-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Math Problem Solved</p>
+                                    <p class="text-sm text-gray-500">2 minutes ago</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-green-600">+10</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-4 h-4 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Study Session Completed</p>
+                                    <p class="text-sm text-gray-500">15 minutes focused study</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-blue-600">+75</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="target" class="w-4 h-4 text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Goal Milestone Reached</p>
+                                    <p class="text-sm text-gray-500">Weekly math goal completed</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-purple-600">+50</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="flame" class="w-4 h-4 text-orange-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Daily Streak Bonus</p>
+                                    <p class="text-sm text-gray-500">7-day learning streak</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-orange-600">+25</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                                    <i data-lucide="award" class="w-4 h-4 text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Achievement Badge Earned</p>
+                                    <p class="text-sm text-gray-500">"Problem Solver" badge</p>
+                                </div>
+                            </div>
+                            <span class="font-bold text-yellow-600">+100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Point Earning Breakdown -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-ayah-primary-dark">Point Earning Breakdown</h2>
+                        <div class="inline-flex items-center px-3 py-1 bg-ayah-bg-light text-ayah-primary rounded-full text-sm font-medium">
+                            <i data-lucide="zap" class="w-4 h-4 mr-1"></i>
+                            ASKIA Formula
+                        </div>
+                    </div>
+
+                    <!-- Formula Explanation -->
+                    <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                        <h3 class="font-semibold text-gray-800 mb-2">📊 Token Economics Formula</h3>
+                        <div class="text-sm text-gray-600 space-y-1">
+                            <p><strong>Base Points</strong> = Session Duration × Subject Difficulty × Engagement Score</p>
+                            <p><strong>Subject Multipliers:</strong> Math(1.2), Science(1.1), Languages(1.0), Arts(0.9)</p>
+                            <p><strong>Bonuses:</strong> Streak(15%), Achievement(1.2x-3.0x), Accuracy(50%)</p>
+                            <p><strong>Daily Cap:</strong> 500 points maximum per day</p>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <!-- Problem Solving -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Math Problem Solving</p>
+                                    <p class="text-sm text-gray-500">Base × 1.2 (Math) × Accuracy Bonus</p>
+                                    <p class="text-xs text-ayah-primary">= 4.2 ASKIA Tokens</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-green-600">420 pts</p>
+                                <p class="text-xs text-gray-500">42 problems</p>
+                            </div>
+                        </div>
+
+                        <!-- Study Time -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-5 h-5 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Focused Study Sessions</p>
+                                    <p class="text-sm text-gray-500">Duration × Subject × Engagement</p>
+                                    <p class="text-xs text-ayah-primary">= 3.75 ASKIA Tokens</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-blue-600">375 pts</p>
+                                <p class="text-xs text-gray-500">75 minutes</p>
+                            </div>
+                        </div>
+
+                        <!-- Goal Progress -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="target" class="w-5 h-5 text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Goal Milestones</p>
+                                    <p class="text-sm text-gray-500">50 points per milestone</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-purple-600">300 pts</p>
+                                <p class="text-xs text-gray-500">6 milestones</p>
+                            </div>
+                        </div>
+
+                        <!-- Daily Streaks -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="flame" class="w-5 h-5 text-orange-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Streak Bonus</p>
+                                    <p class="text-sm text-gray-500">Base × (Days/7) × 0.15</p>
+                                    <p class="text-xs text-ayah-primary">= 1.75 ASKIA Tokens</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-orange-600">175 pts</p>
+                                <p class="text-xs text-gray-500">7 days</p>
+                            </div>
+                        </div>
+
+                        <!-- Badge Earning -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="award" class="w-5 h-5 text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Achievement Bonus</p>
+                                    <p class="text-sm text-gray-500">Base × Rarity (1.2x-3.0x)</p>
+                                    <p class="text-xs text-ayah-primary">= 2.0 ASKIA Tokens</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-yellow-600">200 pts</p>
+                                <p class="text-xs text-gray-500">2 badges</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Economic Balance & Stability Section -->
+            <div class="mt-8 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h2 class="text-xl font-bold text-ayah-primary-dark mb-6">🏦 Economic Health & Balance</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Daily Earning Status -->
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i data-lucide="trending-up" class="w-5 h-5 text-green-600"></i>
+                            <h3 class="font-semibold text-green-800">Daily Earnings</h3>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-green-700">Today:</span>
+                                <span class="font-medium text-green-800">85/500</span>
+                            </div>
+                            <div class="w-full bg-green-200 rounded-full h-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 17%"></div>
+                            </div>
+                            <p class="text-xs text-green-600">415 points remaining</p>
+                        </div>
+                    </div>
+
+                    <!-- Economic Multiplier -->
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i data-lucide="zap" class="w-5 h-5 text-blue-600"></i>
+                            <h3 class="font-semibold text-blue-800">Point Multiplier</h3>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="text-2xl font-bold text-blue-800">1.15x</div>
+                            <p class="text-xs text-blue-600">Adjusted for balance</p>
+                            <div class="inline-flex items-center px-2 py-1 bg-blue-200 text-blue-800 rounded text-xs">
+                                Stable
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Health -->
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i data-lucide="activity" class="w-5 h-5 text-purple-600"></i>
+                            <h3 class="font-semibold text-purple-800">System Health</h3>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-sm text-purple-700">Optimal</span>
+                            </div>
+                            <p class="text-xs text-purple-600">Point distribution balanced</p>
+                            <p class="text-xs text-purple-600">Inflation: 0.2%</p>
+                        </div>
+                    </div>
+
+                    <!-- Blockchain Readiness -->
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i data-lucide="link" class="w-5 h-5 text-orange-600"></i>
+                            <h3 class="font-semibold text-orange-800">Blockchain Ready</h3>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex items-center space-x-1">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-sm text-orange-700">Connected</span>
+                            </div>
+                            <p class="text-xs text-orange-600">All transactions logged</p>
+                            <p class="text-xs text-orange-600">Crypto integrity ready</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Motivation Section -->
+            <div class="mt-8 bg-gradient-to-r from-ayah-primary to-ayah-primary-dark rounded-xl p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2">🎉 You're Doing Amazing!</h2>
+                        <p class="text-ayah-primary-lighter mb-4 text-lg">Your learning is building something special for the future.</p>
+                        <div class="space-y-2">
+                            <p class="text-base">💰 <strong>Your Rewards:</strong> 1,250 points = 12.5 future rewards</p>
+                            <p class="text-base">⏰ <strong>Coming Soon:</strong> Special rewards in Spring 2025</p>
+                            <p class="text-base">🔥 <strong>Keep Going:</strong> Your 7-day streak earns bonus points!</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="gift" class="w-10 h-10 text-white"></i>
+                        </div>
+                        <p class="text-base text-ayah-primary-lighter">This week: +450 points</p>
+                        <p class="text-sm text-ayah-primary-lighter">= +4.5 future rewards</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Simulate point earning animation
+        function simulatePointEarn() {
+            const pointCards = document.querySelectorAll('.point-earn-animation');
+            pointCards.forEach(card => {
+                card.classList.add('point-earn-animation');
+                setTimeout(() => {
+                    card.classList.remove('point-earn-animation');
+                }, 600);
+            });
+        }
+
+        // Simulate real-time point updates (for demo purposes)
+        setInterval(() => {
+            // This would be connected to real learning activity data in production
+            console.log('Checking for new point activities...');
+        }, 30000);
+
+        // Toggle details section
+        function toggleDetails() {
+            const content = document.getElementById('details-content');
+            const chevron = document.getElementById('details-chevron');
+            const button = chevron.parentElement;
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                chevron.style.transform = 'rotate(180deg)';
+                button.querySelector('span').textContent = 'Hide Details';
+            } else {
+                content.classList.add('hidden');
+                chevron.style.transform = 'rotate(0deg)';
+                button.querySelector('span').textContent = 'Show Details';
+            }
+        }
+
+        // Add click handlers for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any interactive functionality here
+            console.log('Points dashboard loaded successfully');
+        });
+    </script>
+</body>
+</html>
