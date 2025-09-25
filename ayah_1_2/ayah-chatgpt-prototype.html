@@ -425,21 +425,13 @@
                 </div>
             </div>
 
-            <!-- Motivation & Rewards Group -->
+            <!-- Rewards & Achievements Group - Unified Gamification -->
             <div class="px-4 pb-4 border-b border-gray-200">
-                <h3 class="text-xs font-medium text-gray-500 mb-2 px-2">Motivation & Rewards</h3>
+                <h3 class="text-xs font-medium text-gray-500 mb-2 px-2">Rewards & Achievements</h3>
                 <div class="space-y-1">
-                    <button id="points-tool" onclick="loadToolPage('points')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
-                        <i data-lucide="star" class="w-4 h-4"></i>
-                        <span class="text-sm font-medium">Points</span>
-                    </button>
-                    <button id="achievements-tool" onclick="loadToolPage('achievements')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
-                        <i data-lucide="award" class="w-4 h-4"></i>
-                        <span class="text-sm font-medium">Achievements</span>
-                    </button>
-                    <button id="streaks-tool" onclick="loadToolPage('streaks')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
-                        <i data-lucide="flame" class="w-4 h-4"></i>
-                        <span class="text-sm font-medium">Streaks</span>
+                    <button id="rewards-tool" onclick="loadToolPage('rewards')" class="w-full flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 text-left tool-button transition-colors duration-200">
+                        <i data-lucide="trophy" class="w-4 h-4"></i>
+                        <span class="text-sm font-medium">Rewards & Achievements</span>
                     </button>
                 </div>
             </div>
@@ -578,16 +570,10 @@
                     </button>
                 </div>
 
-                <!-- Motivation & Rewards Tool icons -->
+                <!-- Rewards & Achievements Tool icons -->
                 <div class="p-2 space-y-1">
-                    <button onclick="loadToolPage('points')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Points">
-                        <i data-lucide="star" class="w-5 h-5"></i>
-                    </button>
-                    <button onclick="loadToolPage('achievements')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Achievements">
-                        <i data-lucide="award" class="w-5 h-5"></i>
-                    </button>
-                    <button onclick="loadToolPage('streaks')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Streaks">
-                        <i data-lucide="flame" class="w-5 h-5"></i>
+                    <button onclick="loadToolPage('rewards')" class="w-full p-2 rounded-lg hover:bg-gray-100 hover:text-gray-900 text-gray-700 flex justify-center transition-colors duration-200" title="Rewards & Achievements">
+                        <i data-lucide="trophy" class="w-5 h-5"></i>
                     </button>
                 </div>
             </div>
@@ -1360,12 +1346,10 @@ What would you like to work on first? I'm here to help you reach your learning g
 
             // Load appropriate tool page
             const toolUrls = {
-                'points': 'points-tools.html',
+                'rewards': 'rewards-achievements-tools.html',
                 'goals': 'goals-tools.html',
                 'progress': 'progress-tools.html',
-                'subjects': 'subjects-tools.html',
-                'achievements': 'achievements-tools.html',
-                'streaks': 'streaks-tools.html'
+                'subjects': 'subjects-tools.html'
             };
 
             if (toolUrls[toolType]) {
@@ -1373,12 +1357,10 @@ What would you like to work on first? I'm here to help you reach your learning g
 
                 // Update mobile title
                 const titles = {
-                    'points': 'My Points',
+                    'rewards': 'Rewards & Achievements',
                     'goals': 'My Goals',
                     'progress': 'Progress Charts',
-                    'subjects': 'Subject Analytics',
-                    'achievements': 'Achievements',
-                    'streaks': 'Daily Streaks'
+                    'subjects': 'Subject Analytics'
                 };
                 mobileTitle.textContent = titles[toolType] || 'Ayah Learning Tools';
 

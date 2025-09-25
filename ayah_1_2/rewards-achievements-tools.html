@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rewards & Achievements - Ayah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Ayah Brand Colors - Unified Design System */
+        :root {
+            --ayah-primary: #4F46E5;           /* Professional blue */
+            --ayah-primary-hover: #4338CA;     /* Darker blue for hover */
+            --ayah-primary-light: #EEF2FF;     /* Light blue background */
+            --ayah-success: #10B981;           /* Success green */
+            --ayah-success-light: #D1FAE5;     /* Light green background */
+            --ayah-accent: #F59E0B;            /* Achievement gold */
+            --ayah-accent-light: #FEF3C7;      /* Light gold background */
+            --ayah-neutral: #6B7280;           /* Text gray */
+            --ayah-bg: #F9FAFB;                /* Light gray background */
+        }
+
+        body {
+            font-family: "Söhne", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+            font-variation-settings: normal;
+        }
+
+        /* Utility classes for brand colors */
+        .bg-ayah-primary { background-color: var(--ayah-primary); }
+        .bg-ayah-primary-light { background-color: var(--ayah-primary-light); }
+        .bg-ayah-success { background-color: var(--ayah-success); }
+        .bg-ayah-success-light { background-color: var(--ayah-success-light); }
+        .bg-ayah-accent { background-color: var(--ayah-accent); }
+        .bg-ayah-accent-light { background-color: var(--ayah-accent-light); }
+        .bg-ayah-bg { background-color: var(--ayah-bg); }
+
+        .text-ayah-primary { color: var(--ayah-primary); }
+        .text-ayah-success { color: var(--ayah-success); }
+        .text-ayah-accent { color: var(--ayah-accent); }
+        .text-ayah-neutral { color: var(--ayah-neutral); }
+
+        .border-ayah-primary { border-color: var(--ayah-primary); }
+        .border-ayah-success { border-color: var(--ayah-success); }
+        .border-ayah-accent { border-color: var(--ayah-accent); }
+
+        /* Animations */
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
+        }
+
+        @keyframes flame-flicker {
+            0%, 100% { transform: scale(1) rotate(-2deg); }
+            25% { transform: scale(1.05) rotate(1deg); }
+            50% { transform: scale(1.1) rotate(-1deg); }
+            75% { transform: scale(1.05) rotate(2deg); }
+        }
+
+        @keyframes badge-earn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .sparkle-animation {
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .flame-animation {
+            animation: flame-flicker 2s ease-in-out infinite;
+        }
+
+        .badge-earned {
+            animation: badge-earn 0.6s ease-out;
+        }
+
+        /* Progress bar animation */
+        .progress-bar {
+            transition: width 0.8s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-ayah-bg min-h-screen">
+    <div class="max-w-6xl mx-auto p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">🏆 Rewards & Achievements</h1>
+            <p class="text-ayah-neutral">Track your learning progress, earn badges, and celebrate your achievements!</p>
+        </div>
+
+        <!-- Quick Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Points Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-ayah-accent-light rounded-lg flex items-center justify-center">
+                            <i data-lucide="star" class="w-5 h-5 text-ayah-accent sparkle-animation"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">My Points</h3>
+                            <p class="text-sm text-ayah-neutral">Total earned</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-3xl font-bold text-ayah-accent mb-2">1,247</div>
+                <div class="text-sm text-ayah-success">+25 points today</div>
+            </div>
+
+            <!-- Badges Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-ayah-primary-light rounded-lg flex items-center justify-center">
+                            <i data-lucide="award" class="w-5 h-5 text-ayah-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">Badges</h3>
+                            <p class="text-sm text-ayah-neutral">Earned achievements</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-3xl font-bold text-ayah-primary mb-2">3/5</div>
+                <div class="text-sm text-ayah-neutral">2 more to unlock</div>
+            </div>
+
+            <!-- Streak Card -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <i data-lucide="flame" class="w-5 h-5 text-orange-500 flame-animation"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">Daily Streak</h3>
+                            <p class="text-sm text-ayah-neutral">Consecutive days</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-3xl font-bold text-orange-500 mb-2">7</div>
+                <div class="text-sm text-ayah-success">Study today to continue!</div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Achievement Badges Section -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold text-gray-900">🏅 Achievement Badges</h2>
+                    <span class="text-sm text-ayah-neutral">3 of 5 earned</span>
+                </div>
+
+                <!-- Badge Grid -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <!-- Earned Badges -->
+                    <div class="text-center p-4 bg-ayah-success-light rounded-lg border-2 border-ayah-success">
+                        <div class="w-12 h-12 mx-auto mb-2 bg-ayah-success rounded-full flex items-center justify-center">
+                            <i data-lucide="play" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-sm text-gray-900">First Steps</h4>
+                        <p class="text-xs text-ayah-neutral mt-1">Complete your first session</p>
+                        <span class="inline-block mt-2 px-2 py-1 bg-ayah-success text-white text-xs rounded-full">EARNED</span>
+                    </div>
+
+                    <div class="text-center p-4 bg-ayah-success-light rounded-lg border-2 border-ayah-success">
+                        <div class="w-12 h-12 mx-auto mb-2 bg-ayah-success rounded-full flex items-center justify-center">
+                            <i data-lucide="target" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-sm text-gray-900">Goal Achiever</h4>
+                        <p class="text-xs text-ayah-neutral mt-1">Complete your first goal</p>
+                        <span class="inline-block mt-2 px-2 py-1 bg-ayah-success text-white text-xs rounded-full">EARNED</span>
+                    </div>
+
+                    <div class="text-center p-4 bg-ayah-success-light rounded-lg border-2 border-ayah-success">
+                        <div class="w-12 h-12 mx-auto mb-2 bg-ayah-success rounded-full flex items-center justify-center">
+                            <i data-lucide="calendar-check" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <h4 class="font-semibold text-sm text-gray-900">Consistent Learner</h4>
+                        <p class="text-xs text-ayah-neutral mt-1">Study for 3 consecutive days</p>
+                        <span class="inline-block mt-2 px-2 py-1 bg-ayah-success text-white text-xs rounded-full">EARNED</span>
+                    </div>
+
+                    <!-- Unearned Badges -->
+                    <div class="text-center p-4 bg-gray-50 rounded-lg border-2 border-gray-200 opacity-60">
+                        <div class="w-12 h-12 mx-auto mb-2 bg-gray-300 rounded-full flex items-center justify-center">
+                            <i data-lucide="star" class="w-6 h-6 text-gray-500"></i>
+                        </div>
+                        <h4 class="font-semibold text-sm text-gray-600">Point Collector</h4>
+                        <p class="text-xs text-gray-500 mt-1">Earn your first 100 points</p>
+                        <div class="mt-2">
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-ayah-accent h-2 rounded-full progress-bar" style="width: 75%"></div>
+                            </div>
+                            <span class="text-xs text-gray-500 mt-1">75/100 points</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Badge Progress -->
+                <div class="bg-ayah-accent-light rounded-lg p-4">
+                    <h4 class="font-semibold text-gray-900 mb-2">🎯 Next Badge: Point Collector</h4>
+                    <p class="text-sm text-ayah-neutral mb-3">You're 25 points away from earning your next badge!</p>
+                    <div class="w-full bg-white rounded-full h-3">
+                        <div class="bg-ayah-accent h-3 rounded-full progress-bar" style="width: 75%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-ayah-neutral mt-1">
+                        <span>75 points</span>
+                        <span>100 points</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Points & Streaks Section -->
+            <div class="space-y-6">
+                <!-- Points Details -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">⭐ Point Details</h2>
+                    
+                    <!-- Recent Activity -->
+                    <div class="space-y-3 mb-6">
+                        <h3 class="font-semibold text-gray-900">Recent Activity</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between p-3 bg-ayah-bg rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="message-circle" class="w-4 h-4 text-ayah-primary"></i>
+                                    <span class="text-sm text-gray-700">Chat interaction</span>
+                                </div>
+                                <span class="text-sm font-semibold text-ayah-accent">+5 points</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-ayah-bg rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="target" class="w-4 h-4 text-ayah-success"></i>
+                                    <span class="text-sm text-gray-700">Goal progress</span>
+                                </div>
+                                <span class="text-sm font-semibold text-ayah-accent">+10 points</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-ayah-bg rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <i data-lucide="clock" class="w-4 h-4 text-ayah-primary"></i>
+                                    <span class="text-sm text-gray-700">Session completed</span>
+                                </div>
+                                <span class="text-sm font-semibold text-ayah-accent">+5 points</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Daily Summary -->
+                    <div class="bg-ayah-primary-light rounded-lg p-4">
+                        <h4 class="font-semibold text-gray-900 mb-2">Today's Summary</h4>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-ayah-neutral">Points earned today:</span>
+                            <span class="text-lg font-bold text-ayah-accent">+25 points</span>
+                        </div>
+                        <div class="flex justify-between items-center mt-1">
+                            <span class="text-sm text-ayah-neutral">From 3 activities</span>
+                            <span class="text-sm text-ayah-success">Great job!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Streak Details -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">🔥 Daily Streak</h2>
+                    
+                    <!-- Current Streak -->
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 mx-auto mb-3 bg-orange-100 rounded-full flex items-center justify-center">
+                            <i data-lucide="flame" class="w-8 h-8 text-orange-500 flame-animation"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-orange-500 mb-1">7 Days</div>
+                        <p class="text-sm text-ayah-neutral">Current streak</p>
+                    </div>
+
+                    <!-- Streak Calendar -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-gray-900 mb-3">This Week</h4>
+                        <div class="grid grid-cols-7 gap-2">
+                            <div class="text-center">
+                                <div class="text-xs text-ayah-neutral mb-1">Mon</div>
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xs text-ayah-neutral mb-1">Tue</div>
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xs text-ayah-neutral mb-1">Wed</div>
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xs text-ayah-neutral mb-1">Thu</div>
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xs text-ayah-neutral mb-1">Fri</div>
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xs text-ayah-neutral mb-1">Sat</div>
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xs text-ayah-neutral mb-1">Sun</div>
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                    <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Streak Motivation -->
+                    <div class="bg-orange-50 rounded-lg p-4">
+                        <h4 class="font-semibold text-gray-900 mb-2">🌟 One Week Streak!</h4>
+                        <p class="text-sm text-ayah-neutral mb-2">Amazing consistency! You've studied for 7 days in a row.</p>
+                        <p class="text-sm text-orange-600 font-medium">Keep it up to reach your 14-day milestone!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Simulate real-time updates
+        function updateStats() {
+            // This would normally fetch real data from the backend
+            console.log('Updating gamification stats...');
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+        });
+    </script>
+</body>
+</html>
