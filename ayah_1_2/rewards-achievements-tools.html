@@ -79,10 +79,167 @@
         .progress-bar {
             transition: width 0.8s ease-in-out;
         }
+
+        /* Interactive elements */
+        .interactive-card {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .interactive-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button hover effects */
+        .btn-hover {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Pulse animation for important actions */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Glow effect for achievements */
+        .achievement-glow {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Streak fire effect */
+        .streak-glow {
+            box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+        }
+
+        /* Enhanced Modal Styles */
+        .modal-backdrop {
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .modal-enter {
+            animation: modalEnter 0.3s ease-out forwards;
+        }
+
+        .modal-exit {
+            animation: modalExit 0.3s ease-in forwards;
+        }
+
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes modalExit {
+            from {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+        }
+
+        /* Brand-consistent gradients */
+        .gradient-ayah-primary {
+            background: linear-gradient(135deg, var(--ayah-primary) 0%, var(--ayah-primary-hover) 100%);
+        }
+
+        .gradient-ayah-accent {
+            background: linear-gradient(135deg, var(--ayah-accent) 0%, #f59e0b 100%);
+        }
+
+        .gradient-streak {
+            background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+        }
+
+        /* Enhanced button styles */
+        .btn-brand {
+            background: linear-gradient(135deg, var(--ayah-primary) 0%, var(--ayah-primary-hover) 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-brand:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 72, 235, 0.3);
+        }
+
+        /* Content styling for modals */
+        .modal-content-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid var(--ayah-primary);
+        }
+
+        .achievement-celebration {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-left-color: var(--ayah-success);
+            color: #1f2937; /* Ensure dark text */
+        }
+
+        .points-highlight {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left-color: var(--ayah-accent);
+            color: #1f2937; /* Ensure dark text */
+        }
+
+        .streak-highlight {
+            background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+            border-left-color: #f97316;
+            color: #1f2937; /* Ensure dark text */
+        }
+
+        /* Ensure all modal content has proper contrast */
+        .modal-content-section h4,
+        .modal-content-section h5,
+        .modal-content-section p,
+        .modal-content-section span,
+        .modal-content-section li {
+            color: #1f2937 !important;
+        }
+
+        /* Override any conflicting text colors in modals */
+        #modalBadgeContent,
+        #pointsModalContent,
+        #streakModalContent,
+        #pointsModalContainer,
+        #streakModalContainer {
+            color: #1f2937;
+        }
+
+        #modalBadgeContent *,
+        #pointsModalContent *,
+        #streakModalContent *,
+        #pointsModalContainer *,
+        #streakModalContainer * {
+            color: inherit;
+        }
     </style>
 </head>
 <body class="bg-ayah-bg min-h-screen">
-    <div class="max-w-6xl mx-auto p-6">
+    <div class="p-6">
         <!-- Header -->
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-gray-900 mb-2">🏆 Rewards & Achievements</h1>
@@ -155,35 +312,38 @@
                 <!-- Badge Grid -->
                 <div class="grid grid-cols-2 gap-4 mb-6">
                     <!-- Earned Badges -->
-                    <div class="text-center p-4 bg-ayah-success-light rounded-lg border-2 border-ayah-success">
+                    <div class="text-center p-4 bg-ayah-success-light rounded-lg border-2 border-ayah-success cursor-pointer hover:shadow-lg transition-all duration-200 transform hover:scale-105" onclick="showBadgeDetails('first-steps', true)">
                         <div class="w-12 h-12 mx-auto mb-2 bg-ayah-success rounded-full flex items-center justify-center">
                             <i data-lucide="play" class="w-6 h-6 text-white"></i>
                         </div>
                         <h4 class="font-semibold text-sm text-gray-900">First Steps</h4>
                         <p class="text-xs text-ayah-neutral mt-1">Complete your first session</p>
                         <span class="inline-block mt-2 px-2 py-1 bg-ayah-success text-white text-xs rounded-full">EARNED</span>
+                        <div class="mt-2 text-xs text-ayah-success font-medium">Click to view details</div>
                     </div>
 
-                    <div class="text-center p-4 bg-ayah-success-light rounded-lg border-2 border-ayah-success">
+                    <div class="text-center p-4 bg-ayah-success-light rounded-lg border-2 border-ayah-success cursor-pointer hover:shadow-lg transition-all duration-200 transform hover:scale-105" onclick="showBadgeDetails('goal-achiever', true)">
                         <div class="w-12 h-12 mx-auto mb-2 bg-ayah-success rounded-full flex items-center justify-center">
                             <i data-lucide="target" class="w-6 h-6 text-white"></i>
                         </div>
                         <h4 class="font-semibold text-sm text-gray-900">Goal Achiever</h4>
                         <p class="text-xs text-ayah-neutral mt-1">Complete your first goal</p>
                         <span class="inline-block mt-2 px-2 py-1 bg-ayah-success text-white text-xs rounded-full">EARNED</span>
+                        <div class="mt-2 text-xs text-ayah-success font-medium">Click to view details</div>
                     </div>
 
-                    <div class="text-center p-4 bg-ayah-success-light rounded-lg border-2 border-ayah-success">
+                    <div class="text-center p-4 bg-ayah-success-light rounded-lg border-2 border-ayah-success cursor-pointer hover:shadow-lg transition-all duration-200 transform hover:scale-105" onclick="showBadgeDetails('consistent-learner', true)">
                         <div class="w-12 h-12 mx-auto mb-2 bg-ayah-success rounded-full flex items-center justify-center">
                             <i data-lucide="calendar-check" class="w-6 h-6 text-white"></i>
                         </div>
                         <h4 class="font-semibold text-sm text-gray-900">Consistent Learner</h4>
                         <p class="text-xs text-ayah-neutral mt-1">Study for 3 consecutive days</p>
                         <span class="inline-block mt-2 px-2 py-1 bg-ayah-success text-white text-xs rounded-full">EARNED</span>
+                        <div class="mt-2 text-xs text-ayah-success font-medium">Click to view details</div>
                     </div>
 
                     <!-- Unearned Badges -->
-                    <div class="text-center p-4 bg-gray-50 rounded-lg border-2 border-gray-200 opacity-60">
+                    <div class="text-center p-4 bg-gray-50 rounded-lg border-2 border-gray-200 cursor-pointer hover:shadow-lg transition-all duration-200 transform hover:scale-105 hover:opacity-100 opacity-60" onclick="showBadgeDetails('point-collector', false)">
                         <div class="w-12 h-12 mx-auto mb-2 bg-gray-300 rounded-full flex items-center justify-center">
                             <i data-lucide="star" class="w-6 h-6 text-gray-500"></i>
                         </div>
@@ -195,6 +355,7 @@
                             </div>
                             <span class="text-xs text-gray-500 mt-1">75/100 points</span>
                         </div>
+                        <div class="mt-2 text-xs text-ayah-primary font-medium">Click to see how to earn</div>
                     </div>
                 </div>
 
@@ -202,12 +363,26 @@
                 <div class="bg-ayah-accent-light rounded-lg p-4">
                     <h4 class="font-semibold text-gray-900 mb-2">🎯 Next Badge: Point Collector</h4>
                     <p class="text-sm text-ayah-neutral mb-3">You're 25 points away from earning your next badge!</p>
-                    <div class="w-full bg-white rounded-full h-3">
+                    <div class="w-full bg-white rounded-full h-3 mb-3">
                         <div class="bg-ayah-accent h-3 rounded-full progress-bar" style="width: 75%"></div>
                     </div>
-                    <div class="flex justify-between text-xs text-ayah-neutral mt-1">
+                    <div class="flex justify-between text-xs text-ayah-neutral mb-4">
                         <span>75 points</span>
                         <span>100 points</span>
+                    </div>
+                    <!-- Action Buttons -->
+                    <div class="flex space-x-2">
+                        <button onclick="startLearningSession()" class="flex-1 bg-ayah-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-ayah-primary-hover transition-colors duration-200">
+                            Start Learning Session
+                        </button>
+                        <button onclick="viewGoals()" class="flex-1 bg-white border border-ayah-primary text-ayah-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-ayah-primary-light transition-colors duration-200">
+                            Work on Goals
+                        </button>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <button onclick="showPointEarningTips()" class="text-xs text-ayah-primary hover:text-ayah-primary-hover font-medium">
+                            💡 Show me how to earn points faster
+                        </button>
                     </div>
                 </div>
             </div>
@@ -216,30 +391,44 @@
             <div class="space-y-6">
                 <!-- Points Details -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                    <h2 class="text-xl font-bold text-gray-900 mb-4">⭐ Point Details</h2>
-                    
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold text-gray-900">⭐ Point Details</h2>
+                        <button onclick="togglePointHistory()" class="text-sm text-ayah-primary hover:text-ayah-primary-hover font-medium">
+                            View Full History
+                        </button>
+                    </div>
+
                     <!-- Recent Activity -->
                     <div class="space-y-3 mb-6">
                         <h3 class="font-semibold text-gray-900">Recent Activity</h3>
-                        <div class="space-y-2">
-                            <div class="flex items-center justify-between p-3 bg-ayah-bg rounded-lg">
+                        <div class="space-y-2" id="recentActivity">
+                            <div class="flex items-center justify-between p-3 bg-ayah-bg rounded-lg hover:bg-ayah-primary-light transition-colors duration-200 cursor-pointer" onclick="showActivityDetails('chat-interaction')">
                                 <div class="flex items-center space-x-3">
                                     <i data-lucide="message-circle" class="w-4 h-4 text-ayah-primary"></i>
-                                    <span class="text-sm text-gray-700">Chat interaction</span>
+                                    <div>
+                                        <span class="text-sm text-gray-700">Chat interaction</span>
+                                        <div class="text-xs text-ayah-neutral">2 minutes ago</div>
+                                    </div>
                                 </div>
                                 <span class="text-sm font-semibold text-ayah-accent">+5 points</span>
                             </div>
-                            <div class="flex items-center justify-between p-3 bg-ayah-bg rounded-lg">
+                            <div class="flex items-center justify-between p-3 bg-ayah-bg rounded-lg hover:bg-ayah-primary-light transition-colors duration-200 cursor-pointer" onclick="showActivityDetails('goal-progress')">
                                 <div class="flex items-center space-x-3">
                                     <i data-lucide="target" class="w-4 h-4 text-ayah-success"></i>
-                                    <span class="text-sm text-gray-700">Goal progress</span>
+                                    <div>
+                                        <span class="text-sm text-gray-700">Goal progress</span>
+                                        <div class="text-xs text-ayah-neutral">15 minutes ago</div>
+                                    </div>
                                 </div>
                                 <span class="text-sm font-semibold text-ayah-accent">+10 points</span>
                             </div>
-                            <div class="flex items-center justify-between p-3 bg-ayah-bg rounded-lg">
+                            <div class="flex items-center justify-between p-3 bg-ayah-bg rounded-lg hover:bg-ayah-primary-light transition-colors duration-200 cursor-pointer" onclick="showActivityDetails('session-completed')">
                                 <div class="flex items-center space-x-3">
                                     <i data-lucide="clock" class="w-4 h-4 text-ayah-primary"></i>
-                                    <span class="text-sm text-gray-700">Session completed</span>
+                                    <div>
+                                        <span class="text-sm text-gray-700">Session completed</span>
+                                        <div class="text-xs text-ayah-neutral">1 hour ago</div>
+                                    </div>
                                 </div>
                                 <span class="text-sm font-semibold text-ayah-accent">+5 points</span>
                             </div>
@@ -253,9 +442,18 @@
                             <span class="text-sm text-ayah-neutral">Points earned today:</span>
                             <span class="text-lg font-bold text-ayah-accent">+25 points</span>
                         </div>
-                        <div class="flex justify-between items-center mt-1">
+                        <div class="flex justify-between items-center mt-1 mb-3">
                             <span class="text-sm text-ayah-neutral">From 3 activities</span>
                             <span class="text-sm text-ayah-success">Great job!</span>
+                        </div>
+                        <!-- Quick Actions -->
+                        <div class="flex space-x-2 mt-3">
+                            <button onclick="earnMorePoints()" class="flex-1 bg-ayah-accent text-white px-3 py-2 rounded-lg text-xs font-medium hover:bg-ayah-accent-hover transition-colors duration-200">
+                                Earn More Points
+                            </button>
+                            <button onclick="viewWeeklyProgress()" class="flex-1 bg-white border border-ayah-primary text-ayah-primary px-3 py-2 rounded-lg text-xs font-medium hover:bg-ayah-primary-light transition-colors duration-200">
+                                Weekly Progress
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -275,47 +473,52 @@
 
                     <!-- Streak Calendar -->
                     <div class="mb-6">
-                        <h4 class="font-semibold text-gray-900 mb-3">This Week</h4>
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-semibold text-gray-900">This Week</h4>
+                            <button onclick="viewStreakHistory()" class="text-xs text-ayah-primary hover:text-ayah-primary-hover font-medium">
+                                View History
+                            </button>
+                        </div>
                         <div class="grid grid-cols-7 gap-2">
                             <div class="text-center">
                                 <div class="text-xs text-ayah-neutral mb-1">Mon</div>
-                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200" onclick="showDayDetails('monday')" title="Click to see activities">
                                     <i data-lucide="check" class="w-4 h-4 text-white"></i>
                                 </div>
                             </div>
                             <div class="text-center">
                                 <div class="text-xs text-ayah-neutral mb-1">Tue</div>
-                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200" onclick="showDayDetails('tuesday')" title="Click to see activities">
                                     <i data-lucide="check" class="w-4 h-4 text-white"></i>
                                 </div>
                             </div>
                             <div class="text-center">
                                 <div class="text-xs text-ayah-neutral mb-1">Wed</div>
-                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200" onclick="showDayDetails('wednesday')" title="Click to see activities">
                                     <i data-lucide="check" class="w-4 h-4 text-white"></i>
                                 </div>
                             </div>
                             <div class="text-center">
                                 <div class="text-xs text-ayah-neutral mb-1">Thu</div>
-                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200" onclick="showDayDetails('thursday')" title="Click to see activities">
                                     <i data-lucide="check" class="w-4 h-4 text-white"></i>
                                 </div>
                             </div>
                             <div class="text-center">
                                 <div class="text-xs text-ayah-neutral mb-1">Fri</div>
-                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200" onclick="showDayDetails('friday')" title="Click to see activities">
                                     <i data-lucide="check" class="w-4 h-4 text-white"></i>
                                 </div>
                             </div>
                             <div class="text-center">
                                 <div class="text-xs text-ayah-neutral mb-1">Sat</div>
-                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200" onclick="showDayDetails('saturday')" title="Click to see activities">
                                     <i data-lucide="check" class="w-4 h-4 text-white"></i>
                                 </div>
                             </div>
                             <div class="text-center">
                                 <div class="text-xs text-ayah-neutral mb-1">Sun</div>
-                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center">
+                                <div class="w-8 h-8 bg-ayah-success rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-200" onclick="showDayDetails('sunday')" title="Click to see activities">
                                     <i data-lucide="check" class="w-4 h-4 text-white"></i>
                                 </div>
                             </div>
@@ -326,26 +529,1223 @@
                     <div class="bg-orange-50 rounded-lg p-4">
                         <h4 class="font-semibold text-gray-900 mb-2">🌟 One Week Streak!</h4>
                         <p class="text-sm text-ayah-neutral mb-2">Amazing consistency! You've studied for 7 days in a row.</p>
-                        <p class="text-sm text-orange-600 font-medium">Keep it up to reach your 14-day milestone!</p>
+                        <p class="text-sm text-orange-600 font-medium mb-4">Keep it up to reach your 14-day milestone!</p>
+
+                        <!-- Streak Actions -->
+                        <div class="flex space-x-2">
+                            <button onclick="continueStreak()" class="flex-1 bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors duration-200">
+                                Continue Streak
+                            </button>
+                            <button onclick="shareStreak()" class="flex-1 bg-white border border-orange-500 text-orange-500 px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-50 transition-colors duration-200">
+                                Share Achievement
+                            </button>
+                        </div>
+
+                        <!-- Streak Challenge -->
+                        <div class="mt-3 text-center">
+                            <button onclick="acceptStreakChallenge()" class="text-xs text-orange-600 hover:text-orange-700 font-medium">
+                                🎯 Accept 14-day challenge
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Enhanced Badge Details Modal -->
+    <div id="badgeModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="modalContent">
+            <!-- Modal Header with Brand Colors -->
+            <div class="gradient-ayah-primary rounded-t-2xl p-4 text-white text-center">
+                <div id="modalBadgeIcon" class="w-16 h-16 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="star" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 id="modalBadgeTitle" class="text-xl font-bold mb-1 text-white">Badge Name</h3>
+                <p id="modalBadgeDescription" class="text-sm text-white opacity-90">Badge description</p>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-4">
+                <div id="modalBadgeContent" class="mb-4">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-2">
+                    <button onclick="closeBadgeModal()" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-200">
+                        Close
+                    </button>
+                    <button id="modalActionButton" onclick="modalAction()" class="flex-1 gradient-ayah-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">
+                        Take Action
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Points Activity Modal -->
+    <div id="pointsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full max-h-[85vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="pointsModalContainer">
+            <!-- Points Header -->
+            <div class="gradient-ayah-accent rounded-t-2xl p-4 text-white text-center">
+                <div class="w-14 h-14 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="star" class="w-7 h-7 text-white sparkle-animation"></i>
+                </div>
+                <h3 id="pointsModalTitle" class="text-lg font-bold mb-1 text-white">Point Activity</h3>
+                <p id="pointsModalSubtitle" class="text-xs text-white opacity-90">Activity details</p>
+            </div>
+
+            <!-- Points Body -->
+            <div class="p-4">
+                <div id="pointsModalContent" class="mb-4">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+
+                <div class="flex space-x-2">
+                    <button onclick="closePointsModal()" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-200">
+                        Close
+                    </button>
+                    <button id="pointsActionButton" onclick="pointsModalAction()" class="flex-1 gradient-ayah-accent text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">
+                        Earn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Streak Details Modal -->
+    <div id="streakModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full max-h-[85vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="streakModalContainer">
+            <!-- Streak Header -->
+            <div class="gradient-streak rounded-t-2xl p-4 text-white text-center">
+                <div class="w-14 h-14 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="flame" class="w-7 h-7 text-white flame-animation"></i>
+                </div>
+                <h3 id="streakModalTitle" class="text-lg font-bold mb-1 text-white">Streak Details</h3>
+                <p id="streakModalSubtitle" class="text-xs text-white opacity-90">Your learning journey</p>
+            </div>
+
+            <!-- Streak Body -->
+            <div class="p-4">
+                <div id="streakModalContent" class="mb-4">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+
+                <div class="flex space-x-2">
+                    <button onclick="closeStreakModal()" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-200">
+                        Close
+                    </button>
+                    <button id="streakActionButton" onclick="streakModalAction()" class="flex-1 gradient-streak text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">
+                        Continue Streak
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Learning Session Modal -->
+    <div id="learningSessionModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="learningSessionModalContent">
+            <!-- Modal Header -->
+            <div class="gradient-ayah-primary rounded-t-2xl p-4 text-white text-center">
+                <div class="w-16 h-16 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="rocket" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1 text-white">Start Learning Session</h3>
+                <p class="text-sm text-white opacity-90">Choose your learning path</p>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-4">
+                <div class="mb-4">
+                    <p class="text-gray-700 mb-4">Ready to learn something new? Choose how you'd like to start your session:</p>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-blue-50 rounded-lg border border-blue-200 cursor-pointer hover:bg-blue-100 transition-colors">
+                            <i data-lucide="message-circle" class="w-5 h-5 text-blue-600 mr-3"></i>
+                            <div>
+                                <div class="font-medium text-blue-900">Chat with AI Tutor</div>
+                                <div class="text-sm text-blue-700">Ask questions and get instant help</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center p-3 bg-green-50 rounded-lg border border-green-200 cursor-pointer hover:bg-green-100 transition-colors">
+                            <i data-lucide="target" class="w-5 h-5 text-green-600 mr-3"></i>
+                            <div>
+                                <div class="font-medium text-green-900">Work on Goals</div>
+                                <div class="text-sm text-green-700">Continue your learning objectives</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center p-3 bg-purple-50 rounded-lg border border-purple-200 cursor-pointer hover:bg-purple-100 transition-colors">
+                            <i data-lucide="book-open" class="w-5 h-5 text-purple-600 mr-3"></i>
+                            <div>
+                                <div class="font-medium text-purple-900">Explore Subjects</div>
+                                <div class="text-sm text-purple-700">Discover new topics to learn</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-2">
+                    <button onclick="closeLearningSessionModal()" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-200">
+                        Cancel
+                    </button>
+                    <button onclick="startChatSession()" class="flex-1 gradient-ayah-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">
+                        Start Chat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Point Earning Tips Modal -->
+    <div id="pointTipsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="pointTipsModalContent">
+            <!-- Modal Header -->
+            <div class="gradient-ayah-accent rounded-t-2xl p-4 text-white text-center">
+                <div class="w-16 h-16 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="lightbulb" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1 text-white">Earn Points Faster</h3>
+                <p class="text-sm text-white opacity-90">Tips to maximize your learning rewards</p>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-4">
+                <div class="mb-4">
+                    <p class="text-gray-700 mb-4">Here are the best ways to earn points quickly:</p>
+
+                    <div class="space-y-3">
+                        <div class="flex items-start p-3 bg-blue-50 rounded-lg border border-blue-200">
+                            <i data-lucide="message-circle" class="w-5 h-5 text-blue-600 mr-3 mt-0.5"></i>
+                            <div>
+                                <div class="font-medium text-blue-900">Chat with AI Tutor</div>
+                                <div class="text-sm text-blue-700">1 point per meaningful message</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start p-3 bg-green-50 rounded-lg border border-green-200">
+                            <i data-lucide="target" class="w-5 h-5 text-green-600 mr-3 mt-0.5"></i>
+                            <div>
+                                <div class="font-medium text-green-900">Complete Goal Milestones</div>
+                                <div class="text-sm text-green-700">10 points per milestone reached</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start p-3 bg-purple-50 rounded-lg border border-purple-200">
+                            <i data-lucide="clock" class="w-5 h-5 text-purple-600 mr-3 mt-0.5"></i>
+                            <div>
+                                <div class="font-medium text-purple-900">Complete Learning Sessions</div>
+                                <div class="text-sm text-purple-700">5 points per focused session</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start p-3 bg-orange-50 rounded-lg border border-orange-200">
+                            <i data-lucide="flame" class="w-5 h-5 text-orange-600 mr-3 mt-0.5"></i>
+                            <div>
+                                <div class="font-medium text-orange-900">Maintain Daily Streaks</div>
+                                <div class="text-sm text-orange-700">5 bonus points daily</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-2">
+                    <button onclick="closePointTipsModal()" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-200">
+                        Close
+                    </button>
+                    <button onclick="startEarningPoints()" class="flex-1 gradient-ayah-accent text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">
+                        Start Earning
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weekly Progress Modal -->
+    <div id="weeklyProgressModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="weeklyProgressModalContent">
+            <!-- Modal Header -->
+            <div class="gradient-ayah-primary rounded-t-2xl p-4 text-white text-center">
+                <div class="w-16 h-16 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1 text-white">Weekly Achievements</h3>
+                <p class="text-sm text-white opacity-90">Your gamification rewards and milestones</p>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-4">
+                <div class="mb-4">
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-blue-600">125</div>
+                            <div class="text-sm text-blue-700">Points Earned</div>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-orange-600">7</div>
+                            <div class="text-sm text-orange-700">Day Streak</div>
+                        </div>
+                        <div class="bg-green-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-green-600">3</div>
+                            <div class="text-sm text-green-700">Goals Completed</div>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-purple-600">5</div>
+                            <div class="text-sm text-purple-700">Subjects Studied</div>
+                        </div>
+                    </div>
+
+                    <!-- Achievement Summary Note -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="info" class="w-4 h-4 text-blue-600"></i>
+                            <span class="text-sm text-blue-800 font-medium">Achievement Summary</span>
+                        </div>
+                        <p class="text-xs text-blue-700 mt-1">This shows your gamification rewards and milestones. For detailed academic metrics and trends, click "View Detailed Progress" below.</p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <div class="font-medium text-gray-900">Highest Earning Day</div>
+                            <div class="text-sm text-gray-600">Wednesday - 35 points earned 🏆</div>
+                        </div>
+
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <div class="font-medium text-gray-900">Achievement Unlocked</div>
+                            <div class="text-sm text-gray-600">Mathematics Master - 3 sessions completed 🎯</div>
+                        </div>
+
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <div class="font-medium text-gray-900">Streak Bonus</div>
+                            <div class="text-sm text-gray-600">7-day streak = +20 bonus points! 🔥</div>
+                        </div>
+
+                        <div class="border-l-4 border-orange-500 pl-4">
+                            <div class="font-medium text-gray-900">Next Milestone</div>
+                            <div class="text-sm text-gray-600">25 more points to unlock "Study Champion" badge 🏅</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-2">
+                    <button onclick="closeWeeklyProgressModal()" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-200">
+                        Close
+                    </button>
+                    <button onclick="viewDetailedProgress()" class="flex-1 gradient-ayah-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">
+                        View Detailed Progress
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Point History Modal -->
+    <div id="pointHistoryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="pointHistoryModalContent">
+            <!-- Modal Header -->
+            <div class="gradient-ayah-accent rounded-t-2xl p-4 text-white text-center">
+                <div class="w-16 h-16 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="history" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1 text-white">Point History</h3>
+                <p class="text-sm text-white opacity-90">Complete record of your achievements</p>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-4">
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-lg font-semibold text-gray-900">Recent Activity</div>
+                        <div class="text-sm text-gray-500">Last 7 days</div>
+                    </div>
+
+                    <div class="space-y-3 max-h-64 overflow-y-auto">
+                        <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                            <div class="flex items-center">
+                                <i data-lucide="message-circle" class="w-4 h-4 text-blue-600 mr-3"></i>
+                                <div>
+                                    <div class="font-medium text-blue-900">Chat Session</div>
+                                    <div class="text-xs text-blue-700">Today, 2:30 PM</div>
+                                </div>
+                            </div>
+                            <div class="text-blue-600 font-semibold">+5</div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                            <div class="flex items-center">
+                                <i data-lucide="target" class="w-4 h-4 text-green-600 mr-3"></i>
+                                <div>
+                                    <div class="font-medium text-green-900">Goal Milestone</div>
+                                    <div class="text-xs text-green-700">Today, 1:15 PM</div>
+                                </div>
+                            </div>
+                            <div class="text-green-600 font-semibold">+10</div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                            <div class="flex items-center">
+                                <i data-lucide="clock" class="w-4 h-4 text-purple-600 mr-3"></i>
+                                <div>
+                                    <div class="font-medium text-purple-900">Study Session</div>
+                                    <div class="text-xs text-purple-700">Today, 12:00 PM</div>
+                                </div>
+                            </div>
+                            <div class="text-purple-600 font-semibold">+5</div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
+                            <div class="flex items-center">
+                                <i data-lucide="flame" class="w-4 h-4 text-orange-600 mr-3"></i>
+                                <div>
+                                    <div class="font-medium text-orange-900">Daily Streak</div>
+                                    <div class="text-xs text-orange-700">Yesterday, 11:59 PM</div>
+                                </div>
+                            </div>
+                            <div class="text-orange-600 font-semibold">+5</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-2">
+                    <button onclick="closePointHistoryModal()" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-200">
+                        Close
+                    </button>
+                    <button onclick="exportHistory()" class="flex-1 gradient-ayah-accent text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">
+                        Export Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Streak History Modal -->
+    <div id="streakHistoryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="streakHistoryModalContent">
+            <!-- Modal Header -->
+            <div class="gradient-streak rounded-t-2xl p-4 text-white text-center">
+                <div class="w-16 h-16 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="flame" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1 text-white">Streak History</h3>
+                <p class="text-sm text-white opacity-90">Your learning consistency journey</p>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-4">
+                <div class="mb-4">
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="bg-orange-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-orange-600">7</div>
+                            <div class="text-sm text-orange-700">Current Streak</div>
+                        </div>
+                        <div class="bg-red-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-red-600">12</div>
+                            <div class="text-sm text-red-700">Longest Ever</div>
+                        </div>
+                        <div class="bg-yellow-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-yellow-600">3</div>
+                            <div class="text-sm text-yellow-700">This Month</div>
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-purple-600">45</div>
+                            <div class="text-sm text-purple-700">Total Days</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="border-l-4 border-orange-500 pl-4">
+                            <div class="font-medium text-gray-900">Best Month</div>
+                            <div class="text-sm text-gray-600">October 2024 - 28 consecutive days</div>
+                        </div>
+
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <div class="font-medium text-gray-900">Consistency Rate</div>
+                            <div class="text-sm text-gray-600">85% - Excellent progress!</div>
+                        </div>
+
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <div class="font-medium text-gray-900">Next Milestone</div>
+                            <div class="text-sm text-gray-600">14-day streak - 7 days to go!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-2">
+                    <button onclick="closeStreakHistoryModal()" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-200">
+                        Close
+                    </button>
+                    <button onclick="setStreakReminder()" class="flex-1 gradient-streak text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">
+                        Set Reminder
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Streak Challenge Modal -->
+    <div id="streakChallengeModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="streakChallengeModalContent">
+            <!-- Modal Header -->
+            <div class="gradient-streak rounded-t-2xl p-4 text-white text-center">
+                <div class="w-16 h-16 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="target" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1 text-white">14-Day Challenge</h3>
+                <p class="text-sm text-white opacity-90">Double your current streak!</p>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-4">
+                <div class="mb-4">
+                    <div class="text-center mb-4">
+                        <div class="text-4xl font-bold text-orange-600 mb-2">7 → 14</div>
+                        <p class="text-gray-700">You're halfway there! Accept the challenge to reach a 14-day learning streak.</p>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-orange-50 to-red-50 p-4 rounded-lg mb-4">
+                        <h4 class="font-semibold text-gray-900 mb-2">🎯 Challenge Benefits:</h4>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                            <li>• Daily reminder notifications</li>
+                            <li>• Bonus points for each day completed</li>
+                            <li>• Special 14-day achievement badge</li>
+                            <li>• Unlock advanced learning features</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-blue-50 p-3 rounded-lg">
+                        <div class="flex items-center">
+                            <i data-lucide="bell" class="w-4 h-4 text-blue-600 mr-2"></i>
+                            <div class="text-sm text-blue-800">
+                                We'll send you gentle reminders to help you stay on track!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-2">
+                    <button onclick="closeStreakChallengeModal()" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-200">
+                        Maybe Later
+                    </button>
+                    <button onclick="acceptChallenge()" class="flex-1 gradient-streak text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">
+                        Accept Challenge
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Achievement Modal -->
+    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="shareModalContent">
+            <!-- Modal Header -->
+            <div class="gradient-ayah-primary rounded-t-2xl p-4 text-white text-center">
+                <div class="w-16 h-16 mx-auto mb-3 bg-white bg-opacity-20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                    <i data-lucide="share-2" class="w-8 h-8 text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1 text-white">Share Achievement</h3>
+                <p class="text-sm text-white opacity-90">Celebrate your 7-day streak!</p>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-4">
+                <div class="mb-4">
+                    <div class="bg-gradient-to-r from-orange-50 to-yellow-50 p-4 rounded-lg mb-4 text-center">
+                        <div class="text-2xl mb-2">🔥</div>
+                        <div class="font-bold text-gray-900">7-Day Learning Streak!</div>
+                        <div class="text-sm text-gray-600">Consistent learning with Ayah AI</div>
+                    </div>
+
+                    <p class="text-gray-700 mb-4 text-center">Share your achievement with parents, teachers, or friends!</p>
+
+                    <div class="space-y-3">
+                        <button class="w-full flex items-center justify-center p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 transition-colors">
+                            <i data-lucide="mail" class="w-5 h-5 text-blue-600 mr-3"></i>
+                            <span class="font-medium text-blue-900">Share via Email</span>
+                        </button>
+
+                        <button class="w-full flex items-center justify-center p-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
+                            <i data-lucide="message-circle" class="w-5 h-5 text-green-600 mr-3"></i>
+                            <span class="font-medium text-green-900">Share via Message</span>
+                        </button>
+
+                        <button class="w-full flex items-center justify-center p-3 bg-purple-50 rounded-lg border border-purple-200 hover:bg-purple-100 transition-colors">
+                            <i data-lucide="copy" class="w-5 h-5 text-purple-600 mr-3"></i>
+                            <span class="font-medium text-purple-900">Copy Link</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-2">
+                    <button onclick="closeShareModal()" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all duration-200">
+                        Close
+                    </button>
+                    <button onclick="generateCertificate()" class="flex-1 gradient-ayah-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all duration-200">
+                        Get Certificate
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Action Floating Button (Mobile-friendly) -->
+    <div class="fixed bottom-6 right-6 z-40">
+        <button onclick="showQuickActions()" class="w-14 h-14 bg-ayah-primary text-white rounded-full shadow-lg hover:bg-ayah-primary-hover transition-all duration-200 transform hover:scale-110 flex items-center justify-center">
+            <i data-lucide="zap" class="w-6 h-6"></i>
+        </button>
+    </div>
+
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
+
+        // Enhanced Badge interaction functions with branded modals
+        function showBadgeDetails(badgeId, isEarned) {
+            const badgeData = {
+                'first-steps': {
+                    name: 'First Steps',
+                    description: 'Complete your first learning session',
+                    icon: 'play',
+                    earnedDate: 'January 20, 2025',
+                    story: 'You took your first step into learning with Ayah! This badge represents the beginning of your educational journey.',
+                    celebration: '🎉 Congratulations on starting your learning adventure!',
+                    color: 'success'
+                },
+                'goal-achiever': {
+                    name: 'Goal Achiever',
+                    description: 'Complete your first learning goal',
+                    icon: 'target',
+                    earnedDate: 'January 22, 2025',
+                    story: 'You set a goal and achieved it! This shows your commitment to structured learning.',
+                    celebration: '🏆 Amazing dedication to reaching your goals!',
+                    color: 'success'
+                },
+                'consistent-learner': {
+                    name: 'Consistent Learner',
+                    description: 'Study for 3 consecutive days',
+                    icon: 'calendar-check',
+                    earnedDate: 'January 24, 2025',
+                    story: 'Consistency is key to learning success, and you\'ve proven you have it!',
+                    celebration: '⭐ Your consistency is paying off!',
+                    color: 'success'
+                },
+                'point-collector': {
+                    name: 'Point Collector',
+                    description: 'Earn your first 100 points',
+                    icon: 'star',
+                    requirements: 'Complete learning activities to earn points. You need 25 more points!',
+                    suggestions: [
+                        'Start a 10-minute chat session (+5 points)',
+                        'Complete a goal milestone (+10 points)',
+                        'Finish a learning session (+5 points)',
+                        'Study for your daily streak (+5 bonus points)'
+                    ],
+                    color: 'primary'
+                }
+            };
+
+            const badge = badgeData[badgeId];
+            showBadgeModal(badge, isEarned);
+        }
+
+        function showBadgeModal(badge, isEarned) {
+            const modal = document.getElementById('badgeModal');
+            const modalContent = document.getElementById('modalContent');
+            const title = document.getElementById('modalBadgeTitle');
+            const description = document.getElementById('modalBadgeDescription');
+            const icon = document.getElementById('modalBadgeIcon');
+            const content = document.getElementById('modalBadgeContent');
+            const actionButton = document.getElementById('modalActionButton');
+
+            // Set badge info
+            title.textContent = badge.name;
+            description.textContent = badge.description;
+            icon.innerHTML = `<i data-lucide="${badge.icon}" class="w-10 h-10 text-white"></i>`;
+
+            if (isEarned) {
+                content.innerHTML = `
+                    <div class="modal-content-section achievement-celebration">
+                        <h4 class="font-bold text-green-700 mb-2 text-sm">${badge.celebration}</h4>
+                        <p class="text-gray-800 mb-2 text-sm">${badge.story}</p>
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-gray-600">Earned on:</span>
+                            <span class="font-semibold text-green-700">${badge.earnedDate}</span>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="inline-flex items-center space-x-2 bg-green-100 px-3 py-1 rounded-full">
+                            <i data-lucide="check-circle" class="w-3 h-3 text-green-600"></i>
+                            <span class="text-xs font-medium text-green-700">Achievement Unlocked</span>
+                        </div>
+                    </div>
+                `;
+                actionButton.textContent = 'View More Badges';
+                actionButton.onclick = () => { closeBadgeModal(); scrollToBadges(); };
+            } else {
+                const suggestionsList = badge.suggestions.map(s => `<li class="flex items-start space-x-2 text-xs text-gray-800"><i data-lucide="arrow-right" class="w-3 h-3 text-purple-600 mt-0.5 flex-shrink-0"></i><span>${s}</span></li>`).join('');
+                content.innerHTML = `
+                    <div class="modal-content-section">
+                        <h4 class="font-bold text-purple-700 mb-2 text-sm">How to Earn This Badge</h4>
+                        <p class="text-gray-800 mb-3 text-sm">${badge.requirements}</p>
+                        <h5 class="font-semibold text-gray-900 mb-2 text-xs">Quick Ways to Earn Points:</h5>
+                        <ul class="space-y-1">
+                            ${suggestionsList}
+                        </ul>
+                    </div>
+                    <div class="bg-purple-100 rounded-lg p-2 text-center">
+                        <div class="text-lg font-bold text-purple-700">25 points to go!</div>
+                        <div class="text-xs text-gray-600">You're 75% of the way there</div>
+                    </div>
+                `;
+                actionButton.textContent = 'Start Learning';
+                actionButton.onclick = () => { closeBadgeModal(); startLearningSession(); };
+            }
+
+            // Show modal with animation
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('modal-enter');
+            }, 10);
+
+            // Refresh icons
+            lucide.createIcons();
+        }
+
+        // Learning session functions
+        function startLearningSession() {
+            showModal('learningSessionModal');
+        }
+
+        function viewGoals() {
+            alert('🎯 Opening your goals!\n\nThis would navigate you to your personal learning goals.');
+            // In real implementation: window.location.href = '/goals';
+        }
+
+        function showPointEarningTips() {
+            showModal('pointTipsModal');
+        }
+
+        // Points interaction functions
+        function togglePointHistory() {
+            showModal('pointHistoryModal');
+        }
+
+        function showActivityDetails(activityType) {
+            const activityData = {
+                'chat-interaction': {
+                    title: 'Chat Interaction',
+                    subtitle: '2 minutes ago • +5 points',
+                    details: 'You asked about algebra concepts and received helpful explanations.',
+                    tips: 'Keep asking questions to deepen your understanding!',
+                    icon: 'message-circle',
+                    suggestions: [
+                        'Ask follow-up questions about algebra',
+                        'Try practice problems with AI guidance',
+                        'Explore related math topics'
+                    ]
+                },
+                'goal-progress': {
+                    title: 'Goal Progress',
+                    subtitle: '15 minutes ago • +10 points',
+                    details: 'You completed 2 math problems toward your "Master Fractions" goal.',
+                    tips: 'Great progress! You\'re building strong foundations.',
+                    icon: 'target',
+                    suggestions: [
+                        'Continue with fraction practice',
+                        'Try more challenging problems',
+                        'Review concepts you found difficult'
+                    ]
+                },
+                'session-completed': {
+                    title: 'Learning Session',
+                    subtitle: '1 hour ago • +5 points',
+                    details: 'You spent 15 minutes learning about science topics.',
+                    tips: 'Consistent effort pays off! Keep up the momentum.',
+                    icon: 'clock',
+                    suggestions: [
+                        'Extend your next session to 20 minutes',
+                        'Explore related science concepts',
+                        'Set a science learning goal'
+                    ]
+                }
+            };
+
+            const activity = activityData[activityType];
+            showPointsModal(activity);
+        }
+
+        function showPointsModal(activity) {
+            const modal = document.getElementById('pointsModal');
+            const modalContainer = document.getElementById('pointsModalContainer');
+            const title = document.getElementById('pointsModalTitle');
+            const subtitle = document.getElementById('pointsModalSubtitle');
+            const content = document.getElementById('pointsModalContent');
+            const actionButton = document.getElementById('pointsActionButton');
+
+            // Set activity info
+            title.textContent = activity.title;
+            subtitle.textContent = activity.subtitle;
+
+            const suggestionsList = activity.suggestions.map(s =>
+                `<li class="flex items-start space-x-2 text-xs text-gray-800">
+                    <i data-lucide="sparkles" class="w-3 h-3 text-yellow-600 mt-0.5 flex-shrink-0"></i>
+                    <span>${s}</span>
+                </li>`
+            ).join('');
+
+            content.innerHTML = `
+                <div class="modal-content-section points-highlight">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
+                            <i data-lucide="${activity.icon}" class="w-4 h-4 text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Activity Details</h4>
+                            <p class="text-xs text-gray-600">${activity.subtitle}</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-800 mb-2 text-sm">${activity.details}</p>
+                    <div class="bg-yellow-100 rounded-lg p-2">
+                        <p class="text-xs font-medium text-yellow-700">${activity.tips}</p>
+                    </div>
+                </div>
+                <div class="modal-content-section">
+                    <h5 class="font-semibold text-gray-900 mb-2 text-xs">💡 Keep Learning:</h5>
+                    <ul class="space-y-1">
+                        ${suggestionsList}
+                    </ul>
+                </div>
+            `;
+
+            actionButton.onclick = () => { closePointsModal(); startLearningSession(); };
+
+            // Show modal with animation
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContainer.classList.remove('scale-95', 'opacity-0');
+                modalContainer.classList.add('modal-enter');
+            }, 10);
+
+            // Refresh icons
+            lucide.createIcons();
+        }
+
+        function earnMorePoints() {
+            alert('⭐ Earn More Points!\n\nQuick actions:\n• Start a 10-minute chat session\n• Work on your active goals\n• Try a new subject area\n• Complete today\'s learning challenge');
+        }
+
+        function viewWeeklyProgress() {
+            showModal('weeklyProgressModal');
+        }
+
+        // Streak interaction functions
+        function viewStreakHistory() {
+            showModal('streakHistoryModal');
+        }
+
+        function showDayDetails(day) {
+            const dayData = {
+                'monday': {
+                    activities: ['Math practice (15 min)', 'Science chat (10 min)'],
+                    totalTime: '25 minutes',
+                    points: 15,
+                    subjects: ['Mathematics', 'Science'],
+                    achievements: ['Maintained streak', 'Goal progress']
+                },
+                'tuesday': {
+                    activities: ['Reading comprehension (20 min)', 'Goal progress (5 min)'],
+                    totalTime: '25 minutes',
+                    points: 15,
+                    subjects: ['English', 'Goal Work'],
+                    achievements: ['Reading milestone', 'Consistent learner']
+                },
+                'wednesday': {
+                    activities: ['History discussion (12 min)', 'Math problems (8 min)'],
+                    totalTime: '20 minutes',
+                    points: 12,
+                    subjects: ['History', 'Mathematics'],
+                    achievements: ['Subject variety', 'Problem solver']
+                },
+                'thursday': {
+                    activities: ['Science experiment (18 min)', 'Writing practice (7 min)'],
+                    totalTime: '25 minutes',
+                    points: 15,
+                    subjects: ['Science', 'English'],
+                    achievements: ['Hands-on learning', 'Writing skills']
+                },
+                'friday': {
+                    activities: ['Math review (14 min)', 'Literature chat (11 min)'],
+                    totalTime: '25 minutes',
+                    points: 15,
+                    subjects: ['Mathematics', 'Literature'],
+                    achievements: ['Review session', 'Critical thinking']
+                },
+                'saturday': {
+                    activities: ['Creative writing (16 min)', 'Science quiz (9 min)'],
+                    totalTime: '25 minutes',
+                    points: 15,
+                    subjects: ['Creative Writing', 'Science'],
+                    achievements: ['Creativity boost', 'Knowledge test']
+                },
+                'sunday': {
+                    activities: ['Mixed subjects (13 min)', 'Goal completion (12 min)'],
+                    totalTime: '25 minutes',
+                    points: 15,
+                    subjects: ['Multi-subject', 'Goal Work'],
+                    achievements: ['Week completion', 'Goal achieved']
+                }
+            };
+
+            const dayInfo = dayData[day];
+            showStreakModal(day, dayInfo);
+        }
+
+        function showStreakModal(day, dayInfo) {
+            const modal = document.getElementById('streakModal');
+            const modalContainer = document.getElementById('streakModalContainer');
+            const title = document.getElementById('streakModalTitle');
+            const subtitle = document.getElementById('streakModalSubtitle');
+            const content = document.getElementById('streakModalContent');
+            const actionButton = document.getElementById('streakActionButton');
+
+            // Set day info
+            title.textContent = `${day.charAt(0).toUpperCase() + day.slice(1)} Activities`;
+            subtitle.textContent = `${dayInfo.totalTime} • ${dayInfo.points} points earned`;
+
+            const activitiesList = dayInfo.activities.map(a =>
+                `<li class="flex items-start space-x-2 text-xs text-gray-800">
+                    <i data-lucide="check-circle" class="w-3 h-3 text-orange-600 mt-0.5 flex-shrink-0"></i>
+                    <span>${a}</span>
+                </li>`
+            ).join('');
+
+            const subjectsList = dayInfo.subjects.map(s =>
+                `<span class="inline-block bg-orange-100 text-orange-800 px-2 py-0.5 rounded-full text-xs font-medium">${s}</span>`
+            ).join(' ');
+
+            const achievementsList = dayInfo.achievements.map(a =>
+                `<span class="inline-block bg-green-100 text-green-800 px-2 py-0.5 rounded-full text-xs font-medium">${a}</span>`
+            ).join(' ');
+
+            content.innerHTML = `
+                <div class="modal-content-section streak-highlight">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-bold text-gray-900 text-sm">Learning Activities</h4>
+                        <div class="text-right">
+                            <div class="text-sm font-bold text-orange-700">${dayInfo.points} points</div>
+                            <div class="text-xs text-gray-600">${dayInfo.totalTime}</div>
+                        </div>
+                    </div>
+                    <ul class="space-y-1 mb-3">
+                        ${activitiesList}
+                    </ul>
+                </div>
+                <div class="modal-content-section">
+                    <h5 class="font-semibold text-gray-900 mb-2 text-xs">📚 Subjects:</h5>
+                    <div class="flex flex-wrap gap-1 mb-3">
+                        ${subjectsList}
+                    </div>
+                    <h5 class="font-semibold text-gray-900 mb-2 text-xs">🏆 Achievements:</h5>
+                    <div class="flex flex-wrap gap-1">
+                        ${achievementsList}
+                    </div>
+                </div>
+            `;
+
+            actionButton.textContent = 'Study Similar Topics';
+            actionButton.onclick = () => { closeStreakModal(); startLearningSession(); };
+
+            // Show modal with animation
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContainer.classList.remove('scale-95', 'opacity-0');
+                modalContainer.classList.add('modal-enter');
+            }, 10);
+
+            // Refresh icons
+            lucide.createIcons();
+        }
+
+        function continueStreak() {
+            alert('🔥 Continue Your Streak!\n\nThis would start a learning session to maintain your 7-day streak. Choose your activity:\n• Quick 10-minute chat\n• Work on goals\n• Try a learning challenge');
+        }
+
+        function shareStreak() {
+            showModal('shareModal');
+        }
+
+        function acceptStreakChallenge() {
+            showModal('streakChallengeModal');
+        }
+
+        // Enhanced Modal functions
+        function closeBadgeModal() {
+            const modal = document.getElementById('badgeModal');
+            const modalContent = document.getElementById('modalContent');
+
+            modalContent.classList.remove('modal-enter');
+            modalContent.classList.add('modal-exit');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalContent.classList.remove('modal-exit');
+                modalContent.classList.add('scale-95', 'opacity-0');
+            }, 300);
+        }
+
+        function closePointsModal() {
+            const modal = document.getElementById('pointsModal');
+            const modalContainer = document.getElementById('pointsModalContainer');
+
+            modalContainer.classList.remove('modal-enter');
+            modalContainer.classList.add('modal-exit');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalContainer.classList.remove('modal-exit');
+                modalContainer.classList.add('scale-95', 'opacity-0');
+            }, 300);
+        }
+
+        function closeStreakModal() {
+            const modal = document.getElementById('streakModal');
+            const modalContainer = document.getElementById('streakModalContainer');
+
+            modalContainer.classList.remove('modal-enter');
+            modalContainer.classList.add('modal-exit');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalContainer.classList.remove('modal-exit');
+                modalContainer.classList.add('scale-95', 'opacity-0');
+            }, 300);
+        }
+
+        function modalAction() {
+            // This would be customized based on the modal content
+            closeBadgeModal();
+            startLearningSession();
+        }
+
+        function pointsModalAction() {
+            closePointsModal();
+            earnMorePoints();
+        }
+
+        function streakModalAction() {
+            closeStreakModal();
+            continueStreak();
+        }
+
+        // Generic modal show/hide functions
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const modalContent = modal.querySelector('.transform');
+
+            modal.classList.remove('hidden');
+
+            // Trigger animation
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('modal-enter');
+            }, 10);
+
+            // Refresh icons for the modal content
+            lucide.createIcons();
+        }
+
+        function hideModal(modalId) {
+            const modal = document.getElementById(modalId);
+            const modalContent = modal.querySelector('.transform');
+
+            modalContent.classList.remove('modal-enter');
+            modalContent.classList.add('modal-exit');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalContent.classList.remove('modal-exit');
+                modalContent.classList.add('scale-95', 'opacity-0');
+            }, 300);
+        }
+
+        // Close functions for new modals
+        function closeLearningSessionModal() {
+            hideModal('learningSessionModal');
+        }
+
+        function closePointTipsModal() {
+            hideModal('pointTipsModal');
+        }
+
+        function closeWeeklyProgressModal() {
+            hideModal('weeklyProgressModal');
+        }
+
+        function closePointHistoryModal() {
+            hideModal('pointHistoryModal');
+        }
+
+        function closeStreakHistoryModal() {
+            hideModal('streakHistoryModal');
+        }
+
+        function closeStreakChallengeModal() {
+            hideModal('streakChallengeModal');
+        }
+
+        function closeShareModal() {
+            hideModal('shareModal');
+        }
+
+        // Action functions for new modals
+        function startChatSession() {
+            closeLearningSessionModal();
+            alert('🚀 Starting chat session!\n\nThis would navigate you to the chat interface.');
+        }
+
+        function startEarningPoints() {
+            closePointTipsModal();
+            startLearningSession();
+        }
+
+        function viewDetailedProgress() {
+            closeWeeklyProgressModal();
+            // Navigate to the detailed progress page
+            window.location.href = 'progress-tools.html';
+        }
+
+        function exportHistory() {
+            closePointHistoryModal();
+            alert('📄 Export Complete!\n\nYour point history has been exported to a CSV file.');
+        }
+
+        function setStreakReminder() {
+            closeStreakHistoryModal();
+            alert('🔔 Reminder Set!\n\nWe\'ll remind you daily to maintain your learning streak.');
+        }
+
+        function acceptChallenge() {
+            closeStreakChallengeModal();
+            alert('🎯 Challenge Accepted!\n\nYou\'re now enrolled in the 14-day streak challenge. Good luck!');
+        }
+
+        function generateCertificate() {
+            closeShareModal();
+            alert('🏆 Certificate Generated!\n\nYour 7-day streak certificate is ready to download.');
+        }
+
+        function scrollToBadges() {
+            document.querySelector('.grid.grid-cols-2.gap-4').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function showQuickActions() {
+            const actions = [
+                '🚀 Start Learning Session',
+                '🎯 Work on Goals',
+                '⭐ Earn Quick Points',
+                '🔥 Continue Streak',
+                '📊 View Progress'
+            ];
+            alert('Quick Actions:\n\n• ' + actions.join('\n• '));
+        }
+
+        // Enhanced badge details with modal (alternative to alert)
+        function showBadgeDetailsModal(badgeId, isEarned) {
+            // This is an enhanced version that could use the modal instead of alerts
+            // For now, keeping the alert version for simplicity
+            showBadgeDetails(badgeId, isEarned);
+        }
 
         // Simulate real-time updates
         function updateStats() {
             // This would normally fetch real data from the backend
             console.log('Updating gamification stats...');
+
+            // Add some visual feedback
+            const pointsElement = document.querySelector('.text-3xl.font-bold.text-ayah-accent');
+            if (pointsElement) {
+                pointsElement.classList.add('pulse-animation');
+                setTimeout(() => {
+                    pointsElement.classList.remove('pulse-animation');
+                }, 2000);
+            }
         }
+
+        // Add keyboard shortcuts for power users
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 's':
+                        e.preventDefault();
+                        startLearningSession();
+                        break;
+                    case 'g':
+                        e.preventDefault();
+                        viewGoals();
+                        break;
+                    case 'h':
+                        e.preventDefault();
+                        viewStreakHistory();
+                        break;
+                }
+            }
+        });
 
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             updateStats();
+
+            // Add achievement glow effects
+            const earnedBadges = document.querySelectorAll('.border-ayah-success');
+            earnedBadges.forEach(badge => {
+                badge.classList.add('achievement-glow');
+            });
+
+            // Add streak glow effect
+            const streakElements = document.querySelectorAll('.text-orange-500');
+            streakElements.forEach(element => {
+                if (element.textContent.includes('7')) {
+                    element.closest('.bg-white')?.classList.add('streak-glow');
+                }
+            });
+
+            // Add click-outside-to-close for modals
+            document.getElementById('badgeModal').addEventListener('click', function(e) {
+                if (e.target === this) closeBadgeModal();
+            });
+
+            document.getElementById('pointsModal').addEventListener('click', function(e) {
+                if (e.target === this) closePointsModal();
+            });
+
+            document.getElementById('streakModal').addEventListener('click', function(e) {
+                if (e.target === this) closeStreakModal();
+            });
+
+            // Add escape key support for modals
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (!document.getElementById('badgeModal').classList.contains('hidden')) {
+                        closeBadgeModal();
+                    } else if (!document.getElementById('pointsModal').classList.contains('hidden')) {
+                        closePointsModal();
+                    } else if (!document.getElementById('streakModal').classList.contains('hidden')) {
+                        closeStreakModal();
+                    }
+                }
+            });
         });
     </script>
 </body>
